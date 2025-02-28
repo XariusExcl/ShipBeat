@@ -1,0 +1,22 @@
+public struct SongValidationResult {
+    public bool Valid;
+    public string Message;
+    public SongData Data;
+}
+
+public struct SongInfo {
+    public string Title;
+    public string Artist;
+    public string Creator;
+    public string File;
+    public float BPM;
+    public float Offset;
+    public float Length;
+    public string DifficultyName;
+    public int DifficultyRating;
+}
+
+public struct SongData {
+    public SongInfo Info;
+    public Note[] Notes;
+}

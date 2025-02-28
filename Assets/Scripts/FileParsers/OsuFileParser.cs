@@ -1,0 +1,109 @@
+using System.Collections.Generic;
+using UnityEngine;
+enum ParseState
+{
+    None,
+    General,
+    Editor,
+    Metadata,
+    Difficulty,
+    Events,
+    TimingPoints,
+    Colours,
+    HitObjects
+};
+
+public class OsuFileParser
+{
+    public static SongValidationResult ParseFile(TextAsset file)
+    {
+        SongData songData = new SongData();
+        SongInfo songInfo = new SongInfo();
+
+        string[] lines = file.text.Split('\n');
+        if (!lines[0].StartsWith("osu file format v"))
+        {
+            return new SongValidationResult { Valid = false, Message = "Invalid file format", Data = songData };
+        }
+        List<Note> notes = new();
+        ParseState state = ParseState.None;
+        int noteId = 0;
+        foreach (string line in lines){
+            switch (state){
+                case ParseState.None:
+                    if (line.StartsWith("[General]"))
+                        state = ParseState.General;
+                    break;
+                case ParseState.General:
+                    if (line.StartsWith("AudioFilename:")){
+                        songInfo.File = line.Split(':')[1].Trim();
+                    }
+                    if (line.StartsWith("Mode:")){
+                        int mode = int.Parse(line.Split(':')[1]);
+                        if (mode != 3)
+                            return new SongValidationResult { Valid = false, Message = $"Invalid mode. Expected 3 (Mania), found {mode}", Data = songData };
+                    }
+
+                    if (line.StartsWith("[Metadata]"))
+                        state = ParseState.Metadata;
+                    break;
+                case ParseState.Metadata:
+                    if (line.StartsWith("Title:"))
+                        songInfo.Title = line.Split(':')[1].Trim();
+                    
+                    if (line.StartsWith("Artist:"))
+                        songInfo.Artist = line.Split(':')[1].Trim();
+                    
+                    if (line.StartsWith("Creator:"))
+                        songInfo.Creator = line.Split(':')[1].Trim();
+
+                    if (line.StartsWith("Version:"))
+                        songInfo.DifficultyName = line.Split(':')[1].Trim();
+
+                    if (line.StartsWith("Tags:"))
+                        songInfo.DifficultyRating = int.Parse(line.Split(':')[1]);
+
+                    if (line.StartsWith("[Difficulty]")){
+                        state = ParseState.Difficulty;
+                    }
+                    break;
+                case ParseState.Difficulty:
+                    if (line.StartsWith("CircleSize:")) {
+                        int circleSize = int.Parse(line.Split(':')[1]);
+                        if (circleSize != 8){
+                            return new SongValidationResult { Valid = false, Message = $"Invalid lane count. Expected 8, found {circleSize}.", Data = songData };;
+                        }
+                    }
+                    if (line.StartsWith("[TimingPoints]")){
+                        state = ParseState.TimingPoints;
+                    }
+                    break;
+                case ParseState.TimingPoints:
+                    // If I ignore it long enough, maybe it'll go away
+
+                    if (line.StartsWith("[HitObjects]")){
+                        state = ParseState.HitObjects;
+                    }
+                    break;
+                case ParseState.HitObjects:
+                    string[] lineNote = line.Split(',');
+                    if (lineNote.Length != 6) break;
+                    notes.Add(new Note{
+                        Id = noteId++,
+                        Type = NoteType.Note,
+                        Lane = int.Parse(lineNote[0])/ 64,
+                        HitTime = float.Parse(lineNote[2])/1000f
+                    });
+                    break;
+            }
+        }
+        if (state != ParseState.HitObjects)
+        {
+            return new SongValidationResult { Valid = false, Message = "File is missing sections", Data = songData };
+        }
+        songData.Info = songInfo;
+        songData.Notes = notes.ToArray();
+        Debug.Log(songData.Notes.Length);
+        return new SongValidationResult { Valid = true, Message = "Song is valid", Data = songData };
+    }
+}
