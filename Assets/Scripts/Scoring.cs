@@ -69,4 +69,15 @@ public class Scoring
     {
         Percentage = (Perfects * 100f + Goods * 50f + Bads * 10f) / (Perfects + Goods + Bads + Misses);
     }
+
+    public static string GetRank()
+    {
+        if (Percentage == 100) return "SS";
+        if (Percentage >= 90) return "S";
+        if (Percentage >= 80) return "A";
+        if (Percentage >= 70) return "B";
+        if (Percentage >= 60) return "C";
+        if (Percentage >= 50) return "D";
+        return "F";
+    }
 }

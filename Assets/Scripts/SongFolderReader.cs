@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SongFolderReader : MonoBehaviour
@@ -5,11 +6,17 @@ public class SongFolderReader : MonoBehaviour
     public static SongData[] ReadFolder(string path)
     {
         TextAsset[] files = Resources.LoadAll<TextAsset>(path);
-        SongData[] songs = new SongData[files.Length];
+        List<SongData> songs = new();
         for (int i = 0; i < files.Length; i++)
         {
-            songs[i] = OsuFileParser.ParseFile(files[i]).Data;
+            SongValidationResult result = OsuFileParser.ParseFile(files[i]);
+            if (!result.Valid)
+            {
+                Debug.LogError($"Error parsing file {files[i].name}: {result.Message}");
+                continue;
+            }
+            songs.Add(result.Data);
         }
-        return songs;
+        return songs.ToArray();
     }
 }

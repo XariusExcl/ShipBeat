@@ -18,29 +18,33 @@ public class Maestro : MonoBehaviour
 
     public static void PlaySong(string path) {
         SongStarted = true;
+        SongEnded = false;
         Debug.Log(path);
         Jukebox.LoadSong(path);
         Jukebox.PlayScheduled(StartDelay);
         SongTime = 0;
         StartTime = (float)AudioSettings.dspTime + StartDelay;
+
     }
 
-    void Awake()
-    {
+    void Awake() {
         Instance = this;
     }
 
-    void Start()
-    {
+    void Start() {
         SongTime = 0;
         StartTime = (float)AudioSettings.dspTime + StartDelay;
         InvokeRepeating("CheckCalibration", 3, 3);
     }
 
-    void Update()
-    {
+    void Update() {
         if(SongStarted && !SongEnded) {
             SongTime = (float)AudioSettings.dspTime - StartTime;
+            if (SongTime > DebugSongLoader.LoadedSong.Info.Length + DebugSongLoader.LoadedSong.Info.SongStart) {
+                SongEnded = true;
+                Invoke("EndSong", 1.5f);
+                Debug.Log("Song Ended");
+            }
             time.text = SongTime.ToString("F2");
         }
 
@@ -57,7 +61,14 @@ public class Maestro : MonoBehaviour
         }
     }
 
+    void EndSong() {
+        SongEnded = true;
+        Debug.Log("Song Ended");
+        GameUIManager.ShowResults();
+    }
+
     void CheckCalibration() {
+        if (!SongStarted || SongEnded) return;
         float delay = Jukebox.GetPlaybackPosition() - SongTime + GlobalOffset;
         if (Mathf.Abs(delay) > .020) {
             Debug.Log($"Song is {Mathf.Abs(delay) * 1000:F0} ms {(delay > 0 ? "early":"late")}.Recalibrate!");
