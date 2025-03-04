@@ -104,6 +104,8 @@ public class OsuFileParser
         }
         songInfo.SongStart = notes[0].HitTime;
         songInfo.Length = notes[notes.Count - 1].HitTime - notes[0].HitTime;
+        songInfo.NoteCount = notes.Count;
+
         songData.Info = songInfo;
         songData.Notes = notes.ToArray();
         return new SongValidationResult { Valid = true, Message = "Song is valid", Data = songData };

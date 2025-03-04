@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class SongFolderReader : MonoBehaviour
 {
-    public static SongData[] ReadFolder(string path)
+    public static SongInfo[] ReadFolder(string path)
     {
         TextAsset[] files = Resources.LoadAll<TextAsset>(path);
-        List<SongData> songs = new();
+        List<SongInfo> songs = new();
         for (int i = 0; i < files.Length; i++)
         {
             SongValidationResult result = OsuFileParser.ParseFile(files[i]);
@@ -15,7 +15,7 @@ public class SongFolderReader : MonoBehaviour
                 Debug.LogError($"Error parsing file {files[i].name}: {result.Message}");
                 continue;
             }
-            songs.Add(result.Data);
+            songs.Add(result.Data.Info);
         }
         return songs.ToArray();
     }

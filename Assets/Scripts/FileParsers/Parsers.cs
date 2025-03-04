@@ -10,10 +10,11 @@ public struct SongInfo {
     public string Creator;
     public string File;
     public float BPM;
-    public float Offset;
+    public float SongStart;
     public float Length;
     public string DifficultyName;
     public int DifficultyRating;
+    public int NoteCount;
 }
 
 public struct SongData {
