@@ -8,11 +8,15 @@ public class NoteBehaviourManager : MonoBehaviour
     public static NoteBehaviourManager Instance;
     public GameObject notePrefab;
 
+
     void Awake(){
         Instance = this;
     }
 
     void Start() {
+        // TODO: Pre-warm models of notes
+
+        // Create a pool of notes
         for (int i = 0; i < 10; i++)
         {
             GameObject noteObject = Instantiate(notePrefab, transform);

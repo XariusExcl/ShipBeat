@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class SongEntryUI : MonoBehaviour
 {
+    public int PositionInCaroussel { get; private set; }
     [SerializeField] SongInfo songInfo;
     [SerializeField] TextMeshProUGUI title;
     [SerializeField] TextMeshProUGUI artist;
@@ -26,9 +27,9 @@ public class SongEntryUI : MonoBehaviour
 
     public void UpdatePosition(Vector3 position)
     {
-        transform.position = position;
+        transform.localPosition = position;
     
-        // TODO : update position to an intermediate value, to be used in a lerp with transform.position in the Update method.
+        // TODO: update position to an intermediate value, to be used in a lerp with transform.position in the Update method.
     }
 
     // Map rating to color gradient, 1-10 going from blue to red hue

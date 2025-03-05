@@ -3,7 +3,15 @@ using UnityEngine;
 
 public class SongFolderReader : MonoBehaviour
 {
-    public static SongInfo[] ReadFolder(string path)
+    public static SongInfo[] Songs { get {
+        if (songs == null)
+            songs = ReadFolder("");
+        return songs;
+    } private set {} }
+
+    static SongInfo[] songs;
+
+    static SongInfo[] ReadFolder(string path)
     {
         TextAsset[] files = Resources.LoadAll<TextAsset>(path);
         List<SongInfo> songs = new();
@@ -17,6 +25,8 @@ public class SongFolderReader : MonoBehaviour
             }
             songs.Add(result.Data.Info);
         }
+        // order by ascending difficulty
+        songs.Sort((a, b) => a.DifficultyRating - b.DifficultyRating);
         return songs.ToArray();
     }
 }
