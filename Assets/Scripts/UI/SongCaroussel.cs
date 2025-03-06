@@ -45,6 +45,8 @@ public class SongCaroussel : MonoBehaviour
     }
     void Update()
     {
+        if (SongSelectReadyMenu.IsShown) return;
+
         // TODO: Implement a key repeat when axis is held down after a certain time.
         if (lastHorizontal != Input.GetAxis("P1_Vertical"))
         {
@@ -58,7 +60,7 @@ public class SongCaroussel : MonoBehaviour
 
         if (Input.GetButtonDown("P1_B1"))
         {
-            Debug.Log("Selected song : " + SongFolderReader.Songs[CurrentSongIndex].Title + " " + SongFolderReader.Songs[CurrentSongIndex].DifficultyName);
+            Debug.Log("Selected song : " + SongFolderReader.Songs[CurrentSongIndex].Title + " - " + SongFolderReader.Songs[CurrentSongIndex].DifficultyName);
             OnSongSelected.Invoke();
         }
     }

@@ -17,7 +17,7 @@ public class DebugSongLoader : MonoBehaviour {
         }
         Scoring.Reset();
         Scoring.NoteCount = LoadedSong.Notes.Length;
-        Maestro.PlaySong("Naked Glow/" + LoadedSong.Info.File);
+        Maestro.PlaySong("Naked Glow/" + LoadedSong.Info.AudioFile);
     }
 
     float lastNoteTime = 0;

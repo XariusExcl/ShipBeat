@@ -5,7 +5,7 @@ public class SongFolderReader : MonoBehaviour
 {
     public static SongInfo[] Songs { get {
         if (songs == null)
-            songs = ReadFolder("");
+            songs = ReadFolder("Songs");
         return songs;
     } private set {} }
 

@@ -72,5 +72,4 @@ crashlytics-build.properties
 
 /.vscode
 
-# Yes, for once, because they're full of "could-be-copyrighted" stuff :)
-Assets/Resources*
+Assets/Resources/Songs*

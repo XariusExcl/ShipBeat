@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 enum ParseState
 {
     None,
@@ -20,6 +21,8 @@ public class OsuFileParser
         SongData songData = new SongData();
         SongInfo songInfo = new SongInfo();
 
+        songInfo.ChartFile = AssetDatabase.GetAssetPath(file).Replace("Assets/Resources/", "").Replace(".txt", "");
+
         string[] lines = file.text.Split('\n');
         if (!lines[0].StartsWith("osu file format v"))
         {
@@ -37,7 +40,7 @@ public class OsuFileParser
                         break;
                     case ParseState.General:
                         if (line.StartsWith("AudioFilename:"))
-                            songInfo.File = line.Split(':')[1].Trim();
+                            songInfo.AudioFile = line.Split(':')[1].Trim();
 
                         if (line.StartsWith("Mode:")) {
                             int mode = int.Parse(line.Split(':')[1]);

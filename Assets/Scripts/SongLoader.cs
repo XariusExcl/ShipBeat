@@ -6,7 +6,7 @@ public class SongLoader : MonoBehaviour
     const float LookAhead = 2f;
     public static SongData LoadedSong = new();
     public static string Folder;
-    public static string FilePath;
+    public string FilePath;
 
     void Awake()
     {
@@ -39,7 +39,8 @@ public class SongLoader : MonoBehaviour
         }
         Scoring.Reset();
         Scoring.NoteCount = LoadedSong.Notes.Length;
-        Maestro.PlaySong(FilePath.Split('/')[0] + "/" + LoadedSong.Info.File); // TODO: Fix this
+        Debug.Log(FilePath);
+        Maestro.PlaySong(FilePath.Split('/')[0] + "/" + FilePath.Split('/')[1] + "/" + LoadedSong.Info.AudioFile); // TODO: Fix this
     }
 
     float lastNoteTime = 0;

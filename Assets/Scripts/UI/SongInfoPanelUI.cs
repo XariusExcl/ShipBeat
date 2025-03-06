@@ -27,7 +27,7 @@ public class SongInfoPanelUI : MonoBehaviour
         title.text = song.Title;
         artist.text = song.Artist;
         creator.text = song.Creator;
-        difficultyRating.text = song.DifficultyRating.ToString();
+        difficultyRating.text = song.DifficultyRating.ToString()+"★";
         length.text = TimeSpan.FromSeconds(song.Length).ToString(@"mm\:ss");
         bpm.text = song.BPM.ToString();
         noteCount.text = song.NoteCount.ToString();

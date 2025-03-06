@@ -8,7 +8,8 @@ public struct SongInfo {
     public string Title;
     public string Artist;
     public string Creator;
-    public string File;
+    public string ChartFile;
+    public string AudioFile;
     public float BPM;
     public float SongStart;
     public float Length;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ResultScreenUI : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class ResultScreenUI : MonoBehaviour
 
     void CheckInput() {
         if (Input.GetButtonDown("P1_B1")) {
-            SceneManagerWrapper.LoadScene("Menu");
+            SceneManager.LoadScene("SongSelect");
         }
     }
 }
