@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.AI;
 enum ParseState
 {
     None,
@@ -21,6 +22,10 @@ public class OsuFileParser
         SongData songData = new SongData();
         SongInfo songInfo = new SongInfo();
 
+        // FIXME: Does not work in build!
+        // The whole "Reading into the Resources Folder" thing doesn't scale well, and can't read files from the machine using system APIs in WebGL.
+        // will have to dig in the StreamingAssets thing, it's basically making webrequests to the local machine, but it's the only way iirc.
+        // Could also use AssetBundle?
         songInfo.ChartFile = AssetDatabase.GetAssetPath(file).Replace("Assets/Resources/", "").Replace(".txt", "");
 
         string[] lines = file.text.Split('\n');
@@ -77,6 +82,13 @@ public class OsuFileParser
                                 return new SongValidationResult { Valid = false, Message = $"Invalid lane count. Expected 8, found {circleSize}.", Data = songData };;
                             }
                         }
+                        if (line.StartsWith("[Events]"))
+                            state = ParseState.Events;
+                        break;
+                    case ParseState.Events:
+                        if (line.StartsWith("0,0,\"")) // Probably not the best way to check for background image, todo: test with a song that has storyboard
+                            songInfo.BackgroundImage = line.Split(',')[2].Trim();
+
                         if (line.StartsWith("[TimingPoints]"))
                             state = ParseState.TimingPoints;
                         break;

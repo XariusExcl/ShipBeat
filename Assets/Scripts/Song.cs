@@ -10,6 +10,7 @@ public struct SongInfo {
     public string Creator;
     public string ChartFile;
     public string AudioFile;
+    public string BackgroundImage;
     public float BPM;
     public float SongStart;
     public float Length;

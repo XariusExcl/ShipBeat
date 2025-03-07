@@ -5,24 +5,22 @@ using UnityEngine.UI;
 public class SongEntryUI : MonoBehaviour
 {
     public int PositionInCaroussel { get; private set; }
-    [SerializeField] SongInfo songInfo;
     [SerializeField] TextMeshProUGUI title;
     [SerializeField] TextMeshProUGUI artist;
     [SerializeField] TextMeshProUGUI difficultyName;
-    [SerializeField] Image difficultyColorL;
-    [SerializeField] Image difficultyColorR;
+    [SerializeField] Image difficultyColor;
+    [SerializeField] Image backgroundImage;
 
 
     public void SetData(SongInfo songInfo)
     {
-        this.songInfo = songInfo;
         title.text = songInfo.Title;
         artist.text = songInfo.Artist;
         difficultyName.text = songInfo.DifficultyName + " " + GetRatingText(songInfo.DifficultyRating);
 
         Color diffColor = GetColorForRating(songInfo.DifficultyRating);
-        difficultyColorL.color = diffColor;
-        difficultyColorR.color = diffColor;
+        difficultyColor.color = diffColor;
+        backgroundImage.sprite = Resources.Load<Sprite>("Songs/" + songInfo.BackgroundImage);
     }
 
     public void UpdatePosition(Vector3 position)
