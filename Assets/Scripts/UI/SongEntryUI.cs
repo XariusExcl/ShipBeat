@@ -20,7 +20,7 @@ public class SongEntryUI : MonoBehaviour
 
         Color diffColor = GetColorForRating(songInfo.DifficultyRating);
         difficultyColor.color = diffColor;
-        backgroundImage.sprite = Resources.Load<Sprite>("Songs/" + songInfo.BackgroundImage);
+        // backgroundImage.sprite =
     }
 
     public void UpdatePosition(Vector3 position)

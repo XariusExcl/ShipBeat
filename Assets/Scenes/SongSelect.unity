@@ -11413,7 +11413,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 471201040}
+  m_Mesh: {fileID: 1693996953}
 --- !u!33 &322532655
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -20628,7 +20628,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1805989848}
+  m_Mesh: {fileID: 1167879883}
 --- !u!33 &500492363
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -41819,50 +41819,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1277603935
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1277603937}
-  - component: {fileID: 1277603936}
-  m_Layer: 0
-  m_Name: SceneManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1277603936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1277603935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95ad9e539c2eb0b41b6e90d0519f611a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1277603937
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1277603935}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1556422077}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1279071394
 Mesh:
   m_ObjectHideFlags: 0
@@ -42869,6 +42825,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1323224077}
   - component: {fileID: 1323224078}
+  - component: {fileID: 1323224079}
   m_Layer: 0
   m_Name: SongSelect
   m_TagString: Untagged
@@ -42904,6 +42861,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   songSelectReadyMenu: {fileID: 1283773947}
+--- !u!114 &1323224079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323224076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c20e8c81940d946b947174ccc69178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1335450985
 GameObject:
   m_ObjectHideFlags: 0
@@ -49290,7 +49259,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1277603937}
   - {fileID: 1323224077}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

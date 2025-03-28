@@ -28,7 +28,7 @@ public class SongLoader : MonoBehaviour
     }
 
     void LoadSong() {
-        TextAsset songFile = Resources.Load<TextAsset>(FilePath);
+        /*
         SongValidationResult parsedSong = OsuFileParser.ParseFile(songFile);
         if (!parsedSong.Valid) {
             Debug.LogError(parsedSong.Message);
@@ -37,6 +37,8 @@ public class SongLoader : MonoBehaviour
             Debug.Log("Song Loaded!");
             LoadedSong = parsedSong.Data;
         }
+        */
+        
         Scoring.Reset();
         Scoring.NoteCount = LoadedSong.Notes.Length;
         Debug.Log(FilePath);

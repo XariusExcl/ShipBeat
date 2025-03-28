@@ -28,7 +28,7 @@ public class SongSelect : MonoBehaviour
         GameObject songLoader = Instantiate(new GameObject(), Vector3.zero, Quaternion.identity);
         songLoader.AddComponent<SongLoader>();
         SongLoader songLoaderComponent = songLoader.GetComponent<SongLoader>();
-        songLoaderComponent.FilePath = SongFolderReader.Songs[SongCaroussel.CurrentSongIndex].ChartFile;
+        // songLoaderComponent.FilePath = SongFolderReader.Songs[SongCaroussel.CurrentSongIndex];
     }
 
     void OnCarousselUpdate()

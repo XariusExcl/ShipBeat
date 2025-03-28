@@ -12,21 +12,16 @@ enum ParseState
     Events,
     TimingPoints,
     Colours,
-    HitObjects
+    HitObjects,
+    Done
 };
 
 public class OsuFileParser
 {
-    public static SongValidationResult ParseFile(TextAsset file)
+    public static SongValidationResult ParseFile(TextAsset file, bool fastPass = false)
     {
         SongData songData = new SongData();
         SongInfo songInfo = new SongInfo();
-
-        // FIXME: Does not work in build!
-        // The whole "Reading into the Resources Folder" thing doesn't scale well, and can't read files from the machine using system APIs in WebGL.
-        // will have to dig in the StreamingAssets thing, it's basically making webrequests to the local machine, but it's the only way iirc.
-        // Could also use AssetBundle?
-        songInfo.ChartFile = AssetDatabase.GetAssetPath(file).Replace("Assets/Resources/", "").Replace(".txt", "");
 
         string[] lines = file.text.Split('\n');
         if (!lines[0].StartsWith("osu file format v"))
@@ -36,7 +31,12 @@ public class OsuFileParser
         List<Note> notes = new();
         ParseState state = ParseState.None;
         int noteId = 0;
-        foreach (string line in lines) {
+        for (int i = 0; i < lines.Length; i++)
+        {
+            string line = lines[i].Trim();
+            if (line.Length == 0) continue;
+            if (ParseState.Done == state) break;
+
             try {
                 switch (state) {
                     case ParseState.None:
@@ -101,6 +101,21 @@ public class OsuFileParser
                     case ParseState.HitObjects:
                         string[] lineNote = line.Split(',');
                         if (lineNote.Length != 6) break;
+                        if (fastPass) {
+                            songInfo.SongStart = float.Parse(lineNote[2])/1000f;
+                            int j = 1;
+                            string[] lastLine;
+                            do {
+                                lastLine = lines[lines.Length - j].Split(',');
+                                j++;
+                            } while (lastLine.Length != 6 || lines.Length - j < i);
+                            if (lines.Length - j < i) throw new System.Exception("Invalid file format, could not find end of notes (fastpass).");
+                            songInfo.Length = float.Parse(lastLine[2])/1000f - songInfo.SongStart;
+                            songInfo.NoteCount = lines.Length - i - 1;
+
+                            state = ParseState.Done;
+                            break;
+                        }
                         notes.Add(new Note{
                             Id = noteId++,
                             Type = NoteType.Note,
@@ -110,16 +125,17 @@ public class OsuFileParser
                         break;
                 }
             } catch (System.Exception e) {
-                Debug.LogError($"Error parsing line: {line}, {e.InnerException}");
+                Debug.LogError($"Error parsing line: {line}, {e.Message}, {e.StackTrace}");
             }
         }
-        if (state != ParseState.HitObjects)
-        {
+        if (state != ParseState.Done)
             return new SongValidationResult { Valid = false, Message = "File is missing sections", Data = songData };
+
+        if (!fastPass) {
+            songInfo.SongStart = notes[0].HitTime;
+            songInfo.Length = notes[notes.Count - 1].HitTime - notes[0].HitTime;
+            songInfo.NoteCount = notes.Count;
         }
-        songInfo.SongStart = notes[0].HitTime;
-        songInfo.Length = notes[notes.Count - 1].HitTime - notes[0].HitTime;
-        songInfo.NoteCount = notes.Count;
 
         songData.Info = songInfo;
         songData.Notes = notes.ToArray();
