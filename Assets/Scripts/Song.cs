@@ -13,6 +13,7 @@ public struct SongInfo {
     public string BackgroundImage;
     public float BPM;
     public float SongStart;
+    public float SongPreviewStart;
     public float Length;
     public string DifficultyName;
     public int DifficultyRating;

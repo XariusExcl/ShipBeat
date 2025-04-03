@@ -22,7 +22,7 @@ public class SongSelectReadyMenu : MonoBehaviour
         IsShown = true;
         animation = GetComponent<Animation>();
         animation.Play("SongSelectReadyMenuIn");
-        mapName.text = $"{SongFolderReader.Songs[SongCaroussel.CurrentSongIndex].Title} - {SongFolderReader.Songs[SongCaroussel.CurrentSongIndex].DifficultyName}({SongFolderReader.Songs[SongCaroussel.CurrentSongIndex].DifficultyRating}★)";
+        mapName.text = $"{SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].Title} - {SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].DifficultyName}({SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].DifficultyRating}★)";
         // thumbnail.sprite = SongFolderReader.Songs[SongCaroussel.CurrentSongIndex].Background;
     }
 
@@ -32,6 +32,7 @@ public class SongSelectReadyMenu : MonoBehaviour
         if (Input.GetButtonDown("P1_B1"))
         {
             SongSelect.CreateSongLoader();
+            // TODO : wait for song to load before going to game (trigger scene transition animation, then load scene)
             SceneManager.LoadScene("Game");
         }
 

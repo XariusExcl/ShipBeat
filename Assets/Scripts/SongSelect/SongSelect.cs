@@ -1,15 +1,9 @@
+// Logic for the song select screen
+
 using UnityEngine;
 
 public class SongSelect : MonoBehaviour
 {
-    // Logic for the song select screen :
-    // wait for SongCaroussel to call the OnSongSelected event
-      // Show some kind of menu to give time to go back
-    // Load the song by creating a SongLoader object and setting the FilePath to the selected song
-    // Then, load the game scene
-    
-    // When OnCarousselUpdate is called, stop preview of currently selected song, fadein new song
-
     [SerializeField] GameObject songSelectReadyMenu;
 
     void Start()
@@ -20,25 +14,28 @@ public class SongSelect : MonoBehaviour
 
     void OnSongSelected()
     {
+        // Show some kind of menu to give option to go back
         songSelectReadyMenu.SetActive(true);
     }
 
     public static void CreateSongLoader()
     {
+        // Load the song by creating a SongLoader object
         GameObject songLoader = Instantiate(new GameObject(), Vector3.zero, Quaternion.identity);
+        songLoader.name = "SongLoader";
         songLoader.AddComponent<SongLoader>();
         SongLoader songLoaderComponent = songLoader.GetComponent<SongLoader>();
-        // songLoaderComponent.FilePath = SongFolderReader.Songs[SongCaroussel.CurrentSongIndex];
+        songLoaderComponent.Init(SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex]);
     }
 
     void OnCarousselUpdate()
     {
-        // get the newly selected song
-        SongInfo song = SongFolderReader.Songs[SongCaroussel.CurrentSongIndex];
-        // stop preview of currently selected song
+        // Stop preview of currently selected song, fadein new song
+        SongInfo song = SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex];
+        if (song.AudioFile == Jukebox.NowPlaying) return; // Don't reload the same song
         Jukebox.Stop();
-        // fadein new song
-        Jukebox.LoadSong(song.AudioFile);
+        Jukebox.LoadSongAndPlay(song.AudioFile);
         Jukebox.Play();
+        Jukebox.SetLoop(true);
     }
 }

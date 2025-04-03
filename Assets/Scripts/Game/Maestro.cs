@@ -20,7 +20,6 @@ public class Maestro : MonoBehaviour
         SongStarted = true;
         SongEnded = false;
         Debug.Log(path);
-        Jukebox.LoadSong(path);
         Jukebox.PlayScheduled(StartDelay);
         SongTime = 0;
         StartTime = (float)AudioSettings.dspTime + StartDelay;
@@ -63,7 +62,6 @@ public class Maestro : MonoBehaviour
 
     void EndSong() {
         SongEnded = true;
-        Debug.Log("Song Ended");
         GameUIManager.ShowResults();
     }
 

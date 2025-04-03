@@ -1,21 +1,37 @@
 // Plays music.
 
 using UnityEngine;
+using System.Collections;
+using UnityEngine.Networking;
 
 public class Jukebox : MonoBehaviour
 {
+    public static string NowPlaying = "";
     public static Jukebox Instance;
     AudioSource audioSource;
 
     /// <summary> 
-    /// Loads the song into the Jukebox (path is relative to Resources folder).
+    /// Loads the song into the Jukebox.
     /// </summary>
-    public static void LoadSong(string path){
-        if (path.EndsWith(".ogg") || path.EndsWith(".wav") || path.EndsWith(".mp3")){
-            path = path.Substring(0, path.Length - 4);
-        }
-        AudioClip clip = Resources.Load<AudioClip>(path);
+    public static void LoadSong(AudioClip clip){
         Instance.audioSource.clip = clip;
+    }
+
+    public static void LoadSongAndPlay(string path) {
+        Instance.StartCoroutine(SongFolderReader.FetchAudioFile(path, (request) => {
+            if (request.result != UnityWebRequest.Result.Success) {
+                Debug.LogError($"Error fetching file: {request.error}");
+                return;
+            }
+            AudioClip myClip = DownloadHandlerAudioClip.GetContent(request);
+            if (myClip == null) {
+                Debug.LogError("AudioClip is null");
+                return;
+            }
+            LoadSong(myClip);
+            NowPlaying = path;
+            Play();
+        }));
     }
 
     public static void Play(){
@@ -55,8 +71,27 @@ public class Jukebox : MonoBehaviour
         Instance.audioSource.timeSamples = (int)(position * Instance.audioSource.clip.frequency);
     }
 
+    /// <summary>
+    /// Set the audio clip to loop.
+    /// </summary>
+    /// <param name="loop">True to loop, false to not loop.</param>
+    /// <param name="loopStart">Start time of the loop in seconds.</param>
+    public static void SetLoop(bool loop, float loopStart = 0){
+        Instance.audioSource.loop = loop;
+        if (loop) {
+            Instance.audioSource.time = loopStart;
+        }
+    }
+
+
     void Awake(){
+        if (Instance != null) {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
         Instance = this;
         audioSource = GetComponent<AudioSource>();
+
     }
 }

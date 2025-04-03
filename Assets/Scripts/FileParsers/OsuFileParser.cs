@@ -34,7 +34,6 @@ public class OsuFileParser
         for (int i = 0; i < lines.Length; i++)
         {
             string line = lines[i].Trim();
-            if (line.Length == 0) continue;
             if (ParseState.Done == state) break;
 
             try {
@@ -51,6 +50,11 @@ public class OsuFileParser
                             int mode = int.Parse(line.Split(':')[1]);
                             if (mode != 3)
                                 return new SongValidationResult { Valid = false, Message = $"Invalid mode. Expected 3 (Mania), found {mode}", Data = songData };
+                        }
+
+                        if (line.StartsWith("PreviewTime:")) {
+                            songInfo.SongPreviewStart = float.Parse(line.Split(':')[1]) / 1000f;
+                            songInfo.SongPreviewStart = (songInfo.SongPreviewStart < 0) ? 0 : songInfo.SongPreviewStart; 
                         }
 
                         if (line.StartsWith("[Metadata]"))
@@ -71,6 +75,8 @@ public class OsuFileParser
 
                         if (line.StartsWith("Tags:"))
                             songInfo.DifficultyRating = int.Parse(line.Split(':')[1]);
+
+                        
 
                         if (line.StartsWith("[Difficulty]"))
                             state = ParseState.Difficulty;
@@ -100,6 +106,8 @@ public class OsuFileParser
                         break;
                     case ParseState.HitObjects:
                         string[] lineNote = line.Split(',');
+                        if (i == lines.Length - 1)
+                            state = ParseState.Done;
                         if (lineNote.Length != 6) break;
                         if (fastPass) {
                             songInfo.SongStart = float.Parse(lineNote[2])/1000f;
@@ -122,7 +130,7 @@ public class OsuFileParser
                             Lane = int.Parse(lineNote[0])/ 64,
                             HitTime = float.Parse(lineNote[2])/1000f
                         });
-                        break;
+                    break;
                 }
             } catch (System.Exception e) {
                 Debug.LogError($"Error parsing line: {line}, {e.Message}, {e.StackTrace}");

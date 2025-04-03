@@ -19,7 +19,7 @@ public class SongInfoPanelUI : MonoBehaviour
 
     void UpdateSongInfo()
     {
-        SetData(SongFolderReader.Songs[SongCaroussel.CurrentSongIndex]);
+        SetData(SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex]);
     }
 
     public void SetData(SongInfo song)

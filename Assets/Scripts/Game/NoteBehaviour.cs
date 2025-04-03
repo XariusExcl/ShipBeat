@@ -62,7 +62,6 @@ public class NoteBehaviour : MonoBehaviour
                 noteSkyModel.SetActive(true);
                 break;
         }
-        // Debug.Log($"Note: {note.Lane} {note.HitTime}");
         lane = LaneManager.GetLane(note.Lane);
         splineAnimate.Container = lane.SplineContainer;
 
