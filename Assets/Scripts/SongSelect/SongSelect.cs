@@ -35,7 +35,7 @@ public class SongSelect : MonoBehaviour
         if (song.AudioFile == Jukebox.NowPlaying) return; // Don't reload the same song
         Jukebox.Stop();
         Jukebox.LoadSongAndPlay(song.AudioFile);
-        Jukebox.Play();
+        Jukebox.SetPlaybackPosition(song.SongPreviewStart);
         Jukebox.SetLoop(true);
     }
 }

@@ -1,7 +1,6 @@
 // Plays music.
 
 using UnityEngine;
-using System.Collections;
 using UnityEngine.Networking;
 
 public class Jukebox : MonoBehaviour
@@ -9,6 +8,8 @@ public class Jukebox : MonoBehaviour
     public static string NowPlaying = "";
     public static Jukebox Instance;
     AudioSource audioSource;
+    public static bool IsPlaying => Instance.audioSource.isPlaying;
+    static float setPlaybackPosition;
 
     /// <summary> 
     /// Loads the song into the Jukebox.
@@ -18,19 +19,18 @@ public class Jukebox : MonoBehaviour
     }
 
     public static void LoadSongAndPlay(string path) {
-        Instance.StartCoroutine(SongFolderReader.FetchAudioFile(path, (request) => {
-            if (request.result != UnityWebRequest.Result.Success) {
-                Debug.LogError($"Error fetching file: {request.error}");
+        Instance.StartCoroutine(SongFolderReader.FetchAudioFile(path, (result) => {
+            if (result.result != UnityWebRequest.Result.Success)
                 return;
-            }
-            AudioClip myClip = DownloadHandlerAudioClip.GetContent(request);
-            if (myClip == null) {
-                Debug.LogError("AudioClip is null");
-                return;
-            }
+
+            AudioClip myClip = result.fetchedObject as AudioClip;
             LoadSong(myClip);
             NowPlaying = path;
             Play();
+            if (setPlaybackPosition > 0) {
+                SetPlaybackPosition(setPlaybackPosition);
+                setPlaybackPosition = 0;
+            }
         }));
     }
 
@@ -68,6 +68,7 @@ public class Jukebox : MonoBehaviour
     /// Set playback position (in seconds) for recalibration/seeking.
     /// </summary>
     public static void SetPlaybackPosition(float position){
+        setPlaybackPosition = position;
         Instance.audioSource.timeSamples = (int)(position * Instance.audioSource.clip.frequency);
     }
 

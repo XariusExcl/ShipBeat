@@ -1,12 +1,9 @@
 // Carries data between Song Select and Game scene
 // and loads the song when the game scene is loaded
 
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
-using Unity.Serialization.Json;
-using NUnit.Framework;
 
 public class SongLoader : MonoBehaviour
 {
@@ -29,17 +26,11 @@ public class SongLoader : MonoBehaviour
         StartCoroutine(SongFolderReader.FetchAudioFile(songInfo.AudioFile, OnAudioFetched));
     }
 
-    void OnFileFetched(UnityWebRequest request) {
-        if (request.result != UnityWebRequest.Result.Success) {
-            Debug.LogError($"Error fetching file: {request.error}");
+    void OnFileFetched(FetchResult fetchResult) {
+        if (fetchResult.result != UnityWebRequest.Result.Success)
             return;
-        }
-        TextAsset file = new TextAsset(request.downloadHandler.text);
-        if (file == null) {
-            Debug.LogError("File is null");
-            SceneManager.LoadScene("Menu");
-            return;
-        }
+
+        TextAsset file = fetchResult.fetchedObject as TextAsset;
         SongValidationResult result = OsuFileParser.ParseFile(file);
         if (result.Valid == false) {
             Debug.LogError($"Error parsing file: {result.Message}");
@@ -54,12 +45,12 @@ public class SongLoader : MonoBehaviour
             SceneManager.LoadScene("Game");
     }
 
-    void OnAudioFetched(UnityWebRequest request) {
-        if (request.result != UnityWebRequest.Result.Success) {
-            Debug.LogError($"Error fetching audio file: {request.error}");
+    void OnAudioFetched(FetchResult fetchResult) {
+        if (fetchResult.result != UnityWebRequest.Result.Success) {
+            Debug.LogError($"Error fetching audio file");
             return;
         }
-        AudioClip audioClip = DownloadHandlerAudioClip.GetContent(request);
+        AudioClip audioClip = fetchResult.fetchedObject as AudioClip;
         if (audioClip == null) {
             Debug.LogError("AudioClip is null");
             SceneManager.LoadScene("Menu");

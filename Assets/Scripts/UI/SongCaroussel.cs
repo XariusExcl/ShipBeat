@@ -6,22 +6,25 @@ using UnityEngine.Events;
 
 public class SongCaroussel : MonoBehaviour
 {
+    public GameObject loadingThrobber;
     public GameObject songEntryPrefab;
-    List<SongEntryUI> songEntries = new();
+    readonly List<SongEntryUI> songEntries = new();
     public static int CurrentSongIndex { get; private set; } = 0;
-    const int NumSongs = 7;
+    const int NumUIs = 9;
+    int scrollPosition; 
 
     // Events
-    public static UnityEvent OnSongSelected = new UnityEvent();
-    public static UnityEvent OnCarousselUpdate = new UnityEvent();
+    public static UnityEvent OnSongSelected = new();
+    public static UnityEvent OnCarousselUpdate = new();
 
 
-    int mathmod(int a, int b) {
+    int Mathmod(int a, int b) {
         return (a % b + b) % b;
     }
 
     void Start()
     {
+        loadingThrobber.SetActive(true);
         if (!SongFolderReader.IsDataLoaded)
             SongFolderReader.OnDataLoaded.AddListener(OnSongDataLoaded);
         else
@@ -30,13 +33,11 @@ public class SongCaroussel : MonoBehaviour
 
     void OnSongDataLoaded()
     {
-        for (int i = 0; i < NumSongs; i++) {
-            GameObject songEntry = Instantiate(songEntryPrefab, transform);
-
-            songEntry.transform.localPosition = new Vector3(0, (32*(NumSongs/2))-i*32, 0);
-
-            SongEntryUI songEntryUI = songEntry.GetComponent<SongEntryUI>();
-            songEntryUI.SetData(SongFolderReader.SongInfos[mathmod(i - NumSongs / 2, SongFolderReader.SongInfos.Count)]);
+        loadingThrobber.SetActive(false);
+        for (int i = 0; i < NumUIs; i++) {
+            SongEntryUI songEntryUI = Instantiate(songEntryPrefab, transform).GetComponent<SongEntryUI>();
+            songEntryUI.UpdatePositionInCaroussel(NumUIs/2 - i);
+            songEntryUI.SetData(SongFolderReader.SongInfos[Mathmod(i - NumUIs/2, SongFolderReader.Count)]);
             songEntries.Add(songEntryUI);
         }
 
@@ -73,17 +74,22 @@ public class SongCaroussel : MonoBehaviour
 
     void UpdateCaroussel(ScrollDirection direction)
     {
+        // Caroussel scroll is cursor relative: Down means select the song below current, up means above.
         if (direction == ScrollDirection.Up) {
-            CurrentSongIndex = mathmod(CurrentSongIndex - 1, SongFolderReader.SongInfos.Count);
+            int updatedEntryIdx = Mathmod(-scrollPosition, NumUIs) + 1;
+            songEntries[^updatedEntryIdx].SetData(SongFolderReader.SongInfos[Mathmod(scrollPosition + NumUIs / 2 + 2, SongFolderReader.Count)]);
+            songEntries.ForEach((entry) => entry.UpdatePositionInCaroussel(-1));
+            scrollPosition -= 1;
+            CurrentSongIndex = Mathmod(CurrentSongIndex - 1, SongFolderReader.Count);
         }
         else if (direction == ScrollDirection.Down) {
-            CurrentSongIndex = mathmod(CurrentSongIndex + 1, SongFolderReader.SongInfos.Count);
+            int updatedEntryIdx = Mathmod(scrollPosition, NumUIs);
+            songEntries[updatedEntryIdx].SetData(SongFolderReader.SongInfos[Mathmod(scrollPosition + NumUIs / 2 + 1, SongFolderReader.Count)]);
+            songEntries.ForEach((entry) => entry.UpdatePositionInCaroussel(1));
+            scrollPosition += 1;
+            CurrentSongIndex = Mathmod(CurrentSongIndex + 1, SongFolderReader.Count);
         }
 
-        // TODO: only update one of them, move the others (for animation)
-        for (int i = 0; i < NumSongs; i++) {
-            songEntries[i].SetData(SongFolderReader.SongInfos[mathmod(CurrentSongIndex + i - NumSongs / 2, SongFolderReader.SongInfos.Count)]);
-        }
         OnCarousselUpdate.Invoke();
     }
 }

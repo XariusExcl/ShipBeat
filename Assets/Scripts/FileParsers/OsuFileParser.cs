@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-using UnityEngine.AI;
+
 enum ParseState
 {
     None,
@@ -20,8 +19,8 @@ public class OsuFileParser
 {
     public static SongValidationResult ParseFile(TextAsset file, bool fastPass = false)
     {
-        SongData songData = new SongData();
-        SongInfo songInfo = new SongInfo();
+        SongData songData = new();
+        SongInfo songInfo = new();
 
         string[] lines = file.text.Split('\n');
         if (!lines[0].StartsWith("osu file format v"))
@@ -52,10 +51,8 @@ public class OsuFileParser
                                 return new SongValidationResult { Valid = false, Message = $"Invalid mode. Expected 3 (Mania), found {mode}", Data = songData };
                         }
 
-                        if (line.StartsWith("PreviewTime:")) {
-                            songInfo.SongPreviewStart = float.Parse(line.Split(':')[1]) / 1000f;
-                            songInfo.SongPreviewStart = (songInfo.SongPreviewStart < 0) ? 0 : songInfo.SongPreviewStart; 
-                        }
+                        if (line.StartsWith("PreviewTime:"))
+                            songInfo.SongPreviewStart = float.Parse(line.Split(':')[1]) / 1000f;        
 
                         if (line.StartsWith("[Metadata]"))
                             state = ParseState.Metadata;
@@ -84,16 +81,17 @@ public class OsuFileParser
                     case ParseState.Difficulty:
                         if (line.StartsWith("CircleSize:")) {
                             int circleSize = int.Parse(line.Split(':')[1]);
-                            if (circleSize != 8){
-                                return new SongValidationResult { Valid = false, Message = $"Invalid lane count. Expected 8, found {circleSize}.", Data = songData };;
-                            }
+                            /*
+                            if (circleSize != 8)
+                                return new SongValidationResult { Valid = false, Message = $"Invalid lane count. Expected 8, found {circleSize}.", Data = songData };
+                            */
                         }
                         if (line.StartsWith("[Events]"))
                             state = ParseState.Events;
                         break;
                     case ParseState.Events:
                         if (line.StartsWith("0,0,\"")) // Probably not the best way to check for background image, todo: test with a song that has storyboard
-                            songInfo.BackgroundImage = line.Split(',')[2].Trim();
+                            songInfo.BackgroundImage = line.Split(',')[2].Replace('"', ' ').Trim();
 
                         if (line.StartsWith("[TimingPoints]"))
                             state = ParseState.TimingPoints;
@@ -108,13 +106,15 @@ public class OsuFileParser
                         string[] lineNote = line.Split(',');
                         if (i == lines.Length - 1)
                             state = ParseState.Done;
+                            
                         if (lineNote.Length != 6) break;
+                        
                         if (fastPass) {
                             songInfo.SongStart = float.Parse(lineNote[2])/1000f;
                             int j = 1;
                             string[] lastLine;
                             do {
-                                lastLine = lines[lines.Length - j].Split(',');
+                                lastLine = lines[^j].Split(',');
                                 j++;
                             } while (lastLine.Length != 6 || lines.Length - j < i);
                             if (lines.Length - j < i) throw new System.Exception("Invalid file format, could not find end of notes (fastpass).");
@@ -141,9 +141,11 @@ public class OsuFileParser
 
         if (!fastPass) {
             songInfo.SongStart = notes[0].HitTime;
-            songInfo.Length = notes[notes.Count - 1].HitTime - notes[0].HitTime;
+            songInfo.Length = notes[^1].HitTime - notes[0].HitTime;
             songInfo.NoteCount = notes.Count;
         }
+        
+        songInfo.SongPreviewStart = (songInfo.SongPreviewStart < 0) ? songInfo.Length/2 : songInfo.SongPreviewStart; 
 
         songData.Info = songInfo;
         songData.Notes = notes.ToArray();

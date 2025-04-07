@@ -1,10 +1,13 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Networking;
+using System;
 
 public class SongEntryUI : MonoBehaviour
 {
-    public int PositionInCaroussel { get; private set; }
+    int positionInCaroussel;
+    Vector3 targetPosition;
     [SerializeField] TextMeshProUGUI title;
     [SerializeField] TextMeshProUGUI artist;
     [SerializeField] TextMeshProUGUI difficultyName;
@@ -20,21 +23,53 @@ public class SongEntryUI : MonoBehaviour
 
         Color diffColor = GetColorForRating(songInfo.DifficultyRating);
         difficultyColor.color = diffColor;
-        // backgroundImage.sprite =
+        StartCoroutine(SongFolderReader.FetchImageFile(songInfo.BackgroundImage, (result) =>
+        {
+            if (result.result == UnityWebRequest.Result.Success)
+            {
+                Texture2D texture = result.fetchedObject as Texture2D;
+                backgroundImage.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
+            }
+        }));
     }
 
-    public void UpdatePosition(Vector3 position)
+    /// <summary>
+    /// Sets the position of the song entry in the caroussel.
+    /// </summary>
+    /// <param name="position">Position relative to last.</param>
+    public void UpdatePositionInCaroussel(int position)
     {
-        transform.localPosition = position;
-    
-        // TODO: update position to an intermediate value, to be used in a lerp with transform.position in the Update method.
+        positionInCaroussel += position;
+        if (Math.Abs(positionInCaroussel) > SongFolderReader.Count / 2 + 2) {
+            positionInCaroussel = Math.Sign(-positionInCaroussel) * (Math.Abs(positionInCaroussel) - 1);
+            targetPosition = CarousselToWorldPosition(positionInCaroussel);
+            transform.localPosition = targetPosition;
+        } else {
+            targetPosition = CarousselToWorldPosition(positionInCaroussel);
+        }
     }
+
+    Vector3 CarousselToWorldPosition(int position)
+    {
+        return new Vector3(-50f / (Mathf.Abs(position) + 1f), 32f * position, 0);
+    }
+
+    void Start()
+    {
+        UpdatePositionInCaroussel(0);
+    }
+
+    void Update()
+    {
+        transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, 10f * Time.deltaTime);
+    }
+
 
     // Map rating to color gradient, 1-10 going from blue to red hue
     Color GetColorForRating(int rating)
     {
-        float hue = Mathf.Lerp(240, 0, rating / 10f);
-        return Color.HSVToRGB(hue / 360f, 1, 1); 
+        float hue = Mathf.Lerp(210, 0, Mathf.Clamp01((rating-3)/6f));
+        return Color.HSVToRGB(hue / 360f, .8f, .9f); 
     }
 
     string GetRatingText(int rating)
