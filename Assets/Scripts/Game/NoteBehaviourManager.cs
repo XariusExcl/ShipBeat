@@ -14,7 +14,11 @@ public class NoteBehaviourManager : MonoBehaviour
     }
 
     void Start() {
-        // TODO: Pre-warm models of notes
+        GameObject prewarmedNote = Instantiate(notePrefab, transform);
+        prewarmedNote.transform.position = new Vector3(0, 0, 20);
+        prewarmedNote.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f); // Notes need to be on screen to be prewarmed, so make them small to avoid distraction
+        NoteBehaviour prewarmedNoteBehaviour = prewarmedNote.GetComponent<NoteBehaviour>();
+        prewarmedNoteBehaviour.StartCoroutine(prewarmedNoteBehaviour.CycleModels());
 
         // Create a pool of notes
         for (int i = 0; i < 10; i++)
@@ -63,7 +67,7 @@ public class NoteBehaviourManager : MonoBehaviour
     /// </summary>
     /// <param name="note"></param>
     public static void SpawnNote(Note note) {
-        NoteBehaviour noteBehaviour = Instance.noteBehaviours.Find(note => note.PoolState == NotePoolState.InPool);
+        NoteBehaviour noteBehaviour = Instance.FetchNoteFromPool();
         noteBehaviour.Init(note);
     }
 

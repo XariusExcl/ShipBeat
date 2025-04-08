@@ -79,7 +79,7 @@ public class SongLoader : MonoBehaviour
     void GameStart() {
         Scoring.Reset();
         Scoring.NoteCount = LoadedSong.Notes.Length;
-        Maestro.PlaySong(LoadedSong.Info.AudioFile); // TODO: Fix this
+        Maestro.StartSong();
     }
 
     float lastNoteTime = 0;

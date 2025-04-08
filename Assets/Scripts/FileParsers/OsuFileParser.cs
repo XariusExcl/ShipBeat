@@ -97,6 +97,7 @@ public class OsuFileParser
                             state = ParseState.TimingPoints;
                         break;
                     case ParseState.TimingPoints:
+                        // BPM
                         // If I ignore it long enough, maybe it'll go away
 
                         if (line.StartsWith("[HitObjects]"))
@@ -111,12 +112,12 @@ public class OsuFileParser
                         
                         if (fastPass) {
                             songInfo.SongStart = float.Parse(lineNote[2])/1000f;
-                            int j = 1;
+                            int j = 0;
                             string[] lastLine;
                             do {
-                                lastLine = lines[^j].Split(',');
                                 j++;
-                            } while (lastLine.Length != 6 || lines.Length - j < i);
+                                lastLine = lines[^j].Split(',');
+                            } while (lastLine.Length != 6 && lines.Length - j >= i);
                             if (lines.Length - j < i) throw new System.Exception("Invalid file format, could not find end of notes (fastpass).");
                             songInfo.Length = float.Parse(lastLine[2])/1000f - songInfo.SongStart;
                             songInfo.NoteCount = lines.Length - i - 1;

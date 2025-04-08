@@ -28,18 +28,16 @@ public class SongSelectReadyMenu : MonoBehaviour
 
     void Update()
     {
-        if (!enableButtons) return;
-        if (Input.GetButtonDown("P1_B1"))
-        {
-            SongSelect.CreateSongLoader();
-            // TODO : wait for song to load before going to game (trigger scene transition animation, then load scene)
-            SceneManager.LoadScene("Game");
-        }
-
         if (Input.GetButtonDown("P1_B2"))
         {
             animation.Play("SongSelectReadyMenuOut");
             enableButtons = false;
+        }
+        if (enableButtons && Input.GetButtonDown("P1_B1"))
+        {
+            SongSelect.CreateSongLoader();
+            // TODO : wait for song to load before going to game (trigger scene transition animation, then load scene)
+            SceneManager.LoadScene("Game");
         }
     }
 

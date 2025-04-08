@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Networking;
 using Unity.Serialization.Json;
+using System.Linq;
 
 public struct SongFolderFileSystemEntry
 {
@@ -27,6 +28,12 @@ public class SongFolderReader : MonoBehaviour
     public static UnityEvent OnDataLoaded = new UnityEvent();
     public static UnityEvent OnDataFailed = new UnityEvent();
     public static List<SongInfo> SongInfos = new List<SongInfo>();
+
+    // Caching
+    const int maxCacheSize = 10;
+    static Dictionary<string, Texture2D> textureCache = new();
+    static Dictionary<string, AudioClip> audioCache = new();
+
     public static int Count { get { return SongInfos.Count; } private set{} }
 
     void Awake() {
@@ -35,7 +42,8 @@ public class SongFolderReader : MonoBehaviour
     }
 
     void Start() {
-        StartCoroutine(ReadFolder());
+        if (!IsDataLoaded)
+            StartCoroutine(ReadFolder());
     }
 
     void Update() {
@@ -160,55 +168,84 @@ public class SongFolderReader : MonoBehaviour
     }
 
     public static IEnumerator FetchImageFile(string filePath, UnityAction<FetchResult> callback) {
-        # if UNITY_EDITOR
-            Texture2D texture = new Texture2D(2, 2);
-            byte[] fileData = System.IO.File.ReadAllBytes(filePath);
-            texture.LoadImage(fileData);
+        if (textureCache.ContainsKey(filePath)) {
             FetchResult result = new FetchResult
             {
                 result = UnityWebRequest.Result.Success,
-                fetchedObject = texture
+                fetchedObject = textureCache[filePath]
             };
             callback(result);
             yield break;
-        # else
-            UnityWebRequest request = UnityWebRequestTexture.GetTexture($"http://localhost:3000{filePath}");
-            yield return request.SendWebRequest();
-            if (request.result != UnityWebRequest.Result.Success) {
-                Debug.LogError($"Error loading image file: {request.error}");
-            }
-            FetchResult result = new FetchResult
-            {
-                result = request.result,
-                fetchedObject = DownloadHandlerTexture.GetContent(request)
-            };
+        } else {
+            Texture2D texture = new Texture2D(2, 2);
+            # if UNITY_EDITOR
+                byte[] fileData = System.IO.File.ReadAllBytes(filePath);
+                texture.LoadImage(fileData);
+                FetchResult result = new FetchResult
+                {
+                    result = UnityWebRequest.Result.Success,
+                    fetchedObject = texture
+                };
+            # else
+                UnityWebRequest request = UnityWebRequestTexture.GetTexture($"http://localhost:3000{filePath}");
+                yield return request.SendWebRequest();
+                if (request.result != UnityWebRequest.Result.Success) {
+                    Debug.LogError($"Error loading image file: {request.error}");
+                }
+                texture = DownloadHandlerTexture.GetContent(request);
+                FetchResult result = new FetchResult
+                {
+                    result = request.result,
+                    fetchedObject = texture
+                };
+            # endif
+            if (textureCache.Count >= maxCacheSize)
+                textureCache.Remove(textureCache.Keys.First());
+
+            textureCache[filePath] = texture;
             callback(result);
-        # endif
+            yield break;
+        }
     }
 
     public static IEnumerator FetchAudioFile(string filePath, UnityAction<FetchResult> callback) {
-        AudioType audioType = AudioType.UNKNOWN;
-        if (filePath.EndsWith(".wav")) audioType = AudioType.WAV;
-        else if (filePath.EndsWith(".mp3")) audioType = AudioType.MPEG;
-        else if (filePath.EndsWith(".ogg")) audioType = AudioType.OGGVORBIS;
-        else if (filePath.EndsWith(".aiff")) audioType = AudioType.AIFF;
-        else if (filePath.EndsWith(".opus")) audioType = AudioType.OGGVORBIS;
+        if (audioCache.ContainsKey(filePath)) {
+            FetchResult result = new FetchResult
+            {
+                result = UnityWebRequest.Result.Success,
+                fetchedObject = audioCache[filePath]
+            };
+            callback(result);
+            yield break;
+        } else {
+            AudioType audioType = AudioType.UNKNOWN;
+            if (filePath.EndsWith(".wav")) audioType = AudioType.WAV;
+            else if (filePath.EndsWith(".mp3")) audioType = AudioType.MPEG;
+            else if (filePath.EndsWith(".ogg")) audioType = AudioType.OGGVORBIS;
+            else if (filePath.EndsWith(".aiff")) audioType = AudioType.AIFF;
+            else if (filePath.EndsWith(".opus")) audioType = AudioType.OGGVORBIS;
 
-        # if UNITY_EDITOR
-            UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip("file://" + filePath, audioType);
-        # else
-            UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip($"http://localhost:3000{filePath}", audioType);
-        # endif
-        yield return request.SendWebRequest();
-        if (request.result != UnityWebRequest.Result.Success) {
-            Debug.LogError($"Error loading audio file: {request.error}");
+            # if UNITY_EDITOR
+                UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip("file://" + filePath, audioType);
+            # else
+                UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip($"http://localhost:3000{filePath}", audioType);
+            # endif
+            yield return request.SendWebRequest();
+            if (request.result != UnityWebRequest.Result.Success) {
+                Debug.LogError($"Error loading audio file: {request.error}");
+            }
+            AudioClip audioClip = DownloadHandlerAudioClip.GetContent(request);
+            FetchResult result = new FetchResult
+            {
+                result = request.result,
+                fetchedObject = audioClip,
+            };
+            if (audioCache.Count >= maxCacheSize)
+                audioCache.Remove(audioCache.Keys.First());
+            
+            audioCache[filePath] = audioClip;
+            callback(result);
         }
-        FetchResult result = new FetchResult
-        {
-            result = request.result,
-            fetchedObject = DownloadHandlerAudioClip.GetContent(request)
-        };
-
-        callback(result);
+        yield break;
     }
 }

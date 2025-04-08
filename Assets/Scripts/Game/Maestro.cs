@@ -14,12 +14,11 @@ public class Maestro : MonoBehaviour
     public static int LaneSpeed = 5; // Note time on the lane is 10 / LaneSpeed, i.e 8 = 1250ms
     public static float StartTime;
     const float StartDelay = 3;
-    public static float GlobalOffset = -.15f; // To be adjusted by the player, in seconds
+    public static float GlobalOffset = -.02f; // To be adjusted by the player, in seconds
 
-    public static void PlaySong(string path) {
+    public static void StartSong() {
         SongStarted = true;
         SongEnded = false;
-        Debug.Log(path);
         Jukebox.PlayScheduled(StartDelay);
         SongTime = 0;
         StartTime = (float)AudioSettings.dspTime + StartDelay;

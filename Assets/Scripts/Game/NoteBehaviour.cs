@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -92,5 +93,27 @@ public class NoteBehaviour : MonoBehaviour
                 transform.position += lane.ExtrapolationVector * Time.deltaTime * (Maestro.LaneSpeed / 10f);
             
         }
+    }
+
+    /// <summary>
+    ///  Cycles through the models of the note. Used for preloading the models at gameplay start.
+    /// </summary>
+    public IEnumerator CycleModels()
+    {
+        yield return new WaitForEndOfFrame();
+        noteGndModel.SetActive(true);
+        yield return new WaitForEndOfFrame();
+        noteGndModel.SetActive(false);
+        noteSkyModel.SetActive(true);
+        yield return new WaitForEndOfFrame();
+        noteSkyModel.SetActive(false);
+        noteSLModel.SetActive(true);
+        yield return new WaitForEndOfFrame();
+        noteSLModel.SetActive(false);
+        noteSRModel.SetActive(true);
+        yield return new WaitForEndOfFrame();
+        noteSRModel.SetActive(false);
+        Destroy(this);
+        yield return null;
     }
 }

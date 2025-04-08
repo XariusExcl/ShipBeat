@@ -75,18 +75,20 @@ public class SongCaroussel : MonoBehaviour
     void UpdateCaroussel(ScrollDirection direction)
     {
         // Caroussel scroll is cursor relative: Down means select the song below current, up means above.
+        const int edge = NumUIs / 2 + 1;
+
         if (direction == ScrollDirection.Up) {
             int updatedEntryIdx = Mathmod(-scrollPosition, NumUIs) + 1;
-            songEntries[^updatedEntryIdx].SetData(SongFolderReader.SongInfos[Mathmod(scrollPosition + NumUIs / 2 + 2, SongFolderReader.Count)]);
-            songEntries.ForEach((entry) => entry.UpdatePositionInCaroussel(-1));
+            songEntries[^updatedEntryIdx].SetData(SongFolderReader.SongInfos[Mathmod(scrollPosition - edge, SongFolderReader.Count)]);
             scrollPosition -= 1;
+            songEntries.ForEach((entry) => entry.UpdatePositionInCaroussel(-1));
             CurrentSongIndex = Mathmod(CurrentSongIndex - 1, SongFolderReader.Count);
         }
         else if (direction == ScrollDirection.Down) {
             int updatedEntryIdx = Mathmod(scrollPosition, NumUIs);
-            songEntries[updatedEntryIdx].SetData(SongFolderReader.SongInfos[Mathmod(scrollPosition + NumUIs / 2 + 1, SongFolderReader.Count)]);
-            songEntries.ForEach((entry) => entry.UpdatePositionInCaroussel(1));
+            songEntries[updatedEntryIdx].SetData(SongFolderReader.SongInfos[Mathmod(scrollPosition + edge, SongFolderReader.Count)]);
             scrollPosition += 1;
+            songEntries.ForEach((entry) => entry.UpdatePositionInCaroussel(1));
             CurrentSongIndex = Mathmod(CurrentSongIndex + 1, SongFolderReader.Count);
         }
 

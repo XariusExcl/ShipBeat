@@ -21,7 +21,7 @@ public class Lane : MonoBehaviour {
         if (lineRenderer.enabled) {
             lineRenderer.positionCount = 20;
             for (int i = 0; i < lineRenderer.positionCount; i++) {
-                lineRenderer.SetPosition(i, (Vector3)SplineContainer.EvaluatePosition(i / (float)lineRenderer.positionCount)); // TODO, can be paralellized with a job?
+                lineRenderer.SetPosition(i, (Vector3)SplineContainer.EvaluatePosition(i / (float)lineRenderer.positionCount));
             }
         }
 
