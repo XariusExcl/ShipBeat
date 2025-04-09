@@ -52,7 +52,7 @@ public class OsuFileParser
                         }
 
                         if (line.StartsWith("PreviewTime:"))
-                            songInfo.SongPreviewStart = float.Parse(line.Split(':')[1]) / 1000f;        
+                            songInfo.SongPreviewStart = float.Parse(line.Split(':')[1]);        
 
                         if (line.StartsWith("[Metadata]"))
                             state = ParseState.Metadata;

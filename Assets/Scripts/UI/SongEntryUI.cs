@@ -26,10 +26,7 @@ public class SongEntryUI : MonoBehaviour
         StartCoroutine(SongFolderReader.FetchImageFile(songInfo.BackgroundImage, (result) =>
         {
             if (result.result == UnityWebRequest.Result.Success)
-            {
-                Texture2D texture = result.fetchedObject as Texture2D;
-                backgroundImage.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
-            }
+                backgroundImage.sprite = result.fetchedObject as Sprite;
         }));
     }
 

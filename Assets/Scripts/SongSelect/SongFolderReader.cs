@@ -17,7 +17,7 @@ public struct SongFolderFileSystemEntry
 public struct FetchResult
 {
     public UnityWebRequest.Result result;
-    public object fetchedObject; // TextAsset, AudioClip or Texture2D
+    public object fetchedObject; // TextAsset, AudioClip or Sprite
 }
 
 public class SongFolderReader : MonoBehaviour
@@ -31,7 +31,7 @@ public class SongFolderReader : MonoBehaviour
 
     // Caching
     const int maxCacheSize = 10;
-    static Dictionary<string, Texture2D> textureCache = new();
+    static Dictionary<string, Sprite> spriteCache = new();
     static Dictionary<string, AudioClip> audioCache = new();
 
     public static int Count { get { return SongInfos.Count; } private set{} }
@@ -168,11 +168,11 @@ public class SongFolderReader : MonoBehaviour
     }
 
     public static IEnumerator FetchImageFile(string filePath, UnityAction<FetchResult> callback) {
-        if (textureCache.ContainsKey(filePath)) {
+        if (spriteCache.ContainsKey(filePath)) {
             FetchResult result = new FetchResult
             {
                 result = UnityWebRequest.Result.Success,
-                fetchedObject = textureCache[filePath]
+                fetchedObject = spriteCache[filePath]
             };
             callback(result);
             yield break;
@@ -184,7 +184,7 @@ public class SongFolderReader : MonoBehaviour
                 FetchResult result = new FetchResult
                 {
                     result = UnityWebRequest.Result.Success,
-                    fetchedObject = texture
+                    fetchedObject = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f)
                 };
             # else
                 UnityWebRequest request = UnityWebRequestTexture.GetTexture($"http://localhost:3000{filePath}");
@@ -196,13 +196,13 @@ public class SongFolderReader : MonoBehaviour
                 FetchResult result = new FetchResult
                 {
                     result = request.result,
-                    fetchedObject = texture
+                    fetchedObject = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f)
                 };
             # endif
-            if (textureCache.Count >= maxCacheSize)
-                textureCache.Remove(textureCache.Keys.First());
+            if (spriteCache.Count >= maxCacheSize)
+                spriteCache.Remove(spriteCache.Keys.First());
 
-            textureCache[filePath] = texture;
+            spriteCache[filePath] = result.fetchedObject as Sprite;
             callback(result);
             yield break;
         }

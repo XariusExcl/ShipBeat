@@ -1,7 +1,9 @@
 // Plays music.
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Events;
 
 public class Jukebox : MonoBehaviour
 {
@@ -9,16 +11,16 @@ public class Jukebox : MonoBehaviour
     public static Jukebox Instance;
     AudioSource audioSource;
     public static bool IsPlaying => Instance.audioSource.isPlaying;
-    static float setPlaybackPosition;
 
     /// <summary> 
     /// Loads the song into the Jukebox.
     /// </summary>
     public static void LoadSong(AudioClip clip){
+        clip.LoadAudioData();
         Instance.audioSource.clip = clip;
     }
 
-    public static void LoadSongAndPlay(string path) {
+    public static void LoadSongAndPlay(string path, float setPlaybackPosition = 0) { 
         Instance.StartCoroutine(SongFolderReader.FetchAudioFile(path, (result) => {
             if (result.result != UnityWebRequest.Result.Success)
                 return;
@@ -27,12 +29,10 @@ public class Jukebox : MonoBehaviour
             LoadSong(myClip);
             NowPlaying = path;
             Play();
-            if (setPlaybackPosition > 0) {
-                SetPlaybackPosition(setPlaybackPosition);
-                setPlaybackPosition = 0;
-            }
+            SetPlaybackPosition(setPlaybackPosition);
         }));
     }
+    
 
     public static void Play(){
         Instance.audioSource.Play();
@@ -68,20 +68,21 @@ public class Jukebox : MonoBehaviour
     /// Set playback position (in seconds) for recalibration/seeking.
     /// </summary>
     public static void SetPlaybackPosition(float position){
-        setPlaybackPosition = position;
+        if (position < 0)
+            position = 0;
+
+        if (Instance.audioSource.clip.loadState != AudioDataLoadState.Loaded) {
+            Instance.StartCoroutine(Instance.WaitForAudioToLoad(() => SetPlaybackPosition(position)));
+            return;
+        }
         Instance.audioSource.timeSamples = (int)(position * Instance.audioSource.clip.frequency);
     }
 
-    /// <summary>
-    /// Set the audio clip to loop.
-    /// </summary>
-    /// <param name="loop">True to loop, false to not loop.</param>
-    /// <param name="loopStart">Start time of the loop in seconds.</param>
-    public static void SetLoop(bool loop, float loopStart = 0){
-        Instance.audioSource.loop = loop;
-        if (loop) {
-            Instance.audioSource.time = loopStart;
+    IEnumerator WaitForAudioToLoad(UnityAction callback){
+        while (audioSource.clip.loadState != AudioDataLoadState.Loaded) {
+            yield return null;
         }
+        callback?.Invoke();
     }
 
 
@@ -93,6 +94,5 @@ public class Jukebox : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         Instance = this;
         audioSource = GetComponent<AudioSource>();
-
     }
 }

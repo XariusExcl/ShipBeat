@@ -34,8 +34,6 @@ public class SongSelect : MonoBehaviour
         SongInfo song = SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex];
         if (song.AudioFile == Jukebox.NowPlaying) return; // Don't reload the same song
         Jukebox.Stop();
-        Jukebox.LoadSongAndPlay(song.AudioFile);
-        Jukebox.SetPlaybackPosition(song.SongPreviewStart);
-        Jukebox.SetLoop(true);
+        Jukebox.LoadSongAndPlay(song.AudioFile, song.SongPreviewStart);
     }
 }
