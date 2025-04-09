@@ -11,7 +11,7 @@ public class SongCaroussel : MonoBehaviour
     readonly List<SongEntryUI> songEntries = new();
     public static int CurrentSongIndex { get; private set; } = 0;
     const int NumUIs = 9;
-    int scrollPosition; 
+    static int scrollPosition; 
 
     // Events
     public static UnityEvent OnSongSelected = new();
@@ -37,7 +37,7 @@ public class SongCaroussel : MonoBehaviour
         for (int i = 0; i < NumUIs; i++) {
             SongEntryUI songEntryUI = Instantiate(songEntryPrefab, transform).GetComponent<SongEntryUI>();
             songEntryUI.UpdatePositionInCaroussel(NumUIs/2 - i);
-            songEntryUI.SetData(SongFolderReader.SongInfos[Mathmod(i - NumUIs/2, SongFolderReader.Count)]);
+            songEntryUI.SetData(SongFolderReader.SongInfos[Mathmod(scrollPosition + i - NumUIs/2, SongFolderReader.Count)]);
             songEntries.Add(songEntryUI);
         }
 
