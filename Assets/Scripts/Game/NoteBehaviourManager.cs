@@ -65,7 +65,7 @@ public class NoteBehaviourManager : MonoBehaviour
     /// <summary>
     /// Spawns a note on a lane
     /// </summary>
-    /// <param name="note"></param>
+    /// <param name="note">The Note data to spawn</param>
     public static void SpawnNote(Note note) {
         NoteBehaviour noteBehaviour = Instance.FetchNoteFromPool();
         noteBehaviour.Init(note);
@@ -74,7 +74,7 @@ public class NoteBehaviourManager : MonoBehaviour
     /// <summary>
     /// Returns a note to the pool
     /// </summary>
-    /// <param name="note"></param>
+    /// <param name="note">The Note object to return to the pool.</param>
     public static void ReturnToPool(Note note) {
         NoteBehaviour noteBehaviour = Instance.noteBehaviours.Find(noteb => noteb.Note.Id == note.Id);
         if (noteBehaviour == null) {
@@ -87,7 +87,7 @@ public class NoteBehaviourManager : MonoBehaviour
     /// <summary>
     /// Returns a note to the pool
     /// </summary>
-    /// <param name="note"></param>
+    /// <param name="id">The note id to return to the pool.</param>
     public static void ReturnToPool(int id) {
         NoteBehaviour noteBehaviour = Instance.noteBehaviours.Find(noteb => noteb.Note.Id == id);
         if (noteBehaviour == null) {

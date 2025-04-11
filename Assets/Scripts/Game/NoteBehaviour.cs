@@ -34,6 +34,7 @@ public class NoteBehaviour : MonoBehaviour
     public NotePoolState PoolState { get; private set; } = NotePoolState.InPool;
     // Components
     SplineAnimate splineAnimate;
+    LineRenderer tailLineRenderer;
     Lane lane;
 
 
@@ -63,6 +64,9 @@ public class NoteBehaviour : MonoBehaviour
                 noteSkyModel.SetActive(true);
                 break;
         }
+        if (note.Type == NoteType.Hold)
+            tailLineRenderer = GetComponent<LineRenderer>();
+
         lane = LaneManager.GetLane(note.Lane);
         splineAnimate.Container = lane.SplineContainer;
 
@@ -86,12 +90,21 @@ public class NoteBehaviour : MonoBehaviour
         if (PoolState == NotePoolState.InPool) return;
         float normalizedTime = (Note.HitTime - Maestro.SongTime) / (10f / Maestro.LaneSpeed);
 
-        if (normalizedTime < 1){       
+        if (normalizedTime < 1){
+            if (Note.Type == NoteType.Hold)
+                tailLineRenderer.enabled = true;
+
             if (normalizedTime > 0) // Move along the spline
                 splineAnimate.NormalizedTime = normalizedTime;
             else // Move along the extrapolation vector
                 transform.position += lane.ExtrapolationVector * Time.deltaTime * (Maestro.LaneSpeed / 10f);
-            
+        }
+
+        if (Note.Type == NoteType.Hold)
+        {
+            float normalizedReleaseTime = (Note.ReleaseTime - Maestro.SongTime) / (10f / Maestro.LaneSpeed);
+            tailLineRenderer.SetPosition(0, normalizedTime > 0 ? transform.position : lane.transform.position);
+            tailLineRenderer.SetPosition(1, lane.SplineContainer.EvaluatePosition(normalizedReleaseTime));
         }
     }
 

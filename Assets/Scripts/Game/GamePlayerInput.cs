@@ -18,10 +18,10 @@ public class GamePlayerInput : MonoBehaviour {
         {
             lastHorizontal = Input.GetAxis("P1_Horizontal");
             if (lastHorizontal > .5) {
-                Judge.JudgePlayerInput(1);
+                Judge.JudgePlayerInput(1, ButtonState.Down);
             }
             else if (lastHorizontal < -.5) {
-                Judge.JudgePlayerInput(0);
+                Judge.JudgePlayerInput(0, ButtonState.Down);
             }
         }
 
@@ -30,13 +30,13 @@ public class GamePlayerInput : MonoBehaviour {
             if (Input.GetButtonDown("P1_B"+i))
             {
                 Beams[i-1].HandleInput(ButtonState.Down);
-                Judge.JudgePlayerInput(i+1/*, ButtonState.Down*/);
+                Judge.JudgePlayerInput(i+1, ButtonState.Down);
             }
 
             if (Input.GetButtonUp("P1_B"+i))
             {
                 Beams[i-1].HandleInput(ButtonState.Up);
-                // Judge.JudgePlayerInput(i, ButtonState.Up);
+                Judge.JudgePlayerInput(i, ButtonState.Up);
             }
         }
     }
