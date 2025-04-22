@@ -33,6 +33,8 @@ public class OsuFileParser
             return new SongValidationResult { Valid = false, Message = "Invalid file format", Data = songData };
         }
         List<Note> notes = new();
+        List<TimingPoint> timingPoints = new();
+
         ParseState state = ParseState.None;
         int noteId = 0;
         for (int i = 0; i < lines.Length; i++)
@@ -102,15 +104,35 @@ public class OsuFileParser
                             state = ParseState.TimingPoints;
                         break;
                     case ParseState.TimingPoints:
-                        // BPM
-                        string[] timingpoint = line.Split(',');
-                        if (timingpoint.Length == 8 && timingpoint[6] == "1") {
-                            songInfo.BPM = 60000f / float.Parse(timingpoint[1], System.Globalization.CultureInfo.InvariantCulture);
-                        }
-                        // TODO, calculate "BPM most of the time"
+                        if (line.StartsWith("[HitObjects]")) {
+                            float lowestBPM = float.MaxValue;
+                            float highestBPM = float.MinValue;
+                            foreach (TimingPoint tp in timingPoints) {
+                                if (tp.BPM > float.MinValue && tp.BPM < lowestBPM) lowestBPM = tp.BPM;
+                                if (tp.BPM > highestBPM) highestBPM = tp.BPM;
+                            }
 
-                        if (line.StartsWith("[HitObjects]"))
+                            if (lowestBPM == float.MaxValue || highestBPM == float.MinValue)
+                                return new SongValidationResult { Valid = false, Message = "No timing points found", Data = songData };
+
+                            if (lowestBPM == highestBPM)
+                                songInfo.BPM = lowestBPM.ToString("F0");
+                            else
+                                songInfo.BPM = $"{lowestBPM:F0} - {highestBPM:F0}";
+                            
                             state = ParseState.HitObjects;
+                            break;
+                        }
+                            
+                        TimingPoint timingPoint = new TimingPoint();
+                        string[] timingpoint = line.Split(',');
+                        if (timingpoint.Length != 8) break;
+                        timingPoint.Time = float.Parse(timingpoint[0], System.Globalization.CultureInfo.InvariantCulture);
+                        timingPoint.BPM = (timingpoint[6] == "1") ? 60000f / float.Parse(timingpoint[1], System.Globalization.CultureInfo.InvariantCulture) : float.MinValue;
+                        timingPoint.Meter = int.Parse(timingpoint[2]);
+                        timingPoint.KiaiMode = (timingpoint.Length > 6 && timingpoint[6] == "1") ? true : false;
+                        timingPoints.Add(timingPoint);
+
                         break;
                     case ParseState.HitObjects:
                         string[] lineNote = line.Split(',');
