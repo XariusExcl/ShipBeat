@@ -7,7 +7,6 @@ public enum ButtonState
     Down
 }
 
-
 public class GamePlayerInput : MonoBehaviour {
     [SerializeField] List<KeyBeam> Beams;
 
@@ -36,7 +35,7 @@ public class GamePlayerInput : MonoBehaviour {
             if (Input.GetButtonUp("P1_B"+i))
             {
                 Beams[i-1].HandleInput(ButtonState.Up);
-                Judge.JudgePlayerInput(i, ButtonState.Up);
+                Judge.JudgePlayerInput(i+1, ButtonState.Up);
             }
         }
     }

@@ -153,13 +153,11 @@ public class OsuFileParser
         if (state != ParseState.Done)
             return new SongValidationResult { Valid = false, Message = "File is missing sections", Data = songData };
 
-        /* Not needed since we reuse songinfo from fastpass
         if (!fastPass) {
             songInfo.SongStart = notes[0].HitTime;
             songInfo.Length = Math.Max(notes[^1].HitTime, notes[^1].ReleaseTime) - notes[0].HitTime;
             songInfo.NoteCount = notes.Count;
         }
-        */
 
         songInfo.SongPreviewStart = (songInfo.SongPreviewStart < 0) ? songInfo.Length/2 : songInfo.SongPreviewStart; 
 

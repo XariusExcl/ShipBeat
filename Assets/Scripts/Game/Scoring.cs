@@ -52,7 +52,7 @@ public class Scoring
     public static void AddBad()
     {
         Bads++;
-        Combo = 0;
+        ResetCombo();
         AddScore(10);
         GameUIManager.ShowTicker(TickerType.Bad);
     }
@@ -60,8 +60,8 @@ public class Scoring
     public static void AddMiss()
     {
         Misses++;
-        Combo = 0;
-        GameUIManager.ResetCombo();
+        ResetCombo();
+        AddScore(0);
         GameUIManager.ShowTicker(TickerType.Miss);
     }
 
@@ -69,10 +69,16 @@ public class Scoring
     {
         Percentage = (Perfects * 100f + Goods * 50f + Bads * 10f) / (Perfects + Goods + Bads + Misses);
     }
+    
+    static void ResetCombo()
+    {
+        Combo = 0;
+        GameUIManager.ResetCombo();
+    }
 
     public static string GetRank()
     {
-        if (Percentage == 100) return "SS";
+        if (Percentage == 100) return "P";
         if (Percentage >= 90) return "S";
         if (Percentage >= 80) return "A";
         if (Percentage >= 70) return "B";

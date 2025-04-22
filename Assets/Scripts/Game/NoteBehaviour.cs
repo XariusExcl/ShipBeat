@@ -38,6 +38,12 @@ public class NoteBehaviour : MonoBehaviour
     Lane lane;
 
 
+    void Awake()
+    {        
+        splineAnimate = GetComponent<SplineAnimate>();
+        tailLineRenderer = GetComponent<LineRenderer>();
+    }
+
     /// <summary>
     /// Initializes the note with the given data. Sets the note to be in use (pool).
     /// </summary>
@@ -48,7 +54,9 @@ public class NoteBehaviour : MonoBehaviour
         noteSkyModel.SetActive(false);
         noteSLModel.SetActive(false);
         noteSRModel.SetActive(false);
-        splineAnimate = GetComponent<SplineAnimate>();
+        tailLineRenderer.positionCount = 2;
+        tailLineRenderer.enabled = false;
+
         Note = note;
         switch (note.Lane) {
             case 0: // Slam Left
@@ -64,8 +72,6 @@ public class NoteBehaviour : MonoBehaviour
                 noteSkyModel.SetActive(true);
                 break;
         }
-        if (note.Type == NoteType.Hold)
-            tailLineRenderer = GetComponent<LineRenderer>();
 
         lane = LaneManager.GetLane(note.Lane);
         splineAnimate.Container = lane.SplineContainer;
@@ -81,6 +87,7 @@ public class NoteBehaviour : MonoBehaviour
         noteSkyModel.SetActive(false);
         noteSLModel.SetActive(false);
         noteSRModel.SetActive(false);
+        tailLineRenderer.enabled = false;
         transform.position = new Vector3(0, -10, 0);
     }
     

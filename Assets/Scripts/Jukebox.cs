@@ -86,7 +86,7 @@ public class Jukebox : MonoBehaviour
     }
 
 
-    void Awake(){
+    void Awake() {
         if (Instance != null) {
             Destroy(gameObject);
             return;

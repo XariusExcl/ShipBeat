@@ -2,13 +2,42 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class Judge : MonoBehaviour {
-    public static Queue<Note>[] notes = new Queue<Note>[8];
+    static Queue<Note>[] notes = new Queue<Note>[8];
     // Hit windows in seconds and in both directions.
     const float PerfectHitWindow = 0.05f;
     const float GreatHitWindow = 0.1f;
     const float BadHitWindow = 0.15f;
     const float MissHitWindow = 0.25f;
     static List<Note> heldNotes;  
+
+    public static void JudgePlayerInput(int id, ButtonState state) {
+
+        if (state == ButtonState.Down) {
+            if (notes[id].Count == 0) return;
+            
+            Note note = notes[id].Peek();
+            float diff = Mathf.Abs(note.HitTime - Maestro.SongTime);
+            if (diff > MissHitWindow) return;
+            
+            JudgeNoteHit(note, state);
+            if (note.Type == NoteType.Hold)
+                heldNotes.Add(note);
+
+            notes[id].Dequeue();
+
+        } else if (state == ButtonState.Up) {
+            if (heldNotes.Count == 0) return;
+            Note note = heldNotes.Find(n => n.Lane == id);
+            if (note.Equals(default(Note))) return; // It no note was found. TODO: Does this work?
+            
+            float diff = Mathf.Abs(note.ReleaseTime - Maestro.SongTime);
+            // if (diff > MissHitWindow) return;
+
+            heldNotes.Remove(note);
+            JudgeNoteHit(note, state);
+            
+        }
+    }
 
     static void JudgeNoteHit(Note note, ButtonState state) {
         if (state == ButtonState.Down) {
@@ -40,35 +69,6 @@ public class Judge : MonoBehaviour {
                 Scoring.AddMiss();
 
             NoteBehaviourManager.ReturnToPool(note);    
-        }
-    }
-
-    public static void JudgePlayerInput(int id, ButtonState state) {
-
-        if (state == ButtonState.Down) {
-            if (notes[id].Count == 0) return;
-            
-            Note note = notes[id].Peek();
-            float diff = Mathf.Abs(note.HitTime - Maestro.SongTime);
-            if (diff > MissHitWindow) return;
-            
-            JudgeNoteHit(note, state);
-            if (note.Type == NoteType.Hold)
-                heldNotes.Add(note);
-
-            notes[id].Dequeue();
-
-        } else if (state == ButtonState.Up) {
-            if (heldNotes.Count == 0) return;
-            Note note = heldNotes.Find(n => n.Lane == id);
-            if (note.Equals(default(Note))) return; // Does this work?
-            
-            float diff = Mathf.Abs(note.ReleaseTime - Maestro.SongTime);
-            if (diff > MissHitWindow) return;
-
-            heldNotes.Remove(note);
-            JudgeNoteHit(note, state);
-            
         }
     }
 

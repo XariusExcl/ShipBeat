@@ -38,7 +38,7 @@ public class Maestro : MonoBehaviour
     void Update() {
         if(SongStarted && !SongEnded) {
             SongTime = (float)AudioSettings.dspTime - StartTime;
-            if (SongTime > SongLoader.LoadedSong.Info.Length + SongLoader.LoadedSong.Info.SongStart) {
+            if (SongTime > SongLoader.LoadedSong.Info.Length + SongLoader.LoadedSong.Info.SongStart + 0.3f) {
                 SongEnded = true;
                 Invoke("EndSong", 1.5f);
                 Debug.Log("Song Ended");

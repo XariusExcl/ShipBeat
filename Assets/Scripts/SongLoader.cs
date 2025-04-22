@@ -1,5 +1,5 @@
 // Carries data between Song Select and Game scene
-// and loads the song when the game scene is loaded
+// and spawns notes in the Game scene
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,17 +7,29 @@ using UnityEngine.Networking;
 
 public class SongLoader : MonoBehaviour
 {
+    [SerializeField] bool UseDebugSong = false;
+    [SerializeField] string DebugSongPath = "F:\\ShipBeat\\Assets\\StreamingAssets\\Songs\\Crazy Shuffle\\debug.osu";
+    [SerializeField] string DebugAudioPath = "F:\\ShipBeat\\Assets\\StreamingAssets\\Songs\\Crazy Shuffle\\audio.mp3";
+
+
     const float LookAhead = 2f;
     public static bool IsFileLoaded = false;
     public static bool IsAudioLoaded = false;
     public static SongData LoadedSong = new();
-    public static string Folder;
+    public static SongLoader Instance;
     SongInfo preloadedSongInfo;
 
     void Awake()
     {
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
+        if (UseDebugSong)
+            Init(new SongInfo { ChartFile = DebugSongPath, AudioFile = DebugAudioPath });
     }
 
     public void Init(SongInfo songInfo) {
@@ -38,8 +50,11 @@ public class SongLoader : MonoBehaviour
             return;
         }
         LoadedSong = result.Data;
-        LoadedSong.Info = preloadedSongInfo;
-        LoadedSong.Info.AudioFile = preloadedSongInfo.AudioFile;
+        if (!UseDebugSong) {
+            LoadedSong.Info = preloadedSongInfo;
+            LoadedSong.Info.AudioFile = preloadedSongInfo.AudioFile;
+        }
+
         IsFileLoaded = true;
         if(IsAudioLoaded)
             SceneManager.LoadScene("Game");
