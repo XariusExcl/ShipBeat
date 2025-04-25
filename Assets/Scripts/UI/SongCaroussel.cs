@@ -10,8 +10,8 @@ public class SongCaroussel : MonoBehaviour
     public GameObject songEntryPrefab;
     readonly List<SongEntryUI> songEntries = new();
     public static int CurrentSongIndex { get; private set; } = 0;
-    const int NumUIs = 9;
-    static int scrollPosition; 
+    public const int NumUIs = 9;
+    int scrollPosition, scrollOffset = 0;
 
     // Events
     public static UnityEvent OnSongSelected = new();
@@ -34,6 +34,7 @@ public class SongCaroussel : MonoBehaviour
     void OnSongDataLoaded()
     {
         loadingThrobber.SetActive(false);
+        scrollOffset = scrollPosition;
         for (int i = 0; i < NumUIs; i++) {
             SongEntryUI songEntryUI = Instantiate(songEntryPrefab, transform).GetComponent<SongEntryUI>();
             songEntryUI.UpdatePositionInCaroussel(NumUIs/2 - i);
@@ -78,18 +79,18 @@ public class SongCaroussel : MonoBehaviour
         const int edge = NumUIs / 2 + 1;
 
         if (direction == ScrollDirection.Up) {
-            int updatedEntryIdx = Mathmod(-scrollPosition, NumUIs) + 1;
+            int updatedEntryIdx = Mathmod(-scrollPosition + scrollOffset, NumUIs) + 1;
             songEntries[^updatedEntryIdx].SetData(SongFolderReader.SongInfos[Mathmod(scrollPosition - edge, SongFolderReader.Count)]);
             scrollPosition -= 1;
             songEntries.ForEach((entry) => entry.UpdatePositionInCaroussel(-1));
-            CurrentSongIndex = Mathmod(CurrentSongIndex - 1, SongFolderReader.Count);
+            CurrentSongIndex = Mathmod(scrollPosition, SongFolderReader.Count);
         }
         else if (direction == ScrollDirection.Down) {
-            int updatedEntryIdx = Mathmod(scrollPosition, NumUIs);
+            int updatedEntryIdx = Mathmod(scrollPosition - scrollOffset, NumUIs);
             songEntries[updatedEntryIdx].SetData(SongFolderReader.SongInfos[Mathmod(scrollPosition + edge, SongFolderReader.Count)]);
             scrollPosition += 1;
             songEntries.ForEach((entry) => entry.UpdatePositionInCaroussel(1));
-            CurrentSongIndex = Mathmod(CurrentSongIndex + 1, SongFolderReader.Count);
+            CurrentSongIndex = Mathmod(scrollPosition, SongFolderReader.Count);
         }
 
         OnCarousselUpdate.Invoke();

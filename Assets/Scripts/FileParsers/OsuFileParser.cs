@@ -59,7 +59,7 @@ public class OsuFileParser
                         }
 
                         if (line.StartsWith("PreviewTime:"))
-                            songInfo.SongPreviewStart = float.Parse(line.Split(':')[1]);        
+                            songInfo.SongPreviewStart = float.Parse(line.Split(':')[1])/1000f;        
 
                         if (line.StartsWith("[Metadata]"))
                             state = ParseState.Metadata;
@@ -89,8 +89,10 @@ public class OsuFileParser
                         if (line.StartsWith("CircleSize:")) {
                             int circleSize = int.Parse(line.Split(':')[1]);
                             
+                            /*
                             if (circleSize != 3 && circleSize != 5 && circleSize != 8)
                                 return new SongValidationResult { Valid = false, Message = $"Invalid lane count. Expected 3, 5 or 8, found {circleSize}.", Data = songData };
+                            */
     
                         }
                         if (line.StartsWith("[Events]"))
@@ -143,7 +145,7 @@ public class OsuFileParser
                         string[] lineNoteParams = lineNote[5].Split(':');
                         
                         if (fastPass) {
-                            songInfo.SongStart = int.Parse(lineNote[2])/1000f;
+                            songInfo.SongStart = float.Parse(lineNote[2], System.Globalization.CultureInfo.InvariantCulture) / 1000f;
                             int j = 0;
                             string[] lastLine;
                             do {
@@ -151,7 +153,7 @@ public class OsuFileParser
                                 lastLine = lines[^j].Split(',');
                             } while (lastLine.Length != 6 && lines.Length - j >= i);
                             if (lines.Length - j < i) throw new Exception("Invalid file format, could not find end of notes (fastpass).");
-                            float lastNoteTime = Mathf.Max(int.Parse(lastLine[2])/1000f, (lineNote[3] == "1") ? 0f : int.Parse(lineNoteParams[0]) / 1000f); // If last note is hold, use release time
+                            float lastNoteTime = Mathf.Max(float.Parse(lastLine[2], System.Globalization.CultureInfo.InvariantCulture)/1000f, (lineNote[3] == "1") ? 0f : float.Parse(lineNoteParams[0], System.Globalization.CultureInfo.InvariantCulture) / 1000f); // If last note is hold, use release time
                             songInfo.Length = lastNoteTime - songInfo.SongStart + .2f;
                             songInfo.NoteCount = lines.Length - i - 1;
 
@@ -163,13 +165,13 @@ public class OsuFileParser
                             Id = noteId++,
                             Type = (lineNote[3] == "1") ? NoteType.Note : NoteType.Hold,
                             Lane = int.Parse(lineNote[0]) / 64,
-                            HitTime = int.Parse(lineNote[2]) / 1000f,
-                            ReleaseTime = (lineNote[3] == "1") ? 0 : int.Parse(lineNoteParams[0]) / 1000f
+                            HitTime = float.Parse(lineNote[2], System.Globalization.CultureInfo.InvariantCulture) / 1000f,
+                            ReleaseTime = (lineNote[3] == "1") ? 0 : float.Parse(lineNoteParams[0], System.Globalization.CultureInfo.InvariantCulture) / 1000f
                         });
                     break;
                 }
             } catch (Exception e) {
-                UnityEngine.Debug.LogError($"Error parsing line: {line}, {e.Message}, {e.StackTrace}");
+                UnityEngine.Debug.LogError($"{songInfo.Title}: Error parsing line {i+1}: {e.Message}{e.StackTrace}");
             }
         }
         if (state != ParseState.Done)

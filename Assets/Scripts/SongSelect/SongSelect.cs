@@ -5,11 +5,23 @@ using UnityEngine;
 public class SongSelect : MonoBehaviour
 {
     [SerializeField] GameObject songSelectReadyMenu;
+    float playSongTimer;
+    const float playSongDelay = .75f;
+    SongInfo selectedSong;
 
     void Start()
     {
         SongCaroussel.OnSongSelected.AddListener(OnSongSelected);
         SongCaroussel.OnCarousselUpdate.AddListener(OnCarousselUpdate);
+    }
+
+    void Update()
+    {
+        if (playSongTimer > 0f) {
+            playSongTimer -= Time.deltaTime;
+            if (playSongTimer <= 0f)
+                Jukebox.LoadSongAndPlay(selectedSong.AudioFile, selectedSong.SongPreviewStart);
+        }
     }
 
     void OnSongSelected()
@@ -31,9 +43,9 @@ public class SongSelect : MonoBehaviour
     void OnCarousselUpdate()
     {
         // Stop preview of currently selected song, fadein new song
-        SongInfo song = SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex];
-        if (song.AudioFile == Jukebox.NowPlaying) return; // Don't reload the same song
+        selectedSong = SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex];
+        if (selectedSong.AudioFile == Jukebox.NowPlaying) return; // Don't reload the same song
         Jukebox.Stop();
-        Jukebox.LoadSongAndPlay(song.AudioFile, song.SongPreviewStart);
+        playSongTimer = playSongDelay;
     }
 }

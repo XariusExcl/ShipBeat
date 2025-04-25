@@ -79,11 +79,11 @@ public class Scoring
     public static string GetRank()
     {
         if (Percentage == 100) return "P";
-        if (Percentage >= 90) return "S";
-        if (Percentage >= 80) return "A";
-        if (Percentage >= 70) return "B";
-        if (Percentage >= 60) return "C";
-        if (Percentage >= 50) return "D";
+        if (Percentage >= 95) return "S";
+        if (Percentage >= 90) return "A";
+        if (Percentage >= 80) return "B";
+        if (Percentage >= 70) return "C";
+        if (Percentage >= 60) return "D";
         return "F";
     }
 }

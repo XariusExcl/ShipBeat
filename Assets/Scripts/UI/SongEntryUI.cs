@@ -37,7 +37,7 @@ public class SongEntryUI : MonoBehaviour
     public void UpdatePositionInCaroussel(int position)
     {
         positionInCaroussel += position;
-        if (Math.Abs(positionInCaroussel) > SongFolderReader.Count / 2 + 2) {
+        if (Math.Abs(positionInCaroussel) > SongCaroussel.NumUIs / 2) {
             positionInCaroussel = Math.Sign(-positionInCaroussel) * (Math.Abs(positionInCaroussel) - 1);
             targetPosition = CarousselToWorldPosition(positionInCaroussel);
             transform.localPosition = targetPosition;
