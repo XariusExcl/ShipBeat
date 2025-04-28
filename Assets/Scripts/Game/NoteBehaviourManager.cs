@@ -85,15 +85,14 @@ public class NoteBehaviourManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns a note to the pool
+    /// Hides the head of a note for when a long note is being held.
     /// </summary>
-    /// <param name="id">The note id to return to the pool.</param>
-    public static void ReturnToPool(int id) {
-        NoteBehaviour noteBehaviour = Instance.noteBehaviours.Find(noteb => noteb.Note.Id == id);
+    public static void HideHead(Note note) {
+        NoteBehaviour noteBehaviour = Instance.noteBehaviours.Find(noteb => noteb.Note.Id == note.Id);
         if (noteBehaviour == null) {
-            Debug.LogError($"Note {id} not found in pool!");
+            Debug.LogError($"Note {note.Id} not found in pool!");
             return;
-        }
-        noteBehaviour.ReturnToPool();
+        }       
+        noteBehaviour.HideHead();
     }
 }

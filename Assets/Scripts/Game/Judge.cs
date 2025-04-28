@@ -28,21 +28,20 @@ public class Judge : MonoBehaviour {
         } else if (state == ButtonState.Up) {
             if (heldNotes.Count == 0) return;
             Note note = heldNotes.Find(n => n.Lane == id);
-            if (note.Equals(default(Note))) return; // It no note was found. TODO: Does this work?
+            if (note.Equals(default(Note))) return; // If no note was found. TODO: Does this work?
             
             float diff = Mathf.Abs(note.ReleaseTime - Maestro.SongTime);
-            // if (diff > MissHitWindow) return;
 
             heldNotes.Remove(note);
-            JudgeNoteHit(note, state);
-            
+            JudgeNoteHit(note, state, diff);
         }
     }
 
-    static void JudgeNoteHit(Note note, ButtonState state) {
+    static void JudgeNoteHit(Note note, ButtonState state, float diff = 0) {
         if (state == ButtonState.Down) {
-            float diff = Mathf.Abs(Maestro.SongTime - note.HitTime);
-            if (note.Lane >= 2) { // Normal note
+            LaneManager.GetLane(note.Lane).SuccessfulHit();
+
+            if (note.Lane != 0) { // Normal note
                 if (diff < PerfectHitWindow)
                     Scoring.AddPerfect();
                 else if (diff < GreatHitWindow)
@@ -60,9 +59,10 @@ public class Judge : MonoBehaviour {
 
             if (note.Type == NoteType.Note)
                 NoteBehaviourManager.ReturnToPool(note);
+            else if (note.Type == NoteType.Hold)
+                NoteBehaviourManager.HideHead(note);
 
         } else if (state == ButtonState.Up) {
-            float diff = Mathf.Abs(Maestro.SongTime - note.ReleaseTime);
             if (diff < BadHitWindow)
                 Scoring.AddPerfect();
             else

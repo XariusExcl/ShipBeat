@@ -94,6 +94,7 @@ public class SongLoader : MonoBehaviour
     void GameStart() {
         Scoring.Reset();
         Scoring.NoteCount = LoadedSong.Notes.Length;
+        LaneManager.SetLaneCount(LoadedSong.Info.LaneCount);
         Maestro.StartSong();
     }
 

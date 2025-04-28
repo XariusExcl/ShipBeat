@@ -29,6 +29,7 @@ public class Ticker : MonoBehaviour
         tmpText.text = textList[(int)type];
         tmpText.color = textColors[(int)type];
         anim.clip = animClips[(int)type];
+        anim.Stop();
         anim.Play();
     }
 }

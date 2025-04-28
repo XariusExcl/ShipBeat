@@ -5,7 +5,7 @@ public class LaneManager : MonoBehaviour {
     public static List<Lane> Lanes;
     [SerializeField] List<Lane> laneReferences;
     
-    void Start()
+    void Awake()
     {
         Lanes = laneReferences;
     }
@@ -13,5 +13,21 @@ public class LaneManager : MonoBehaviour {
     public static Lane GetLane(int id)
     {
         return Lanes[id];
+    }
+
+    public static void SetLaneCount(int count)
+    {
+        if (count != 4 && count != 7) {
+            Debug.LogError($"Invalid lane count: {count}. Must be 4 or 7.");
+            return;
+        }
+
+        for (int i = 0; i < Lanes.Count; i++) {
+            if (i < count) {
+                Lanes[i].gameObject.SetActive(true);
+            } else {
+                Lanes[i].gameObject.SetActive(false);
+            }
+        }
     }
 }

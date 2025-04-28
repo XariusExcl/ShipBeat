@@ -1,7 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class KeyBeam : MonoBehaviour {
+public class Receptor : MonoBehaviour {
+    [SerializeField] GameObject hitEffect;
+    [SerializeField] GameObject holdEffect;
+
     Coroutine beamCoroutine;
     MeshRenderer meshRenderer;
     Color baseColor;
@@ -21,14 +24,30 @@ public class KeyBeam : MonoBehaviour {
     }
 
     void BeamPress() {
+        if (beamCoroutine != null)
+            StopCoroutine(beamCoroutine);
+
         meshRenderer.material.color = Color.white;
     }
 
     void BeamRelease() {
-        if (beamCoroutine != null) {
+        if (beamCoroutine != null)
             StopCoroutine(beamCoroutine);
-        }
+        
         beamCoroutine = StartCoroutine(BeamReleaseCO());
+    }
+
+    public void SuccessfulHit() {
+        Debug.Log("Hit!");
+        hitEffect.SetActive(true);
+    }
+
+    public void SuccessfulHold() {
+        holdEffect.SetActive(true);
+    }
+
+    public void SuccessfulRelease() {
+        holdEffect.SetActive(false);
     }
 
     IEnumerator BeamReleaseCO() {

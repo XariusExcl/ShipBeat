@@ -8,7 +8,7 @@ public enum ButtonState
 }
 
 public class GamePlayerInput : MonoBehaviour {
-    [SerializeField] List<KeyBeam> Beams;
+    [SerializeField] List<Receptor> Beams;
 
     float lastHorizontal = 0;
     float settingLastHorizontal = 0;
@@ -49,13 +49,10 @@ public class GamePlayerInput : MonoBehaviour {
 
         if (lastHorizontal != Input.GetAxis("P1_Horizontal"))
         {
-            lastHorizontal = Input.GetAxis("P1_Horizontal");
-            if (lastHorizontal > .5) {
-                Judge.JudgePlayerInput(1, ButtonState.Down);
-            }
-            else if (lastHorizontal < -.5) {
+            if (lastHorizontal < .5f && Mathf.Abs(Input.GetAxis("P1_Horizontal")) > .5f) {
                 Judge.JudgePlayerInput(0, ButtonState.Down);
             }
+            lastHorizontal = Mathf.Abs(Input.GetAxis("P1_Horizontal"));
         }
 
         for (int i = 1; i <= 6; i++)
@@ -63,13 +60,13 @@ public class GamePlayerInput : MonoBehaviour {
             if (Input.GetButtonDown("P1_B"+i))
             {
                 Beams[i-1].HandleInput(ButtonState.Down);
-                Judge.JudgePlayerInput(i+1, ButtonState.Down);
+                Judge.JudgePlayerInput(i, ButtonState.Down);
             }
 
             if (Input.GetButtonUp("P1_B"+i))
             {
                 Beams[i-1].HandleInput(ButtonState.Up);
-                Judge.JudgePlayerInput(i+1, ButtonState.Up);
+                Judge.JudgePlayerInput(i, ButtonState.Up);
             }
         }
     }

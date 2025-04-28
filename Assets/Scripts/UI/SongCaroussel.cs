@@ -11,7 +11,8 @@ public class SongCaroussel : MonoBehaviour
     readonly List<SongEntryUI> songEntries = new();
     public static int CurrentSongIndex { get; private set; } = 0;
     public const int NumUIs = 9;
-    int scrollPosition, scrollOffset = 0;
+    static int scrollPosition = 0;
+    int scrollOffset = 0;
 
     // Events
     public static UnityEvent OnSongSelected = new();

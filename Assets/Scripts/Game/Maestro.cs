@@ -1,4 +1,4 @@
-// The "GameManager" for song playing. Keeps track of the song time and when the song starts and ends. Also contains the hit window and lane speed for the notes.
+// The "GameManager" for song playing. Keeps track of the song time and when the song starts and ends. Also contains the lane speed for the notes.
 
 using TMPro;
 using UnityEngine;
@@ -11,7 +11,7 @@ public class Maestro : MonoBehaviour
     public static bool SongEnded = false;
     public static float SongTime;
 
-    public static int LaneSpeed = 5; // Note time on the lane is 10 / LaneSpeed, i.e 8 = 1250ms
+    public static int LaneSpeed = 8; // Note time on the lane is 10 / LaneSpeed, i.e 8 = 1250ms
     public static float StartTime;
     const float StartDelay = 3;
     public static float GlobalOffset = -.02f; // To be adjusted by the player, in seconds
@@ -22,7 +22,6 @@ public class Maestro : MonoBehaviour
         Jukebox.PlayScheduled(StartDelay);
         SongTime = 0;
         StartTime = (float)AudioSettings.dspTime + StartDelay;
-
     }
 
     void Awake() {

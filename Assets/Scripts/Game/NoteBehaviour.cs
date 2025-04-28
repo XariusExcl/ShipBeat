@@ -25,8 +25,7 @@ public enum NotePoolState
 public class NoteBehaviour : MonoBehaviour
 {
     // Models
-    [SerializeField] GameObject noteSLModel;
-    [SerializeField] GameObject noteSRModel;
+    [SerializeField] GameObject noteDodgeModel;
     [SerializeField] GameObject noteGndModel;
     [SerializeField] GameObject noteSkyModel;
     // Data
@@ -52,23 +51,19 @@ public class NoteBehaviour : MonoBehaviour
     {
         noteGndModel.SetActive(false);
         noteSkyModel.SetActive(false);
-        noteSLModel.SetActive(false);
-        noteSRModel.SetActive(false);
+        noteDodgeModel.SetActive(false);
         tailLineRenderer.positionCount = 2;
         tailLineRenderer.enabled = false;
 
         Note = note;
         switch (note.Lane) {
             case 0: // Slam Left
-                noteSLModel.SetActive(true);
+                noteDodgeModel.SetActive(true);
                 break;
-            case 1: // Slam Right
-                noteSRModel.SetActive(true);
-                break;
-            case 2: case 3: case 4: // Block
+            case 1: case 2: case 3: // Block
                 noteGndModel.SetActive(true);
                 break;
-            case 5: case 6: case 7: // Sky
+            case 4: case 5: case 6: // Sky
                 noteSkyModel.SetActive(true);
                 break;
         }
@@ -85,13 +80,11 @@ public class NoteBehaviour : MonoBehaviour
         PoolState = NotePoolState.InPool;
         noteGndModel.SetActive(false);
         noteSkyModel.SetActive(false);
-        noteSLModel.SetActive(false);
-        noteSRModel.SetActive(false);
+        noteDodgeModel.SetActive(false);
         tailLineRenderer.enabled = false;
         transform.position = new Vector3(0, -10, 0);
     }
     
-
     void Update()
     {
         if (PoolState == NotePoolState.InPool) return;
@@ -116,7 +109,16 @@ public class NoteBehaviour : MonoBehaviour
     }
 
     /// <summary>
-    ///  Cycles through the models of the note. Used for preloading the models at gameplay start.
+    /// Hides the note head for when the long note is being held.
+    /// </summary>
+    public void HideHead()
+    {
+        noteGndModel.SetActive(false);
+        noteSkyModel.SetActive(false);
+    }
+
+    /// <summary>
+    ///  Cycles through the models of the note. Used for preloading the models at gameplay start without causing too big of a lag spike.
     /// </summary>
     public IEnumerator CycleModels()
     {
@@ -127,12 +129,9 @@ public class NoteBehaviour : MonoBehaviour
         noteSkyModel.SetActive(true);
         yield return new WaitForEndOfFrame();
         noteSkyModel.SetActive(false);
-        noteSLModel.SetActive(true);
+        noteDodgeModel.SetActive(true);
         yield return new WaitForEndOfFrame();
-        noteSLModel.SetActive(false);
-        noteSRModel.SetActive(true);
-        yield return new WaitForEndOfFrame();
-        noteSRModel.SetActive(false);
+        noteDodgeModel.SetActive(false);
         Destroy(this);
         yield return null;
     }

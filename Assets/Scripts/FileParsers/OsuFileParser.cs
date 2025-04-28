@@ -35,6 +35,8 @@ public class OsuFileParser
         List<Note> notes = new();
         List<TimingPoint> timingPoints = new();
 
+        int circleSize = 0;
+
         ParseState state = ParseState.None;
         int noteId = 0;
         for (int i = 0; i < lines.Length; i++)
@@ -87,13 +89,12 @@ public class OsuFileParser
                         break;
                     case ParseState.Difficulty:
                         if (line.StartsWith("CircleSize:")) {
-                            int circleSize = int.Parse(line.Split(':')[1]);
+                            circleSize = int.Parse(line.Split(':')[1]);
                             
-                            /*
-                            if (circleSize != 3 && circleSize != 5 && circleSize != 8)
-                                return new SongValidationResult { Valid = false, Message = $"Invalid lane count. Expected 3, 5 or 8, found {circleSize}.", Data = songData };
-                            */
-    
+                            if (circleSize != 4 && circleSize != 7)
+                                return new SongValidationResult { Valid = false, Message = $"Invalid lane count. Expected 4 or 7, found {circleSize}.", Data = songData };
+
+                            songInfo.LaneCount = circleSize;
                         }
                         if (line.StartsWith("[Events]"))
                             state = ParseState.Events;
@@ -164,7 +165,7 @@ public class OsuFileParser
                         notes.Add(new Note{
                             Id = noteId++,
                             Type = (lineNote[3] == "1") ? NoteType.Note : NoteType.Hold,
-                            Lane = int.Parse(lineNote[0]) / 64,
+                            Lane = (int)Mathf.Floor(int.Parse(lineNote[0]) * circleSize / 512),
                             HitTime = float.Parse(lineNote[2], System.Globalization.CultureInfo.InvariantCulture) / 1000f,
                             ReleaseTime = (lineNote[3] == "1") ? 0 : float.Parse(lineNoteParams[0], System.Globalization.CultureInfo.InvariantCulture) / 1000f
                         });

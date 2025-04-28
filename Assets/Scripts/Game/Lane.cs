@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Splines;
 
 public class Lane : MonoBehaviour {
+    [SerializeField] Receptor receptor;
     [HideInInspector] public SplineContainer SplineContainer;
     [HideInInspector] public Vector3 ExtrapolationVector;
 
@@ -11,6 +12,8 @@ public class Lane : MonoBehaviour {
     {
         SplineContainer = GetComponent<SplineContainer>();
         lineRenderer = GetComponent<LineRenderer>();
+        receptor = GetComponentInChildren<Receptor>();
+        Debug.Assert(receptor != null, "Receptor not found in Lane object.", gameObject);
         UpdateLane();
     }
 
@@ -26,5 +29,23 @@ public class Lane : MonoBehaviour {
         }
 
         // Debug.DrawRay(transform.position, ExtrapolationVector, Color.red, 10f);
+    }
+
+    public void SuccessfulHit() {
+        if (receptor != null) {
+            receptor.SuccessfulHit();
+        }
+    }
+
+    public void SuccessfulHold() {
+        if (receptor != null) {
+            receptor.SuccessfulHold();
+        }
+    }
+
+    public void SuccessfulRelease() {
+        if (receptor != null) {
+            receptor.SuccessfulRelease();
+        }
     }
 }

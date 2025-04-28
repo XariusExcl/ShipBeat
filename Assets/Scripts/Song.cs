@@ -18,6 +18,7 @@ public struct SongInfo {
     public string DifficultyName;
     public int DifficultyRating;
     public int NoteCount;
+    public int LaneCount;
 }
 
 public struct TimingPoint {
