@@ -3,6 +3,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class Maestro : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Maestro : MonoBehaviour
 
     public static List<TimingPoint> TimingPoints = new List<TimingPoint>();
     static TimingPoint currentTimingPoint = new TimingPoint();
+    static TimingPoint currentEffectPoint = new TimingPoint();
 
     // Song time and state
     public static int LaneSpeed = 8; // Note time on the lane is 10 / LaneSpeed, i.e 8 = 1250ms
@@ -22,6 +24,9 @@ public class Maestro : MonoBehaviour
     public static float StartTime;
     const float StartDelay = 3;
     public static float GlobalOffset = -.02f; // To be adjusted by the player, in seconds
+    public static bool IsKiaiTime = false;
+    public static UnityEvent OnKiaiStart = new UnityEvent();
+    public static UnityEvent OnKiaiEnd = new UnityEvent();
 
     public static void StartSong() {
         SongStarted = true;
@@ -30,6 +35,11 @@ public class Maestro : MonoBehaviour
         SongTime = 0;
         StartTime = (float)AudioSettings.dspTime + StartDelay;
         currentTimingPoint = TimingPoints[0];
+
+        // print all timing points
+        foreach (var timingPoint in TimingPoints) {
+            Debug.Log($"Timing Point: {timingPoint.Time} BPM: {timingPoint.BPM} Kiai: {timingPoint.KiaiMode}");
+        }
     }
 
     void Start() {
@@ -59,9 +69,23 @@ public class Maestro : MonoBehaviour
     void UpdateTimingPoint() {
         if (TimingPoints.Count == 0 || timingPointIndex >= TimingPoints.Count) return;
         if (SongTime >= TimingPoints[timingPointIndex].Time) {
-            currentTimingPoint = TimingPoints[timingPointIndex];
+            if (TimingPoints[timingPointIndex].BPM != float.MinValue) // if BPM is not set to MinValue, then it's a timing point
+                currentTimingPoint = TimingPoints[timingPointIndex];
+
+            currentEffectPoint = TimingPoints[timingPointIndex];
+
             timingPointIndex++;
-            Debug.Log($"Timing Point: {currentTimingPoint.Time}, BPM: {currentTimingPoint.BPM}, Meter: {currentTimingPoint.Meter}");
+
+            if (currentEffectPoint.KiaiMode && !IsKiaiTime) {
+                IsKiaiTime = true;
+                Debug.Log("Kiai Time!");
+                OnKiaiStart.Invoke();
+            } else if (!currentEffectPoint.KiaiMode && IsKiaiTime) {
+                IsKiaiTime = false;
+                Debug.Log("End Kiai Time");
+                OnKiaiEnd.Invoke();
+            }
+            Debug.Log($"Timing Point {currentEffectPoint.Time}: {(IsKiaiTime?"(K) ":"")}current BPM: {currentTimingPoint.BPM} {currentTimingPoint.Meter}/4");
         }
     }
 

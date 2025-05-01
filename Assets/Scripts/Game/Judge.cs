@@ -12,7 +12,7 @@ public class Judge : MonoBehaviour {
 
     public static void JudgePlayerInput(int id, ButtonState state) {
 
-        if (state == ButtonState.Down) {
+        if (state == ButtonState.Down || state == ButtonState.Left || state == ButtonState.Right) {
             if (notes[id].Count == 0) return;
             
             Note note = notes[id].Peek();
@@ -38,7 +38,7 @@ public class Judge : MonoBehaviour {
     }
 
     static void JudgeNoteHit(Note note, ButtonState state, float diff) {
-        if (state == ButtonState.Down) {
+        if (state == ButtonState.Down || state == ButtonState.Left || state == ButtonState.Right) {
             if (note.Lane != 0) { // Normal note
                 if (diff < PerfectHitWindow)
                     Scoring.AddPerfect();
@@ -57,11 +57,11 @@ public class Judge : MonoBehaviour {
 
             if (note.Type == NoteType.Note) {
                 NoteBehaviourManager.ReturnToPool(note);
-                LaneManager.GetLane(note.Lane).SuccessfulHit();
+                LaneManager.GetLane(note.Lane).SuccessfulHit(state == ButtonState.Right);
             }
             else if (note.Type == NoteType.Hold) {
                 NoteBehaviourManager.HideHead(note);
-                LaneManager.GetLane(note.Lane).SuccessfulHold();
+                LaneManager.GetLane(note.Lane).Hold();
             }
 
         } else if (state == ButtonState.Up) {
@@ -70,7 +70,7 @@ public class Judge : MonoBehaviour {
             else
                 Scoring.AddMiss();
             
-            LaneManager.GetLane(note.Lane).SuccessfulRelease();
+            LaneManager.GetLane(note.Lane).Release();
 
             NoteBehaviourManager.ReturnToPool(note);    
         }
@@ -106,6 +106,7 @@ public class Judge : MonoBehaviour {
             if (heldNote.ReleaseTime < Maestro.SongTime - BadHitWindow) {
                 heldNotes.RemoveAt(i);
                 Scoring.AddMiss();
+                LaneManager.GetLane(heldNote.Lane).Release();
                 NoteBehaviourManager.ReturnToPool(heldNote);
             }
         }

@@ -140,7 +140,7 @@ public class OsuFileParser
                         timingPoint.Time = float.Parse(timingpoint[0], System.Globalization.CultureInfo.InvariantCulture) / 1000f;
                         timingPoint.BPM = (timingpoint[6] == "1") ? 60000f / float.Parse(timingpoint[1], System.Globalization.CultureInfo.InvariantCulture) : float.MinValue;
                         timingPoint.Meter = int.Parse(timingpoint[2]);
-                        timingPoint.KiaiMode = (timingpoint.Length > 6 && timingpoint[6] == "1") ? true : false;
+                        timingPoint.KiaiMode = (timingpoint[7] == "1") ? true : false;
                         timingPoints.Add(timingPoint);
 
                         break;
@@ -170,10 +170,12 @@ public class OsuFileParser
                             break;
                         }
                         
+                        int lane = (int)Mathf.Floor(int.Parse(lineNote[0]) * circleSize / 512);
+
                         notes.Add(new Note{
                             Id = noteId++,
-                            Type = (lineNote[3] == "1") ? NoteType.Note : NoteType.Hold,
-                            Lane = (int)Mathf.Floor(int.Parse(lineNote[0]) * circleSize / 512),
+                            Type = (lane == 0 || lineNote[3] == "1") ? NoteType.Note : NoteType.Hold,
+                            Lane = lane,
                             HitTime = float.Parse(lineNote[2], System.Globalization.CultureInfo.InvariantCulture) / 1000f,
                             ReleaseTime = (lineNote[3] == "1") ? 0 : float.Parse(lineNoteParams[0], System.Globalization.CultureInfo.InvariantCulture) / 1000f
                         });

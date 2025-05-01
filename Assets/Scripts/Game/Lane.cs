@@ -31,19 +31,19 @@ public class Lane : MonoBehaviour {
         // Debug.DrawRay(transform.position, ExtrapolationVector, Color.red, 10f);
     }
 
-    public void SuccessfulHit() {
+    public void SuccessfulHit(bool mirror = false) {
         if (receptor != null) {
-            receptor.SuccessfulHit();
+            receptor.SuccessfulHit(mirror);
         }
     }
 
-    public void SuccessfulHold() {
+    public void Hold() {
         if (receptor != null) {
             receptor.SuccessfulHold();
         }
     }
 
-    public void SuccessfulRelease() {
+    public void Release() {
         if (receptor != null) {
             receptor.SuccessfulRelease();
         }

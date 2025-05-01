@@ -2,17 +2,18 @@ using UnityEngine;
 using System.Collections;
 
 public class Receptor : MonoBehaviour {
+
+    [SerializeField] MeshRenderer model;
     [SerializeField] HitEffect hitEffect;
     [SerializeField] HoldEffect holdEffect;
 
     Coroutine beamCoroutine;
-    MeshRenderer meshRenderer;
-    Color baseColor;
+    Color? baseColor;
+    [SerializeField] Color highColor = Color.white;
 
     void Start()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-        baseColor = meshRenderer.material.color;
+        baseColor = model?.material.color;
     }
 
     public void HandleInput(ButtonState buttonState)
@@ -28,7 +29,7 @@ public class Receptor : MonoBehaviour {
         if (beamCoroutine != null)
             StopCoroutine(beamCoroutine);
 
-        meshRenderer.material.color = Color.white;
+        model.material.color = highColor;
     }
 
     void BeamRelease() {
@@ -38,8 +39,8 @@ public class Receptor : MonoBehaviour {
         beamCoroutine = StartCoroutine(BeamReleaseCO());
     }
 
-    public void SuccessfulHit() {
-        hitEffect.Show();
+    public void SuccessfulHit(bool mirror = false) {
+        hitEffect.Show(mirror);
     }
 
     public void SuccessfulHold() {
@@ -54,9 +55,9 @@ public class Receptor : MonoBehaviour {
         float time = 0;
         while (time < 0.1f) {
             time += Time.deltaTime;
-            meshRenderer.material.color = Color.Lerp(Color.white, baseColor, time / 0.1f);
+            model.material.color = Color.Lerp(highColor, (Color)baseColor, time / 0.1f);
             yield return null;
         }
-        meshRenderer.material.color = baseColor;
+        model.material.color = (Color)baseColor;
     }
 }

@@ -101,8 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b9a93e0bfe34842a17a73a723c9d55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model: {fileID: 7803074225238264817}
   hitEffect: {fileID: 780495981654296337}
   holdEffect: {fileID: 4145996591017589556}
+  highColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &4657919529644182712
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 786c89f94b0c4f1478f438cffc86283f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.25
+  duration: 0.2
+  hitEffectPrefab: {fileID: 0}
 --- !u!33 &884141324457988226
 MeshFilter:
   m_ObjectHideFlags: 0
