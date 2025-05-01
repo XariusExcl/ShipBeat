@@ -7,16 +7,17 @@ public class HitEffect : MonoBehaviour {
 
     void Awake() {
         meshRenderer = GetComponent<MeshRenderer>();
-        gameObject.SetActive(false);
+        meshRenderer.enabled = false;
     }
 
-    public void Start()
+    public void Show()
     {
+        meshRenderer.enabled = true;
         StartCoroutine(ShowCO());
     }
     
     IEnumerator ShowCO() {
         yield return new WaitForSeconds(duration);
-        gameObject.SetActive(false);
+        meshRenderer.enabled = false;
     }
 }

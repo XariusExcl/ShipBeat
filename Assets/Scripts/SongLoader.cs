@@ -4,6 +4,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using System.Linq;
 
 public class SongLoader : MonoBehaviour
 {
@@ -95,6 +96,7 @@ public class SongLoader : MonoBehaviour
         Scoring.Reset();
         Scoring.NoteCount = LoadedSong.Notes.Length;
         LaneManager.SetLaneCount(LoadedSong.Info.LaneCount);
+        Maestro.TimingPoints = LoadedSong.TimingPoints.ToList();
         Maestro.StartSong();
     }
 

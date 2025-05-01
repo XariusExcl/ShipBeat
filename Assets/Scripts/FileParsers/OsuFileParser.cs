@@ -21,8 +21,10 @@ public class OsuFileParser
 {
     public static SongValidationResult ParseFile(TextAsset file, bool fastPass = false)
     {
-        // Stopwatch stopwatch = new Stopwatch();
-        // stopwatch.Start();
+        # if DEBUG
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
+        # endif
         
         SongData songData = new();
         SongInfo songInfo = new();
@@ -108,6 +110,9 @@ public class OsuFileParser
                         break;
                     case ParseState.TimingPoints:
                         if (line.StartsWith("[HitObjects]")) {
+                            if (timingPoints.Count == 0)
+                                return new SongValidationResult { Valid = false, Message = "No timing points found", Data = songData };
+
                             float lowestBPM = float.MaxValue;
                             float highestBPM = float.MinValue;
                             foreach (TimingPoint tp in timingPoints) {
@@ -122,6 +127,8 @@ public class OsuFileParser
                                 songInfo.BPM = lowestBPM.ToString("F0");
                             else
                                 songInfo.BPM = $"{lowestBPM:F0} - {highestBPM:F0}";
+
+                            songData.TimingPoints = timingPoints.ToArray();
                             
                             state = ParseState.HitObjects;
                             break;
@@ -130,7 +137,7 @@ public class OsuFileParser
                         TimingPoint timingPoint = new TimingPoint();
                         string[] timingpoint = line.Split(',');
                         if (timingpoint.Length != 8) break;
-                        timingPoint.Time = float.Parse(timingpoint[0], System.Globalization.CultureInfo.InvariantCulture);
+                        timingPoint.Time = float.Parse(timingpoint[0], System.Globalization.CultureInfo.InvariantCulture) / 1000f;
                         timingPoint.BPM = (timingpoint[6] == "1") ? 60000f / float.Parse(timingpoint[1], System.Globalization.CultureInfo.InvariantCulture) : float.MinValue;
                         timingPoint.Meter = int.Parse(timingpoint[2]);
                         timingPoint.KiaiMode = (timingpoint.Length > 6 && timingpoint[6] == "1") ? true : false;
@@ -154,8 +161,9 @@ public class OsuFileParser
                                 lastLine = lines[^j].Split(',');
                             } while (lastLine.Length != 6 && lines.Length - j >= i);
                             if (lines.Length - j < i) throw new Exception("Invalid file format, could not find end of notes (fastpass).");
-                            float lastNoteTime = Mathf.Max(float.Parse(lastLine[2], System.Globalization.CultureInfo.InvariantCulture)/1000f, (lineNote[3] == "1") ? 0f : float.Parse(lineNoteParams[0], System.Globalization.CultureInfo.InvariantCulture) / 1000f); // If last note is hold, use release time
-                            songInfo.Length = lastNoteTime - songInfo.SongStart + .2f;
+                            // If last note is hold (3:128), use release time
+                            float lastNoteTime = (lastLine[3] == "1") ? float.Parse(lastLine[2], System.Globalization.CultureInfo.InvariantCulture) / 1000f : float.Parse(lastLine[5].Split(':')[0], System.Globalization.CultureInfo.InvariantCulture) / 1000f;
+                            songInfo.Length = lastNoteTime - songInfo.SongStart + Judge.MissHitWindow;
                             songInfo.NoteCount = lines.Length - i - 1;
 
                             state = ParseState.Done;
@@ -189,8 +197,10 @@ public class OsuFileParser
         songData.Info = songInfo;
         songData.Notes = notes.ToArray();
 
-        // stopwatch.Stop();
-        // UnityEngine.Debug.Log($"Parsed {songInfo.Title} - {songInfo.DifficultyName} in {stopwatch.Elapsed.TotalMilliseconds:F3}ms {(fastPass?"(fast":"(full")}, {songData.Info.NoteCount} notes).");
+        # if DEBUG
+        stopwatch.Stop();
+        UnityEngine.Debug.Log($"Parsed {songInfo.Title} - {songInfo.DifficultyName} in {stopwatch.Elapsed.TotalMilliseconds:F3}ms {(fastPass?"(fast":"(full")}, {songData.Info.NoteCount} notes).");
+        # endif
         return new SongValidationResult { Valid = true, Message = "Song is valid", Data = songData };
     }
 }

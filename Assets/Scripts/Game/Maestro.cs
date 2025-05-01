@@ -1,17 +1,24 @@
-// The "GameManager" for song playing. Keeps track of the song time and when the song starts and ends. Also contains the lane speed for the notes.
+// The "GameManager" for song playing. Keeps track of the song time info and when the song starts and ends. Also contains the lane speed for the notes.
 
 using TMPro;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Maestro : MonoBehaviour
 {
     [SerializeField] TMP_Text time;
-    Maestro Instance;
+
+    public static List<TimingPoint> TimingPoints = new List<TimingPoint>();
+    static TimingPoint currentTimingPoint = new TimingPoint();
+
+    // Song time and state
+    public static int LaneSpeed = 8; // Note time on the lane is 10 / LaneSpeed, i.e 8 = 1250ms
     public static bool SongStarted = false;
     public static bool SongEnded = false;
     public static float SongTime;
-
-    public static int LaneSpeed = 8; // Note time on the lane is 10 / LaneSpeed, i.e 8 = 1250ms
+    public static int Bar;
+    public static int Beat;
+    public static float Tick;
     public static float StartTime;
     const float StartDelay = 3;
     public static float GlobalOffset = -.02f; // To be adjusted by the player, in seconds
@@ -22,10 +29,7 @@ public class Maestro : MonoBehaviour
         Jukebox.PlayScheduled(StartDelay);
         SongTime = 0;
         StartTime = (float)AudioSettings.dspTime + StartDelay;
-    }
-
-    void Awake() {
-        Instance = this;
+        currentTimingPoint = TimingPoints[0];
     }
 
     void Start() {
@@ -35,27 +39,38 @@ public class Maestro : MonoBehaviour
     }
 
     void Update() {
+        SongTime = (float)AudioSettings.dspTime - StartTime;
+
         if(SongStarted && !SongEnded) {
-            SongTime = (float)AudioSettings.dspTime - StartTime;
             if (SongTime > SongLoader.LoadedSong.Info.Length + SongLoader.LoadedSong.Info.SongStart + 0.3f) {
                 SongEnded = true;
                 Invoke("EndSong", 1.5f);
                 Debug.Log("Song Ended");
             }
+            UpdateTimingPoint();
+            UpdateTimingInfo();
             time.text = SongTime.ToString("F2");
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            GlobalOffset += .01f;
-            Debug.Log($"Global Offset: {GlobalOffset}");
-            Jukebox.SetPlaybackPosition(SongTime - GlobalOffset);
-        }
+        Shader.SetGlobalFloat("_Tick", Mathf.Abs(Tick));
+    }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            GlobalOffset -= .01f;
-            Debug.Log($"Global Offset: {GlobalOffset}");
-            Jukebox.SetPlaybackPosition(SongTime - GlobalOffset);
+    int timingPointIndex = 0;
+    void UpdateTimingPoint() {
+        if (TimingPoints.Count == 0 || timingPointIndex >= TimingPoints.Count) return;
+        if (SongTime >= TimingPoints[timingPointIndex].Time) {
+            currentTimingPoint = TimingPoints[timingPointIndex];
+            timingPointIndex++;
+            Debug.Log($"Timing Point: {currentTimingPoint.Time}, BPM: {currentTimingPoint.BPM}, Meter: {currentTimingPoint.Meter}");
         }
+    }
+
+    void UpdateTimingInfo() {
+        float relativeTime = SongTime - currentTimingPoint.Time;
+        float beat = relativeTime * (currentTimingPoint.BPM / 60f);
+        Bar = Mathf.FloorToInt(beat / currentTimingPoint.Meter);
+        Beat = Mathf.FloorToInt(beat % currentTimingPoint.Meter);
+        Tick = beat - (int)beat;
     }
 
     void EndSong() {

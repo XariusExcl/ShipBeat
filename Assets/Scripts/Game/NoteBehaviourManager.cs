@@ -7,7 +7,7 @@ public class NoteBehaviourManager : MonoBehaviour
     List<NoteBehaviour> noteBehaviours = new List<NoteBehaviour>();
     public static NoteBehaviourManager Instance;
     public GameObject notePrefab;
-
+    
 
     void Awake(){
         Instance = this;

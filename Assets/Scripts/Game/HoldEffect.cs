@@ -1,12 +1,20 @@
 using UnityEngine;
 
 public class HoldEffect : MonoBehaviour {
+    MeshRenderer meshRenderer;
 
-    public void Show() {
-        gameObject.SetActive(true);
+    void Awake() {
+        meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.enabled = false;
     }
-    
-    public void Hide() {
-        gameObject.SetActive(false);
+
+    public void Show()
+    {
+        meshRenderer.enabled = true;
+    }
+
+    public void Hide()
+    {
+        meshRenderer.enabled = false;
     }
 }

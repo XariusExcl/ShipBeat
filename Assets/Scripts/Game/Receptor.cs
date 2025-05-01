@@ -2,12 +2,13 @@ using UnityEngine;
 using System.Collections;
 
 public class Receptor : MonoBehaviour {
-    [SerializeField] GameObject hitEffect;
-    [SerializeField] GameObject holdEffect;
+    [SerializeField] HitEffect hitEffect;
+    [SerializeField] HoldEffect holdEffect;
 
     Coroutine beamCoroutine;
     MeshRenderer meshRenderer;
     Color baseColor;
+
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -38,16 +39,15 @@ public class Receptor : MonoBehaviour {
     }
 
     public void SuccessfulHit() {
-        Debug.Log("Hit!");
-        hitEffect.SetActive(true);
+        hitEffect.Show();
     }
 
     public void SuccessfulHold() {
-        holdEffect.SetActive(true);
+        holdEffect.Show();
     }
 
     public void SuccessfulRelease() {
-        holdEffect.SetActive(false);
+        holdEffect.Hide();
     }
 
     IEnumerator BeamReleaseCO() {

@@ -35,12 +35,14 @@ public class GamePlayerInput : MonoBehaviour {
                 settingLastHorizontal = Input.GetAxis("P1_Horizontal");
                 if (settingLastHorizontal > .5) {
                     Maestro.GlobalOffset += 0.005f;
+                    Jukebox.SetPlaybackPosition(Maestro.SongTime - Maestro.GlobalOffset);
                     Debug.Log($"Set Audio offset to {(Mathf.Sign(Maestro.GlobalOffset)==1f?"+":"")}{Maestro.GlobalOffset*1000:F0}ms.");
                     InfoToasterUI.ShowToaster($"Set Audio offset to {(Mathf.Sign(Maestro.GlobalOffset)==1f?"+":"")}{Maestro.GlobalOffset*1000:F0}ms.");
                 }
                 
                 else if (settingLastHorizontal < -.5) {
                     Maestro.GlobalOffset -= 0.005f;
+                    Jukebox.SetPlaybackPosition(Maestro.SongTime - Maestro.GlobalOffset);
                     Debug.Log($"Set Audio offset to {(Mathf.Sign(Maestro.GlobalOffset)==1f?"+":"")}{Maestro.GlobalOffset*1000:F0}ms.");
                     InfoToasterUI.ShowToaster($"Set Audio offset to {(Mathf.Sign(Maestro.GlobalOffset)==1f?"+":"")}{Maestro.GlobalOffset*1000:F0}ms.");
                 }

@@ -4,10 +4,10 @@ using System.Collections.Generic;
 public class Judge : MonoBehaviour {
     static Queue<Note>[] notes = new Queue<Note>[8];
     // Hit windows in seconds and in both directions.
-    const float PerfectHitWindow = 0.05f;
-    const float GreatHitWindow = 0.1f;
-    const float BadHitWindow = 0.15f;
-    const float MissHitWindow = 0.25f;
+    public const float PerfectHitWindow = 0.05f;
+    public const float GreatHitWindow = 0.1f;
+    public const float BadHitWindow = 0.15f;
+    public const float MissHitWindow = 0.25f;
     static List<Note> heldNotes;  
 
     public static void JudgePlayerInput(int id, ButtonState state) {
@@ -19,7 +19,7 @@ public class Judge : MonoBehaviour {
             float diff = Mathf.Abs(note.HitTime - Maestro.SongTime);
             if (diff > MissHitWindow) return;
             
-            JudgeNoteHit(note, state);
+            JudgeNoteHit(note, state, diff);
             if (note.Type == NoteType.Hold)
                 heldNotes.Add(note);
 
@@ -37,10 +37,8 @@ public class Judge : MonoBehaviour {
         }
     }
 
-    static void JudgeNoteHit(Note note, ButtonState state, float diff = 0) {
+    static void JudgeNoteHit(Note note, ButtonState state, float diff) {
         if (state == ButtonState.Down) {
-            LaneManager.GetLane(note.Lane).SuccessfulHit();
-
             if (note.Lane != 0) { // Normal note
                 if (diff < PerfectHitWindow)
                     Scoring.AddPerfect();
@@ -57,16 +55,22 @@ public class Judge : MonoBehaviour {
                     Scoring.AddMiss();
             }
 
-            if (note.Type == NoteType.Note)
+            if (note.Type == NoteType.Note) {
                 NoteBehaviourManager.ReturnToPool(note);
-            else if (note.Type == NoteType.Hold)
+                LaneManager.GetLane(note.Lane).SuccessfulHit();
+            }
+            else if (note.Type == NoteType.Hold) {
                 NoteBehaviourManager.HideHead(note);
+                LaneManager.GetLane(note.Lane).SuccessfulHold();
+            }
 
         } else if (state == ButtonState.Up) {
             if (diff < BadHitWindow)
                 Scoring.AddPerfect();
             else
                 Scoring.AddMiss();
+            
+            LaneManager.GetLane(note.Lane).SuccessfulRelease();
 
             NoteBehaviourManager.ReturnToPool(note);    
         }
