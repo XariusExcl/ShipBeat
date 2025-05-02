@@ -13,6 +13,8 @@ public class SongSelect : MonoBehaviour
     {
         SongCaroussel.OnSongSelected.AddListener(OnSongSelected);
         SongCaroussel.OnCarousselUpdate.AddListener(OnCarousselUpdate);
+        Maestro.SongStarted = false;
+        Maestro.SongEnded = false;
     }
 
     void Update()

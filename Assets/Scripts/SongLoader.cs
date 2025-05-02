@@ -5,12 +5,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using System.Linq;
+using System.Collections;
 
 public class SongLoader : MonoBehaviour
 {
     [SerializeField] bool UseDebugSong = false;
-    [SerializeField] string DebugSongPath = "F:\\ShipBeat\\Assets\\StreamingAssets\\Songs\\Crazy Shuffle\\debug.osu";
-    [SerializeField] string DebugAudioPath = "F:\\ShipBeat\\Assets\\StreamingAssets\\Songs\\Crazy Shuffle\\audio.mp3";
+    [SerializeField] string DebugSongPath = "\\Songs\\Crazy Shuffle\\debug.osu";
+    [SerializeField] string DebugAudioPath = "\\Songs\\Crazy Shuffle\\audio.mp3";
 
 
     const float LookAhead = 2f;
@@ -30,7 +31,7 @@ public class SongLoader : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
         if (UseDebugSong)
-            Init(new SongInfo { ChartFile = DebugSongPath, AudioFile = DebugAudioPath });
+            Init(new SongInfo { ChartFile = Application.streamingAssetsPath + DebugSongPath, AudioFile = Application.streamingAssetsPath + DebugAudioPath });
     }
 
     public void Init(SongInfo songInfo) {
@@ -57,8 +58,6 @@ public class SongLoader : MonoBehaviour
         }
 
         IsFileLoaded = true;
-        if(IsAudioLoaded)
-            SceneManager.LoadScene("Game");
     }
 
     void OnAudioFetched(FetchResult fetchResult) {
@@ -74,8 +73,6 @@ public class SongLoader : MonoBehaviour
         }
         Jukebox.LoadSong(audioClip);
         IsAudioLoaded = true;
-        if(IsFileLoaded)
-            SceneManager.LoadScene("Game");
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
@@ -86,13 +83,21 @@ public class SongLoader : MonoBehaviour
                 SceneManager.LoadScene("Menu");
                 return;
             }
-            GameStart();
+            StartCoroutine(WaitForFileLoad());
         } else {
             Destroy(gameObject);
         }
     }
 
+    IEnumerator WaitForFileLoad() {
+        while (!IsFileLoaded || !IsAudioLoaded) {
+            yield return null;
+        }
+        GameStart();
+    }
+
     void GameStart() {
+        Debug.Log("Game Start");
         Scoring.Reset();
         Scoring.NoteCount = LoadedSong.Notes.Length;
         LaneManager.SetLaneCount(LoadedSong.Info.LaneCount);
@@ -104,6 +109,9 @@ public class SongLoader : MonoBehaviour
     int lastNoteIndex = 0;
     bool endOfNotesReached = false;
     void Update() {
+        if (!Maestro.SongStarted)
+            return;
+
         while (!endOfNotesReached && Maestro.SongTime > lastNoteTime - LookAhead) {
             if (lastNoteIndex >= LoadedSong.Notes.Length) {
                 endOfNotesReached = true;
