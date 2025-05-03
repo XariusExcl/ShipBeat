@@ -54,6 +54,7 @@ public class Jukebox : MonoBehaviour
     }
 
     public static void SetVolume(float volume){
+        Debug.Log($"Setting volume to {volume}");
         Instance.audioSource.volume = volume;
     }
 

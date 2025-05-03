@@ -8,6 +8,7 @@ public class StarsEffect : MonoBehaviour
     [SerializeField] float normalRate;
     [SerializeField] Gradient kiaiGradient;
     [SerializeField] float kiaiRate;
+    [SerializeField] float kiaiSpeedMultiplier;
     
 
     void Start()
@@ -25,6 +26,7 @@ public class StarsEffect : MonoBehaviour
             main.startColor = normalGradient;
             var emission = starsParticleSystem.emission;
             emission.rateOverTime = normalRate;
+            main.simulationSpeed = 1f;
         }
 
         if (farStarsParticleSystem != null) {
@@ -32,6 +34,7 @@ public class StarsEffect : MonoBehaviour
             main.startColor = normalGradient;
             var emission = farStarsParticleSystem.emission;
             emission.rateOverTime = normalRate;
+            main.simulationSpeed = 1f;
         }
     }
 
@@ -42,6 +45,7 @@ public class StarsEffect : MonoBehaviour
             main.startColor = kiaiGradient;
             var emission = starsParticleSystem.emission;
             emission.rateOverTime = kiaiRate;
+            main.simulationSpeed = kiaiSpeedMultiplier;
         }
 
         if (farStarsParticleSystem != null) {
@@ -49,6 +53,7 @@ public class StarsEffect : MonoBehaviour
             main.startColor = kiaiGradient;
             var emission = farStarsParticleSystem.emission;
             emission.rateOverTime = kiaiRate;
+            main.simulationSpeed = kiaiSpeedMultiplier;
         }
     }
 

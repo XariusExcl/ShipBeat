@@ -274,6 +274,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f8f4df752388649bdb63d9bc5f7704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &338268200 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1898151243316606035, guid: a912707aa5a24264ea8e4190cced4801, type: 3}
+  m_PrefabInstance: {fileID: 1291281143}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &361832106
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +400,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1898151243316606035, guid: a912707aa5a24264ea8e4190cced4801, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1030338467}
   m_SourcePrefab: {fileID: 100100000, guid: a912707aa5a24264ea8e4190cced4801, type: 3}
 --- !u!4 &370460037 stripped
 Transform:
@@ -11056,6 +11064,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 988719134}
   m_CullTransparentMesh: 1
+--- !u!1 &1030338466 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1898151243316606035, guid: a912707aa5a24264ea8e4190cced4801, type: 3}
+  m_PrefabInstance: {fileID: 370460036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1030338467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030338466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120c7159ae9dd494ca2b95b450af620a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  decisionTime: 1
+  distance: 1.5
 --- !u!1 &1079329274
 GameObject:
   m_ObjectHideFlags: 0
@@ -11910,13 +11938,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1898151243316606035, guid: a912707aa5a24264ea8e4190cced4801, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1291281145}
   m_SourcePrefab: {fileID: 100100000, guid: a912707aa5a24264ea8e4190cced4801, type: 3}
 --- !u!4 &1291281144 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7212010466499376734, guid: a912707aa5a24264ea8e4190cced4801, type: 3}
   m_PrefabInstance: {fileID: 1291281143}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1291281145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338268200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120c7159ae9dd494ca2b95b450af620a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  decisionTime: 1
+  distance: 1.5
 --- !u!1 &1387830950
 GameObject:
   m_ObjectHideFlags: 0
@@ -12627,7 +12673,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1898151243316606035, guid: a912707aa5a24264ea8e4190cced4801, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1906084218}
   m_SourcePrefab: {fileID: 100100000, guid: a912707aa5a24264ea8e4190cced4801, type: 3}
 --- !u!4 &1750066110 stripped
 Transform:
@@ -12846,6 +12895,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1898210273}
   m_CullTransparentMesh: 1
+--- !u!1 &1906084217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1898151243316606035, guid: a912707aa5a24264ea8e4190cced4801, type: 3}
+  m_PrefabInstance: {fileID: 1750066109}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1906084218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906084217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120c7159ae9dd494ca2b95b450af620a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  decisionTime: 1
+  distance: 1.5
 --- !u!1 &1928683740
 GameObject:
   m_ObjectHideFlags: 0
@@ -13127,6 +13196,7 @@ MonoBehaviour:
     m_NumColorKeys: 6
     m_NumAlphaKeys: 2
   kiaiRate: 10
+  kiaiSpeedMultiplier: 2
 --- !u!1 &2040244189
 GameObject:
   m_ObjectHideFlags: 0

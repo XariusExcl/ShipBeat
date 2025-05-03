@@ -43,12 +43,13 @@ public class SongSelectReadyMenu : MonoBehaviour
         {
             animation.Play("SongSelectReadyMenuOut");
             enableButtons = false;
+            SFXManager.PlayReturnSound();
         }
         if (enableButtons && Input.GetButtonDown("P1_B1"))
         {
+            SFXManager.PlaySelectSound();
             SongSelect.CreateSongLoader();
-
-            // TODO : wait for song to load before going to game (trigger scene transition animation, then load scene)
+            // TODO : UI transition
             transitionDirector.Play();
         }
     }

@@ -32,6 +32,7 @@ public class Maestro : MonoBehaviour
         SongStarted = true;
         SongEnded = false;
         Jukebox.PlayScheduled(StartDelay);
+        Jukebox.SetVolume(0.5f);
         SongTime = 0;
         StartTime = (float)AudioSettings.dspTime + StartDelay;
         currentTimingPoint = TimingPoints[0];

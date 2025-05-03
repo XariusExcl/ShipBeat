@@ -6,8 +6,8 @@ using UnityEngine.Events;
 
 public class SongCaroussel : MonoBehaviour
 {
-    public GameObject loadingThrobber;
-    public GameObject songEntryPrefab;
+    [SerializeField] GameObject loadingThrobber;
+    [SerializeField] GameObject songEntryPrefab;
     readonly List<SongEntryUI> songEntries = new();
     public static int CurrentSongIndex { get; private set; } = 0;
     public const int NumUIs = 9;
@@ -76,6 +76,7 @@ public class SongCaroussel : MonoBehaviour
 
     void UpdateCaroussel(ScrollDirection direction)
     {
+        SFXManager.PlayScrollSound();
         // Caroussel scroll is cursor relative: Down means select the song below current, up means above.
         const int edge = NumUIs / 2 + 1;
 

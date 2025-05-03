@@ -30,6 +30,7 @@ public class SongSelect : MonoBehaviour
     {
         // Show some kind of menu to give option to go back
         songSelectReadyMenu.SetActive(true);
+        SFXManager.PlaySelectSound();
     }
 
     public static void CreateSongLoader()
