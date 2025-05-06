@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d6e690df48a68411f9e3800f10386bfd
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 32042
+  packageName: Mini Profiler Free
+  packageVersion: 2.3.0
+  assetPath: Assets/MiniProfilerFree/Prefabs/Framerate Watcher.prefab
+  uploadId: 598818

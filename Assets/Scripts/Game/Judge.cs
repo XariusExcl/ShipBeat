@@ -97,7 +97,12 @@ public class Judge : MonoBehaviour {
             if (note.HitTime < Maestro.SongTime - BadHitWindow) {
                 lane.Dequeue();
                 Scoring.AddMiss();
-                NoteBehaviourManager.ReturnToPool(note);
+                if (note.Type == NoteType.Note)
+                    NoteBehaviourManager.ReturnToPool(note);
+                else if (note.Type == NoteType.Hold) {
+                    NoteBehaviourManager.HideHead(note);
+                    heldNotes.Add(note);
+                }
             }
         }
 
