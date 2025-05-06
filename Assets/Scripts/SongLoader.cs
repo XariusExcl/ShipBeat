@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using System.Linq;
 using System.Collections;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class SongLoader : MonoBehaviour
 {
@@ -23,6 +26,10 @@ public class SongLoader : MonoBehaviour
 
     void Awake()
     {
+#if UNITY_EDITOR
+        EditorApplication.playModeStateChanged += OnExitPlayMode;
+#endif    
+
         if (Instance != null && Instance != this) {
             Destroy(gameObject);
             return;
@@ -30,8 +37,10 @@ public class SongLoader : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
-        if (UseDebugSong)
+        if (UseDebugSong) {
+            SongFolderReader.ClearCache();
             Init(new SongInfo { ChartFile = Application.streamingAssetsPath + DebugSongPath, AudioFile = Application.streamingAssetsPath + DebugAudioPath });
+        }
     }
 
     public void Init(SongInfo songInfo) {
@@ -129,4 +138,18 @@ public class SongLoader : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+
+#if UNITY_EDITOR
+    private static void OnExitPlayMode(PlayModeStateChange state)
+    {
+        if(state == PlayModeStateChange.ExitingPlayMode)
+        {
+            IsFileLoaded = false;
+            IsAudioLoaded = false;
+            LoadedSong = new();
+            Instance = null;
+            EditorApplication.playModeStateChanged -= OnExitPlayMode;
+        }
+    }
+# endif
 }

@@ -6,6 +6,10 @@ using UnityEngine.Networking;
 using Unity.Serialization.Json;
 using System.Linq;
 
+#if UNITY_EDITOR
+using UnityEditor;
+# endif
+
 public struct SongFolderFileSystemEntry
 {
     public string name;
@@ -22,7 +26,6 @@ public struct FetchResult
 
 public class SongFolderReader : MonoBehaviour
 {
-    public static SongFolderReader Instance { get; private set; }
     public static bool IsDataLoaded = false;
     bool dataLoadedNotified = false;
     public static UnityEvent OnDataLoaded = new UnityEvent();
@@ -36,12 +39,10 @@ public class SongFolderReader : MonoBehaviour
 
     public static int Count { get { return SongInfos.Count; } private set{} }
 
-    void Awake() {
-        if (Instance == null) 
-            Instance = this;
-    }
-
     void Start() {
+# if UNITY_EDITOR
+        EditorApplication.playModeStateChanged += OnExitPlayMode;
+# endif
         if (!IsDataLoaded)
             StartCoroutine(ReadFolder());
     }
@@ -248,4 +249,20 @@ public class SongFolderReader : MonoBehaviour
         }
         yield break;
     }
+
+#if UNITY_EDITOR
+    void OnExitPlayMode(PlayModeStateChange state) {
+        if (state == PlayModeStateChange.ExitingPlayMode) {
+            ClearCache();
+            EditorApplication.playModeStateChanged -= OnExitPlayMode;
+        }
+    }
+
+    public static void ClearCache() {
+        spriteCache.Clear();
+        audioCache.Clear();
+        IsDataLoaded = false;
+        SongInfos.Clear();
+    }
+#endif
 }
