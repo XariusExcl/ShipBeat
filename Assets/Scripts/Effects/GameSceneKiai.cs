@@ -2,11 +2,14 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+# if UNITY_EDITOR
+using UnityEditor;
+# endif
 
 public class GameSceneKiai : MonoBehaviour
 {
-    [SerializeField] Camera mainCamera;
-    [SerializeField] VolumeProfile globalVolumeProfile;
+    Camera mainCamera;
+    VolumeProfile globalVolumeProfile;
     float normalCameraFov;
     [SerializeField] float kiaiCameraFov;
     float normalCameraZPos;
@@ -21,9 +24,22 @@ public class GameSceneKiai : MonoBehaviour
 
     void Start()
     {
+#if UNITY_EDITOR
+        EditorApplication.playModeStateChanged += OnExitPlayMode;
+#endif    
+        
         Maestro.OnKiaiStart.AddListener(SetKiai);
         Maestro.OnKiaiEnd.AddListener(SetNormal);
 
+        GetRefs();
+
+        SetNormalInstant();
+    }
+
+    void GetRefs()
+    {
+        mainCamera = Camera.main;
+        globalVolumeProfile = FindObjectOfType<Volume>()?.profile;
         normalCameraFov = mainCamera.fieldOfView;
         normalCameraZPos = mainCamera.transform.localPosition.z;
         normalChromaticAberration = 0;
@@ -32,8 +48,6 @@ public class GameSceneKiai : MonoBehaviour
         globalVolumeProfile.TryGet(out globalColorAdjustments);
         normalChromaticAberration = globalChromaticAberration.intensity.value;
         normalPostExposure = globalColorAdjustments.postExposure.value;
-
-        SetNormalInstant();
     }
 
     void SetKiai()
@@ -48,6 +62,9 @@ public class GameSceneKiai : MonoBehaviour
 
     void SetNormalInstant()
     {
+        if (mainCamera == null || globalVolumeProfile == null)
+            Start();
+
         mainCamera.fieldOfView = normalCameraFov;
         mainCamera.transform.localPosition = new Vector3(mainCamera.transform.localPosition.x, mainCamera.transform.localPosition.y, normalCameraZPos);
         globalChromaticAberration.intensity.value = normalChromaticAberration;
@@ -95,4 +112,12 @@ public class GameSceneKiai : MonoBehaviour
         Maestro.OnKiaiStart.RemoveListener(SetKiai);
         Maestro.OnKiaiEnd.RemoveListener(SetNormal);
     }
+
+#if UNITY_EDITOR
+    void OnExitPlayMode(PlayModeStateChange state)
+    {
+        if (state != PlayModeStateChange.ExitingPlayMode) return;
+        SetNormalInstant();
+    }
+#endif
 }

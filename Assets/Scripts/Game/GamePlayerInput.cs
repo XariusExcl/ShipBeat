@@ -11,6 +11,9 @@ public enum ButtonState
 
 public class GamePlayerInput : MonoBehaviour {
     [SerializeField] List<Receptor> Receptors;
+    [SerializeField] ShipMovement playerShip;
+    [SerializeField] ShipMovement otherShips;
+
 
     float lastHorizontal = 0;
     float settingLastHorizontal = 0;
@@ -55,10 +58,16 @@ public class GamePlayerInput : MonoBehaviour {
         {
             if (lastHorizontal < .5f && Mathf.Abs(Input.GetAxis("P1_Horizontal")) > .5f) {
                 Receptors[0].HandleInput(ButtonState.Up);
-                if (Input.GetAxis("P1_Horizontal") > 0)
+                if (Input.GetAxis("P1_Horizontal") > 0) {
                     Judge.JudgePlayerInput(0, ButtonState.Right);
-                else
+                    playerShip.Jostle(ButtonState.Left);
+                    otherShips.Jostle(ButtonState.Left);
+                }
+                else {
                     Judge.JudgePlayerInput(0, ButtonState.Left);
+                    playerShip.Jostle(ButtonState.Right);
+                    otherShips.Jostle(ButtonState.Right);
+                }
             }
             
             lastHorizontal = Mathf.Abs(Input.GetAxis("P1_Horizontal"));

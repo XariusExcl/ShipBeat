@@ -12,6 +12,7 @@ public class SongSelectReadyMenu : MonoBehaviour
     [SerializeField] TMP_Text mapName;
     [SerializeField] PlayableDirector transitionDirector;
     public static bool IsShown = false;
+    public static bool IsValidated = false;
     bool enableButtons = false;
     Animation animation;
 
@@ -41,17 +42,23 @@ public class SongSelectReadyMenu : MonoBehaviour
     {
         if (Input.GetButtonDown("P1_B2"))
         {
-            animation.Play("SongSelectReadyMenuOut");
-            enableButtons = false;
-            SFXManager.PlayReturnSound();
+            PlayOutAnimation();
         }
         if (enableButtons && Input.GetButtonDown("P1_B1"))
         {
+            IsValidated = true;
             SFXManager.PlaySelectSound();
             SongSelect.CreateSongLoader();
             // TODO : UI transition
             transitionDirector.Play();
         }
+    }
+
+    public void PlayOutAnimation()
+    {
+        animation.Play("SongSelectReadyMenuOut");
+        enableButtons = false;
+        SFXManager.PlayReturnSound();
     }
 
     // Used in animation
@@ -63,6 +70,11 @@ public class SongSelectReadyMenu : MonoBehaviour
     void OnDisable()
     {
         IsShown = false;
+    }
+
+    void OnDestroy()
+    {
+        IsValidated = false;
     }
 
     void EnableButtons()

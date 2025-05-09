@@ -56,12 +56,12 @@ public class Judge : MonoBehaviour {
             }
 
             if (note.Type == NoteType.Note) {
-                NoteBehaviourManager.ReturnToPool(note);
                 LaneManager.GetLane(note.Lane).SuccessfulHit(state == ButtonState.Right);
+                NoteBehaviourManager.ReturnToPool(note);
             }
             else if (note.Type == NoteType.Hold) {
-                NoteBehaviourManager.HideHead(note);
                 LaneManager.GetLane(note.Lane).Hold();
+                NoteBehaviourManager.HideHead(note);
             }
 
         } else if (state == ButtonState.Up) {
@@ -71,8 +71,7 @@ public class Judge : MonoBehaviour {
                 Scoring.AddMiss();
             
             LaneManager.GetLane(note.Lane).Release();
-
-            NoteBehaviourManager.ReturnToPool(note);    
+            NoteBehaviourManager.ReturnToPool(note);
         }
     }
 

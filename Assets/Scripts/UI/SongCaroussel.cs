@@ -18,7 +18,6 @@ public class SongCaroussel : MonoBehaviour
     public static UnityEvent OnSongSelected = new();
     public static UnityEvent OnCarousselUpdate = new();
 
-
     int Mathmod(int a, int b) {
         return (a % b + b) % b;
     }
@@ -55,7 +54,7 @@ public class SongCaroussel : MonoBehaviour
     }
     void Update()
     {
-        if (SongSelectReadyMenu.IsShown || !SongFolderReader.IsDataLoaded) return;
+        if (SongSelectReadyMenu.IsShown || SongSelectReadyMenu.IsValidated || !SongFolderReader.IsDataLoaded) return;
 
         // TODO: Implement a key repeat when axis is held down after a certain time.
         if (lastHorizontal != Input.GetAxis("P1_Vertical"))
@@ -68,8 +67,7 @@ public class SongCaroussel : MonoBehaviour
                 UpdateCaroussel(ScrollDirection.Down);
         }
 
-        if (Input.GetButtonDown("P1_B1"))
-        {
+        if (Input.GetButtonDown("P1_B1") && !SongSelectReadyMenu.IsValidated) {
             OnSongSelected.Invoke();
         }
     }

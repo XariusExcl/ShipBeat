@@ -3,6 +3,7 @@ using UnityEngine.Splines;
 
 public class Lane : MonoBehaviour {
     [SerializeField] Receptor receptor;
+    [SerializeField] int laneResolution = 20;
     [HideInInspector] public SplineContainer SplineContainer;
     [HideInInspector] public Vector3 ExtrapolationVector;
 
@@ -22,7 +23,7 @@ public class Lane : MonoBehaviour {
         ExtrapolationVector = (-(Vector3)SplineContainer.EvaluateTangent(0.01f)).normalized * SplineContainer.CalculateLength();
 
         if (lineRenderer.enabled) {
-            lineRenderer.positionCount = 20;
+            lineRenderer.positionCount = laneResolution;
             for (int i = 0; i < lineRenderer.positionCount; i++) {
                 lineRenderer.SetPosition(i, (Vector3)SplineContainer.EvaluatePosition(i / (float)lineRenderer.positionCount));
             }

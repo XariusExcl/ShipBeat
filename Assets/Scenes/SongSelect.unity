@@ -16755,7 +16755,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28f8f4df752388649bdb63d9bc5f7704, type: 3}
   m_Name: 
@@ -34123,7 +34123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7666317127593824575, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -34884,6 +34884,7 @@ GameObject:
   - component: {fileID: 1045487086}
   - component: {fileID: 1045487089}
   - component: {fileID: 1045487088}
+  - component: {fileID: 1045487090}
   m_Layer: 5
   m_Name: SelectScreenCommands
   m_TagString: Untagged
@@ -34949,6 +34950,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045487085}
   m_CullTransparentMesh: 1
+--- !u!95 &1045487090
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045487085}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1052591137
 GameObject:
   m_ObjectHideFlags: 0
@@ -43355,6 +43378,7 @@ GameObject:
   - component: {fileID: 1283773949}
   - component: {fileID: 1283773952}
   - component: {fileID: 1283773953}
+  - component: {fileID: 1283773954}
   m_Layer: 5
   m_Name: ReadyMenu
   m_TagString: Untagged
@@ -43470,6 +43494,36 @@ Animation:
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
+--- !u!114 &1283773954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283773947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 8278fccd269462e41b1c816b6e4c14c5, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1283773952}
+          m_TargetAssemblyTypeName: SongSelectReadyMenu, Assembly-CSharp
+          m_MethodName: PlayOutAnimation
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1303945369
 GameObject:
   m_ObjectHideFlags: 0
@@ -49969,6 +50023,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1438454292}
   - component: {fileID: 1438454293}
+  - component: {fileID: 1438454294}
   m_Layer: 5
   m_Name: SongCaroussel
   m_TagString: Untagged
@@ -50010,6 +50065,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingThrobber: {fileID: 128989164}
   songEntryPrefab: {fileID: 1444790200087245864, guid: 5b0cf7858afbc7b4f8962b0e1f02ecd6, type: 3}
+--- !u!95 &1438454294
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438454291}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1440267397
 GameObject:
   m_ObjectHideFlags: 0
@@ -50067,8 +50144,6 @@ PlayableDirector:
     value: {fileID: 993892326}
   - key: {fileID: 5671840792690192625, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
     value: {fileID: 1033116317}
-  - key: {fileID: -934925530501007636, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
-    value: {fileID: 1153867717}
   - key: {fileID: -1044031367393762571, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
     value: {fileID: 1505847158}
   - key: {fileID: -6334390424638473143, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
@@ -50079,6 +50154,16 @@ PlayableDirector:
     value: {fileID: 1440267400}
   - key: {fileID: -2355761838946499937, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
     value: {fileID: 1165730906}
+  - key: {fileID: 5192785543025976429, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
+    value: {fileID: 1660570291}
+  - key: {fileID: 5650468549386170701, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
+    value: {fileID: 1890661113}
+  - key: {fileID: 8845227821607316216, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
+    value: {fileID: 1438454294}
+  - key: {fileID: 7286589515567606213, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
+    value: {fileID: 1045487090}
+  - key: {fileID: 7846510307667858543, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
+    value: {fileID: 1283773954}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1440267399
@@ -52881,6 +52966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1660570290}
+  - component: {fileID: 1660570291}
   m_Layer: 5
   m_Name: Highscores
   m_TagString: Untagged
@@ -52908,6 +52994,28 @@ RectTransform:
   m_AnchoredPosition: {x: 10, y: -25}
   m_SizeDelta: {x: 90, y: 120}
   m_Pivot: {x: 0, y: 0.5}
+--- !u!95 &1660570291
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660570289}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1669246334
 GameObject:
   m_ObjectHideFlags: 0
@@ -56331,6 +56439,7 @@ GameObject:
   - component: {fileID: 1890661111}
   - component: {fileID: 1890661110}
   - component: {fileID: 1890661112}
+  - component: {fileID: 1890661113}
   m_Layer: 5
   m_Name: SongInfoPanel
   m_TagString: Untagged
@@ -56415,6 +56524,28 @@ MonoBehaviour:
   length: {fileID: 1119561278}
   bpm: {fileID: 1970082850}
   noteCount: {fileID: 2128632222}
+--- !u!95 &1890661113
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890661107}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1891584179
 GameObject:
   m_ObjectHideFlags: 0

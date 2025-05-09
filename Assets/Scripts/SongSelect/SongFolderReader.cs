@@ -43,8 +43,9 @@ public class SongFolderReader : MonoBehaviour
 # if UNITY_EDITOR
         EditorApplication.playModeStateChanged += OnExitPlayMode;
 # endif
-        if (!IsDataLoaded)
+        if (!IsDataLoaded) {
             StartCoroutine(ReadFolder());
+        }
     }
 
     void Update() {
@@ -252,11 +253,12 @@ public class SongFolderReader : MonoBehaviour
 
 #if UNITY_EDITOR
     void OnExitPlayMode(PlayModeStateChange state) {
-        if (state == PlayModeStateChange.ExitingPlayMode) {
-            ClearCache();
-            EditorApplication.playModeStateChanged -= OnExitPlayMode;
-        }
+        if (state != PlayModeStateChange.ExitingPlayMode) return;
+        Debug.Log("Exiting play mode, clearing cache.");
+        ClearCache();
+        EditorApplication.playModeStateChanged -= OnExitPlayMode;
     }
+#endif
 
     public static void ClearCache() {
         spriteCache.Clear();
@@ -264,5 +266,4 @@ public class SongFolderReader : MonoBehaviour
         IsDataLoaded = false;
         SongInfos.Clear();
     }
-#endif
 }
