@@ -13,6 +13,7 @@ public class SongEntryUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI difficultyName;
     [SerializeField] Image difficultyColor;
     [SerializeField] Image backgroundImage;
+    [SerializeField] SongSelectSceneData songSelectSceneData;
 
 
     public void SetData(SongInfo songInfo)
@@ -21,7 +22,7 @@ public class SongEntryUI : MonoBehaviour
         artist.text = songInfo.Artist;
         difficultyName.text = songInfo.DifficultyName + " " + GetRatingText(songInfo.DifficultyRating);
 
-        Color diffColor = GetColorForRating(songInfo.DifficultyRating);
+        Color diffColor = songSelectSceneData.GetColorForRating(songInfo.DifficultyRating);
         difficultyColor.color = diffColor;
         StartCoroutine(SongFolderReader.FetchImageFile(songInfo.BackgroundImage, (result) =>
         {
@@ -60,15 +61,7 @@ public class SongEntryUI : MonoBehaviour
     {
         transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, 10f * Time.deltaTime);
     }
-
-
-    // Map rating to color gradient, 1-10 going from blue to red hue
-    Color GetColorForRating(int rating)
-    {
-        float hue = Mathf.Lerp(210, 0, Mathf.Clamp01((rating-3)/6f));
-        return Color.HSVToRGB(hue / 360f, .8f, .9f); 
-    }
-
+    
     string GetRatingText(int rating)
     {
         // 1-4 easy, 5-7 medium, 8-10 hard

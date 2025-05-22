@@ -202,6 +202,7 @@ MonoBehaviour:
   difficultyName: {fileID: 5270343914027277587}
   difficultyColor: {fileID: 5772971316807103580}
   backgroundImage: {fileID: 5089964477159274363}
+  songSelectSceneData: {fileID: 11400000, guid: b4de85a88d465b44a87857809464dcf1, type: 2}
 --- !u!1 &6195680947548645327
 GameObject:
   m_ObjectHideFlags: 0

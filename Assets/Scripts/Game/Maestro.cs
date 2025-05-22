@@ -23,7 +23,7 @@ public class Maestro : MonoBehaviour
     public static float Tick;
     public static float StartTime;
     const float StartDelay = 3;
-    public static float GlobalOffset = -.02f; // To be adjusted by the player, in seconds
+    public static float GlobalOffset = -.1f; // To be adjusted by the player, in seconds
     public static bool IsKiaiTime = false;
     public static UnityEvent OnKiaiStart = new UnityEvent();
     public static UnityEvent OnKiaiEnd = new UnityEvent();
