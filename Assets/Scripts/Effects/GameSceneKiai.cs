@@ -39,7 +39,7 @@ public class GameSceneKiai : MonoBehaviour
     void GetRefs()
     {
         mainCamera = Camera.main;
-        globalVolumeProfile = FindObjectOfType<Volume>()?.profile;
+        globalVolumeProfile = FindFirstObjectByType<Volume>()?.profile;
         normalCameraFov = mainCamera.fieldOfView;
         normalCameraZPos = mainCamera.transform.localPosition.z;
         normalChromaticAberration = 0;

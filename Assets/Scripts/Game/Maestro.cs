@@ -36,11 +36,6 @@ public class Maestro : MonoBehaviour
         SongTime = 0;
         StartTime = (float)AudioSettings.dspTime + StartDelay;
         currentTimingPoint = TimingPoints[0];
-
-        // print all timing points
-        foreach (var timingPoint in TimingPoints) {
-            Debug.Log($"Timing Point: {timingPoint.Time} BPM: {timingPoint.BPM} Kiai: {timingPoint.KiaiMode}");
-        }
     }
 
     void Start() {
