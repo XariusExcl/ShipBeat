@@ -11,6 +11,7 @@ public class SongSelectReadyMenu : MonoBehaviour
     [SerializeField] Image difficultyColor;
     [SerializeField] TMP_Text mapName;
     [SerializeField] PlayableDirector transitionDirector;
+    [SerializeField] SongSelectSceneData songSelectSceneData;
     public static bool IsShown = false;
     public static bool IsValidated = false;
     bool enableButtons = false;
@@ -33,7 +34,7 @@ public class SongSelectReadyMenu : MonoBehaviour
         {
             if (result.result == UnityWebRequest.Result.Success) {
                 backgroundImage.sprite = result.fetchedObject as Sprite;
-                difficultyColor.color = GetColorForRating(SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].DifficultyRating);
+                difficultyColor.color = songSelectSceneData.GetColorForRating(SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].DifficultyRating);
             }
         }));
     }

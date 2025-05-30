@@ -11,8 +11,8 @@ public enum ButtonState
 
 public class GamePlayerInput : MonoBehaviour {
     [SerializeField] List<Receptor> Receptors;
-    [SerializeField] ShipMovement playerShip;
-    [SerializeField] ShipMovement otherShips;
+    [SerializeField] JostleEffect playerShip;
+    [SerializeField] JostleEffect otherShips;
 
 
     float lastHorizontal = 0;

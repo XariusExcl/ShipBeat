@@ -1,0 +1,2 @@
+#debug_text
+Hey, la localisation a fonctionné !

@@ -11408,10 +11408,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120c7159ae9dd494ca2b95b450af620a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedParameters: 1
   speed: 1
   decisionTime: 1
-  distance: 1.5
-  jostleAmount: 0.5
+  amplitude: 0
 --- !u!1 &1079329274
 GameObject:
   m_ObjectHideFlags: 0
@@ -12288,10 +12288,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120c7159ae9dd494ca2b95b450af620a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedParameters: 1
   speed: 1
   decisionTime: 1
-  distance: 1.5
-  jostleAmount: 0.5
+  amplitude: 0
 --- !u!1 &1387830950
 GameObject:
   m_ObjectHideFlags: 0
@@ -12760,7 +12760,7 @@ MonoBehaviour:
   - {fileID: 793582719}
   - {fileID: 1699132234}
   - {fileID: 718682108}
-  playerShip: {fileID: 8849653924814508608}
+  playerShip: {fileID: 8849653924814508607}
   otherShips: {fileID: 2061979139}
 --- !u!1 &1655071180
 GameObject:
@@ -13296,10 +13296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120c7159ae9dd494ca2b95b450af620a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedParameters: 1
   speed: 1
   decisionTime: 1
-  distance: 1.5
-  jostleAmount: 0.5
+  amplitude: 0
 --- !u!1 &1928683740
 GameObject:
   m_ObjectHideFlags: 0
@@ -13881,12 +13881,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2061979137}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 120c7159ae9dd494ca2b95b450af620a, type: 3}
+  m_Script: {fileID: 11500000, guid: c4ea94dc942d6a84fb21d569c09e9155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  decisionTime: -1
-  distance: 0
   jostleAmount: 0.5
 --- !u!1 &2093402319
 GameObject:
@@ -14309,32 +14306,19 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4457176333008241637, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1107104763}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7666317127593824575, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8849653924814508608}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
---- !u!1 &8849653924814508607 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7666317127593824575, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
+--- !u!114 &8849653924814508607 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1626173264164878314, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
   m_PrefabInstance: {fileID: 8849653924814508606}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8849653924814508608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8849653924814508607}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 120c7159ae9dd494ca2b95b450af620a, type: 3}
+  m_Script: {fileID: 11500000, guid: c4ea94dc942d6a84fb21d569c09e9155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
-  decisionTime: 1
-  distance: 0.2
-  jostleAmount: 0.35
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

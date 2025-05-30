@@ -4,9 +4,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 public class Jukebox : MonoBehaviour
 {
+    static Queue<AudioClip> UpNext;
+    static Queue<bool> UpNextLooping;
     public static string NowPlaying = "";
     public static Jukebox Instance;
     AudioSource audioSource;
@@ -15,13 +18,16 @@ public class Jukebox : MonoBehaviour
     /// <summary> 
     /// Loads the song into the Jukebox.
     /// </summary>
-    public static void LoadSong(AudioClip clip){
+    public static void LoadSong(AudioClip clip)
+    {
         clip.LoadAudioData();
         Instance.audioSource.clip = clip;
     }
 
-    public static void LoadSongAndPlay(string path, float setPlaybackPosition = 0) { 
-        Instance.StartCoroutine(SongFolderReader.FetchAudioFile(path, (result) => {
+    public static void LoadSongAndPlay(string path, float setPlaybackPosition = 0)
+    {
+        Instance.StartCoroutine(SongFolderReader.FetchAudioFile(path, (result) =>
+        {
             if (result.result != UnityWebRequest.Result.Success)
                 return;
 
@@ -32,28 +38,33 @@ public class Jukebox : MonoBehaviour
             SetPlaybackPosition(setPlaybackPosition);
         }));
     }
-    
 
-    public static void Play(){
+
+    public static void Play()
+    {
         Instance.audioSource.Play();
     }
 
     /// <summary> 
     /// Schedules the audio file to be played in seconds. Use this to give time for the audio file to load before playing.
     /// </summary>
-    public static void PlayScheduled(float delay){
+    public static void PlayScheduled(float delay)
+    {
         Instance.audioSource.PlayScheduled(AudioSettings.dspTime + delay);
     }
 
-    public static void Pause(){
+    public static void Pause()
+    {
         Instance.audioSource.Pause();
     }
 
-    public static void Stop(){
+    public static void Stop()
+    {
         Instance.audioSource.Stop();
     }
 
-    public static void SetVolume(float volume){
+    public static void SetVolume(float volume)
+    {
         Debug.Log($"Setting volume to {volume}");
         Instance.audioSource.volume = volume;
     }
@@ -61,39 +72,78 @@ public class Jukebox : MonoBehaviour
     /// <summary> 
     /// Get playback position (in seconds) from the audio system. Used to sanity check desynchronization (maybe).
     /// </summary>
-    public static float GetPlaybackPosition(){
+    public static float GetPlaybackPosition()
+    {
         return (float)Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
     }
 
     /// <summary> 
     /// Set playback position (in seconds) for recalibration/seeking.
     /// </summary>
-    public static void SetPlaybackPosition(float position){
+    public static void SetPlaybackPosition(float position)
+    {
         if (position < 0)
             position = 0;
 
-        if (Instance.audioSource.clip.loadState != AudioDataLoadState.Loaded) {
+        if (Instance.audioSource.clip.loadState != AudioDataLoadState.Loaded)
+        {
             Instance.StartCoroutine(Instance.WaitForAudioToLoad(() => SetPlaybackPosition(position)));
             return;
         }
         Instance.audioSource.timeSamples = (int)(position * Instance.audioSource.clip.frequency);
     }
 
-    IEnumerator WaitForAudioToLoad(UnityAction callback){
-        while (audioSource.clip.loadState != AudioDataLoadState.Loaded) {
+    IEnumerator WaitForAudioToLoad(UnityAction callback)
+    {
+        while (audioSource.clip.loadState != AudioDataLoadState.Loaded)
+        {
             yield return null;
         }
         callback?.Invoke();
     }
 
-
-    void Awake() {
-        if (Instance != null) {
+    void Awake()
+    {
+        if (Instance != null)
+        {
             Destroy(gameObject);
             return;
         }
         DontDestroyOnLoad(gameObject);
         Instance = this;
         audioSource = GetComponent<AudioSource>();
+    }
+
+    public static void QueueSong(AudioClip clip, bool looping = false)
+    {
+        UpNext ??= new Queue<AudioClip>();
+        UpNextLooping ??= new Queue<bool>();
+
+        UpNext.Enqueue(clip);
+        UpNextLooping.Enqueue(looping);
+    }
+
+    public static void QueueNext()
+    {
+        Stop();
+        Instance.audioSource.loop = false;
+    }
+
+    void Update()
+    {
+        if (!audioSource.isPlaying && UpNext.Count > 0)
+        {
+            AudioClip nextClip = UpNext.Dequeue();
+            bool looping = UpNextLooping.Count > 0 ? UpNextLooping.Dequeue() : false;
+            if (nextClip == null)
+            {
+                Debug.LogWarning("Next clip is null, skipping to next in queue.");
+                return;
+            }
+            LoadSong(nextClip);
+            audioSource.loop = looping;
+            NowPlaying = nextClip.name;
+            Play();
+        }
     }
 }

@@ -24,8 +24,6 @@ public class TutoBotHead : MonoBehaviour
 
     public void LookAt(Vector3 targetPosition = default)
     {
-        Debug.Log("TutoBotHead: LookAt called with targetPosition: " + targetPosition);
-
         if (targetPosition == default)
             targetPosition = Camera.main.transform.position;
 

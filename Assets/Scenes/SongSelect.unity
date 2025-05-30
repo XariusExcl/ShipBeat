@@ -43491,6 +43491,7 @@ MonoBehaviour:
   difficultyColor: {fileID: 31779974}
   mapName: {fileID: 2082668030}
   transitionDirector: {fileID: 1440267398}
+  songSelectSceneData: {fileID: 11400000, guid: b4de85a88d465b44a87857809464dcf1, type: 2}
 --- !u!111 &1283773953
 Animation:
   m_ObjectHideFlags: 0
