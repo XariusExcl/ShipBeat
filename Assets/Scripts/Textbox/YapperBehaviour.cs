@@ -1,0 +1,90 @@
+// Attached to an object which speaks in a textbox.
+
+using System.Collections.Generic;
+using UnityEngine;
+public class YapperBehaviour : MonoBehaviour
+{
+    static List<YapperBehaviour> Yappers = new List<YapperBehaviour>();
+    public string ID;
+    public bool SupportsAnimation { get { return animator is not null || TryGetComponent(out Animator _); } }
+    [SerializeField] AudioClip voice;
+    [Range(0f, 1f)][SerializeField] float volume = 1f;
+    [SerializeField] GameObject head;
+    AudioSource audioSource;
+    Animator animator;
+
+    void OnEnable()
+    {
+        if (!Yappers.Contains(this))
+            Yappers.Add(this);
+        else
+            Debug.LogWarning($"YapperBehaviour: Duplicate ID '{ID}' found on {gameObject.name}.", gameObject);
+    }
+
+    public static YapperBehaviour FindByID(string id)
+    {
+        foreach (YapperBehaviour yapper in Yappers)
+        {
+            if (yapper.ID == id)
+                return yapper;
+        }
+        Debug.LogWarning($"YapperBehaviour: ID '{id}' not found");
+        return null;
+    }
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.clip = voice;
+        audioSource.volume = volume;
+    }
+
+    public void Speak()
+    {
+        if (voice != null)
+            audioSource.PlayOneShot(voice, volume);
+    }
+
+    public void FacePoint(Vector3 position = default)
+    {
+        ILookAt body = GetComponent<ILookAt>();
+        if (body != null)
+            body.LookAt(position);
+
+        else Debug.LogWarning($"YapperBehaviour: No ILookAt component found on {gameObject.name}.", gameObject);
+    }
+
+    public void LookAt(Vector3 position = default)
+    {
+        if (head != null)
+        {
+            ILookAt lookAt = head.GetComponent<ILookAt>();
+            if (lookAt != null)
+                lookAt.LookAt(position);
+            else Debug.LogWarning($"YapperBehaviour: No ILookAt component found on head of {gameObject.name}.", gameObject);
+        }
+        else Debug.LogWarning($"YapperBehaviour: Head object not assigned on {gameObject.name}.", gameObject);
+    }
+
+    public void SetEmote(string emote)
+    {
+        if (SupportsAnimation)
+            animator.SetTrigger(emote);
+        else Debug.LogWarning($"YapperBehaviour: Animator not found on {gameObject.name}. Cannot set emote '{emote}'.", gameObject);
+    }
+
+    void OnDestroy()
+    {
+        if (Yappers.Contains(this))
+            Yappers.Remove(this);
+        else Debug.LogWarning($"YapperBehaviour: ID '{ID}' not found in Yappers list on {gameObject.name}.", gameObject);
+    }
+}

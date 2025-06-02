@@ -6,9 +6,9 @@ public class MainMenuNavigation : MonoBehaviour
     [SerializeField] private CameraDolly cameraDolly;
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private GameObject mainMenu;
-    [SerializeField] private GameObject quickPlayButton;
-    [SerializeField] private GameObject loginMenu;
-    [SerializeField] private GameObject loginFirstField;
+    [SerializeField] private GameObject mainMenuQuickPlayButton;
+    [SerializeField] private GameObject quickPlayMenu;
+    [SerializeField] private GameObject quickPlayMenuFirstField;
     [SerializeField] private AudioClip introMusic;
     [SerializeField] private AudioClip introMusicLoop;
 
@@ -21,16 +21,16 @@ public class MainMenuNavigation : MonoBehaviour
     public void ShowMainMenu()
     {
         cameraDolly.MoveToWaypoint(1);
-        loginMenu.SetActive(false);
+        quickPlayMenu.SetActive(false);
         mainMenu.SetActive(true);
-        eventSystem.SetSelectedGameObject(quickPlayButton);
+        eventSystem.SetSelectedGameObject(mainMenuQuickPlayButton);
     }
 
     public void QuickPlayPressed()
     {
         cameraDolly.MoveToNextWaypoint();
-        loginMenu.SetActive(true);
-        eventSystem.SetSelectedGameObject(loginFirstField);
+        quickPlayMenu.SetActive(true);
+        eventSystem.SetSelectedGameObject(quickPlayMenuFirstField);
     }
 
     public void LoginPressed()
@@ -41,9 +41,15 @@ public class MainMenuNavigation : MonoBehaviour
     public void QuickPlayBackPressed()
     {
         cameraDolly.MoveToPreviousWaypoint();
-        loginMenu.SetActive(false);
+        quickPlayMenu.SetActive(false);
         mainMenu.SetActive(true);
-        eventSystem.SetSelectedGameObject(quickPlayButton);
+        eventSystem.SetSelectedGameObject(mainMenuQuickPlayButton);
+    }
+
+    public void GuestAuth()
+    {
+        eventSystem.SetSelectedGameObject(null);
+        TextboxSystem.StartDialogue("debug_test");
     }
 
     public void ExitGame()

@@ -5003,6 +5003,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7724a30435b3c764998399582c8e786f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8647938208811881476}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7724a30435b3c764998399582c8e786f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7365247773022454467}
     - targetCorrespondingSourceObject: {fileID: -1884358480048102074, guid: 7724a30435b3c764998399582c8e786f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2768492080257805469}
@@ -5177,6 +5180,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc80b891036c124aa65d18902b9e1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7365247773022454467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8480251940025235971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f92e1e956d37e4fa3bb413bc4881a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: tutobot
+  voice: {fileID: 8300000, guid: cc971e88f15d90f4f877545d73eed8dc, type: 3}
+  volume: 1
 --- !u!1 &9065753570818536704 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8881512760021192110, guid: 7724a30435b3c764998399582c8e786f, type: 3}

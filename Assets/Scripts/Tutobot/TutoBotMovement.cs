@@ -1,25 +1,17 @@
 using UnityEngine;
 
-public class TutoBotHead : MonoBehaviour, ILookAt
+public class TutoBotMovement : MonoBehaviour, ILookAt
 {
     Quaternion targetRotation;
-    Vector3 initialPosition;
-
-    [SerializeField] Transform lookAtTarget;
+    public bool disableSlerp = false;
     void Start()
     {
-        initialPosition = transform.localPosition;
         targetRotation = transform.rotation;
     }
 
     void Update()
     {
-        // bob the head up and down
-        float bobSpeed = 2f;
-        float bobAmount = 0.01f;
-        float bob = Mathf.Sin(Time.time * bobSpeed) * bobAmount;
-        transform.localPosition = new Vector3(transform.localPosition.x, bob + initialPosition.y, transform.localPosition.z);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        if (!disableSlerp) transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
     }
 
     public void LookAt(Vector3 targetPosition = default)
@@ -27,11 +19,13 @@ public class TutoBotHead : MonoBehaviour, ILookAt
         if (targetPosition == default)
             targetPosition = Camera.main.transform.position;
 
-        // targetPosition.y = transform.position.y;
+        // look at the target position only by rotating around the Y axis
         Transform clonedTransform = Instantiate(transform, transform);
         clonedTransform.localPosition = Vector3.zero; // reset local position to avoid offset
         clonedTransform.LookAt(targetPosition);
+        clonedTransform.rotation = Quaternion.Euler(0f, clonedTransform.rotation.eulerAngles.y, 0f);
         targetRotation = clonedTransform.rotation;
         Destroy(clonedTransform.gameObject);
+
     }
 }

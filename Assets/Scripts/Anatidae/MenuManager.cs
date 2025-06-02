@@ -10,21 +10,29 @@ public class MenuManager : MonoBehaviour
     const float HeldQuitTime = 1.5f;
     float heldQuitTimer = 0f;
     const string MenuMessage = "Retour au menu";
+    static bool backToMenuCalled = false;
 
-    #if UNITY_WEBGL && !UNITY_EDITOR
+#if UNITY_WEBGL && !UNITY_EDITOR
     [DllImport("__Internal")]
     public static extern void BackToMenu();
-    #else
+#else
     public static void BackToMenu()
     {
         Debug.Log("Retour au menu de la borne d'arcade !");
     }
-    #endif
+#endif
+
+    void Start()
+    {
+        backToMenuCalled = false;
+    }
 
     void Update()
     {
-        if (heldQuitTimer >= HeldQuitTime || afkTimer >= AfkTime) {
+        if (!backToMenuCalled && heldQuitTimer >= HeldQuitTime || afkTimer >= AfkTime)
+        {
             BackToMenu();
+            backToMenuCalled = true;
         }
 
         if (Input.GetButton("Coin"))
@@ -38,10 +46,12 @@ public class MenuManager : MonoBehaviour
         else
             afkTimer += Time.deltaTime;
 
-        if (heldQuitTimer != 0 || afkTimer - AfkTime + 6f > 0f) {
+        if (heldQuitTimer != 0 || afkTimer - AfkTime + 6f > 0f)
+        {
             quitText.gameObject.SetActive(true);
             quitText.text = MenuMessage + new string('.', (int)Mathf.Min(Mathf.Max(heldQuitTimer * 3f, afkTimer - AfkTime + 10f * 0.4f), 3));
-        } else quitText.gameObject.SetActive(false);
+        }
+        else quitText.gameObject.SetActive(false);
     }
 
     public void OnApplicationQuit()
