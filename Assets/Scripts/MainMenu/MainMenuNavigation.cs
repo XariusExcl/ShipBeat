@@ -49,7 +49,7 @@ public class MainMenuNavigation : MonoBehaviour
     public void GuestAuth()
     {
         eventSystem.SetSelectedGameObject(null);
-        TextboxSystem.StartDialogue("debug_test");
+        TextboxSystem.StartDialogue("guest_tutoask");
     }
 
     public void ExitGame()

@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class TutoBotMovement : MonoBehaviour, ILookAt
+public class TutoBotMovement : MonoBehaviour
 {
     Quaternion targetRotation;
-    public bool disableSlerp = false;
+    [SerializeField] LookTarget lookTarget;
+    [SerializeField] public bool IsLookingAtTarget;
+    [SerializeField] public bool disableSlerp = false;
+
     void Start()
     {
         targetRotation = transform.rotation;
@@ -11,21 +14,24 @@ public class TutoBotMovement : MonoBehaviour, ILookAt
 
     void Update()
     {
-        if (!disableSlerp) transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        transform.rotation = disableSlerp ? targetRotation : Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        if (IsLookingAtTarget) LookAtTarget();
     }
 
-    public void LookAt(Vector3 targetPosition = default)
+    Vector3 cachedTargetPosition;
+    public void LookAtTarget()
     {
-        if (targetPosition == default)
-            targetPosition = Camera.main.transform.position;
+        if (cachedTargetPosition == lookTarget.transform.position)
+            return;
 
-        // look at the target position only by rotating around the Y axis
+        cachedTargetPosition = lookTarget.transform.position;
+
+        // look at the target position, only around Y axis
         Transform clonedTransform = Instantiate(transform, transform);
         clonedTransform.localPosition = Vector3.zero; // reset local position to avoid offset
-        clonedTransform.LookAt(targetPosition);
+        clonedTransform.LookAt(lookTarget.transform.position);
         clonedTransform.rotation = Quaternion.Euler(0f, clonedTransform.rotation.eulerAngles.y, 0f);
         targetRotation = clonedTransform.rotation;
         Destroy(clonedTransform.gameObject);
-
     }
 }

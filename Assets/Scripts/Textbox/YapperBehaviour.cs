@@ -8,8 +8,10 @@ public class YapperBehaviour : MonoBehaviour
     public string ID;
     public bool SupportsAnimation { get { return animator is not null || TryGetComponent(out Animator _); } }
     [SerializeField] AudioClip voice;
+    [SerializeField] public Color Color;
     [Range(0f, 1f)][SerializeField] float volume = 1f;
-    [SerializeField] GameObject head;
+    [SerializeField] LookTarget eyesTarget;
+    [SerializeField] LookTarget bodyTarget;
     AudioSource audioSource;
     Animator animator;
 
@@ -47,31 +49,30 @@ public class YapperBehaviour : MonoBehaviour
         audioSource.volume = volume;
     }
 
+    public void UpdateBodyTarget(string targetName = "camera")
+    {
+        if (bodyTarget == null)
+        {
+            Debug.LogWarning($"YapperBehaviour: Body target not set on {gameObject.name}.", gameObject);
+            return;
+        }
+        bodyTarget.Track(targetName);
+    }
+
+    public void UpdateEyesTarget(string targetName = "camera")
+    {
+        if (eyesTarget == null)
+        {
+            Debug.LogWarning($"YapperBehaviour: Head target not set on {gameObject.name}.", gameObject);
+            return;
+        }
+        eyesTarget.Track(targetName);
+    }
+
     public void Speak()
     {
         if (voice != null)
             audioSource.PlayOneShot(voice, volume);
-    }
-
-    public void FacePoint(Vector3 position = default)
-    {
-        ILookAt body = GetComponent<ILookAt>();
-        if (body != null)
-            body.LookAt(position);
-
-        else Debug.LogWarning($"YapperBehaviour: No ILookAt component found on {gameObject.name}.", gameObject);
-    }
-
-    public void LookAt(Vector3 position = default)
-    {
-        if (head != null)
-        {
-            ILookAt lookAt = head.GetComponent<ILookAt>();
-            if (lookAt != null)
-                lookAt.LookAt(position);
-            else Debug.LogWarning($"YapperBehaviour: No ILookAt component found on head of {gameObject.name}.", gameObject);
-        }
-        else Debug.LogWarning($"YapperBehaviour: Head object not assigned on {gameObject.name}.", gameObject);
     }
 
     public void SetEmote(string emote)

@@ -1,0 +1,65 @@
+// --------------------------------- longueur max de la textbox : 113 chars --------------------------------- //
+#debug_test
+[y:tutobot][l:camera][o:camera][e:handsIdle][e:happyWag]Hey, la localisation a fonctionné ![e:smile]
+[e:open][e:idleWag]Le [s:i][c:#00ffff]rich text[c:][s:] aussi. Cool !
+[e:handsShyPoint][e:closeAAA]Est-ce que les choix fonctionnent ?
+$debug_test_yes Oui !
+$debug_test_no Non...
+#debug_test_yes
+[e:smile][e:handsClap]Super !
+[e:open][e:handsIdle]
+#debug_test_no
+[e:closeAAA][e:handsIdle]Aww.... Attends,[e:half] quoi ?
+[e:open]
+#guest_tutoask
+[y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah ![e:smile] Vous voilà enfin agent._._.___[s:i][c:#00ffff][k:agentName][c:][s:] ?[e:open][o:camera]
+[e:idleWag]Désolé si j'écorche votre nom ? Je ne vous trouve pas dans la base de données des pilotes._._.
+[e:half]Ehm_._._. Même si je sais que vos talents de pilote sont bien plus que confirmés._._.
+[e:handsShyPoint][e:closeAAA]Les vaisseaux de notre flotte n'ont peut-être pas les commandes aux mêmes endroits, agissent de manière différente et._._.
+Que diriez-vous d'un petit... tutoriel ?
+$guest_tutoask_yes Pourquoi pas !
+$guest_tutoask_howdareyou Comment oses-tu...
+#guest_tutoask_howdareyou
+[e:guruguru][e:handsHoldHead][e:tailShock]Awawawa... Je ne voulais pas vous offusquer ! Je suis toujours à disposition si jamais vous_._._. [e:closeAAA][e:handsIdle][e:idleWag]Changez d'avis.
+[e:open]Bonne chance !
+[!:StartGame]
+#guest_tutoask_yes
+[e:smile][e:handsClap]Parfait !_____ Une petite mise à niveau[e:handsIdle][e:sleep] ne fait jamais de mal.
+[e:open]Suivez-moi, Nous allons faire un petit vol d'entraînement.[e:handsConverse]
+[!:StartTutorial]
+#tutorial_1
+[s:i][c:#aaaaaa]*ksssht*[c:#aaaaaa][s:] Vous me reçevez ?___ Je vous contacte depuis le [s:i]Mothership.[s:]
+Bienvenue sur Elite Beat Airlines !___ Je suis votre commandante de bord, TUT-0 ! Hihi...
+Passons ensemble sur les commandes du vaisseau, pour mener à bien vos futures missions.
+
+Devant vous se situe le LIDAR de détection. Des débris vont apparaître sur ces 3 lignes.
+Ces débris vont s'approcher doucement du vaisseau, jusqu'à la portée optimale.
+Lorsqu'ils y sont, il suffira d'appuyer sur le bouton correspondant pour le détruire !
+Allez, c'est à vous !
+#tutorial_bad_2
+Le système est assez exigeant sur le timing mais ne vous en faites pas, ça vient avec l'entraînement !
+Passons sur les nuages de débris.
+Pour dégager les nuages, il faut rester appuyé sur le bouton correspondant,
+Et quand le bout du trait arrive dans la zone, relâchez le bouton !
+#tutorial_good_2
+Bravo ! Je savais que vous étiez un pilote hors-pair !
+Passons sur les nuages de débris.
+Pour dégager les nuages, il faut rester appuyé sur le bouton correspondant,
+Et quand le bout du trait arrive dans la zone, relâchez le bouton !
+#tutorial_3
+Bien, je-
+[y:ship]ALERTE, ESQUIVE IMMINENTE REQUISE
+[y:tutobot]Un débris indestructible est sur la trajectoire, on va devoir l'esquiver !
+Donnez un coup de joystick à gauche ou a droite au bon moment pour l'esquiver !
+
+#tutorial_bad_4
+[y:ship]FAUSSE ALERTE.
+...Il faut peut-être envoyer ce vaisseau aux révisions...
+#tutorial_good_4
+YES !
+Vous avez beaucoup de potentiel ! Magnifique esquive.
+#tutorial_5
+Bon ! Je pense que nous avons fait le tour des fonctionnalités du vaisseau.
+Si jamais vous avez besoin de vous remémorer quoi que ce soit, n'hésitez pas à me demander !
+Je serais toujours ravie de vous accompagner dans vos missions !
+[!:EndSong]

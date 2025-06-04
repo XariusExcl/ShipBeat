@@ -30,7 +30,7 @@ public struct DialogueEvent
 
 public class LocalisationFileParser : MonoBehaviour
 {
-    static TextAsset[] textAssets;
+    static TextAsset localisationFile;
     static int keyCount = 0;
     static string keyName;
     static DialogueEvent currentDialogueEvent;
@@ -47,23 +47,21 @@ public class LocalisationFileParser : MonoBehaviour
         };
         keyCount = 0;
         keyName = string.Empty;
-        textAssets = Resources.LoadAll<TextAsset>($"Localisation/{language}");
-        UnityEngine.Debug.Assert(textAssets.Length > 0, $"No localisation files found for language: {language}.");
+        localisationFile = Resources.Load<TextAsset>($"Localisation/{language}");
+        if (localisationFile == null)
+        {
+            UnityEngine.Debug.LogError($"Localisation file not found for language: {language}.");
+            return;
+        }
 
 #if DEBUG
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
 #endif
-        foreach (TextAsset textAsset in textAssets)
-        {
-            if (textAsset != null)
-                ParseFile(textAsset);
-            else
-                UnityEngine.Debug.LogWarning("Text asset is null, skipping.");
-        }
+        ParseFile(localisationFile);
 #if DEBUG
         stopwatch.Stop();
-        UnityEngine.Debug.Log($"LocalisationFileParser: {textAssets.Length} files, {keyCount} keys done in {stopwatch.Elapsed.TotalMilliseconds:F3}ms.");
+        UnityEngine.Debug.Log($"LocalisationFileParser: {keyCount} keys done in {stopwatch.Elapsed.TotalMilliseconds:F3}ms.");
 #endif
     }
 
@@ -73,7 +71,7 @@ public class LocalisationFileParser : MonoBehaviour
 
         foreach (string line in lines)
         {
-            if (string.IsNullOrEmpty(line)) return; // Skip empty lines
+            if (string.IsNullOrEmpty(line)) continue; // Skip empty lines
 
             switch (line[0])
             {

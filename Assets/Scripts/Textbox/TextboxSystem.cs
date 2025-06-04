@@ -114,10 +114,12 @@ public class TextboxSystem : MonoBehaviour
 	bool isColor = false;
 	int colorStartIndex = 0;
 
-	IEnumerator TypeSentence(string sentence, float shortDelay = .016f, float longDelay = .033f)
+	IEnumerator TypeSentence(string sentence, float shortDelay = .02f, float longDelay = .04f)
 	{
 		typing = true;
 		isItalics = isColor = false;
+		yield return new WaitForEndOfFrame(); // Prevents insta-skipping dialogue after button press
+		skip = false;
 
 		char[] punctuation = { ',', '.', '?', '!' };
 		StringBuilder textboxTextSB = new StringBuilder();
@@ -161,21 +163,11 @@ public class TextboxSystem : MonoBehaviour
 						case "e": // Emote
 							yapper?.SetEmote(effect[1]);
 							break;
-						case "f": // Face direction
-							if (effect[1] == "camera")
-								yapper.FacePoint();
-							else if (effect.Length == 4)
-								yapper.FacePoint(new Vector3(float.Parse(effect[1]), float.Parse(effect[2]), float.Parse(effect[3])));
-							else
-								Debug.LogWarning("Invalid face point effect: " + effectString);
+						case "o": // Orientation direction
+							yapper.UpdateBodyTarget(effect[1] ?? "");
 							break;
 						case "l": // Look at
-							if (effect[1] == "camera")
-								yapper.LookAt();
-							else if (effect.Length == 4)
-								yapper.LookAt(new Vector3(float.Parse(effect[1]), float.Parse(effect[2]), float.Parse(effect[3])));
-							else
-								Debug.LogWarning("Invalid look at effect: " + effectString);
+							yapper.UpdateEyesTarget(effect[1] ?? "");
 							break;
 						case "y" // Set Yapper
 							when effect[1].Length > 0:
@@ -194,6 +186,13 @@ public class TextboxSystem : MonoBehaviour
 								isColor = true;
 								colorStartIndex = i;
 							}
+							break;
+						case "k": // String key
+							// TODO: Implement string key replacement
+							Debug.LogWarning("String key replacement not implemented yet for: " + effect[1]);
+							break;
+						case "!": // Event
+							DialogueEvents.TriggerEvent(effect[1]);
 							break;
 						default:
 							Debug.LogWarning("Unsupported textbox effect: \"" + effect[0] + "\".");

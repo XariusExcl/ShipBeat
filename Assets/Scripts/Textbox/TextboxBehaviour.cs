@@ -93,15 +93,15 @@ public class TextboxBehaviour : MonoBehaviour
     public void SetBgColor(Color color = default)
     {
         if (color == default)
-        {
             color = new Color(.0f, .9f, 1f, 1f);
-        }
+
         backgroundImage.color = color;
     }
 
     public void UpdateYapper(GameObject newYapper)
     {
         yapper = newYapper;
+        SetBgColor(yapper.GetComponent<YapperBehaviour>().Color);
     }
 
 

@@ -75,3 +75,4 @@ crashlytics-build.properties
 Assets/StreamingAssets/Songs*
 # Sorry, can't upload those!
 Assets/Resources/Audio
+Assets/Resources/Songs
