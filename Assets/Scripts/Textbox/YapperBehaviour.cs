@@ -47,6 +47,7 @@ public class YapperBehaviour : MonoBehaviour
 
         audioSource.clip = voice;
         audioSource.volume = volume;
+        audioSource.playOnAwake = false;
     }
 
     public void UpdateBodyTarget(string targetName = "camera")
@@ -72,7 +73,10 @@ public class YapperBehaviour : MonoBehaviour
     public void Speak()
     {
         if (voice != null)
+        {
+            audioSource.pitch = Random.Range(0.9f, 1.1f); // Random pitch variation
             audioSource.PlayOneShot(voice, volume);
+        }
     }
 
     public void SetEmote(string emote)

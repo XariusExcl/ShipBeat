@@ -42,7 +42,7 @@ public class ResultScreenUI : MonoBehaviour
 
     void CheckInput() {
         if (Input.GetButtonDown("P1_B1")) {
-            SceneManager.LoadScene("SongSelect");
+            GameUIManager.ReturnToSongSelect();
         }
     }
 }

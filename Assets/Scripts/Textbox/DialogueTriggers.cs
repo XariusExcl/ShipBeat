@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DialogueEvents : MonoBehaviour
+public class DialogueTriggers : MonoBehaviour
 {
     public static UnityEvent StartGame = new UnityEvent();
     public static UnityEvent StartTutorial = new UnityEvent();

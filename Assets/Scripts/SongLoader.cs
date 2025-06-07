@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using System.Linq;
 using System.Collections;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -30,14 +31,18 @@ public class SongLoader : MonoBehaviour
         EditorApplication.playModeStateChanged += OnExitPlayMode;
 #endif    
 
-        if (Instance != null && Instance != this) {
+        Debug.Log("SongLoader Awake");
+
+        if (Instance != null && Instance != this)
+        {
             Destroy(gameObject);
             return;
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
-        if (UseDebugSong) {
+        if (UseDebugSong)
+        {
             SongFolderReader.ClearCache();
             Init(new SongInfo { ChartFile = Application.streamingAssetsPath + DebugSongPath, AudioFile = Application.streamingAssetsPath + DebugAudioPath });
         }
@@ -109,7 +114,9 @@ public class SongLoader : MonoBehaviour
     }
 
     void GameStart() {
-        Debug.Log("Game Start");
+        if (!UseDebugSong)
+            GameUIManager.DontShowTransitionDoors();
+            
         Scoring.Reset();
         Scoring.NoteCount = LoadedSong.Notes.Length;
         LaneManager.SetLaneCount(LoadedSong.Info.LaneCount);

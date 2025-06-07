@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4578000291675850835}
   - component: {fileID: 1497172324860679477}
   - component: {fileID: 7727860734101395134}
+  - component: {fileID: 1808426847652795921}
   m_Layer: 5
   m_Name: Textbox
   m_TagString: Untagged
@@ -66,7 +67,7 @@ MonoBehaviour:
   m_Color: {r: 0, g: 0.9869609, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -97,6 +98,19 @@ MonoBehaviour:
   - {fileID: 177309605490340273}
   tailTransform: {fileID: 9164254235410102703}
   textboxText: {fileID: 7970007251986874465}
+--- !u!114 &1808426847652795921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202276444018042552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &5723370900422673244
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,13 +272,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9050682083382558115}
-  m_LocalRotation: {x: -0, y: -0, z: -0.99997526, w: 0.007033936}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1306609046563163124}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -179.194}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -79.4, y: -0.29999924}
@@ -294,7 +308,7 @@ MonoBehaviour:
   m_Color: {r: 0, g: 0.9903989, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

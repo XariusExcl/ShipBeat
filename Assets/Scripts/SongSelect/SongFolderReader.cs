@@ -39,8 +39,9 @@ public class SongFolderReader : MonoBehaviour
 
     public static int Count { get { return SongInfos.Count; } private set{} }
 
-    void Start() {
-# if UNITY_EDITOR
+    void Start()
+    {
+#if UNITY_EDITOR
         EditorApplication.playModeStateChanged += OnExitPlayMode;
 # endif
         if (!IsDataLoaded) {
@@ -48,7 +49,8 @@ public class SongFolderReader : MonoBehaviour
         }
     }
 
-    void Update() {
+    void Update()
+    {
         if (IsDataLoaded && !dataLoadedNotified)
         {
             dataLoadedNotified = true;

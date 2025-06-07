@@ -47,7 +47,7 @@ public class TextboxSystem : MonoBehaviour
 
 	void Update()
 	{
-		if (!Auto && Input.GetButtonDown("P1_B1"))
+		if (instance.goTextbox.activeSelf && !Auto && Input.GetButtonDown("P1_B1"))
 		{
 			if (typing)
 				skip = true;
@@ -62,11 +62,11 @@ public class TextboxSystem : MonoBehaviour
 		Auto = auto;
 
 		Textboxes.Clear();
-		if (! instance.goTextbox.activeSelf)
-		{
+		if (!instance.goTextbox.activeSelf) {
 			instance.goTextbox.SetActive(true);
 			instance.textboxBehaviour.Initialize();
 		}
+		instance.textboxBehaviour.DisableAllButtons();
 
 		if (!LocalisationFileParser.textLibrary.ContainsKey(dialogueId))
 		{
@@ -197,7 +197,7 @@ public class TextboxSystem : MonoBehaviour
 							Debug.LogWarning("String key replacement not implemented yet for: " + effect[1]);
 							break;
 						case "!": // Event
-							DialogueEvents.TriggerEvent(effect[1]);
+							DialogueTriggers.TriggerEvent(effect[1]);
 							break;
 						case "ts": // Textbox size
 							if (effect.Length >= 3 && float.TryParse(effect[1], out float width) && float.TryParse(effect[2], out float height))

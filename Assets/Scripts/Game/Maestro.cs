@@ -39,7 +39,8 @@ public class Maestro : MonoBehaviour
         currentTimingPoint = TimingPoints[0];
     }
 
-    void Start() {
+    void Start()
+    {
         SongTime = 0;
         StartTime = (float)AudioSettings.dspTime + StartDelay;
         InvokeRepeating("CheckCalibration", 3, 3);

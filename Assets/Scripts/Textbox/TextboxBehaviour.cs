@@ -21,7 +21,7 @@ public class TextboxBehaviour : MonoBehaviour
     [SerializeField] Transform tailTransform;
     [SerializeField] TMP_Text textboxText;
     EventSystem eventSystem;
-    Vector2 size = new Vector2(250f, 80f);
+    Vector2 size = new Vector2(250f, 46f);
 
     void Awake()
     {

@@ -40,7 +40,7 @@ public class TutorialStoryboard : MonoBehaviour
             if (Scoring.Percentage < 75f)
                 TextboxSystem.StartDialogue("tutorial_bad_2", true);
             else
-                TextboxSystem.StartDialogue("tutorial_good_2"); } },
+                TextboxSystem.StartDialogue("tutorial_good_2", true); } },
         new() { bar = 26, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
         new() { bar = 28, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
         new() { bar = 30, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
@@ -52,7 +52,7 @@ public class TutorialStoryboard : MonoBehaviour
         new() { bar = 46, beat = 0, action = () => {
             TextboxSystem.DisplayNextSentence();
             missCountBeforeSlam = Scoring.Misses; } },
-        new() { bar = 48, beat = 0, action = () => {
+        new() { bar = 47, beat = 3, action = () => {
             if (missCountBeforeSlam < Scoring.Misses )
                 TextboxSystem.StartDialogue("tutorial_bad_4", true);
             else
@@ -82,6 +82,7 @@ public class TutorialStoryboard : MonoBehaviour
             Destroy(friendlyship);
         commandsPanel.SetActive(false);
         noteExplain.SetActive(false);
+        Maestro.StoryboardEnded = false;
     }
 
     void Update()
@@ -105,9 +106,14 @@ public class TutorialStoryboard : MonoBehaviour
 
     void NewBeat()
     {
-        if (triggerIndex >= triggers.Count) return; // Set some bool to tell the storyboard is done
+        if (triggerIndex >= triggers.Count)
+        {
+            Maestro.StoryboardEnded = true;
+            return; // Set some bool to tell the storyboard is done
+        }
 
-        while (triggers[triggerIndex].bar == bar && triggers[triggerIndex].beat == beat)
+
+        while (triggerIndex < triggers.Count && triggers[triggerIndex].bar == bar && triggers[triggerIndex].beat == beat)
         {
             triggers[triggerIndex].action.Invoke();
             triggerIndex++;

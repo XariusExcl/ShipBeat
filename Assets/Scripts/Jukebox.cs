@@ -26,6 +26,7 @@ public class Jukebox : MonoBehaviour
 
     public static void LoadSongAndPlay(string path, float setPlaybackPosition = 0)
     {
+        ClearQueue();
         Instance.StartCoroutine(SongFolderReader.FetchAudioFile(path, (result) =>
         {
             if (result.result != UnityWebRequest.Result.Success)
@@ -50,6 +51,7 @@ public class Jukebox : MonoBehaviour
     /// </summary>
     public static void PlayScheduled(float delay)
     {
+        ClearQueue();
         Instance.audioSource.PlayScheduled(AudioSettings.dspTime + delay);
     }
 
@@ -144,5 +146,12 @@ public class Jukebox : MonoBehaviour
             NowPlaying = nextClip.name;
             Play();
         }
+    }
+
+    public static void ClearQueue()
+    {
+        UpNext.Clear();
+        UpNextLooping.Clear();
+        Instance.audioSource.loop = false;
     }
 }
