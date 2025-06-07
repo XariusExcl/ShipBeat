@@ -14,9 +14,10 @@ public class Maestro : MonoBehaviour
     static TimingPoint currentEffectPoint = new TimingPoint();
 
     // Song time and state
-    public static int LaneSpeed = 8; // Note time on the lane is 10 / LaneSpeed, i.e 8 = 1250ms
+    public static int LaneSpeed = 5; // Note time on the lane is 10 / LaneSpeed, i.e 8 = 1250ms
     public static bool SongStarted = false;
     public static bool SongEnded = false;
+    public static bool StoryboardEnded = false;
     public static float SongTime;
     public static int Bar;
     public static int Beat;
@@ -48,7 +49,7 @@ public class Maestro : MonoBehaviour
         SongTime = (float)AudioSettings.dspTime - StartTime;
 
         if(SongStarted && !SongEnded) {
-            if (SongTime > SongLoader.LoadedSong.Info.Length + SongLoader.LoadedSong.Info.SongStart + 0.3f) {
+            if (StoryboardEnded && SongTime > SongLoader.LoadedSong.Info.Length + SongLoader.LoadedSong.Info.SongStart + 0.3f) {
                 SongEnded = true;
                 Invoke("EndSong", 1.5f);
                 Debug.Log("Song Ended");

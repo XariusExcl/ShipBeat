@@ -6,13 +6,13 @@ using UnityEditor.Build.Reporting;
 
 public class BuildVersionProcessor : IPreprocessBuildWithReport
 {
+    const string VERSION = "0.2";
     public int callbackOrder => 0;
 
     public void OnPreprocessBuild(BuildReport report)
     {
-        string version = PlayerSettings.bundleVersion;
         string buildNumber = DateTime.Now.ToString("yyyyMMdd.HHmm");
-        string fullVersion = $"{version}.{buildNumber}";
+        string fullVersion = $"{VERSION}.{buildNumber}";
 
         PlayerSettings.bundleVersion = fullVersion;
         Debug.Log($"Build version set to: {fullVersion}");
@@ -21,9 +21,8 @@ public class BuildVersionProcessor : IPreprocessBuildWithReport
     [MenuItem("Build/Set Version")]
     public static void SetVersion()
     {
-        string version = PlayerSettings.bundleVersion;
         string buildNumber = DateTime.Now.ToString("yyyyMMdd.HHmm");
-        string fullVersion = $"{version}.{buildNumber}";
+        string fullVersion = $"{VERSION}.{buildNumber}";
 
         PlayerSettings.bundleVersion = fullVersion;
         Debug.Log($"Build version set to: {fullVersion}");

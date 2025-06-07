@@ -28,38 +28,35 @@ $guest_tutoask_howdareyou Comment oses-tu...
 [e:open]Suivez-moi, Nous allons faire un petit vol d'entraînement.[e:handsConverse]
 [!:StartTutorial]
 #tutorial_1
-[s:i][c:#aaaaaa]*ksssht*[c:#aaaaaa][s:] Vous me reçevez ?___ Je vous contacte depuis le [s:i]Mothership.[s:]
-Bienvenue sur Elite Beat Airlines !___ Je suis votre commandante de bord, TUT-0 ! Hihi...
-Passons ensemble sur les commandes du vaisseau, pour mener à bien vos futures missions.
-
-Devant vous se situe le LIDAR de détection. Des débris vont apparaître sur ces 3 lignes.
-Ces débris vont s'approcher doucement du vaisseau, jusqu'à la portée optimale.
-Lorsqu'ils y sont, il suffira d'appuyer sur le bouton correspondant pour le détruire !
-Allez, c'est à vous !
+[ts:200:46][tp:0:50][y:tutobot][s:i][c:#aaaaaa]*ksssht*[c:#ffffff][s:] Vous me reçevez ?___ Je vous contacte depuis le [s:i]Mothership.[s:]
+[e:smile][e:happyWag]Bienvenue sur [s:i]Elite Beat Airlines[s:] !___ Je suis votre commandante de bord,___ TUT-0 !___ Hihi...
+[e:open][e:idleWag]Regardons ensemble sur les commandes du vaisseau.
+[e:handsConverse]Des débris vont apparaître sur le LIDAR, juste ici :
+[e:handsTogether]Pour les détruire, il faut appuyer sur le bon bouton, au bon moment !
+Allez, c'est à vous ![e:handsIdle]
 #tutorial_bad_2
-Le système est assez exigeant sur le timing mais ne vous en faites pas, ça vient avec l'entraînement !
-Passons sur les nuages de débris.
+[e:handsIdle][e:half]C'est un timing a avoir, mais ça vient avec l'entraînement !
+[e:open]Passons sur les nuages de débris.
 Pour dégager les nuages, il faut rester appuyé sur le bouton correspondant,
 Et quand le bout du trait arrive dans la zone, relâchez le bouton !
 #tutorial_good_2
-Bravo ! Je savais que vous étiez un pilote hors-pair !
-Passons sur les nuages de débris.
+[e:handsClap][e:smile]Bravo ! Je savais que vous étiez un pilote hors-pair !
+[e:handsIdle][e:open]Passons sur les nuages de débris.
 Pour dégager les nuages, il faut rester appuyé sur le bouton correspondant,
 Et quand le bout du trait arrive dans la zone, relâchez le bouton !
 #tutorial_3
-Bien, je-
-[y:ship]ALERTE, ESQUIVE IMMINENTE REQUISE
-[y:tutobot]Un débris indestructible est sur la trajectoire, on va devoir l'esquiver !
+[e:handsTogether][e:open]Bien, je pense que nous-
+[ts:120:34][tp:100:-50][y:ship]ALERTE, ESQUIVE IMMINENTE REQUISE.
+[ts:200:46][tp:0:50][y:tutobot][e:handsHoldHead][e:point]Un débris indestructible est sur la trajectoire, on va devoir l'esquiver !
 Donnez un coup de joystick à gauche ou a droite au bon moment pour l'esquiver !
-
 #tutorial_bad_4
-[y:ship]FAUSSE ALERTE.
-...Il faut peut-être envoyer ce vaisseau aux révisions...
+[ts:120:34][tp:100:-50][e:point][y:ship]FAUSSE ALERTE.
+[ts:200:46][tp:0:50][y:tutobot][e:half]...Il faut peut-être envoyer ce vaisseau aux révisions...
 #tutorial_good_4
-YES !
-Vous avez beaucoup de potentiel ! Magnifique esquive.
+[e:inequal][e:handsClap]YES !
+[e:open][e:handsIdle]Vous avez beaucoup de potentiel ! Magnifique esquive.
 #tutorial_5
-Bon ! Je pense que nous avons fait le tour des fonctionnalités du vaisseau.
+[e:open][e:handsIdle]Bon ! Je pense que nous avons fait le tour des fonctionnalités du vaisseau.
 Si jamais vous avez besoin de vous remémorer quoi que ce soit, n'hésitez pas à me demander !
-Je serais toujours ravie de vous accompagner dans vos missions !
+[e:smile][e:happyWag]Je serais toujours ravie de vous accompagner dans vos missions !
 [!:EndSong]

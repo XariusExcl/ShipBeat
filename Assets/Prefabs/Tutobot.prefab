@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6684153941944645222}
+  - component: {fileID: 4361442981248600800}
   m_Layer: 0
   m_Name: LookTarget
   m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -31,6 +32,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1180883374914271098}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4361442981248600800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130646045233289352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ed4fe242ba6d74686fb98fec0cc345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: -0.6, z: 0}
 --- !u!1 &7686138836724111206
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,6 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6071630874220806089}
+  - component: {fileID: 8295179150999481458}
   m_Layer: 0
   m_Name: BodyTarget
   m_TagString: Untagged
@@ -96,6 +111,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1180883374914271098}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8295179150999481458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9064804238169875157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ed4fe242ba6d74686fb98fec0cc345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1001 &2053109441686853623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -108,6 +136,18 @@ PrefabInstance:
       propertyPath: head
       value: 
       objectReference: {fileID: 3868692617904777932}
+    - target: {fileID: 7365247773022454467, guid: f2bae41b676707b429590e0462ab12a9, type: 3}
+      propertyPath: bodyTarget
+      value: 
+      objectReference: {fileID: 8295179150999481458}
+    - target: {fileID: 7365247773022454467, guid: f2bae41b676707b429590e0462ab12a9, type: 3}
+      propertyPath: eyesTarget
+      value: 
+      objectReference: {fileID: 4361442981248600800}
+    - target: {fileID: 8033551066670020444, guid: f2bae41b676707b429590e0462ab12a9, type: 3}
+      propertyPath: lookTarget
+      value: 
+      objectReference: {fileID: 4361442981248600800}
     - target: {fileID: 8033551066670020444, guid: f2bae41b676707b429590e0462ab12a9, type: 3}
       propertyPath: lookAtTarget
       value: 
@@ -211,6 +251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e921d86097f171b41a02dcfa9de9e3b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookAtTarget: {fileID: 6071630874220806089}
+  lookTarget: {fileID: 8295179150999481458}
   IsLookingAtTarget: 1
   disableSlerp: 0

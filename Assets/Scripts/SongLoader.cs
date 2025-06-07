@@ -51,7 +51,10 @@ public class SongLoader : MonoBehaviour
 
     void OnFileFetched(FetchResult fetchResult) {
         if (fetchResult.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError($"Error fetching file: {fetchResult.result}");
             return;
+        }
 
         TextAsset file = fetchResult.fetchedObject as TextAsset;
         SongValidationResult result = OsuFileParser.ParseFile(file);

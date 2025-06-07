@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LookTarget : MonoBehaviour
 {
-    Transform trackedObject;
+    [SerializeField] Transform trackedObject;
     [SerializeField] Vector3 offset = Vector3.zero;
     public void Track(string name = "camera")
     {

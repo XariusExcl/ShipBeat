@@ -8,8 +8,8 @@ using System.Collections.Generic;
 
 public class Jukebox : MonoBehaviour
 {
-    static Queue<AudioClip> UpNext;
-    static Queue<bool> UpNextLooping;
+    static Queue<AudioClip> UpNext = new Queue<AudioClip>();
+    static Queue<bool> UpNextLooping = new Queue<bool>();
     public static string NowPlaying = "";
     public static Jukebox Instance;
     AudioSource audioSource;
@@ -112,13 +112,12 @@ public class Jukebox : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         Instance = this;
         audioSource = GetComponent<AudioSource>();
+        UpNext ??= new Queue<AudioClip>();
+        UpNextLooping ??= new Queue<bool>();
     }
 
     public static void QueueSong(AudioClip clip, bool looping = false)
     {
-        UpNext ??= new Queue<AudioClip>();
-        UpNextLooping ??= new Queue<bool>();
-
         UpNext.Enqueue(clip);
         UpNextLooping.Enqueue(looping);
     }

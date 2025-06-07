@@ -22,6 +22,7 @@ public class TextboxSystem : MonoBehaviour
 	// Dialogue variables
 	static Queue<Textbox> Textboxes;
 	static Textbox currentTextbox;
+	static bool Auto = false;
 	[HideInInspector] public static List<DialogueChoice> choices = new List<DialogueChoice>();
 	[HideInInspector] public static string fullText;
 	bool typing = false;
@@ -46,7 +47,7 @@ public class TextboxSystem : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetButtonDown("P1_B1"))
+		if (!Auto && Input.GetButtonDown("P1_B1"))
 		{
 			if (typing)
 				skip = true;
@@ -55,13 +56,17 @@ public class TextboxSystem : MonoBehaviour
 		}
 	}
 
-	public static void StartDialogue(string dialogueId)
+	public static void StartDialogue(string dialogueId, bool auto = false)
 	{
 		// TODO: Set some UI variable to true to lock everything else but the dialogue;
+		Auto = auto;
 
 		Textboxes.Clear();
-		instance.goTextbox.SetActive(true);
-		instance.textboxBehaviour.Initialize();
+		if (! instance.goTextbox.activeSelf)
+		{
+			instance.goTextbox.SetActive(true);
+			instance.textboxBehaviour.Initialize();
+		}
 
 		if (!LocalisationFileParser.textLibrary.ContainsKey(dialogueId))
 		{
@@ -194,6 +199,22 @@ public class TextboxSystem : MonoBehaviour
 						case "!": // Event
 							DialogueEvents.TriggerEvent(effect[1]);
 							break;
+						case "ts": // Textbox size
+							if (effect.Length >= 3 && float.TryParse(effect[1], out float width) && float.TryParse(effect[2], out float height))
+							{
+								instance.textboxBehaviour.SetSize(new Vector2(width, height));
+								sentence = WrapText(currentTextbox.Text, instance.textboxBehaviour.GetMaxLineLength()); // recalculate text wrapping
+								length = sentence.Length;
+							}
+							else
+								Debug.LogWarning("Textbox size effect requires two float parameters: width and height.");
+							break;
+						case "tp": // Textbox position
+							if (effect.Length >= 3 && float.TryParse(effect[1], out float x) && float.TryParse(effect[2], out float y))
+								instance.textboxBehaviour.SetPosition(new Vector2(x, y));
+							else
+								Debug.LogWarning("Textbox position effect requires two float parameters: x and y.");
+							break;
 						default:
 							Debug.LogWarning("Unsupported textbox effect: \"" + effect[0] + "\".");
 							break;
@@ -278,7 +299,7 @@ public class TextboxSystem : MonoBehaviour
 		foreach (var word in words)
 		{
 			// Ignore commands in word length calculation
-			int wordLength = Regex.Replace(word, @"\[\S*?:\S*?\]", "").Length;
+			int wordLength = Regex.Replace(word, @"(\[\S*?:\S*?\])|(_+)", "").Length;
 			if (lineLength + wordLength > maxWidth)
 			{
 				sb.AppendLine();
