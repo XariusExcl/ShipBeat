@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class MainMenuNavigation : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class MainMenuNavigation : MonoBehaviour
     [SerializeField] private TransitionDoors transitionDoors;
     [SerializeField] private AudioClip introMusic;
     [SerializeField] private AudioClip introMusicLoop;
+
+    [SerializeField] string TutorialSongPath;
+    [SerializeField] string TutorialAudioPath;
 
     void Start()
     {
@@ -64,7 +68,7 @@ public class MainMenuNavigation : MonoBehaviour
     public void StartTutorial()
     {
         transitionDoors.CloseDoor();
-        Invoke("LoadTutorial", 1f);
+        LoadTutorial();
     }
 
     public void StartGame()
@@ -74,6 +78,38 @@ public class MainMenuNavigation : MonoBehaviour
     }
 
     void LoadTutorial()
+    {
+        Jukebox.ClearQueue();
+        GameObject songLoader = Instantiate(new GameObject(), Vector3.zero, Quaternion.identity);
+        songLoader.name = "SongLoader";
+        SongLoader songLoaderComponent = songLoader.AddComponent<SongLoader>();
+#if UNITY_EDITOR
+        songLoaderComponent.Init(new SongInfo
+        {
+            ChartFile = Application.streamingAssetsPath + TutorialSongPath,
+            AudioFile = Application.streamingAssetsPath + TutorialAudioPath
+        });
+#else
+        songLoaderComponent.Init(new SongInfo
+        {
+            ChartFile = "/ShipBeat/StreamingAssets" + TutorialSongPath,
+            AudioFile = "/ShipBeat/StreamingAssets" + TutorialAudioPath
+        });
+#endif
+    // No, I don't like this either.
+
+        StartCoroutine(WaitForFileLoad());
+    }
+
+    IEnumerator WaitForFileLoad()
+    {
+        while (!SongLoader.IsFileLoaded && !SongLoader.IsAudioLoaded)
+            yield return null;
+
+        Invoke("LoadGameScene", 1f);
+    }
+
+    void LoadGameScene()
     {
         Jukebox.ClearQueue();
         SceneManager.LoadScene("Game");

@@ -60,7 +60,6 @@ public class SongCaroussel : MonoBehaviour
     {
         if (SongSelectReadyMenu.IsShown || SongSelectReadyMenu.IsValidated || !SongFolderReader.IsDataLoaded) return;
 
-        // TODO: Implement a key repeat when axis is held down after a certain time.
         if (lastHorizontal != Input.GetAxis("P1_Vertical"))
         {
             lastHorizontal = Input.GetAxis("P1_Vertical");

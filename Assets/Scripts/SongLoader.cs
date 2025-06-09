@@ -14,8 +14,8 @@ using UnityEditor;
 public class SongLoader : MonoBehaviour
 {
     [SerializeField] bool UseDebugSong = false;
-    [SerializeField] string DebugSongPath = "\\Songs\\Crazy Shuffle\\debug.osu";
-    [SerializeField] string DebugAudioPath = "\\Songs\\Crazy Shuffle\\audio.mp3";
+    [SerializeField] string DebugSongPath;
+    [SerializeField] string DebugAudioPath;
 
 
     const float LookAhead = 2f;
@@ -29,10 +29,7 @@ public class SongLoader : MonoBehaviour
     {
 #if UNITY_EDITOR
         EditorApplication.playModeStateChanged += OnExitPlayMode;
-#endif    
-
-        Debug.Log("SongLoader Awake");
-
+#endif
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -65,14 +62,17 @@ public class SongLoader : MonoBehaviour
         SongValidationResult result = OsuFileParser.ParseFile(file);
         if (result.Valid == false) {
             Debug.LogError($"Error parsing file: {result.Message}");
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("SongSelect");
             return;
         }
         LoadedSong = result.Data;
-        if (!UseDebugSong) {
+        /*
+        if (!UseDebugSong)
+        {
             LoadedSong.Info = preloadedSongInfo;
             LoadedSong.Info.AudioFile = preloadedSongInfo.AudioFile;
         }
+        */
 
         IsFileLoaded = true;
     }
@@ -85,7 +85,7 @@ public class SongLoader : MonoBehaviour
         AudioClip audioClip = fetchResult.fetchedObject as AudioClip;
         if (audioClip == null) {
             Debug.LogError("AudioClip is null");
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("SongSelect");
             return;
         }
         Jukebox.LoadSong(audioClip);
@@ -97,7 +97,7 @@ public class SongLoader : MonoBehaviour
         if (scene.name == "Game") {
             if (preloadedSongInfo.ChartFile == null) {
                 Debug.LogError("No file path set for song loader");
-                SceneManager.LoadScene("Menu");
+                SceneManager.LoadScene("SongSelect");
                 return;
             }
             StartCoroutine(WaitForFileLoad());
@@ -114,9 +114,6 @@ public class SongLoader : MonoBehaviour
     }
 
     void GameStart() {
-        if (!UseDebugSong)
-            GameUIManager.DontShowTransitionDoors();
-            
         Scoring.Reset();
         Scoring.NoteCount = LoadedSong.Notes.Length;
         LaneManager.SetLaneCount(LoadedSong.Info.LaneCount);
@@ -147,6 +144,8 @@ public class SongLoader : MonoBehaviour
     void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        IsFileLoaded = false;
+        IsAudioLoaded = false;
     }
 
 #if UNITY_EDITOR

@@ -34,11 +34,15 @@ public class LocalisationFileParser : MonoBehaviour
     static int keyCount = 0;
     static string keyName;
     static DialogueEvent currentDialogueEvent;
+    public static string loadedLanguage = "";
     public static Dictionary<string, DialogueEvent> textLibrary = new Dictionary<string, DialogueEvent>();
     static readonly string[] NewLineChars = { "\r\n", "\r", "\n" };
 
     public static void LoadLanguage(string language)
     {
+        if (language == loadedLanguage)
+            return;
+
         textLibrary.Clear();
         currentDialogueEvent = new DialogueEvent
         {
@@ -95,7 +99,7 @@ public class LocalisationFileParser : MonoBehaviour
                     dc.NextId = parts[0].Substring(1);
                     dc.Text = parts[1];
                     currentDialogueEvent.Choices.Add(dc);
-                break;
+                    break;
                 case '/': // Comment
                     break;
                 default:
@@ -108,8 +112,13 @@ public class LocalisationFileParser : MonoBehaviour
                     break;
             }
         }
-        
+
         // Add last key dialogue of file
         textLibrary.Add(keyName, currentDialogueEvent);
+    }
+
+    void OnApplicationQuit()
+    {
+        loadedLanguage = string.Empty;
     }
 }

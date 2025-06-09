@@ -49,7 +49,6 @@ public class SongSelectReadyMenu : MonoBehaviour
             IsValidated = true;
             SFXManager.PlaySelectSound();
             SongSelect.CreateSongLoader();
-            // TODO : UI transition
             transitionDirector.Play();
         }
     }
