@@ -52,6 +52,8 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: 622cf1192df0fa5469e932884d3b6712, type: 2}
   - {fileID: 7400000, guid: e3566ba192c95a64ebecc4fd34748646, type: 2}
+  - {fileID: 7400000, guid: f895fc35a39499740832acad10d940bc, type: 2}
+  - {fileID: 7400000, guid: 4b870b23eca74ae4eababb19a448dc38, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -69,7 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2464fe77820eb94996fdb5db643d500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialState: 0
+  doorL: {fileID: 4368283107598181473}
+  doorR: {fileID: 4498458020884767611}
 --- !u!1 &4368283107598181473
 GameObject:
   m_ObjectHideFlags: 0

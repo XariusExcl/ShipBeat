@@ -182,7 +182,7 @@ public class OsuFileParser
                     break;
                 }
             } catch (Exception e) {
-                UnityEngine.Debug.LogError($"{songInfo.Title}: Error parsing line {i+1}: {e.Message}{e.StackTrace}");
+                return new SongValidationResult { Valid = false, Message = $"Error parsing line {i+1}: {e.Message}", Data = songData };
             }
         }
         if (state != ParseState.Done)

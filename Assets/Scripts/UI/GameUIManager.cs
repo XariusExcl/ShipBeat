@@ -58,10 +58,4 @@ public class GameUIManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("SongSelect");
     }
-
-    public static void DontShowTransitionDoors()
-    {
-        Debug.Log("Transition doors will not be shown.");
-        Instance.transitionDoors.OpenInstantly();
-    }
 }

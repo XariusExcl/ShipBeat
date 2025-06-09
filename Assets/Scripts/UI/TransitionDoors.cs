@@ -8,23 +8,39 @@ public class TransitionDoors : MonoBehaviour
         Closed,
         Open
     }
+    static DoorState initialState = DoorState.Open;
 
     [SerializeField] GameObject doorL;
     [SerializeField] GameObject doorR;
 
     private Animation doorAnimation;
-    [SerializeField] private DoorState initialState = DoorState.Closed;
-    [SerializeField] public bool PlayOnAwake = true;
 
     void Awake()
     {
         doorAnimation = GetComponent<Animation>();
+        OnSceneLoaded();
+    }
 
-        if (PlayOnAwake)
-            if (initialState == DoorState.Closed)
-                doorAnimation.Play("TransitionDoorOpen");
-            else
-                doorAnimation.Play("TransitionDoorOpen");
+    void Start()
+    {
+        if (initialState == DoorState.Closed)
+        {
+            doorAnimation.Play("TransitionDoorOpen");
+            initialState = DoorState.Open;
+        }
+    }
+
+    void OnSceneLoaded()
+    {
+        switch (initialState)
+        {
+            case DoorState.Closed:
+                doorAnimation.Play("DoorClosed");
+                break;
+            case DoorState.Open:
+                doorAnimation.Play("DoorOpened");
+                break;
+        }
     }
 
     public void OpenDoor()
@@ -33,6 +49,7 @@ public class TransitionDoors : MonoBehaviour
             return;
 
         doorAnimation.Play("TransitionDoorOpen");
+        initialState = DoorState.Open;
     }
 
     public void CloseDoor()
@@ -41,13 +58,14 @@ public class TransitionDoors : MonoBehaviour
             return;
 
         doorAnimation.Play("TransitionDoorClose");
+        initialState = DoorState.Closed;
     }
 
     public void OpenInstantly()
     {
         doorAnimation.Stop("TransitionDoorOpen");
         doorAnimation.Stop("TransitionDoorClose");
-        doorL.SetActive(false);
-        doorR.SetActive(false);
+        doorAnimation.Play("DoorOpened");
+        initialState = DoorState.Open;
     }
 }

@@ -15,7 +15,6 @@ public class BuildVersionProcessor : IPreprocessBuildWithReport
         string fullVersion = $"{VERSION}.{buildNumber}";
 
         PlayerSettings.bundleVersion = fullVersion;
-        Debug.Log($"Build version set to: {fullVersion}");
     }
 
     [MenuItem("Build/Set Version")]
@@ -25,6 +24,5 @@ public class BuildVersionProcessor : IPreprocessBuildWithReport
         string fullVersion = $"{VERSION}.{buildNumber}";
 
         PlayerSettings.bundleVersion = fullVersion;
-        Debug.Log($"Build version set to: {fullVersion}");
     }
 }

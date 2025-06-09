@@ -6,7 +6,6 @@ public class StoryboardLoader : MonoBehaviour
 
     void Start()
     {
-        Debug.Log($"Loading storyboard for song: {SongLoader.LoadedSong.Info.Title}");
         if (storyboardList == null || storyboardList.storyboards == null || storyboardList.storyboards.Count == 0)
         {
             Debug.LogWarning("No storyboards available to load.");
@@ -17,7 +16,8 @@ public class StoryboardLoader : MonoBehaviour
         foreach (KeyValue kv in storyboardList.storyboards)
         {
             if (kv.key.Equals(SongLoader.LoadedSong.Info.Title, System.StringComparison.OrdinalIgnoreCase))
-            {
+            { 
+                Debug.Log($"Loading storyboard for song: {SongLoader.LoadedSong.Info.Title}");
                 GameObject storyboardPrefab = kv.value;
                 if (storyboardPrefab != null)
                 {

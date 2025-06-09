@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -62,7 +63,6 @@ public class TutorialStoryboard : MonoBehaviour
         new() { bar = 52, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
         new() { bar = 54, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
         new() { bar = 56, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
-        new() { bar = 58, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
     };
 
     int triggerIndex = 0;
@@ -72,6 +72,11 @@ public class TutorialStoryboard : MonoBehaviour
     int beat = -1;
 
     void Start()
+    {
+        StartCoroutine(PrewarmModels());
+    }
+
+    void Init()
     {
         instance = this;
         bar = -1;
@@ -112,11 +117,22 @@ public class TutorialStoryboard : MonoBehaviour
             return; // Set some bool to tell the storyboard is done
         }
 
-
         while (triggerIndex < triggers.Count && triggers[triggerIndex].bar == bar && triggers[triggerIndex].beat == beat)
         {
             triggers[triggerIndex].action.Invoke();
             triggerIndex++;
         }
+    }
+
+    public IEnumerator PrewarmModels()
+    {
+        tutoBot.SetActive(true);
+        commandsPanel.SetActive(true);
+        noteExplain.SetActive(true);
+        yield return new WaitForEndOfFrame();
+        tutoBot.SetActive(false);
+        commandsPanel.SetActive(false);
+        noteExplain.SetActive(false);
+        Init();
     }
 }

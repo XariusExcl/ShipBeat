@@ -1,0 +1,62 @@
+// --------------------------------- longueur max de la textbox : 113 chars --------------------------------- //
+#debug_test
+[y:tutobot][l:camera][o:camera][e:handsIdle][e:happyWag]Hey, la localisation a fonctionné ![e:smile]
+[e:open][e:idleWag]Le [s:i][c:#00ffff]rich text[c:][s:] aussi. Cool !
+[e:handsShyPoint][e:closeAAA]Est-ce que les choix fonctionnent ?
+$debug_test_yes Oui !
+$debug_test_no Non...
+#debug_test_yes
+[e:smile][e:handsClap]Super !
+[e:open][e:handsIdle]
+#debug_test_no
+[e:closeAAA][e:handsIdle]Aww.... Attends,[e:half] quoi ?
+[e:open]
+#guest_tutoask
+[y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah! [e:smile] There you are agent._._.___[s:i][c:#00ffff][k:agentName][c:][s:] ?[e:open][o:camera]
+[e:idleWag]My apologies if I mispronounced your name? I can't find you in the pilot database._._.
+[e:half]Ehm_._._. Even though I know your piloting skills are more than confirmed._._.
+[e:handsShyPoint][e:closeAAA]Our fleet's ships might not have the same controls in the same places, behave differently and._._.
+Would you like a little... tutorial?
+$guest_tutoask_yes Why not!
+$guest_tutoask_howdareyou How dare you...
+#guest_tutoask_howdareyou
+[e:guruguru][e:handsHoldHead][e:tailShock]Awawawa... I didn't mean to offend you! I'm always available if you_._._. [e:closeAAA][e:handsIdle][e:idleWag]Change your mind.
+[e:open]Good luck!
+[!:StartGame]
+#guest_tutoask_yes
+[e:smile][e:handsClap]Perfect!_____ A little refresher[e:handsIdle][e:sleep] never hurts.
+[e:open]Follow me, let's do a little training flight.[e:handsConverse]
+[!:StartTutorial]
+#tutorial_1
+[ts:200:46][tp:0:50][y:tutobot][s:i][c:#aaaaaa]*ksssht*[c:#ffffff][s:] Do you read me?___ I'm contacting you from the [s:i]Mothership.[s:]
+[e:smile][e:happyWag]Welcome to [s:i]Elite Beat Airlines[s:]!___ I'm your flight commander,___ TUT-0!___ Hehe...
+[e:open][e:idleWag]Let's take a look at the ship's controls.
+[e:handsConverse]Debris will appear on the LIDAR, right here:
+[e:handsTogether]To destroy them, you need to press on the right button, at the right time!
+Okay! Now it's your turn![e:handsIdle]
+#tutorial_bad_2
+[e:handsIdle][e:half]It's all about timing, but it comes with practice!
+[e:open]Let's move on to debris clouds.
+To clear the clouds, you need to hold down the corresponding button,
+And when the end of the line reaches the zone, release the button!
+#tutorial_good_2
+[e:handsClap][e:smile]Well done! I knew you were an ace pilot!
+[e:handsIdle][e:open]Let's move on to debris clouds.
+To clear the clouds, you need to hold down the corresponding button,
+And when the end of the line reaches the zone, release the button!
+#tutorial_3
+[e:handsTogether][e:open]Well, I think we-
+[ts:120:34][tp:100:-50][y:ship]ALERT, IMMEDIATE DODGE REQUIRED.
+[ts:200:46][tp:0:50][y:tutobot][e:handsHoldHead][e:point]An indestructible debris is on the path, we need to dodge it!
+Nudge the joystick left or right at the right time to dodge it!
+#tutorial_bad_4
+[ts:120:34][tp:100:-50][e:point][y:ship]FALSE ALERT.
+[ts:200:46][tp:0:50][y:tutobot][e:half]...Maybe we should send this ship for maintenance...
+#tutorial_good_4
+[e:inequal][e:handsClap]YES!
+[e:open][e:handsIdle]You have a lot of potential! Great dodge.
+#tutorial_5
+[e:open][e:handsIdle]Alright! I think we've covered the ship's features.
+If you ever need to refresh your memory on anything, don't hesitate to ask me!
+[e:smile][e:happyWag]I'll always be happy to follow along on your missions!
+[!:EndSong]

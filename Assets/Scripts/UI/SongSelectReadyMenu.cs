@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.Playables;
@@ -28,7 +27,7 @@ public class SongSelectReadyMenu : MonoBehaviour
         IsShown = true;
         animation = GetComponent<Animation>();
         animation.Play("SongSelectReadyMenuIn");
-        mapName.text = $"{SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].Title} - {SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].DifficultyName}({SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].DifficultyRating}★)";
+        mapName.text = $"{SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].Title} - {SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].DifficultyName}\n(Rating: {SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].DifficultyRating})";
         // Image should be in cache so it's fine
         StartCoroutine(SongFolderReader.FetchImageFile(SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].BackgroundImage, (result) =>
         {
@@ -81,11 +80,5 @@ public class SongSelectReadyMenu : MonoBehaviour
     void EnableButtons()
     {
         enableButtons = true;   
-    }
-
-    Color GetColorForRating(int rating)
-    {
-        float hue = Mathf.Lerp(210, 0, Mathf.Clamp01((rating-3)/6f));
-        return Color.HSVToRGB(hue / 360f, .8f, .9f); 
     }
 }

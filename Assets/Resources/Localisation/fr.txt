@@ -35,7 +35,7 @@ $guest_tutoask_howdareyou Comment oses-tu...
 [e:handsTogether]Pour les détruire, il faut appuyer sur le bon bouton, au bon moment !
 Allez, c'est à vous ![e:handsIdle]
 #tutorial_bad_2
-[e:handsIdle][e:half]C'est un timing a avoir, mais ça vient avec l'entraînement !
+[e:handsIdle][e:half]C'est un timing à avoir, mais ça vient avec l'entraînement !
 [e:open]Passons sur les nuages de débris.
 Pour dégager les nuages, il faut rester appuyé sur le bouton correspondant,
 Et quand le bout du trait arrive dans la zone, relâchez le bouton !
@@ -48,7 +48,7 @@ Et quand le bout du trait arrive dans la zone, relâchez le bouton !
 [e:handsTogether][e:open]Bien, je pense que nous-
 [ts:120:34][tp:100:-50][y:ship]ALERTE, ESQUIVE IMMINENTE REQUISE.
 [ts:200:46][tp:0:50][y:tutobot][e:handsHoldHead][e:point]Un débris indestructible est sur la trajectoire, on va devoir l'esquiver !
-Donnez un coup de joystick à gauche ou a droite au bon moment pour l'esquiver !
+Donnez un coup de joystick à gauche ou à droite au bon moment pour l'esquiver !
 #tutorial_bad_4
 [ts:120:34][tp:100:-50][e:point][y:ship]FAUSSE ALERTE.
 [ts:200:46][tp:0:50][y:tutobot][e:half]...Il faut peut-être envoyer ce vaisseau aux révisions...
