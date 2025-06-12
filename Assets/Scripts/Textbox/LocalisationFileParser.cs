@@ -67,6 +67,7 @@ public class LocalisationFileParser : MonoBehaviour
         stopwatch.Stop();
         UnityEngine.Debug.Log($"LocalisationFileParser: {keyCount} keys done in {stopwatch.Elapsed.TotalMilliseconds:F3}ms.");
 #endif
+        loadedLanguage = language;
     }
 
     static void ParseFile(TextAsset textAsset)

@@ -55,6 +55,9 @@ public class TextboxBehaviour : MonoBehaviour
         Vector2 startSize = new Vector2(0f, 7f);
         while (elapsedTime < 0.5f)
         {
+            if (elapsedTime > 0.2f)
+                tailTransform.gameObject.SetActive(true);
+
             rectTransform.sizeDelta = new Vector2(
                 Mathf.SmoothStep(startSize.x, size.x, elapsedTime / 0.25f),
                 Mathf.SmoothStep(startSize.y, size.y, (elapsedTime - .25f) / 0.25f)
@@ -63,7 +66,6 @@ public class TextboxBehaviour : MonoBehaviour
             yield return null;
         }
         rectTransform.sizeDelta = size;
-        tailTransform.gameObject.SetActive(true);
     }
 
     public void SetText(string text)
@@ -104,12 +106,12 @@ public class TextboxBehaviour : MonoBehaviour
 
     IEnumerator FadeOutCoroutine()
     {
-        // change size from size to 0,0
-        tailTransform.gameObject.SetActive(false);
         float elapsedTime = 0f;
         Vector2 startSize = size;
         while (elapsedTime < 0.25f)
         {
+            if (elapsedTime > 0.1f)
+                tailTransform.gameObject.SetActive(false);
             rectTransform.sizeDelta = new Vector2(
                 startSize.x,
                 Mathf.SmoothStep(startSize.y, 0f, elapsedTime / 0.25f)

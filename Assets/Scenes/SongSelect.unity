@@ -2115,6 +2115,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 79cb8fd37d5bbd84bbb087315351b252, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d00cdb603bf90f44db30fc48ffea2dec, type: 2}
     - target: {fileID: 919132149155446097, guid: 79cb8fd37d5bbd84bbb087315351b252, type: 3}
       propertyPath: m_Name
       value: DockerInside

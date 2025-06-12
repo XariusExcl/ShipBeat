@@ -3,7 +3,52 @@ guid: 79cb8fd37d5bbd84bbb087315351b252
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black
+    second: {fileID: 2100000, guid: 7b890222e2c3b5c4fb71cb964b9e308f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BlueLight
+    second: {fileID: 2100000, guid: 2c811513af6ae2b46bf888c593d24a2e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dark
+    second: {fileID: 2100000, guid: 805249cd443eb714080741ab1889708a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkerGrey
+    second: {fileID: 2100000, guid: 92c7cfe412542ce45addae6101437c16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grey
+    second: {fileID: 2100000, guid: c1f4dcca808e00841835f1a3c143bbea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light
+    second: {fileID: 2100000, guid: c06a1658dc6ad8e4aa9cf1b1d3bc57a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LighterGrey
+    second: {fileID: 2100000, guid: 03f9c6f50cd88784fa7282f979893248, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: 61994062265e7c94db306e65be202b92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Space
+    second: {fileID: 2100000, guid: 024f30fb69f579044831ec641064b009, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
