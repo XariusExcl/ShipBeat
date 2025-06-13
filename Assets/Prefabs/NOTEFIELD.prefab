@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   receptor: {fileID: 7408213806253456853}
+  laneResolution: 20
   SplineContainer: {fileID: 0}
   ExtrapolationVector: {x: 0, y: 0, z: 0}
 --- !u!120 &3543645493813284592

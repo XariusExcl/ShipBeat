@@ -19,7 +19,7 @@ public class Scoring
         Bads = 0;
         Misses = 0;
         NoteCount = 0;
-        Percentage = 0;
+        Percentage = 100;
     }
 
     public static void AddScore(int score)

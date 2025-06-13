@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 public class GameUIManager : MonoBehaviour
 {
@@ -14,17 +15,37 @@ public class GameUIManager : MonoBehaviour
 
     void Awake()
     {
+        uiScore = 0;
+        uiPercentage = 100f;
         Instance = this;
+    }
+
+    void Update()
+    {
+        int scoreDiff = Scoring.Score - uiScore;
+        if (scoreDiff > 0)
+        {
+            uiScore += (int)Mathf.Ceil(scoreDiff / 10f);
+            scoreText.text = uiScore.ToString("D7");
+        }
+
+        float percentageDiff = Scoring.Percentage - uiPercentage;
+        if (Math.Abs(percentageDiff) > 0.005f)
+        {
+            uiPercentage += percentageDiff / 5f;
+            percentageText.text = uiPercentage.ToString("F2") + "%";
+        }
     }
 
     public static void ShowTicker(TickerType type)
     {
         Instance.ticker.ShowTicker(type);
     }
-
+    static int uiScore = 0;
+    static float uiPercentage = 0;
     public static void UpdateScore(int score)
     {
-        Instance.scoreText.text = score.ToString();
+        // Maybe something here?
     }
 
     public static void UpdateCombo(int combo)
@@ -39,7 +60,7 @@ public class GameUIManager : MonoBehaviour
 
     public static void UpdatePercentage(float percentage)
     {
-        Instance.percentageText.text = percentage.ToString("F2") + "%";
+        // Maybe something here?
     }
 
     public static void ShowResults()
