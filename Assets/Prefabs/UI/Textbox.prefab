@@ -178,8 +178,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Textbox Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0438a045e1d768240b9e1422058420c6, type: 2}
-  m_sharedMaterial: {fileID: 6703493187491899706, guid: 0438a045e1d768240b9e1422058420c6, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d8335a74db53faa4781fd72a6dc8dcbc, type: 2}
+  m_sharedMaterial: {fileID: 6466562551522254260, guid: d8335a74db53faa4781fd72a6dc8dcbc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

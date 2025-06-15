@@ -26,12 +26,12 @@ public class GamePlayerInput : MonoBehaviour {
             if (settingLastVertical != Input.GetAxis("P1_Vertical")) {
                 settingLastVertical = Input.GetAxis("P1_Vertical");
                 if (settingLastVertical > .5) {
-                    Maestro.LaneSpeed += 1; 
-                    Debug.Log($"Set Scroll Speed to {Maestro.LaneSpeed}");
+                    Maestro.LaneSpeed++;
+                    if (Maestro.LaneSpeed > 15) Maestro.LaneSpeed = 15;
                     InfoToasterUI.ShowToaster($"Set Scroll Speed to {Maestro.LaneSpeed}");
                 } else if (settingLastVertical < -.5) {
-                    Maestro.LaneSpeed -= 1; 
-                    Debug.Log($"Set Scroll Speed to {Maestro.LaneSpeed}");
+                    Maestro.LaneSpeed--;
+                    if (Maestro.LaneSpeed < 5) Maestro.LaneSpeed = 5;
                     InfoToasterUI.ShowToaster($"Set Scroll Speed to {Maestro.LaneSpeed}");
                 }
             }

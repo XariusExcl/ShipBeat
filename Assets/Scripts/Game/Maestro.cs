@@ -7,8 +7,6 @@ using UnityEngine.Events;
 
 public class Maestro : MonoBehaviour
 {
-    [SerializeField] TMP_Text time;
-
     public static List<TimingPoint> TimingPoints = new List<TimingPoint>();
     static TimingPoint currentTimingPoint = new TimingPoint();
     static TimingPoint currentEffectPoint = new TimingPoint();
@@ -57,7 +55,6 @@ public class Maestro : MonoBehaviour
             }
             UpdateTimingPoint();
             UpdateTimingInfo();
-            time.text = SongTime.ToString("F2");
         }
 
         Shader.SetGlobalFloat("_Tick", Mathf.Abs(Tick));

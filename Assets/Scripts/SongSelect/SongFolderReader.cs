@@ -41,9 +41,9 @@ public class SongFolderReader : MonoBehaviour
 
     void Start()
     {
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         EditorApplication.playModeStateChanged += OnExitPlayMode;
-# endif
+        #endif
         if (!IsDataLoaded) {
             StartCoroutine(ReadFolder());
         }

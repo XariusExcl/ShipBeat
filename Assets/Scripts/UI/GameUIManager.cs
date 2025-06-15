@@ -11,6 +11,9 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] Ticker ticker;
     [SerializeField] ResultScreenUI resultsScreen;
     [SerializeField] TransitionDoors transitionDoors;
+    [SerializeField] ProgressBar progressBar;
+    [SerializeField] TextMeshProUGUI songTime;
+    [SerializeField] GameObject skipButton;
 
 
     void Awake()
@@ -22,6 +25,12 @@ public class GameUIManager : MonoBehaviour
 
     void Update()
     {
+        
+        if (Maestro.SongTime > 2 && Maestro.SongTime < SongLoader.LoadedSong.Info.SongStart - 2)
+            skipButton.SetActive(true);
+        else
+            skipButton.SetActive(false);
+
         int scoreDiff = Scoring.Score - uiScore;
         if (scoreDiff > 0)
         {
@@ -35,6 +44,10 @@ public class GameUIManager : MonoBehaviour
             uiPercentage += percentageDiff / 5f;
             percentageText.text = uiPercentage.ToString("F2") + "%";
         }
+
+        progressBar.SetProgress(Maestro.SongTime / (SongLoader.LoadedSong.Info.Length + SongLoader.LoadedSong.Info.SongStart));
+
+        songTime.text = ((Maestro.SongTime < 0) ? "-" : "") + TimeSpan.FromSeconds(Maestro.SongTime).ToString(@"m\:ss");
     }
 
     public static void ShowTicker(TickerType type)
@@ -55,7 +68,7 @@ public class GameUIManager : MonoBehaviour
 
     public static void ResetCombo()
     {
-        Instance.comboText.text = "0";
+        Instance.comboText.text = "";
     }
 
     public static void UpdatePercentage(float percentage)

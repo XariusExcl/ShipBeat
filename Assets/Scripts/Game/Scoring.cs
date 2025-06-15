@@ -52,16 +52,16 @@ public class Scoring
     public static void AddBad()
     {
         Bads++;
-        ResetCombo();
         AddScore(10);
+        ResetCombo();
         GameUIManager.ShowTicker(TickerType.Bad);
     }
 
     public static void AddMiss()
     {
         Misses++;
-        ResetCombo();
         AddScore(0);
+        ResetCombo();
         GameUIManager.ShowTicker(TickerType.Miss);
     }
 
