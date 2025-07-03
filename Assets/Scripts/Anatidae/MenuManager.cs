@@ -18,7 +18,7 @@ public class MenuManager : MonoBehaviour
 #else
     public static void BackToMenu()
     {
-        Debug.Log("Retour au menu de la borne d'arcade !");
+        // Debug.Log("Retour au menu de la borne d'arcade !");
     }
 #endif
 
