@@ -14,6 +14,7 @@ public class SongSelectReadyMenu : MonoBehaviour
     public static bool IsShown = false;
     public static bool IsValidated = false;
     bool enableButtons = false;
+    public bool HasFocus = false;
     Animation animation;
 
     void Start()
@@ -57,6 +58,7 @@ public class SongSelectReadyMenu : MonoBehaviour
     {
         animation.Play("SongSelectReadyMenuOut");
         enableButtons = false;
+        HasFocus = false;
         SFXManager.PlayReturnSound();
     }
 

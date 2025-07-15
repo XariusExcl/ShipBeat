@@ -1,9 +1,6 @@
-// Right now, it's kind of the "main" element of the Songselect screen. TODO, make a Manager?
-
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Events;
-using System.ComponentModel;
 
 public class SongCaroussel : MonoBehaviour
 {
@@ -15,6 +12,7 @@ public class SongCaroussel : MonoBehaviour
     public const int NumUIs = 9;
     static int scrollPosition = 0;
     int scrollOffset = 0;
+    public bool HasFocus;
 
     // Events
     public static UnityEvent OnSongSelected = new();
@@ -58,7 +56,7 @@ public class SongCaroussel : MonoBehaviour
     }
     void Update()
     {
-        if (SongSelectReadyMenu.IsShown || SongSelectReadyMenu.IsValidated || !SongFolderReader.IsDataLoaded) return;
+        if (!HasFocus || !SongFolderReader.IsDataLoaded) return;
 
         if (lastHorizontal != Input.GetAxis("P1_Vertical"))
         {
