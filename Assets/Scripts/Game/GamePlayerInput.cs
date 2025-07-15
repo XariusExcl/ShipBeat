@@ -28,11 +28,11 @@ public class GamePlayerInput : MonoBehaviour {
                 if (settingLastVertical > .5) {
                     Maestro.LaneSpeed++;
                     if (Maestro.LaneSpeed > 15) Maestro.LaneSpeed = 15;
-                    InfoToasterUI.ShowToaster($"Set Scroll Speed to {Maestro.LaneSpeed}");
+                    InfoToasterUI.ShowToaster($"Vitesse de défilement : {Maestro.LaneSpeed}");
                 } else if (settingLastVertical < -.5) {
                     Maestro.LaneSpeed--;
                     if (Maestro.LaneSpeed < 5) Maestro.LaneSpeed = 5;
-                    InfoToasterUI.ShowToaster($"Set Scroll Speed to {Maestro.LaneSpeed}");
+                    InfoToasterUI.ShowToaster($"Vitesse de défilement : {Maestro.LaneSpeed}");
                 }
             }
 
@@ -41,15 +41,13 @@ public class GamePlayerInput : MonoBehaviour {
                 if (settingLastHorizontal > .5) {
                     Maestro.GlobalOffset += 0.005f;
                     Jukebox.SetPlaybackPosition(Maestro.SongTime - Maestro.GlobalOffset);
-                    Debug.Log($"Set Audio offset to {(Mathf.Sign(Maestro.GlobalOffset)==1f?"+":"")}{Maestro.GlobalOffset*1000:F0}ms.");
-                    InfoToasterUI.ShowToaster($"Set Audio offset to {(Mathf.Sign(Maestro.GlobalOffset)==1f?"+":"")}{Maestro.GlobalOffset*1000:F0}ms.");
+                    InfoToasterUI.ShowToaster($"Compensation latence audio : {(Mathf.Sign(Maestro.GlobalOffset)==1f?"+":"")}{Maestro.GlobalOffset*1000:F0}ms.");
                 }
                 
                 else if (settingLastHorizontal < -.5) {
                     Maestro.GlobalOffset -= 0.005f;
                     Jukebox.SetPlaybackPosition(Maestro.SongTime - Maestro.GlobalOffset);
-                    Debug.Log($"Set Audio offset to {(Mathf.Sign(Maestro.GlobalOffset)==1f?"+":"")}{Maestro.GlobalOffset*1000:F0}ms.");
-                    InfoToasterUI.ShowToaster($"Set Audio offset to {(Mathf.Sign(Maestro.GlobalOffset)==1f?"+":"")}{Maestro.GlobalOffset*1000:F0}ms.");
+                    InfoToasterUI.ShowToaster($"Compensation latence audio : {(Mathf.Sign(Maestro.GlobalOffset)==1f?"+":"")}{Maestro.GlobalOffset*1000:F0}ms.");
                 }
             }
         }

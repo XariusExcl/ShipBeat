@@ -123,12 +123,9 @@ public class VerticalNameInput : MonoBehaviour
 
     bool CheckIfAnySelected()
     {
-        bool select = false;
         foreach (VerticalNameInputLetter vnil in letters)
-        {
             if (vnil.IsSelected)
-                select = true;
-        }
-        return select;
+                return true;
+        return false;
     }
 }
