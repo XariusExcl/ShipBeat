@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.Splines;
 
-public class Lane : MonoBehaviour {
+public class Lane : MonoBehaviour
+{
     [SerializeField] Receptor receptor;
     [SerializeField] int laneResolution = 20;
     [HideInInspector] public SplineContainer SplineContainer;
@@ -22,9 +23,11 @@ public class Lane : MonoBehaviour {
     {
         ExtrapolationVector = (-(Vector3)SplineContainer.EvaluateTangent(0.01f)).normalized * SplineContainer.CalculateLength();
 
-        if (lineRenderer.enabled) {
+        if (lineRenderer.enabled)
+        {
             lineRenderer.positionCount = laneResolution;
-            for (int i = 0; i < lineRenderer.positionCount; i++) {
+            for (int i = 0; i < lineRenderer.positionCount; i++)
+            {
                 lineRenderer.SetPosition(i, (Vector3)SplineContainer.EvaluatePosition(i / (float)lineRenderer.positionCount));
             }
         }
@@ -32,21 +35,26 @@ public class Lane : MonoBehaviour {
         // Debug.DrawRay(transform.position, ExtrapolationVector, Color.red, 10f);
     }
 
-    public void SuccessfulHit(bool mirror = false) {
-        if (receptor != null) {
+    public void SuccessfulHit(bool mirror = false)
+    {
+        if (receptor != null)
             receptor.SuccessfulHit(mirror);
-        }
     }
 
-    public void Hold() {
-        if (receptor != null) {
+    public void Hold()
+    {
+        if (receptor != null)
             receptor.SuccessfulHold();
-        }
     }
 
-    public void Release() {
-        if (receptor != null) {
+    public void SuccessfulRelease()
+    {
+        if (receptor != null)
             receptor.SuccessfulRelease();
-        }
+    }
+    
+    public void Release() {
+        if (receptor != null)
+            receptor.Release();
     }
 }

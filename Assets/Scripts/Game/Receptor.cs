@@ -47,8 +47,12 @@ public class Receptor : MonoBehaviour {
         holdEffect.Show();
     }
 
-    public void SuccessfulRelease() {
+    public void Release() {
         holdEffect.Hide();
+    }
+
+    public void SuccessfulRelease() {
+        holdEffect.Release();
     }
 
     IEnumerator BeamReleaseCO() {

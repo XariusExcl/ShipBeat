@@ -70,7 +70,7 @@ public class Judge : MonoBehaviour {
             else
                 Scoring.AddMiss();
             
-            LaneManager.GetLane(note.Lane).Release();
+            LaneManager.GetLane(note.Lane).SuccessfulRelease();
             NoteBehaviourManager.ReturnToPool(note);
         }
     }
