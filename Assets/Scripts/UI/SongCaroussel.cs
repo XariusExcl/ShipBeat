@@ -6,7 +6,6 @@ public class SongCaroussel : MonoBehaviour
 {
     [SerializeField] GameObject loadingThrobber;
     [SerializeField] GameObject songEntryPrefab;
-    [SerializeField] Gradient ratingColorGradient;
     readonly List<SongEntryUI> songEntries = new();
     public static int CurrentSongIndex { get; private set; } = 0;
     public const int NumUIs = 9;

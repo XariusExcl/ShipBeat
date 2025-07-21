@@ -1,9 +1,9 @@
 // The "GameManager" for song playing. Keeps track of the song time info and when the song starts and ends. Also contains the lane speed for the notes.
 
-using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using Anatidae;
 
 public class Maestro : MonoBehaviour
 {
@@ -94,9 +94,10 @@ public class Maestro : MonoBehaviour
 
     void EndSong() {
         SongEnded = true;
+        if (SongFolderReader.SongInfos.Count != 0) // Special case to not save a score when testing
+            StartCoroutine(ExtradataManager.SetExtraData($"Scores/{SongLoader.LoadedSong.Info.Title}_{SongLoader.LoadedSong.Info.DifficultyName}", Scoring.SaveScore()));
         GameUIManager.ShowResults();
     }
-
     void CheckCalibration() {
         if (!SongStarted || SongEnded) return;
         float delay = Jukebox.GetPlaybackPosition() - SongTime + GlobalOffset;

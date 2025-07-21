@@ -5,8 +5,15 @@ using System.Collections;
 
 public class TestExtradataStorage : MonoBehaviour
 {
-    [SerializeField] private string key;
-    [SerializeField] private string value;
+    [SerializeField] string key;
+    [SerializeField] string value;
+    [SerializeField] bool fetchOnAwake;
+
+    void Awake()
+    {
+        if (fetchOnAwake)
+            FetchData();
+    }
 
     public void SetData()
     {
@@ -38,7 +45,7 @@ public class TestExtradataStorage : MonoBehaviour
 
         }
         else
-            Debug.LogWarning("No extra data fetched yet (shouldn't happen).");
+            Debug.LogWarning("Extradata unavailable (server is offline).");
     }
 
     public void GetDataWithKey()

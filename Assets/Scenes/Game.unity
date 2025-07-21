@@ -13782,8 +13782,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UseDebugSong: 1
-  DebugSongPath: \\Songs\\chess\\pawn.osu
-  DebugAudioPath: \\Songs\\chess\\audio.wav
+  DebugSongPath: \\Songs\\Nothing But Theory\\lapix - Nothing but Theory (More JazzFunktion
+    Mix) (Xarius) [Graph Theory (wip)].osu
+  DebugAudioPath: \\Songs\\Nothing But Theory\\audio.wav
 --- !u!4 &1743609055
 Transform:
   m_ObjectHideFlags: 0

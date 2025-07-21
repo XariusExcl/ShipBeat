@@ -21,7 +21,6 @@ namespace Anatidae {
     }
     public class ExtradataManager : MonoBehaviour
     {
-
         public static List<ExtraDataElement> ExtraData { get; private set; } = new List<ExtraDataElement>();
         public static bool HasFetchedExtraData { get; private set; }
 
@@ -52,24 +51,26 @@ namespace Anatidae {
 
         public static IEnumerator SetExtraData(string key, string value)
         {
-            ExtraDataElement test = new ExtraDataElement { key = key, value = value };
-            Debug.Log($"test {test.key} = {test.value}");
-            Debug.Log($"{JsonUtility.ToJson(test)}");
-
+            ExtraDataElement extraDataElement = new ExtraDataElement { key = key, value = value };
             UnityWebRequest request = new UnityWebRequest("http://localhost:3000/api/extradata?game=" + HighscoreManager.GameName)
             {
                 method = UnityWebRequest.kHttpVerbPOST,
-                uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(JsonUtility.ToJson(new ExtraDataElement { key = key, value = value })))
+                uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(JsonUtility.ToJson(extraDataElement)))
                 {
                     contentType = "application/json"
                 }
             };
-
             yield return request.SendWebRequest();
             if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
                 Debug.LogError(request.error);
-
-            yield return FetchExtraData();
+            else {
+                int i = ExtraData.FindIndex(e => e.key == key);
+                if (i != -1)
+                    ExtraData[i] = extraDataElement;
+                else
+                    ExtraData.Add(extraDataElement);
+            }
+            // yield return FetchExtraData();
         }
 
         public static string GetDataWithKey(string key)
@@ -88,7 +89,7 @@ namespace Anatidae {
                 }
             }
 
-            Debug.LogWarning($"No extra data found for key: {key}");
+            // Debug.LogWarning($"No extra data found for key: {key}");
             return null;
         }
     }

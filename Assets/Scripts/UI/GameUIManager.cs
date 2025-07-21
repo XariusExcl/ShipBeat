@@ -79,7 +79,7 @@ public class GameUIManager : MonoBehaviour
     public static void ShowResults()
     {
         Instance.resultsScreen.gameObject.SetActive(true);
-        Instance.resultsScreen.ShowResults(Scoring.Perfects, Scoring.Goods, Scoring.Bads, Scoring.Misses, Scoring.Percentage, Scoring.GetRank());
+        Instance.resultsScreen.ShowResults(Scoring.Perfects, Scoring.Goods, Scoring.Bads, Scoring.Misses, Scoring.Percentage, Scoring.Rank);
     }
 
     public static void ReturnToSongSelect()

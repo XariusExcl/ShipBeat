@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1244632830529941997}
   - component: {fileID: 5745903634298766737}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 8734092730913645400}
   - component: {fileID: 4598553742628950398}
   m_Layer: 5
-  m_Name: bg1 (1)
+  m_Name: bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 8995115186726519047}
   - component: {fileID: 1674109774687380508}
   m_Layer: 5
-  m_Name: Text (TMP) (3)
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 2159807785675680178}
   - component: {fileID: 2737078490282387818}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Percentage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -493,6 +493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4957860035335309688}
   - component: {fileID: 7107770062878844488}
+  - component: {fileID: 2121802066335969740}
   m_Layer: 5
   m_Name: HighscoreEntry
   m_TagString: Untagged
@@ -536,6 +537,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4070931889368334141}
   m_CullTransparentMesh: 1
+--- !u!114 &2121802066335969740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4070931889368334141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec565f2184702f4492bcf51a968cade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: {fileID: 5745903634298766737}
+  time: {fileID: 8564906650252156268}
+  score: {fileID: 1674109774687380508}
+  percentage: {fileID: 2737078490282387818}
+  rank: {fileID: 5556703681877474056}
+  rankBorder: {fileID: 5030033205886732674}
+  rankBg: {fileID: 2475978769619677732}
+  songSelectSceneData: {fileID: 11400000, guid: b4de85a88d465b44a87857809464dcf1, type: 2}
 --- !u!1 &4239738800355455037
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,7 +569,7 @@ GameObject:
   - component: {fileID: 2452940261414790415}
   - component: {fileID: 8564906650252156268}
   m_Layer: 5
-  m_Name: Text (TMP) (4)
+  m_Name: Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -759,7 +780,7 @@ GameObject:
   - component: {fileID: 1733336037969164552}
   - component: {fileID: 2475978769619677732}
   m_Layer: 5
-  m_Name: GameObject (1)
+  m_Name: RankBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -834,7 +855,7 @@ GameObject:
   - component: {fileID: 1484798485942083380}
   - component: {fileID: 5556703681877474056}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Rank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -970,7 +991,7 @@ GameObject:
   - component: {fileID: 8480000144488044093}
   - component: {fileID: 5030033205886732674}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: RankBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

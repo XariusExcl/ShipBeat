@@ -1,3 +1,14 @@
+using System;
+using System.Collections.Generic;
+using Anatidae;
+using UnityEngine;
+
+[Serializable]
+public struct HighscoreList
+{
+    public List<BeatmapHighscore> list;
+}
+
 public class Scoring
 {
     public static int Score { get; private set; } = 0;
@@ -7,8 +18,8 @@ public class Scoring
     public static int Goods { get; private set; } = 0;
     public static int Bads { get; private set; } = 0;
     public static int Misses { get; private set; } = 0;
-    public static int NoteCount { get; set; } = 0;
     public static float Percentage { get; private set; } = 0;
+    public static char Rank { get { return GetRank(); } }
     public static void Reset()
     {
         Score = 0;
@@ -18,7 +29,6 @@ public class Scoring
         Goods = 0;
         Bads = 0;
         Misses = 0;
-        NoteCount = 0;
         Percentage = 100;
     }
 
@@ -69,21 +79,93 @@ public class Scoring
     {
         Percentage = (Perfects * 100f + Goods * 50f + Bads * 10f) / (Perfects + Goods + Bads + Misses);
     }
-    
+
     static void ResetCombo()
     {
         Combo = 0;
         GameUIManager.ResetCombo();
     }
 
-    public static string GetRank()
+    static char GetRank()
     {
-        if (Percentage == 100) return "P";
-        if (Percentage >= 95) return "S";
-        if (Percentage >= 90) return "A";
-        if (Percentage >= 80) return "B";
-        if (Percentage >= 70) return "C";
-        if (Percentage >= 60) return "D";
-        return "F";
+        if (Percentage == 100) return 'P';
+        if (Percentage >= 95) return 'S';
+        if (Percentage >= 90) return 'A';
+        if (Percentage >= 80) return 'B';
+        if (Percentage >= 70) return 'C';
+        if (Percentage >= 60) return 'D';
+        return 'F';
+    }
+
+    public static string SaveScore()
+    {
+        SongInfo info = SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex];
+        HighscoreList highscores = new();
+        highscores.list = new();
+        string json = ExtradataManager.GetDataWithKey($"Scores/{info.Title}_{info.DifficultyName}");
+        if (json is null)
+        {
+            highscores.list.Add(CreateHighscore());
+        }
+        else
+        {
+            highscores = JsonUtility.FromJson<HighscoreList>(json);
+            if (highscores.list.Count == 0)
+            {
+                highscores.list.Add(CreateHighscore());
+            }
+            else
+            {
+                int index = highscores.list.FindIndex(h => h.PlayerName == HighscoreManager.PlayerName);
+                if (index != -1)
+                {
+                    if (highscores.list[index].Percentage < Percentage)
+                    {
+                        BeatmapHighscore updatedHighscore = highscores.list[index];
+                        updatedHighscore.Score = Score;
+                        updatedHighscore.Combo = Combo;
+                        updatedHighscore.MaxCombo = MaxCombo;
+                        updatedHighscore.Timestamp = DateTime.Now.ToString("o");
+                        updatedHighscore.Perfects = Perfects;
+                        updatedHighscore.Goods = Goods;
+                        updatedHighscore.Bads = Bads;
+                        updatedHighscore.Misses = Misses;
+                        updatedHighscore.Rank = Rank;
+
+                        highscores.list[index] = updatedHighscore;
+                    }
+                    else
+                    {
+                        // Score not beaten
+                    }
+                }
+                else
+                {
+                    // No scores for this player, create a new score
+                    highscores.list.Add(CreateHighscore());
+                }
+            }
+        }
+        highscores.list.Sort((a, b) => b.Score - a.Score);
+        return JsonUtility.ToJson(highscores);
+    }
+
+    static BeatmapHighscore CreateHighscore()
+    {
+        BeatmapHighscore highscore = new BeatmapHighscore
+        {
+            PlayerName = HighscoreManager.PlayerName ?? "GUE",
+            Score = Score,
+            Combo = Combo,
+            MaxCombo = MaxCombo,
+            Timestamp = DateTime.Now.ToString("o"),
+            Percentage = Percentage,
+            Perfects = Perfects,
+            Goods = Goods,
+            Bads = Bads,
+            Misses = Misses,
+            Rank = Rank
+        };
+        return highscore;
     }
 }

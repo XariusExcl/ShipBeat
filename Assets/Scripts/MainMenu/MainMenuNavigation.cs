@@ -5,15 +5,16 @@ using System.Collections;
 
 public class MainMenuNavigation : MonoBehaviour
 {
-    [SerializeField] private CameraDolly cameraDolly;
-    [SerializeField] private EventSystem eventSystem;
-    [SerializeField] private GameObject mainMenu;
-    [SerializeField] private GameObject mainMenuQuickPlayButton;
-    [SerializeField] private GameObject quickPlayMenu;
-    [SerializeField] private GameObject quickPlayMenuFirstField;
-    [SerializeField] private TransitionDoors transitionDoors;
-    [SerializeField] private AudioClip introMusic;
-    [SerializeField] private AudioClip introMusicLoop;
+    [SerializeField] CameraDolly cameraDolly;
+    [SerializeField] EventSystem eventSystem;
+    [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject mainMenuQuickPlayButton;
+    [SerializeField] GameObject quickPlayMenu;
+    [SerializeField] GameObject quickPlayMenuFirstField;
+    [SerializeField] TransitionDoors transitionDoors;
+    [SerializeField] VerticalNameInput nameInput;
+    [SerializeField] AudioClip introMusic;
+    [SerializeField] AudioClip introMusicLoop;
 
     [SerializeField] string TutorialSongPath;
     [SerializeField] string TutorialAudioPath;

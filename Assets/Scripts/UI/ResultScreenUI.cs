@@ -13,13 +13,14 @@ public class ResultScreenUI : MonoBehaviour
     [SerializeField] GameObject returnButton;
 
 
-    public void ShowResults(int perfectCount, int goodCount, int badCount, int missCount, float accuracy, string rank) {
+    public void ShowResults(int perfectCount, int goodCount, int badCount, int missCount, float accuracy, char rank)
+    {
         tmp_PerfectCount.text = perfectCount.ToString();
         tmp_GoodCount.text = goodCount.ToString();
         tmp_BadCount.text = badCount.ToString();
         tmp_MissCount.text = missCount.ToString();
         tmp_Accuracy.text = accuracy.ToString("F2") + "%";
-        tmp_Rank.text = rank;
+        tmp_Rank.text = rank.ToString();
     }
 
     void OnEnable() {

@@ -61,15 +61,16 @@ public class SongEntryUI : MonoBehaviour
     {
         transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, 10f * Time.deltaTime);
     }
-    
+
     string GetRatingText(int rating)
     {
-        // 1-4 easy, 5-7 medium, 8-10 hard
-        if (rating < 5)
-            return "(Easy "+rating+')';
+        if (rating < 4)
+            return $"(Easy {rating})";
         else if (rating < 8)
-            return "(Medium "+rating+')';
+            return $"(Medium {rating})";
+        else if (rating < 12)
+            return $"(Hard {rating})";
         else
-            return "(Hard "+rating+')';
+            return $"(Expert {rating})";
     }
 }
