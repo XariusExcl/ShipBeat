@@ -27,11 +27,9 @@ public class GamePlayerInput : MonoBehaviour {
                 settingLastVertical = Input.GetAxis("P1_Vertical");
                 if (settingLastVertical > .5) {
                     Maestro.LaneSpeed++;
-                    if (Maestro.LaneSpeed > 15) Maestro.LaneSpeed = 15;
                     InfoToasterUI.ShowToaster($"Vitesse de défilement : {Maestro.LaneSpeed}");
                 } else if (settingLastVertical < -.5) {
                     Maestro.LaneSpeed--;
-                    if (Maestro.LaneSpeed < 5) Maestro.LaneSpeed = 5;
                     InfoToasterUI.ShowToaster($"Vitesse de défilement : {Maestro.LaneSpeed}");
                 }
             }

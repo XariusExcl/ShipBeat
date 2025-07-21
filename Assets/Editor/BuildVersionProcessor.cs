@@ -14,7 +14,7 @@ public class BuildVersionProcessor : IPreprocessBuildWithReport
         string buildNumber = DateTime.Now.ToString("yyyyMMdd.HHmm");
         string fullVersion = $"{VERSION}.{buildNumber}";
 
-        PlayerSettings.bundleVersion = fullVersion;
+        UnityEditor.PlayerSettings.bundleVersion = fullVersion;
     }
 
     [MenuItem("Build/Set Version")]
@@ -23,6 +23,6 @@ public class BuildVersionProcessor : IPreprocessBuildWithReport
         string buildNumber = DateTime.Now.ToString("yyyyMMdd.HHmm");
         string fullVersion = $"{VERSION}.{buildNumber}";
 
-        PlayerSettings.bundleVersion = fullVersion;
+        UnityEditor.PlayerSettings.bundleVersion = fullVersion;
     }
 }

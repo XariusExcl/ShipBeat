@@ -46,7 +46,7 @@ public class SongCaroussel : MonoBehaviour
         UpdateCaroussel(ScrollDirection.None);
     }
 
-    float lastHorizontal = 0;
+    float lastVertical = 0;
     enum ScrollDirection
     {
         None,
@@ -57,13 +57,13 @@ public class SongCaroussel : MonoBehaviour
     {
         if (!HasFocus || !SongFolderReader.IsDataLoaded) return;
 
-        if (lastHorizontal != Input.GetAxis("P1_Vertical"))
+        if (lastVertical != Input.GetAxis("P1_Vertical"))
         {
-            lastHorizontal = Input.GetAxis("P1_Vertical");
-            if (lastHorizontal > .5)
+            lastVertical = Input.GetAxis("P1_Vertical");
+            if (lastVertical > .5)
                 UpdateCaroussel(ScrollDirection.Up);
 
-            else if (lastHorizontal < -.5)
+            else if (lastVertical < -.5)
                 UpdateCaroussel(ScrollDirection.Down);
         }
 

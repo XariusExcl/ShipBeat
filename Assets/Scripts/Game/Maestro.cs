@@ -12,7 +12,18 @@ public class Maestro : MonoBehaviour
     static TimingPoint currentEffectPoint = new TimingPoint();
 
     // Song time and state
-    public static int LaneSpeed = 5; // Note time on the lane is 10 / LaneSpeed, i.e 8 = 1250ms
+    static int _laneSpeed = 7;
+    public static int LaneSpeed // Note time on the lane is 10 / LaneSpeed, i.e 8 = 1250ms
+    {
+        get => _laneSpeed;
+        set
+        {
+            if (value > 15) value = 15;
+            if (value < 5) value = 5;
+            _laneSpeed = value;
+        }
+    }
+
     public static bool SongStarted = false;
     public static bool SongEnded = false;
     public static bool StoryboardEnded = false;
@@ -22,7 +33,17 @@ public class Maestro : MonoBehaviour
     public static float Tick;
     public static float StartTime;
     const float StartDelay = 3;
-    public static float GlobalOffset = -.1f; // To be adjusted by the player, in seconds
+    static float _globalOffset = -.1f;
+    public static float GlobalOffset
+    {
+        get => _globalOffset;
+        set
+        {
+            if (value < -.25f) value = -.25f;
+            if (value > .25f) value = .25f;
+            _globalOffset = value;
+        }
+    }
     public static bool IsKiaiTime = false;
     public static UnityEvent OnKiaiStart = new UnityEvent();
     public static UnityEvent OnKiaiEnd = new UnityEvent();
