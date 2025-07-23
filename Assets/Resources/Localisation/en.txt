@@ -12,7 +12,7 @@ $debug_test_no Non...
 [e:closeAAA][e:handsIdle]Aww.... Attends,[e:half] quoi ?
 [e:open]
 #guest_tutoask
-[y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah! [e:smile] There you are agent._._.___[s:i][c:#00ffff][k:agentName][c:][s:] ?[e:open][o:camera]
+[y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah! [e:smile] There you are agent._._.___ [s:i][c:#00ffff][k:playerName][c:][s:]?[e:open][o:camera]
 [e:idleWag]My apologies if I mispronounced your name? I can't find you in the pilot database._._.
 [e:half]Ehm_._._. Even though I know your piloting skills are more than confirmed._._.
 [e:handsShyPoint][e:closeAAA]Our fleet's ships might not have the same controls in the same places, behave differently and._._.

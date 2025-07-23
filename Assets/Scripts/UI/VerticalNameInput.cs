@@ -6,7 +6,18 @@ public class VerticalNameInput : MonoBehaviour
 {
     [SerializeField] VerticalNameInputLetter[] letters;
     private int[] letterIndices = new int[3];
-    char[] playerName = new char[3];
+    public string Value {
+        get
+        {
+            string temp = "";
+            for (int i = 0; i < letters.Length; i++)
+            {
+                temp += letters[i].Letter;
+            }
+            return temp;
+        }
+        private set {}
+    }
     static readonly char[] Alphabet = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '♥', '\0' };
     private int nameLetterIndex = 0;
     bool blockInput = false;
@@ -15,12 +26,7 @@ public class VerticalNameInput : MonoBehaviour
     const int repeatFrameWait = 2;
     int currentRepeatFrameWait = 3;
     float lastKeyInputTime = 0f;
-    bool neutralInput = true;
-    bool oldNeutralInput = false;
-    bool inputDown = false;
-    bool inputUp = false;
-    bool repeatDown = false;
-    bool repeatUp = false;
+    bool neutralInput, oldNeutralInput, inputDown, inputUp, repeatDown, repeatUp = false;
 
     void Start()
     {
@@ -29,9 +35,7 @@ public class VerticalNameInput : MonoBehaviour
             letters[i].Index = i;
             letters[i].Letter = Alphabet[0];
             letterIndices[i] = 0;
-            playerName[i] = Alphabet[0];
         }
-        UpdateName();
     }
 
     void Update()
@@ -107,7 +111,7 @@ public class VerticalNameInput : MonoBehaviour
 
     public void UpdateName()
     {
-        HighscoreManager.PlayerName = Regex.Replace(new string(playerName), @"\0", "_");
+        HighscoreManager.PlayerName = Regex.Replace(Value, @"\0", "_");
     }
 
     public void LetterSelected(int letterIndex)

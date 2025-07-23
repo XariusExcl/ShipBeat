@@ -11,8 +11,13 @@ $debug_test_no Non...
 #debug_test_no
 [e:closeAAA][e:handsIdle]Aww.... Attends,[e:half] quoi ?
 [e:open]
+#guest_badname
+[y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah ![e:smile] Vous voilà agent._._.___ [e:idleWag]Errr...[e:half]
+Je ne suis pas sûre de pouvoir dire ce nom...
+[e:open]Essayez d'en saisir un autre.
+[!:RetrySelectingName]
 #guest_tutoask
-[y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah ![e:smile] Vous voilà enfin agent._._.___[s:i][c:#00ffff][k:agentName][c:][s:] ?[e:open][o:camera]
+[y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah ![e:smile] Vous voilà enfin agent._._.___ [s:i][c:#00ffff][k:agentName][c:][s:] ?[e:open][o:camera]
 [e:idleWag]Désolé si j'écorche votre nom ? Je ne vous trouve pas dans la base de données des pilotes._._.
 [e:half]Ehm_._._. Même si je sais que vos talents de pilote sont bien plus que confirmés._._.
 [e:handsShyPoint][e:closeAAA]Les vaisseaux de notre flotte n'ont peut-être pas les commandes aux mêmes endroits, agissent de manière différente et._._.

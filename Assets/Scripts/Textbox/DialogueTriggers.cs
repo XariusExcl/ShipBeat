@@ -7,11 +7,13 @@ public class DialogueTriggers : MonoBehaviour
     public static UnityEvent StartGame = new UnityEvent();
     public static UnityEvent StartTutorial = new UnityEvent();
     public static UnityEvent EndSong = new UnityEvent();
+    public static UnityEvent RetrySelectingName = new UnityEvent();
     public static Dictionary<string, UnityEvent> events = new Dictionary<string, UnityEvent>
     {
         { "StartGame", StartGame },
         { "StartTutorial", StartTutorial },
-        { "EndSong", EndSong }
+        { "EndSong", EndSong },
+        { "RetrySelectingName", RetrySelectingName }
     };
 
     public static void TriggerEvent(string eventName)

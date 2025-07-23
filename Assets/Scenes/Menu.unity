@@ -4687,7 +4687,9 @@ MonoBehaviour:
   mainMenuQuickPlayButton: {fileID: 664548985}
   quickPlayMenu: {fileID: 1415607144}
   quickPlayMenuFirstField: {fileID: 2830747462070326563}
+  firstLetter: {fileID: 2830747462070326563}
   transitionDoors: {fileID: 2068453432}
+  nameInput: {fileID: 8814800718280346341}
   introMusic: {fileID: 8300000, guid: 58dfe488d43d1b04fbc9d24042bb2809, type: 3}
   introMusicLoop: {fileID: 8300000, guid: 7a848f12d7cd39143b7efb8d8ba1941b, type: 3}
   TutorialSongPath: /Songs/Rambling Pleat/tutorial.osu

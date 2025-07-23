@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.Generic;
 using UnityEngine;
+using Anatidae;
 
 public class TextboxSystem : MonoBehaviour
 {
@@ -62,13 +63,14 @@ public class TextboxSystem : MonoBehaviour
 		Auto = auto;
 
 		Textboxes.Clear();
-		if (!instance.goTextbox.activeSelf) {
+		if (!instance.goTextbox.activeSelf)
+		{
 			instance.goTextbox.SetActive(true);
 			instance.textboxBehaviour.Initialize();
 		}
 		instance.textboxBehaviour.DisableAllButtons();
 
-		if (!LocalisationFileParser.textLibrary.ContainsKey(dialogueId))
+		if (!LocalisationFileParser.TextLibrary.ContainsKey(dialogueId))
 		{
 			Debug.LogWarning("DialogueManager : \"" + dialogueId + "\" ID does not exist!");
 			// TODO : default dialogue ID ?
@@ -77,11 +79,11 @@ public class TextboxSystem : MonoBehaviour
 		else
 		{
 			// Start dialogue
-			foreach (Textbox tb in LocalisationFileParser.textLibrary[dialogueId].Textboxes)
+			foreach (Textbox tb in LocalisationFileParser.TextLibrary[dialogueId].Textboxes)
 			{
 				Textboxes.Enqueue(tb);
 			}
-			choices = LocalisationFileParser.textLibrary[dialogueId].Choices;
+			choices = LocalisationFileParser.TextLibrary[dialogueId].Choices;
 			DisplayNextSentence();
 		}
 	}
@@ -106,6 +108,9 @@ public class TextboxSystem : MonoBehaviour
 		}
 		currentTextbox = Textboxes.Dequeue();
 
+		// Replacing textKeys with their value
+		MatchEvaluator textKeyEvaluator = new MatchEvaluator(TextKeyReplace);
+		currentTextbox.Text = Regex.Replace(currentTextbox.Text, @"\[k:(\S*?)\]", textKeyEvaluator);
 		// Text formatting
 		fullText = WrapText(currentTextbox.Text, instance.textboxBehaviour.GetMaxLineLength());
 
@@ -192,10 +197,6 @@ public class TextboxSystem : MonoBehaviour
 								colorStartIndex = i;
 							}
 							break;
-						case "k": // String key
-							// TODO: Implement string key replacement
-							Debug.LogWarning("String key replacement not implemented yet for: " + effect[1]);
-							break;
 						case "!": // Event
 							DialogueTriggers.TriggerEvent(effect[1]);
 							break;
@@ -272,9 +273,10 @@ public class TextboxSystem : MonoBehaviour
 				}
 				else if (letter != ' ')
 				{ // Normal pause, no sound if ' '
-					if (!skip) {
+					if (!skip)
+					{
 						if (i % 2 == 0) yapper?.Speak();
-						yield return new WaitForSeconds(shortDelay);	
+						yield return new WaitForSeconds(shortDelay);
 					}
 				}
 			}
@@ -309,5 +311,21 @@ public class TextboxSystem : MonoBehaviour
 			lineLength += wordLength + 1;
 		}
 		return sb.ToString();
+	}
+
+	public static string TextKeyReplace(Match m)
+	{
+		string key = m.Groups[1].ToString();
+		switch (key)
+		{
+			case "playerName":
+				return HighscoreManager.PlayerName;
+			case "score":
+				return Scoring.Score.ToString();
+			default:
+				if (LocalisationFileParser.TextLibrary.ContainsKey(key))
+					return LocalisationFileParser.TextLibrary[key].Textboxes[0].Text;
+				else return "";
+		}
 	}
 }

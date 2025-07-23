@@ -35,7 +35,7 @@ public class LocalisationFileParser : MonoBehaviour
     static string keyName;
     static DialogueEvent currentDialogueEvent;
     public static string loadedLanguage = "";
-    public static Dictionary<string, DialogueEvent> textLibrary = new Dictionary<string, DialogueEvent>();
+    public static Dictionary<string, DialogueEvent> TextLibrary = new Dictionary<string, DialogueEvent>();
     static readonly string[] NewLineChars = { "\r\n", "\r", "\n" };
 
     public static void LoadLanguage(string language)
@@ -43,7 +43,7 @@ public class LocalisationFileParser : MonoBehaviour
         if (language == loadedLanguage)
             return;
 
-        textLibrary.Clear();
+        TextLibrary.Clear();
         currentDialogueEvent = new DialogueEvent
         {
             Textboxes = new List<Textbox>(),
@@ -83,7 +83,7 @@ public class LocalisationFileParser : MonoBehaviour
                 case '#': // Key
                     if (keyCount > 0)
                     {
-                        textLibrary.Add(keyName, currentDialogueEvent);
+                        TextLibrary.Add(keyName, currentDialogueEvent);
                     }
 
                     keyCount++;
@@ -115,7 +115,7 @@ public class LocalisationFileParser : MonoBehaviour
         }
 
         // Add last key dialogue of file
-        textLibrary.Add(keyName, currentDialogueEvent);
+        TextLibrary.Add(keyName, currentDialogueEvent);
     }
 
     void OnApplicationQuit()
