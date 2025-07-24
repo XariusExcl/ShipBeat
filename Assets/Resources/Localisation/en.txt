@@ -11,6 +11,11 @@ $debug_test_no Non...
 #debug_test_no
 [e:closeAAA][e:handsIdle]Aww.... Attends,[e:half] quoi ?
 [e:open]
+#guest_badname
+[y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah! [e:smile] There you are agent._._.___ [e:idleWag]Errr...[e:half]
+I'm not sure I can say that...
+[e:open]Please input another name.
+[!:RetrySelectingName]
 #guest_tutoask
 [y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah! [e:smile] There you are agent._._.___ [s:i][c:#00ffff][k:playerName][c:][s:]?[e:open][o:camera]
 [e:idleWag]My apologies if I mispronounced your name? I can't find you in the pilot database._._.
