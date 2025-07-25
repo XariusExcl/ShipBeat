@@ -95,6 +95,7 @@ public class VerticalNameInput : MonoBehaviour
 
     void MoveDown()
     {
+        SFXManager.PlayVerticalBlipSound();
         if (++letterIndices[nameLetterIndex] >= Alphabet.Length)
             letterIndices[nameLetterIndex] = 0;
 
@@ -103,6 +104,7 @@ public class VerticalNameInput : MonoBehaviour
 
     void MoveUp()
     {
+        SFXManager.PlayVerticalBlipSound();
         if (--letterIndices[nameLetterIndex] < 0)
             letterIndices[nameLetterIndex] = Alphabet.Length - 1;
 
@@ -116,6 +118,7 @@ public class VerticalNameInput : MonoBehaviour
 
     public void LetterSelected(int letterIndex)
     {
+        SFXManager.PlayHorizontalBlipSound();
         nameLetterIndex = letterIndex;
         blockInput = !CheckIfAnySelected();
     }

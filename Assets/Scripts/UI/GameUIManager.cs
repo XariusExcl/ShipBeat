@@ -26,7 +26,7 @@ public class GameUIManager : MonoBehaviour
     void Update()
     {
         
-        if (Maestro.SongTime > 2 && Maestro.SongTime < SongLoader.LoadedSong.Info.SongStart - 2)
+        if (!Maestro.IsTutorial && Maestro.SongTime > 2 && Maestro.SongTime < SongLoader.LoadedSong.Info.SongStart - 2)
             skipButton.SetActive(true);
         else
             skipButton.SetActive(false);

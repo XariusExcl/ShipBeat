@@ -3,8 +3,8 @@ using UnityEngine;
 
 public enum ButtonState
 {
-    Up,
-    Down,
+    Released,
+    Pressed,
     Left,
     Right
 }
@@ -53,7 +53,7 @@ public class GamePlayerInput : MonoBehaviour {
         if (lastHorizontal != Input.GetAxis("P1_Horizontal"))
         {
             if (lastHorizontal < .5f && Mathf.Abs(Input.GetAxis("P1_Horizontal")) > .5f) {
-                Receptors[0].HandleInput(ButtonState.Up);
+                Receptors[0].HandleInput(ButtonState.Released);
                 if (Input.GetAxis("P1_Horizontal") > 0) {
                     Judge.JudgePlayerInput(0, ButtonState.Right);
                     playerShip.Jostle(ButtonState.Left);
@@ -73,14 +73,14 @@ public class GamePlayerInput : MonoBehaviour {
         {
             if (Input.GetButtonDown("P1_B"+i))
             {
-                Receptors[i].HandleInput(ButtonState.Down);
-                Judge.JudgePlayerInput(i, ButtonState.Down);
+                Receptors[i].HandleInput(ButtonState.Pressed);
+                Judge.JudgePlayerInput(i, ButtonState.Pressed);
             }
 
             if (Input.GetButtonUp("P1_B"+i))
             {
-                Receptors[i].HandleInput(ButtonState.Up);
-                Judge.JudgePlayerInput(i, ButtonState.Up);
+                Receptors[i].HandleInput(ButtonState.Released);
+                Judge.JudgePlayerInput(i, ButtonState.Released);
             }
         }
     }

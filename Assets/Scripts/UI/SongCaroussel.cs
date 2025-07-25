@@ -8,7 +8,7 @@ public class SongCaroussel : MonoBehaviour
     [SerializeField] GameObject songEntryPrefab;
     readonly List<SongEntryUI> songEntries = new();
     public static int CurrentSongIndex { get; private set; } = 0;
-    public const int NumUIs = 9;
+    public const int NumUIs = 11;
     static int scrollPosition = 0;
     int scrollOffset = 0;
     public bool HasFocus;

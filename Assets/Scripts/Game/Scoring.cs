@@ -82,6 +82,7 @@ public class Scoring
 
     static void ResetCombo()
     {
+        if (Combo > 20) SFXManager.PlayComboBreakSound();
         Combo = 0;
         GameUIManager.ResetCombo();
     }

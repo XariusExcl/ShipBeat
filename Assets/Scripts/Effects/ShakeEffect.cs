@@ -13,9 +13,9 @@ public class ShakeEffect : MonoBehaviour
     }
 
     [SerializeField] TransformParameters affectedParameters = TransformParameters.Position;
-    [SerializeField] float speed = 5f;
-    [SerializeField] float decisionTime = .1f;
-    [SerializeField] float amplitude;
+    [SerializeField] public float Speed = 5f;
+    [SerializeField] public float DecisionTime = .1f;
+    [SerializeField] public float Amplitude;
     Vector3 origin;
     Vector3 targetPosition;
     Vector3 secondaryTarget;
@@ -25,21 +25,22 @@ public class ShakeEffect : MonoBehaviour
     Quaternion currentRotation;
     Quaternion newRotation;
 
+    // Used in Animation
     public void SetSpeed(float newSpeed)
     {
-        speed = newSpeed;
+        Speed = newSpeed;
     }
 
     public void SetDecisionTime(float newDecisionTime)
     {
-        decisionTime = newDecisionTime;
-        timeToNextMove = decisionTime * Random.value;
+        DecisionTime = newDecisionTime;
+        timeToNextMove = DecisionTime * Random.value;
     }
 
     public void SetDistance(float newDistance)
     {
-        amplitude = newDistance;
-        targetPosition = GetRandomPoint(origin, amplitude);
+        Amplitude = newDistance;
+        targetPosition = GetRandomPoint(origin, Amplitude);
         secondaryTarget = origin;
         position = origin;
     }
@@ -53,13 +54,13 @@ public class ShakeEffect : MonoBehaviour
     private IEnumerator SetAmountOverTimeCoroutine(float incrementValue)
     {
         float elapsed = 0f;
-        while (amplitude > 0f)
+        while (Amplitude > 0f)
         {
             elapsed += Time.deltaTime;
-            amplitude += incrementValue * Time.deltaTime;
+            Amplitude += incrementValue * Time.deltaTime;
             yield return null;
         }
-        amplitude = 0f; // Ensure distance does not go below zero
+        Amplitude = 0f; // Ensure distance does not go below zero
         yield return null;
     }
 
@@ -67,23 +68,23 @@ public class ShakeEffect : MonoBehaviour
     {
         origin = transform.localPosition;
         originalRotation = transform.localRotation;
-        timeToNextMove = decisionTime * Random.value;
+        timeToNextMove = DecisionTime * Random.value;
         secondaryTarget = origin;
         position = origin;
-        targetPosition = GetRandomPoint(origin, amplitude);
-        targetRotation = GetRandomRotation(originalRotation, amplitude);
+        targetPosition = GetRandomPoint(origin, Amplitude);
+        targetRotation = GetRandomRotation(originalRotation, Amplitude);
     }
 
     float timeToNextMove;
     void Update()
     {
-        if (decisionTime >= 0)
+        if (DecisionTime >= 0)
         {
             if (timeToNextMove <= 0)
             {
-                targetPosition = GetRandomPoint(origin, amplitude);
-                targetRotation = GetRandomRotation(originalRotation, amplitude);
-                timeToNextMove = decisionTime;
+                targetPosition = GetRandomPoint(origin, Amplitude);
+                targetRotation = GetRandomRotation(originalRotation, Amplitude);
+                timeToNextMove = DecisionTime;
             }
             else
             {
@@ -94,8 +95,8 @@ public class ShakeEffect : MonoBehaviour
         if (affectedParameters.HasFlag(TransformParameters.Position))
         {
             // Move towards the target (2 iterations)
-            secondaryTarget = Vector3.Lerp(secondaryTarget, targetPosition, speed * 2f * Time.deltaTime);
-            position = Vector3.Lerp(position, secondaryTarget, speed * Time.deltaTime);
+            secondaryTarget = Vector3.Lerp(secondaryTarget, targetPosition, Speed * 2f * Time.deltaTime);
+            position = Vector3.Lerp(position, secondaryTarget, Speed * Time.deltaTime);
             transform.localPosition = position;
         }
 
@@ -103,7 +104,7 @@ public class ShakeEffect : MonoBehaviour
         {
             // Rotate towards the target
             currentRotation = transform.localRotation;
-            newRotation = Quaternion.Lerp(currentRotation, targetRotation, speed * Time.deltaTime);
+            newRotation = Quaternion.Lerp(currentRotation, targetRotation, Speed * Time.deltaTime);
             transform.localRotation = newRotation;
         }
     }

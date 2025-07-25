@@ -27,6 +27,7 @@ public class Maestro : MonoBehaviour
     public static bool SongStarted = false;
     public static bool SongEnded = false;
     public static bool StoryboardEnded = false;
+    public static bool IsTutorial = false;
     public static float SongTime;
     public static int Bar;
     public static int Beat;
@@ -51,6 +52,7 @@ public class Maestro : MonoBehaviour
     public static void StartSong() {
         SongStarted = true;
         SongEnded = false;
+        IsTutorial = false;
         Jukebox.PlayScheduled(StartDelay);
         Jukebox.SetVolume(0.5f);
         SongTime = 0;
@@ -62,7 +64,7 @@ public class Maestro : MonoBehaviour
     {
         SongTime = 0;
         StartTime = (float)AudioSettings.dspTime + StartDelay;
-        InvokeRepeating("CheckCalibration", 3, 3);
+        InvokeRepeating("CheckCalibration", 1, 3);
     }
 
     void Update() {

@@ -20,6 +20,7 @@ public class TextboxBehaviour : MonoBehaviour
     [SerializeField] TextboxButton[] choiceButtons;
     [SerializeField] Transform tailTransform;
     [SerializeField] TMP_Text textboxText;
+    [SerializeField] GameObject doneIndicator;
     EventSystem eventSystem;
     Vector2 size = new Vector2(250f, 46f);
 
@@ -164,7 +165,7 @@ public class TextboxBehaviour : MonoBehaviour
         Vector2 yapperScreenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, yapper.transform.position);
 
         float yPos, xPos;
-        
+
         float above = Mathf.Sign(yapperScreenPos.y - rectTransform.position.y);
         yPos = above * rectTransform.rect.height * halfCanvasToScreen + rectTransform.position.y;
 
@@ -173,5 +174,10 @@ public class TextboxBehaviour : MonoBehaviour
 
         tailTransform.localScale = new Vector3(Mathf.Sign(xPos - rectTransform.position.x), above, 1f);
         tailTransform.position = new Vector2(Mathf.Lerp(tailTransform.position.x, xPos, .1f), yPos);
+    }
+
+    public void DoneIndicatorActive(bool status)
+    {
+        doneIndicator.SetActive(status);
     }
 }

@@ -46,6 +46,7 @@ public class PlayerSettingsUI : MonoBehaviour
             {
                 shown = false;
                 animation.Play("PlayerSettingsFadeout");
+                SFXManager.PlayDeepBlipDownSound();
                 EventSystem.current.SetSelectedGameObject(null);
                 playerSettings = new PlayerSettings { AudioLatency = Maestro.GlobalOffset, ScrollSpeed = Maestro.LaneSpeed };
                 StartCoroutine(ExtradataManager.SetExtraData($"Player/{HighscoreManager.PlayerName}/Settings", JsonUtility.ToJson(playerSettings)));
@@ -57,17 +58,22 @@ public class PlayerSettingsUI : MonoBehaviour
         {
             shown = true;
             animation.Play("PlayerSettingsFadein");
+            SFXManager.PlayDeepBlipUpSound();
             EventSystem.current.SetSelectedGameObject(scrollSpeedSetting.gameObject);
         }
 
         if (lastHorizontal != Input.GetAxis("P1_Horizontal"))
         {
             lastHorizontal = Input.GetAxis("P1_Horizontal");
-            if (lastHorizontal > .5)
+            if (lastHorizontal > .5) {
+                SFXManager.PlayHorizontalBlipSound();
                 ModifySetting(1);
+            }
 
-            else if (lastHorizontal < -.5)
+            else if (lastHorizontal < -.5) {
+                SFXManager.PlayHorizontalBlipSound();
                 ModifySetting(-1);
+            }
         }
         UpdateUI();
     }

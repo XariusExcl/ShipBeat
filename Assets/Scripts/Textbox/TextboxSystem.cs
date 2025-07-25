@@ -50,6 +50,7 @@ public class TextboxSystem : MonoBehaviour
 	{
 		if (instance.goTextbox.activeSelf && !Auto && Input.GetButtonDown("P1_B1"))
 		{
+			SFXManager.PlayHorizontalBlipSound();
 			if (typing)
 				skip = true;
 			else
@@ -90,6 +91,7 @@ public class TextboxSystem : MonoBehaviour
 
 	public static void DisplayNextSentence()
 	{
+		instance.textboxBehaviour.DoneIndicatorActive(false);
 		if (Textboxes.Count == 0)
 		{
 			instance.StopAllCoroutines();
@@ -283,6 +285,7 @@ public class TextboxSystem : MonoBehaviour
 		}
 		typing = false;
 		skip = false;
+		textboxBehaviour.DoneIndicatorActive(!Auto);
 	}
 
 	public static void EndDialogue()

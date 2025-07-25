@@ -19,7 +19,10 @@ public class TutorialStoryboard : MonoBehaviour
     static TutorialStoryboard instance;
     List<StoryboardTrigger> triggers = new List<StoryboardTrigger>
     {
-        new() { bar = 0, beat = 0, action = () => { instance.tutoBot.SetActive(true); } },
+        new() { bar = 0, beat = 0, action = () => {
+            Maestro.IsTutorial = true;
+            instance.tutoBot.SetActive(true);
+        } },
         new() { bar = 0, beat = 1, action = () => TextboxSystem.StartDialogue("tutorial_1", true) },
         new() { bar = 2, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
         new() { bar = 4, beat = 0, action = () => {

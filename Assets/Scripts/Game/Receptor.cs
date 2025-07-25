@@ -18,7 +18,7 @@ public class Receptor : MonoBehaviour {
 
     public void HandleInput(ButtonState buttonState)
     {
-        if (buttonState == ButtonState.Down)
+        if (buttonState == ButtonState.Pressed)
             BeamPress();
         else
             BeamRelease();

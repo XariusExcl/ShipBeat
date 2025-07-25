@@ -49,7 +49,9 @@ public class SongEntryUI : MonoBehaviour
 
     Vector3 CarousselToWorldPosition(int position)
     {
-        return new Vector3(-50f / (Mathf.Abs(position) + 1f), 32f * position, 0);
+        // return new Vector3(-50f / (Mathf.Abs(position) + 1f), 32f * position, 0);
+        return new Vector3((position == 0) ? -30f : 9f * position, 30f * position + ((position != 0) ? Math.Sign(position) * 4 : 0) , 0);
+
     }
 
     void Start()

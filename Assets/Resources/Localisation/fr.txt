@@ -16,6 +16,10 @@ $debug_test_no Non...
 Je ne suis pas sûre de pouvoir dire ce nom...
 [e:open]Essayez d'en saisir un autre.
 [!:RetrySelectingName]
+#guest_welcomeback
+[y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah ![e:open] Bienvenue agent [s:i][c:#00ffff][k:playerName][c:][s:].[o:camera] Heureuse de vous revoir ![e:smile]
+[e:open]Bonne chance pour vos prochaines missions ![e:handsConverse]
+[!:StartGame]
 #guest_tutoask
 [y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah ![e:smile] Vous voilà enfin agent._._.___ [s:i][c:#00ffff][k:playerName][c:][s:] ?[e:open][o:camera]
 [e:idleWag]Désolé si j'écorche votre nom ? Je ne vous trouve pas dans la base de données des pilotes._._.
@@ -34,7 +38,7 @@ $guest_tutoask_howdareyou Comment oses-tu...
 [!:StartTutorial]
 #tutorial_1
 [ts:200:46][tp:0:50][y:tutobot][s:i][c:#aaaaaa]*ksssht*[c:#ffffff][s:] Vous me reçevez ?___ Je vous contacte depuis le [s:i]Mothership.[s:]
-[e:smile][e:happyWag]Bienvenue sur [s:i]Elite Beat Airlines[s:] ! Je suis votre commandante de bord, TUT-0 !___ Hihi...
+[e:smile][e:happyWag]Bienvenue sur [s:i]Elite Beat Airlines[s:] ! Ici votre commandante de bord, TUT-0 !___ Hihi...
 [e:open][e:idleWag]Regardons ensemble sur les commandes du vaisseau.
 [e:handsConverse]Des débris vont apparaître sur le LIDAR, juste ici :
 [e:handsTogether]Pour les détruire, il faut appuyer sur le bon bouton, au bon moment !

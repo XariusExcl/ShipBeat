@@ -12,7 +12,7 @@ public class Judge : MonoBehaviour {
 
     public static void JudgePlayerInput(int id, ButtonState state) {
 
-        if (state == ButtonState.Down || state == ButtonState.Left || state == ButtonState.Right) {
+        if (state == ButtonState.Pressed || state == ButtonState.Left || state == ButtonState.Right) {
             if (notes[id].Count == 0) return;
             
             Note note = notes[id].Peek();
@@ -25,7 +25,7 @@ public class Judge : MonoBehaviour {
 
             notes[id].Dequeue();
 
-        } else if (state == ButtonState.Up) {
+        } else if (state == ButtonState.Released) {
             if (heldNotes.Count == 0) return;
             Note note = heldNotes.Find(n => n.Lane == id);
             if (note.Equals(default(Note))) return; // If no note was found. TODO: Does this work?
@@ -38,7 +38,8 @@ public class Judge : MonoBehaviour {
     }
 
     static void JudgeNoteHit(Note note, ButtonState state, float diff) {
-        if (state == ButtonState.Down || state == ButtonState.Left || state == ButtonState.Right) {
+        if (state == ButtonState.Pressed || state == ButtonState.Left || state == ButtonState.Right) {
+            SFXManager.PlayNoteHitSound();
             if (note.Lane != 0) { // Normal note
                 if (diff < PerfectHitWindow)
                     Scoring.AddPerfect();
@@ -64,7 +65,7 @@ public class Judge : MonoBehaviour {
                 NoteBehaviourManager.HideHead(note);
             }
 
-        } else if (state == ButtonState.Up) {
+        } else if (state == ButtonState.Released) {
             if (diff < BadHitWindow)
                 Scoring.AddPerfect();
             else

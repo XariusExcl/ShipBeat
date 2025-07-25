@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.Networking;
 using Anatidae;
-using System.Text;
 using UnityEngine.Events;
 
 public class MainMenuNavigation : MonoBehaviour
@@ -26,6 +25,7 @@ public class MainMenuNavigation : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(ExtradataManager.FetchExtraData());
         Jukebox.QueueSong(introMusic);
         Jukebox.QueueSong(introMusicLoop, true);
         // TODO: Is it okay if they are never disposed?
@@ -44,6 +44,7 @@ public class MainMenuNavigation : MonoBehaviour
 
     public void QuickPlayPressed()
     {
+        SFXManager.PlayHorizontalBlipSound();
         cameraDolly.MoveToNextWaypoint();
         quickPlayMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(quickPlayMenuFirstField);
@@ -56,6 +57,7 @@ public class MainMenuNavigation : MonoBehaviour
 
     public void QuickPlayBackPressed()
     {
+        SFXManager.PlayHorizontalBlipSound();
         cameraDolly.MoveToPreviousWaypoint();
         quickPlayMenu.SetActive(false);
         mainMenu.SetActive(true);
@@ -64,17 +66,20 @@ public class MainMenuNavigation : MonoBehaviour
 
     public void GuestAuth()
     {
+        SFXManager.PlayHorizontalBlipSound();
         eventSystem.SetSelectedGameObject(null);
         nameInput.UpdateName();
         // Check censor
         StartCoroutine(CheckIfNameValidCoroutine((valid) =>
         {
             if (valid)
-                TextboxSystem.StartDialogue("guest_tutoask");
+                if (ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/Settings") is not null)
+                    TextboxSystem.StartDialogue("guest_welcomeback");
+                else
+                    TextboxSystem.StartDialogue("guest_tutoask");
             else
                 TextboxSystem.StartDialogue("guest_badname");
-        }
-        ));
+        }));
     }
 
     public void ExitGame()
@@ -113,7 +118,6 @@ public class MainMenuNavigation : MonoBehaviour
             AudioFile = "/ShipBeat/StreamingAssets" + TutorialAudioPath
         });
 #endif
-        // No, I don't like this either.
 
         StartCoroutine(WaitForFileLoad());
     }
@@ -138,7 +142,8 @@ public class MainMenuNavigation : MonoBehaviour
         SceneManager.LoadScene("SongSelect");
     }
 
-    struct ValidNameResponse {
+    struct ValidNameResponse
+    {
         public bool valid;
     }
     IEnumerator CheckIfNameValidCoroutine(UnityAction<bool> callback)
@@ -146,7 +151,8 @@ public class MainMenuNavigation : MonoBehaviour
         using (UnityWebRequest request = UnityWebRequest.Post("http://localhost:3000/api/nameValid", $"{{\"name\": \"{HighscoreManager.PlayerName}\"}}", "application/json"))
         {
             yield return request.SendWebRequest();
-            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError) {
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+            {
                 Debug.LogError(request.error);
                 callback.Invoke(true);
             }
@@ -157,5 +163,12 @@ public class MainMenuNavigation : MonoBehaviour
                 callback.Invoke(validNameResponse.valid);
             }
         }
+    }
+
+    void OnDestroy()
+    {
+        DialogueTriggers.StartTutorial.RemoveListener(StartTutorial);
+        DialogueTriggers.StartGame.RemoveListener(StartGame);
+        DialogueTriggers.RetrySelectingName.RemoveListener(SelectFirstLetter);        
     }
 }

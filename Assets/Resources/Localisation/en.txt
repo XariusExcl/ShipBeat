@@ -16,6 +16,10 @@ $debug_test_no Non...
 I'm not sure I can say that...
 [e:open]Please input another name.
 [!:RetrySelectingName]
+#guest_welcomeback
+[y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah![e:open] Welcome back agent [s:i][c:#00ffff][k:playerName][c:][s:].[o:camera] I'm glad to see you![e:smile]
+[e:open]Good luck on your next missions![e:handsConverse]
+[!:StartGame]
 #guest_tutoask
 [y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah! [e:smile] There you are agent._._.___ [s:i][c:#00ffff][k:playerName][c:][s:]?[e:open][o:camera]
 [e:idleWag]My apologies if I mispronounced your name? I can't find you in the pilot database._._.
@@ -34,7 +38,7 @@ $guest_tutoask_howdareyou How dare you...
 [!:StartTutorial]
 #tutorial_1
 [ts:200:46][tp:0:50][y:tutobot][s:i][c:#aaaaaa]*ksssht*[c:#ffffff][s:] Do you read me?___ I'm contacting you from the [s:i]Mothership.[s:]
-[e:smile][e:happyWag]Welcome to [s:i]Elite Beat Airlines[s:]! I'm your flight commander, TUT-0!___ Hehe...
+[e:smile][e:happyWag]Welcome to [s:i]Elite Beat Airlines[s:]! This is your captain speaking, TUT-0!___ Hehe...
 [e:open][e:idleWag]Let's take a look at the ship's controls.
 [e:handsConverse]Debris will appear on the LIDAR, right here:
 [e:handsTogether]To destroy them, you need to press on the right button, at the right time!
