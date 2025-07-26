@@ -53,6 +53,7 @@ public class Maestro : MonoBehaviour
         SongStarted = true;
         SongEnded = false;
         IsTutorial = false;
+        Jukebox.Stop();
         Jukebox.PlayScheduled(StartDelay);
         Jukebox.SetVolume(0.5f);
         SongTime = 0;
@@ -64,7 +65,7 @@ public class Maestro : MonoBehaviour
     {
         SongTime = 0;
         StartTime = (float)AudioSettings.dspTime + StartDelay;
-        InvokeRepeating("CheckCalibration", 1, 3);
+        InvokeRepeating("CheckCalibration", 3, 3);
     }
 
     void Update() {

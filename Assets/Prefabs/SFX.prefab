@@ -64,7 +64,7 @@ MonoBehaviour:
   optionChangeSound: {fileID: 0}
   optionChangeVolume: 1
   noteHitSound: {fileID: 8300000, guid: d7c62aa189cf25142b40fe69ce9a25f6, type: 3}
-  noteHitVolume: 0.7
+  noteHitVolume: 1
   comboBreakSound: {fileID: 8300000, guid: 77cdfd712458e864cb78d65cb0f8b827, type: 3}
   comboBreakVolume: 1
 --- !u!82 &905530055191851990

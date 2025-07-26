@@ -1429,11 +1429,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556020414}
   m_CullTransparentMesh: 1
---- !u!1 &652095321 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7666317127593824575, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
-  m_PrefabInstance: {fileID: 8849653924814508606}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &718682108 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6454805405107162247, guid: bcd0d503c2beff7409287dd3b5984f02, type: 3}
@@ -12036,6 +12031,10 @@ MonoBehaviour:
   Speed: 1
   DecisionTime: 1
   Amplitude: 0.5
+  ChangesOnKiai: 1
+  kiaiSpeed: 2
+  kiaiDecisionTime: 0.5
+  kiaiAmplitude: 1
 --- !u!224 &1059790382 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5617585772250123, guid: 1faf43ad74fa0ff42a3243893f930658, type: 3}
@@ -12725,6 +12724,52 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!1 &1249535336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1249535337}
+  - component: {fileID: 1249535338}
+  m_Layer: 0
+  m_Name: JostleLayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1249535337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249535336}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2061979138}
+  m_Father: {fileID: 1929173909}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1249535338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249535336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ea94dc942d6a84fb21d569c09e9155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jostleAmount: 0.5
 --- !u!1 &1258862163
 GameObject:
   m_ObjectHideFlags: 0
@@ -12957,6 +13002,10 @@ MonoBehaviour:
   Speed: 1
   DecisionTime: 1
   Amplitude: 0.5
+  ChangesOnKiai: 1
+  kiaiSpeed: 2
+  kiaiDecisionTime: 0.5
+  kiaiAmplitude: 1
 --- !u!96 &1291281146 stripped
 TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 3135264888833855296, guid: a912707aa5a24264ea8e4190cced4801, type: 3}
@@ -13618,7 +13667,7 @@ MonoBehaviour:
   - {fileID: 1699132234}
   - {fileID: 718682108}
   playerShip: {fileID: 8849653924814508607}
-  otherShips: {fileID: 2061979139}
+  otherShips: {fileID: 1249535338}
 --- !u!1 &1655071180
 GameObject:
   m_ObjectHideFlags: 0
@@ -14217,6 +14266,10 @@ MonoBehaviour:
   Speed: 1
   DecisionTime: 1
   Amplitude: 0.5
+  ChangesOnKiai: 1
+  kiaiSpeed: 2
+  kiaiDecisionTime: 0.5
+  kiaiAmplitude: 1
 --- !u!1 &1928683740
 GameObject:
   m_ObjectHideFlags: 0
@@ -14384,7 +14437,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2019569410}
-  - {fileID: 2061979138}
+  - {fileID: 1249535337}
   m_Father: {fileID: 1197007482}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1929173910
@@ -14777,7 +14830,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2061979138}
-  - component: {fileID: 2061979139}
   - component: {fileID: 2061979140}
   m_Layer: 0
   m_Name: FriendlyShips
@@ -14794,7 +14846,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2061979137}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14802,21 +14854,8 @@ Transform:
   - {fileID: 1291281144}
   - {fileID: 1750066110}
   - {fileID: 370460037}
-  m_Father: {fileID: 1929173909}
+  m_Father: {fileID: 1249535337}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2061979139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061979137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ea94dc942d6a84fb21d569c09e9155, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jostleAmount: 0.5
 --- !u!114 &2061979140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14829,7 +14868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fdbce98421248a4199bd806f613d6e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kiaiPosition: {x: 0, y: 0, z: -13}
+  kiaiPosition: {x: 0, y: 0, z: -8}
   kiaiScale: {x: 1, y: 1, z: 2.5}
   shipTrails:
   - {fileID: 1291281147}
@@ -15331,6 +15370,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1197007482}
     m_Modifications:
+    - target: {fileID: 1273912247039391295, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
+      propertyPath: kiaiSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1273912247039391295, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
+      propertyPath: ChangesOnKiai
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1273912247039391295, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
+      propertyPath: kiaiAmplitude
+      value: 0.075
+      objectReference: {fileID: 0}
+    - target: {fileID: 1273912247039391295, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
+      propertyPath: kiaiDecisionTime
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 4457176333008241637, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -15381,37 +15436,19 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4457176333008241637, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1107104763}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7666317127593824575, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8849653924814508609}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
 --- !u!114 &8849653924814508607 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1626173264164878314, guid: 10eb0d35c96975042895b363b340bfc1, type: 3}
   m_PrefabInstance: {fileID: 8849653924814508606}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652095321}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4ea94dc942d6a84fb21d569c09e9155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8849653924814508609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652095321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5de6f74547100ce499cf5119968bd9fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kiaiSpeed: 10
-  kiaiDecisionTime: 0.05
-  kiaiAmplitude: 0.075
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

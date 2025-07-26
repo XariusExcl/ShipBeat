@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-
 public class ShakeEffect : MonoBehaviour
 {
     [System.Flags]
@@ -16,6 +15,14 @@ public class ShakeEffect : MonoBehaviour
     [SerializeField] public float Speed = 5f;
     [SerializeField] public float DecisionTime = .1f;
     [SerializeField] public float Amplitude;
+    [SerializeField] bool ChangesOnKiai;
+    float normalSpeed;
+    [SerializeField] float kiaiSpeed;
+    float normalDecisionTime;
+    [SerializeField] float kiaiDecisionTime;
+    float normalAmplitude;
+    [SerializeField] float kiaiAmplitude;
+
     Vector3 origin;
     Vector3 targetPosition;
     Vector3 secondaryTarget;
@@ -73,6 +80,34 @@ public class ShakeEffect : MonoBehaviour
         position = origin;
         targetPosition = GetRandomPoint(origin, Amplitude);
         targetRotation = GetRandomRotation(originalRotation, Amplitude);
+        if (ChangesOnKiai)
+        {
+            normalSpeed = Speed;
+            normalDecisionTime = DecisionTime;
+            normalAmplitude = Amplitude;
+            Maestro.OnKiaiStart.AddListener(SetKiaiShake);
+            Maestro.OnKiaiEnd.AddListener(SetNormalShake);
+        }
+    }
+
+    void SetNormalShake()
+    {
+        SetSpeed(normalSpeed);
+        SetDecisionTime(normalDecisionTime);
+        SetDistance(normalAmplitude);
+    }
+
+    void SetKiaiShake()
+    {
+        SetSpeed(kiaiSpeed);
+        SetDecisionTime(kiaiDecisionTime);
+        SetDistance(kiaiAmplitude);
+    }
+
+    void OnDestroy()
+    {
+        Maestro.OnKiaiStart.RemoveListener(SetKiaiShake);
+        Maestro.OnKiaiEnd.RemoveListener(SetNormalShake);
     }
 
     float timeToNextMove;
@@ -118,5 +153,4 @@ public class ShakeEffect : MonoBehaviour
     {
         return originalRotation * Quaternion.Euler(Random.Range(-maxAngle, maxAngle), Random.Range(-maxAngle, maxAngle), Random.Range(-maxAngle, maxAngle));
     }
-
 }

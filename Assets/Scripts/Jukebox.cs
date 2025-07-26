@@ -40,8 +40,12 @@ public class Jukebox : MonoBehaviour
         }));
     }
 
-
     public static void Play()
+    {
+        Instance.audioSource.Play();
+    }
+
+    public void InstancePlay()
     {
         Instance.audioSource.Play();
     }
@@ -52,7 +56,9 @@ public class Jukebox : MonoBehaviour
     public static void PlayScheduled(float delay)
     {
         ClearQueue();
-        Instance.audioSource.PlayScheduled(AudioSettings.dspTime + delay);
+        // Instance.audioSource.PlayScheduled(AudioSettings.dspTime + delay);
+        // WEBGL FIX because lmao https://discussions.unity.com/t/audiosource-playscheduled-causes-problems-in-webgl-build/917494/7
+        Instance.Invoke("InstancePlay", delay);
     }
 
     public static void Pause()
@@ -63,6 +69,7 @@ public class Jukebox : MonoBehaviour
     public static void Stop()
     {
         Instance.audioSource.Stop();
+        Instance.audioSource.timeSamples = 0;
     }
 
     public static void SetVolume(float volume)

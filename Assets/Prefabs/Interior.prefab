@@ -149,3 +149,7 @@ MonoBehaviour:
   Speed: 2
   DecisionTime: 1
   Amplitude: 0.05
+  ChangesOnKiai: 0
+  kiaiSpeed: 0
+  kiaiDecisionTime: 0
+  kiaiAmplitude: 0
