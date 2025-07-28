@@ -11,6 +11,7 @@ public class BeatmapHighscoreUI : MonoBehaviour
     [SerializeField] TMP_Text percentage;
     [SerializeField] TMP_Text rank;
     [SerializeField] Image rankBorder;
+    [SerializeField] Image fcBorder;
     [SerializeField] Image rankBg;
     [SerializeField] SongSelectSceneData songSelectSceneData;
 
@@ -33,7 +34,7 @@ public class BeatmapHighscoreUI : MonoBehaviour
         percentage.text = $"{data.Percentage:F2}%";
         rank.text = data.Rank.ToString();
 
-        Color rankColor = new();
+        Color rankColor;
         switch (data.Rank)
         {
             case 'P':
@@ -61,6 +62,11 @@ public class BeatmapHighscoreUI : MonoBehaviour
 
         rankBorder.color = rankColor;
         rankBg.color = new Color(rankColor.r, rankColor.g, rankColor.b, .1f);
+        if (data.Misses == 0 && data.Bads == 0)
+        {
+            fcBorder.color = rankColor;
+            fcBorder.gameObject.SetActive(true);    
+        } else fcBorder.gameObject.SetActive(false);    
     }
 
     public void SetBlank()
@@ -72,6 +78,7 @@ public class BeatmapHighscoreUI : MonoBehaviour
         rank.text = "";
         rankBorder.color = songSelectSceneData.fRankColor;
         rankBg.color = new Color(songSelectSceneData.fRankColor.r, songSelectSceneData.fRankColor.g, songSelectSceneData.fRankColor.b, .1f);
+        fcBorder.gameObject.SetActive(false);
     }
 
     public void Hide()
