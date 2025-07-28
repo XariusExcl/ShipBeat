@@ -16,12 +16,12 @@ public class SFXManager : MonoBehaviour
     [SerializeField][Range(0f, 1f)] float deepBlipDownpVolume = 1f;
     [SerializeField] AudioClip scrollSound;
     [SerializeField][Range(0f, 1f)] float scrollVolume = 1f;
+    [SerializeField] AudioClip rollSound;
+    [SerializeField][Range(0f, 1f)] float rollVolume = 1f;
     [SerializeField] AudioClip selectSound;
     [SerializeField][Range(0f, 1f)] float selectVolume = 1f;
     [SerializeField] AudioClip returnSound;
     [SerializeField][Range(0f, 1f)] float returnVolume = 1f;
-    [SerializeField] AudioClip optionChangeSound;
-    [SerializeField][Range(0f, 1f)] float optionChangeVolume = 1f;
     [SerializeField] AudioClip noteHitSound;
     [SerializeField][Range(0f, 1f)] float noteHitVolume = 1f;
     [SerializeField] AudioClip comboBreakSound;
@@ -53,18 +53,22 @@ public class SFXManager : MonoBehaviour
     {
         Instance.audioSource.PlayOneShot(Instance.scrollSound, Instance.scrollVolume);
     }
+
+    public static void PlayRollSound()
+    {
+        Instance.audioSource.PlayOneShot(Instance.rollSound, Instance.rollVolume);
+    }
+
     public static void PlaySelectSound()
     {
         Instance.audioSource.PlayOneShot(Instance.selectSound, Instance.selectVolume);
     }
+
     public static void PlayReturnSound()
     {
         Instance.audioSource.PlayOneShot(Instance.returnSound, Instance.returnVolume);
     }
-    public static void PlayOptionChangeSound()
-    {
-        Instance.audioSource.PlayOneShot(Instance.optionChangeSound, Instance.optionChangeVolume);
-    }
+
     public static void PlayVerticalBlipSound()
     {
         Instance.audioSource.PlayOneShot(Instance.verticalBlipSound, Instance.verticalBlipVolume);

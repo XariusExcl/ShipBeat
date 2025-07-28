@@ -57,12 +57,12 @@ MonoBehaviour:
   deepBlipDownpVolume: 0.6
   scrollSound: {fileID: 8300000, guid: 4f69bac916254494ba39f9102c014604, type: 3}
   scrollVolume: 1
+  rollSound: {fileID: 0}
+  rollVolume: 1
   selectSound: {fileID: 8300000, guid: 9490fcbd19625ef4986563c24fa6aaf7, type: 3}
   selectVolume: 0.6
   returnSound: {fileID: 8300000, guid: bf6e62d84d575c54aaa61603b7014f04, type: 3}
   returnVolume: 1
-  optionChangeSound: {fileID: 0}
-  optionChangeVolume: 1
   noteHitSound: {fileID: 8300000, guid: d7c62aa189cf25142b40fe69ce9a25f6, type: 3}
   noteHitVolume: 1
   comboBreakSound: {fileID: 8300000, guid: 77cdfd712458e864cb78d65cb0f8b827, type: 3}

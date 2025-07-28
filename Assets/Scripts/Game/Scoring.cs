@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Anatidae;
+using NUnit.Framework;
 using UnityEngine;
 
 [Serializable]
@@ -13,32 +14,27 @@ public class Scoring
 {
     public static int Score { get; private set; } = 0;
     public static int Combo { get; private set; } = 0;
-    public static int MaxCombo { get; private set; } = 0;
+    public static int BestCombo { get; private set; } = 0;
     public static int Perfects { get; private set; } = 0;
     public static int Goods { get; private set; } = 0;
     public static int Bads { get; private set; } = 0;
     public static int Misses { get; private set; } = 0;
     public static float Percentage { get; private set; } = 0;
     public static char Rank { get { return GetRank(); } }
+    public static bool IsPersonalHighscore;
+    public static bool IsCabHighscore;
     public static void Reset()
     {
-        Score = 0;
-        Combo = 0;
-        MaxCombo = 0;
-        Perfects = 0;
-        Goods = 0;
-        Bads = 0;
-        Misses = 0;
+        Score = Combo = BestCombo = Perfects = Goods = Bads = Misses = 0;
         Percentage = 100;
+        IsPersonalHighscore = IsCabHighscore = false;
     }
 
     public static void AddScore(int score)
     {
         Score += score;
-        GameUIManager.UpdateScore(Score);
         GameUIManager.UpdateCombo(Combo);
         CalculatePercentage();
-        GameUIManager.UpdatePercentage(Percentage);
     }
 
     public static void AddPerfect()
@@ -46,7 +42,7 @@ public class Scoring
         Perfects++;
         Combo++;
         AddScore(100);
-        if (Combo > MaxCombo) MaxCombo = Combo;
+        if (Combo > BestCombo) BestCombo = Combo;
         GameUIManager.ShowTicker(TickerType.Perfect);
     }
 
@@ -55,7 +51,7 @@ public class Scoring
         Goods++;
         Combo++;
         AddScore(50);
-        if (Combo > MaxCombo) MaxCombo = Combo;
+        if (Combo > BestCombo) BestCombo = Combo;
         GameUIManager.ShowTicker(TickerType.Good);
     }
 
@@ -104,28 +100,28 @@ public class Scoring
         HighscoreList highscores = new();
         highscores.list = new();
         string json = ExtradataManager.GetDataWithKey($"Scores/{info.Title}_{info.DifficultyName}");
+        
         if (json is null)
-        {
             highscores.list.Add(CreateHighscore());
-        }
         else
         {
             highscores = JsonUtility.FromJson<HighscoreList>(json);
             if (highscores.list.Count == 0)
-            {
                 highscores.list.Add(CreateHighscore());
-            }
             else
             {
                 int index = highscores.list.FindIndex(h => h.PlayerName == HighscoreManager.PlayerName);
                 if (index != -1)
-                {
-                    if (highscores.list[index].Percentage < Percentage)
+                    if (highscores.list[index].Percentage < Percentage) // Highscore is beaten
                     {
+                        if (highscores.list[0].Percentage < Percentage)
+                            IsCabHighscore = true;
+                            
+                        IsPersonalHighscore = true;
                         BeatmapHighscore updatedHighscore = highscores.list[index];
                         updatedHighscore.Score = Score;
                         updatedHighscore.Combo = Combo;
-                        updatedHighscore.MaxCombo = MaxCombo;
+                        updatedHighscore.MaxCombo = BestCombo;
                         updatedHighscore.Timestamp = DateTime.Now.ToString("o");
                         updatedHighscore.Perfects = Perfects;
                         updatedHighscore.Goods = Goods;
@@ -136,15 +132,7 @@ public class Scoring
                         highscores.list[index] = updatedHighscore;
                     }
                     else
-                    {
-                        // Score not beaten
-                    }
-                }
-                else
-                {
-                    // No scores for this player, create a new score
-                    highscores.list.Add(CreateHighscore());
-                }
+                        highscores.list.Add(CreateHighscore()); // No scores for this player, create a new score
             }
         }
         highscores.list.Sort((a, b) => b.Score - a.Score);
@@ -158,7 +146,7 @@ public class Scoring
             PlayerName = HighscoreManager.PlayerName ?? "GUE",
             Score = Score,
             Combo = Combo,
-            MaxCombo = MaxCombo,
+            MaxCombo = BestCombo,
             Timestamp = DateTime.Now.ToString("o"),
             Percentage = Percentage,
             Perfects = Perfects,

@@ -55,7 +55,7 @@ public class SongCaroussel : MonoBehaviour
     }
     void Update()
     {
-        if (!HasFocus || !SongFolderReader.IsDataLoaded) return;
+        if (!HasFocus || SongSelectReadyMenu.IsValidated || !SongFolderReader.IsDataLoaded) return;
 
         if (lastVertical != Input.GetAxis("P1_Vertical"))
         {

@@ -5,6 +5,7 @@ using System;
 public class GameUIManager : MonoBehaviour
 {
     static GameUIManager Instance;
+    public static bool IsHighscore;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI percentageText;
     [SerializeField] TextMeshProUGUI comboText;
@@ -23,9 +24,10 @@ public class GameUIManager : MonoBehaviour
         Instance = this;
     }
 
+    static int uiScore = 0;
+    static float uiPercentage = 0;
     void Update()
     {
-        
         if (!Maestro.IsTutorial && Maestro.SongTime > 2 && Maestro.SongTime < SongLoader.LoadedSong.Info.SongStart - 2)
             skipButton.SetActive(true);
         else
@@ -54,12 +56,6 @@ public class GameUIManager : MonoBehaviour
     {
         Instance.ticker.ShowTicker(type);
     }
-    static int uiScore = 0;
-    static float uiPercentage = 0;
-    public static void UpdateScore(int score)
-    {
-        // Maybe something here?
-    }
 
     public static void UpdateCombo(int combo)
     {
@@ -71,15 +67,10 @@ public class GameUIManager : MonoBehaviour
         Instance.comboText.text = "";
     }
 
-    public static void UpdatePercentage(float percentage)
-    {
-        // Maybe something here?
-    }
-
     public static void ShowResults()
     {
         Instance.resultsScreen.gameObject.SetActive(true);
-        Instance.resultsScreen.ShowResults(Scoring.Perfects, Scoring.Goods, Scoring.Bads, Scoring.Misses, Scoring.Percentage, Scoring.Rank);
+        Instance.resultsScreen.ShowResults();
     }
 
     public static void ReturnToSongSelect()
