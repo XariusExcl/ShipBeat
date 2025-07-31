@@ -90,13 +90,13 @@ public class ResultScreenUI : MonoBehaviour
 
         float t = 0f;
         float fillAmount = 0f;
-        while (fillAmount <= Scoring.Percentage * 0.01f - 0.01f)
+        while ((2f - Scoring.Percentage * 0.01f) * (t * .5f - 1f) < 1)
         {
             if (t > 0.95) tmp_PerfectCount.text = Mathf.Round(Scoring.Perfects * easeOutCubic(Math.Clamp(t - 1f, 0f, 1f))).ToString();
             if (t > 1.2) tmp_GoodCount.text = Mathf.Round(Scoring.Goods * easeOutCubic(Math.Clamp(t - 1.25f, 0f, 1f))).ToString();
             if (t > 1.45) tmp_BadCount.text = Mathf.Round(Scoring.Bads * easeOutCubic(Math.Clamp(t - 1.5f, 0f, 1f))).ToString();
             if (t > 1.7) tmp_MissCount.text = Mathf.Round(Scoring.Misses * easeOutCubic(Math.Clamp(t - 1.75f, 0f, 1f))).ToString();
-            if (t > 1.95) fillAmount = Scoring.Percentage * 0.01f * easeOutCubic(Math.Clamp((2f - Scoring.Percentage * 0.01f)*(t * .5f - 1f), 0f, 1f));
+            fillAmount = Scoring.Percentage * 0.01f * easeOutCubic(Math.Clamp((2f - Scoring.Percentage * 0.01f) * (t * .5f - 1f), 0f, 1f));
             rankRing.fillAmount = fillAmount;
             t += Time.deltaTime;
             yield return new WaitForEndOfFrame();

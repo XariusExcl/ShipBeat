@@ -23,6 +23,7 @@ public class Scoring
     public static char Rank { get { return GetRank(); } }
     public static bool IsPersonalHighscore;
     public static bool IsCabHighscore;
+    public static int TotalScore;
     public static void Reset()
     {
         Score = Combo = BestCombo = Perfects = Goods = Bads = Misses = 0;
@@ -99,6 +100,15 @@ public class Scoring
         SongInfo info = SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex];
         HighscoreList highscores = new();
         highscores.list = new();
+
+        try
+        {
+            TotalScore = int.Parse(ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore"));
+        }
+        catch (Exception e)
+        {
+            TotalScore = 0;
+        }
         string json = ExtradataManager.GetDataWithKey($"Scores/{info.Title}_{info.DifficultyName}");
         
         if (json is null)
@@ -112,11 +122,13 @@ public class Scoring
             {
                 int index = highscores.list.FindIndex(h => h.PlayerName == HighscoreManager.PlayerName);
                 if (index != -1)
+                {
                     if (highscores.list[index].Percentage < Percentage) // Highscore is beaten
                     {
                         if (highscores.list[0].Percentage < Percentage)
                             IsCabHighscore = true;
-                            
+
+                        TotalScore += Score - highscores.list[index].Score;
                         IsPersonalHighscore = true;
                         BeatmapHighscore updatedHighscore = highscores.list[index];
                         updatedHighscore.Score = Score;
@@ -131,8 +143,13 @@ public class Scoring
 
                         highscores.list[index] = updatedHighscore;
                     }
-                    else
-                        highscores.list.Add(CreateHighscore()); // No scores for this player, create a new score
+                }
+                else
+                {
+                    // No scores for this player, create a new score
+                    highscores.list.Add(CreateHighscore());
+                    TotalScore += Score;
+                }
             }
         }
         highscores.list.Sort((a, b) => b.Score - a.Score);

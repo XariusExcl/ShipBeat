@@ -118,8 +118,12 @@ public class Maestro : MonoBehaviour
 
     void EndSong() {
         SongEnded = true;
-        if (SongFolderReader.SongInfos.Count != 0) // Special case to not save a score when testing
+        if (SongFolderReader.SongInfos.Count != 0)
+        {
+            // Special case to not save a score when testing
             StartCoroutine(ExtradataManager.SetExtraData($"Scores/{SongLoader.LoadedSong.Info.Title}_{SongLoader.LoadedSong.Info.DifficultyName}", Scoring.SaveScore()));
+            StartCoroutine(ExtradataManager.SetExtraData($"Player/{HighscoreManager.PlayerName}/TotalScore", Scoring.TotalScore.ToString()));
+        }
         GameUIManager.ShowResults();
     }
     void CheckCalibration() {

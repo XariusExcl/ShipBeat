@@ -39,7 +39,7 @@ $guest_tutoask_howdareyou Comment oses-tu...
 #tutorial_1
 [ts:200:46][tp:0:50][y:tutobot][s:i][c:#aaaaaa]*ksssht*[c:#ffffff][s:] Vous me reçevez ?___ Je vous contacte depuis le [s:i]Mothership.[s:]
 [e:smile][e:happyWag]Bienvenue sur [s:i]Elite Beat Airlines[s:] ! Ici votre commandante de bord, TUT-0 !___ Hihi...
-[e:open][e:idleWag]Regardons ensemble sur les commandes du vaisseau.
+[e:open][e:idleWag]Regardons ensemble les commandes du vaisseau.
 [e:handsConverse]Des débris vont apparaître sur le LIDAR, juste ici :
 [e:handsTogether]Pour les détruire, il faut appuyer sur le bon bouton, au bon moment !
 Allez, c'est à vous ![e:handsIdle]
