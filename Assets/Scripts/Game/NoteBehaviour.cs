@@ -57,7 +57,7 @@ public class NoteBehaviour : MonoBehaviour
 
         Note = note;
         switch (note.Lane) {
-            case 0: // Slam Left
+            case 0: // Slam
                 noteDodgeModel.SetActive(true);
                 break;
             case 1: case 2: case 3: // Block

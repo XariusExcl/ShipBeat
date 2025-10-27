@@ -28,7 +28,7 @@ public class Lane : MonoBehaviour
             lineRenderer.positionCount = laneResolution;
             for (int i = 0; i < lineRenderer.positionCount; i++)
             {
-                lineRenderer.SetPosition(i, (Vector3)SplineContainer.EvaluatePosition(i / (float)lineRenderer.positionCount));
+                lineRenderer.SetPosition(i, (Vector3)SplineContainer.EvaluatePosition(i / (float)(lineRenderer.positionCount - 1) ));
             }
         }
 

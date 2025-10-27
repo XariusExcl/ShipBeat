@@ -28,7 +28,6 @@ public class MainMenuNavigation : MonoBehaviour
         StartCoroutine(ExtradataManager.FetchExtraData());
         Jukebox.QueueSong(introMusic);
         Jukebox.QueueSong(introMusicLoop, true);
-        // TODO: Is it okay if they are never disposed?
         DialogueTriggers.StartTutorial.AddListener(StartTutorial);
         DialogueTriggers.StartGame.AddListener(StartGame);
         DialogueTriggers.RetrySelectingName.AddListener(SelectFirstLetter);

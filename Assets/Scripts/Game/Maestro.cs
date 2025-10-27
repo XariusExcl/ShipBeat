@@ -130,7 +130,7 @@ public class Maestro : MonoBehaviour
         if (!SongStarted || SongEnded) return;
         float delay = Jukebox.GetPlaybackPosition() - SongTime + GlobalOffset;
         if (Mathf.Abs(delay) > .020) {
-            Debug.Log($"Song is {Mathf.Abs(delay) * 1000:F0} ms {(delay > 0 ? "early":"late")}.Recalibrate!");
+            Debug.Log($"Song is {Mathf.Abs(delay) * 1000:F0} ms {(delay > 0 ? "early" : "late")}.Recalibrate!");
             Jukebox.SetPlaybackPosition(SongTime - GlobalOffset);
         }
     }

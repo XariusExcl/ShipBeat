@@ -7,6 +7,6 @@ public class PlayerInfoScoreUI : MonoBehaviour
 
     void OnEnable()
     {
-        agentScore.text = $"{Scoring.TotalScore / 1000000f}<size=60%>.{(int)(Scoring.TotalScore % 1000000f / 1000):D3} <size=100%>M<size=60%>";
+        agentScore.text = $"{(int)(Scoring.TotalScore / 1000000f)}<size=60%>.{(int)(Scoring.TotalScore % 1000000f / 1000):D3} <size=100%>M<size=60%>";
     }
 }

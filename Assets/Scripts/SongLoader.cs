@@ -118,6 +118,7 @@ public class SongLoader : MonoBehaviour
         LaneManager.SetLaneCount(LoadedSong.Info.LaneCount);
         Maestro.TimingPoints = LoadedSong.TimingPoints.ToList();
         Maestro.StartSong();
+        BeatMarkerGenerator.SongReady();
     }
 
     float lastNoteTime = 0;

@@ -559,6 +559,10 @@ PrefabInstance:
       propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4430364562257540239, guid: 773eefb0375a31440970ceae728c91d0, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 0.3019608
+      objectReference: {fileID: 0}
     - target: {fileID: 5963582473891189099, guid: 773eefb0375a31440970ceae728c91d0, type: 3}
       propertyPath: m_Name
       value: LoginButton
@@ -566,6 +570,22 @@ PrefabInstance:
     - target: {fileID: 8030894458207320952, guid: 773eefb0375a31440970ceae728c91d0, type: 3}
       propertyPath: m_text
       value: Se connecter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8030894458207320952, guid: 773eefb0375a31440970ceae728c91d0, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.39812505
+      objectReference: {fileID: 0}
+    - target: {fileID: 8030894458207320952, guid: 773eefb0375a31440970ceae728c91d0, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.39812505
+      objectReference: {fileID: 0}
+    - target: {fileID: 8030894458207320952, guid: 773eefb0375a31440970ceae728c91d0, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.41509432
+      objectReference: {fileID: 0}
+    - target: {fileID: 8030894458207320952, guid: 773eefb0375a31440970ceae728c91d0, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4284900970
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1287,7 +1307,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0

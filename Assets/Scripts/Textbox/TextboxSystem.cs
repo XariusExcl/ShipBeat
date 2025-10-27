@@ -74,7 +74,6 @@ public class TextboxSystem : MonoBehaviour
 		if (!LocalisationFileParser.TextLibrary.ContainsKey(dialogueId))
 		{
 			Debug.LogWarning("DialogueManager : \"" + dialogueId + "\" ID does not exist!");
-			// TODO : default dialogue ID ?
 			EndDialogue();
 		}
 		else

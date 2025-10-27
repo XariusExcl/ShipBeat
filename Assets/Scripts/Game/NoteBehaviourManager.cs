@@ -21,31 +21,16 @@ public class NoteBehaviourManager : MonoBehaviour
         prewarmedNoteBehaviour.StartCoroutine(prewarmedNoteBehaviour.CycleModels());
 
         // Create a pool of notes
-        for (int i = 0; i < 10; i++)
-        {
-            GameObject noteObject = Instantiate(notePrefab, transform);
-            noteObject.transform.position = new Vector3(0, -10, 0); 
-            NoteBehaviour noteBehaviour = noteObject.GetComponent<NoteBehaviour>();
-            noteBehaviour.ReturnToPool();
-            noteBehaviours.Add(noteBehaviour);
-        }
+        CreateNotes(10);
     }
 
     NoteBehaviour FetchNoteFromPool()
     {
         NoteBehaviour noteBehaviour = noteBehaviours.Find(note => note.PoolState == NotePoolState.InPool);
-        // If none are available, create new ones
         if (noteBehaviour == null)
         {
-            for (int i = 0; i < 5; i++)
-            {
-                GameObject noteObject = Instantiate(notePrefab, transform);
-                noteObject.transform.position = new Vector3(0, -10, 0); 
-                NoteBehaviour newNoteBehaviour = noteObject.GetComponent<NoteBehaviour>();
-                newNoteBehaviour.ReturnToPool();
-                noteBehaviours.Add(newNoteBehaviour);
-            }
-            noteBehaviour = noteBehaviours.Find(note => note.PoolState == NotePoolState.InPool);
+            CreateNotes(5);
+            noteBehaviour = noteBehaviours[^1];
         }
         return noteBehaviour;
     }
@@ -87,12 +72,26 @@ public class NoteBehaviourManager : MonoBehaviour
     /// <summary>
     /// Hides the head of a note for when a long note is being held.
     /// </summary>
-    public static void HideHead(Note note) {
+    public static void HideHead(Note note)
+    {
         NoteBehaviour noteBehaviour = Instance.noteBehaviours.Find(noteb => noteb.Note.Id == note.Id);
-        if (noteBehaviour == null) {
+        if (noteBehaviour == null)
+        {
             Debug.LogError($"Note {note.Id} not found in pool!");
             return;
-        }       
+        }
         noteBehaviour.HideHead();
+    }
+    
+    void CreateNotes(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            GameObject noteObject = Instantiate(notePrefab, transform);
+            noteObject.transform.position = new Vector3(0, -10, 0); 
+            NoteBehaviour newNoteBehaviour = noteObject.GetComponent<NoteBehaviour>();
+            newNoteBehaviour.ReturnToPool();
+            noteBehaviours.Add(newNoteBehaviour);
+        }
     }
 }

@@ -35,12 +35,6 @@ public class ResultScreenUI : MonoBehaviour
         Invoke(nameof(RollSound), 1.95f);
     }
 
-    // THIS IS A TEST DELETE ME
-    void Start()
-    {
-        ShowResults();
-    }
-
     void ShuffleSound()
     {
         audioSource.PlayOneShot(shuffleSound);

@@ -39,10 +39,6 @@ public class TestExtradataStorage : MonoBehaviour
         {
             if (ExtradataManager.ExtraData.Count == 0)
                 Debug.Log("No extra data found.");
-
-            foreach (var kvp in ExtradataManager.ExtraData)
-                Debug.Log($"Fetched: [{kvp.key}] = \"{kvp.value}\"");
-
         }
         else
             Debug.LogWarning("Extradata unavailable (server is offline).");

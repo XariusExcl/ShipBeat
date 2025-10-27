@@ -30,8 +30,8 @@ public class SongInfoPanelUI : MonoBehaviour
         Color diffColor = songSelectSceneData.GetColorForRatingUI(song.DifficultyRating);
         bg.color = new Color(diffColor.r, diffColor.g, diffColor.b, 0.5f);
         title.text = song.Title;
-        artist.text = song.Artist;
-        creator.text = song.Creator;
+        artist.text = $"<i>de </i>{song.Artist}";
+        creator.text = $"<i>beatmap par </i>{song.Creator}";
         difficultyRating.text = song.DifficultyRating.ToString();
         length.text = TimeSpan.FromSeconds(song.Length).ToString(@"mm\:ss");
         bpm.text = song.BPM.ToString();

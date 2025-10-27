@@ -29,6 +29,14 @@ public class Scoring
         Score = Combo = BestCombo = Perfects = Goods = Bads = Misses = 0;
         Percentage = 100;
         IsPersonalHighscore = IsCabHighscore = false;
+        try
+        {
+            TotalScore = int.Parse(ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore"));
+        }
+        catch (Exception e)
+        {
+            TotalScore = 0;
+        }
     }
 
     public static void AddScore(int score)
@@ -101,14 +109,6 @@ public class Scoring
         HighscoreList highscores = new();
         highscores.list = new();
 
-        try
-        {
-            TotalScore = int.Parse(ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore"));
-        }
-        catch (Exception e)
-        {
-            TotalScore = 0;
-        }
         string json = ExtradataManager.GetDataWithKey($"Scores/{info.Title}_{info.DifficultyName}");
         
         if (json is null)
