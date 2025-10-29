@@ -3,7 +3,22 @@ guid: ab09a183d15bd2340b896be06dfde290
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Neon
+    second: {fileID: 2100000, guid: ff09535960918ed4088e93f69dc829bc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ShipDark
+    second: {fileID: 2100000, guid: 1f247c148f8cbe846b474db90701d7fa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ShipWhite
+    second: {fileID: 2100000, guid: 16d074c2aff1fb841b9ae9580304900b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

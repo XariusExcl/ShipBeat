@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   receptor: {fileID: 4988055107739034684}
+  laneResolution: 2
   SplineContainer: {fileID: 0}
   ExtrapolationVector: {x: 0, y: 0, z: 0}
 --- !u!120 &5146869390329069478
@@ -171,6 +172,8 @@ LineRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -192,6 +195,7 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -273,14 +277,6 @@ PrefabInstance:
       propertyPath: m_MaxSpeed
       value: 20.880615
       objectReference: {fileID: 0}
-    - target: {fileID: 1346478536980298766, guid: 972c9b968ea036a47a55e3352db17c4e, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1346478536980298766, guid: 972c9b968ea036a47a55e3352db17c4e, type: 3}
-      propertyPath: m_StartOffset
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1837663516053978528, guid: 972c9b968ea036a47a55e3352db17c4e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -321,9 +317,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2295920359548204154, guid: 972c9b968ea036a47a55e3352db17c4e, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078784159651373722, guid: 972c9b968ea036a47a55e3352db17c4e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078784159651373722, guid: 972c9b968ea036a47a55e3352db17c4e, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3252874153373385646, guid: 972c9b968ea036a47a55e3352db17c4e, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252874153373385646, guid: 972c9b968ea036a47a55e3352db17c4e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252874153373385646, guid: 972c9b968ea036a47a55e3352db17c4e, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4075274023065438983, guid: 972c9b968ea036a47a55e3352db17c4e, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5132642381795667340, guid: 972c9b968ea036a47a55e3352db17c4e, type: 3}
       propertyPath: m_IsActive
@@ -332,6 +352,14 @@ PrefabInstance:
     - target: {fileID: 5824803514382473873, guid: 972c9b968ea036a47a55e3352db17c4e, type: 3}
       propertyPath: m_Name
       value: NoteHitTarget
+      objectReference: {fileID: 0}
+    - target: {fileID: 6226077438946036551, guid: 972c9b968ea036a47a55e3352db17c4e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8872769479230578107, guid: 972c9b968ea036a47a55e3352db17c4e, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8876101456231482534, guid: 972c9b968ea036a47a55e3352db17c4e, type: 3}
       propertyPath: m_ConstrainProportionsScale

@@ -9,7 +9,7 @@ public class Receptor : MonoBehaviour {
 
     Coroutine beamCoroutine;
     Color? baseColor;
-    [SerializeField] Color highColor = Color.white;
+    [SerializeField] Color beamPressColor = Color.white;
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class Receptor : MonoBehaviour {
         if (beamCoroutine != null)
             StopCoroutine(beamCoroutine);
 
-        model.material.color = highColor;
+        model.material.color = beamPressColor;
     }
 
     void BeamRelease() {
@@ -59,7 +59,7 @@ public class Receptor : MonoBehaviour {
         float time = 0;
         while (time < 0.1f) {
             time += Time.deltaTime;
-            model.material.color = Color.Lerp(highColor, (Color)baseColor, time / 0.1f);
+            model.material.color = Color.Lerp(beamPressColor, (Color)baseColor, time / 0.1f);
             yield return null;
         }
         model.material.color = (Color)baseColor;
