@@ -39,8 +39,8 @@ public class Receptor : MonoBehaviour {
         beamCoroutine = StartCoroutine(BeamReleaseCO());
     }
 
-    public void SuccessfulHit(bool mirror = false) {
-        hitEffect.Show(mirror);
+    public void SuccessfulHit(JudgeType judge, bool mirror = false) {
+        hitEffect.Show(judge, mirror);
     }
 
     public void SuccessfulHold() {

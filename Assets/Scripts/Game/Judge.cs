@@ -1,6 +1,15 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+public enum JudgeType
+{
+    Perfect = 0,
+    Great = 1,
+    Bad = 2,
+    Miss = 3,
+    Undefined = 4
+}
+
 public class Judge : MonoBehaviour {
     static Queue<Note>[] notes = new Queue<Note>[8];
     // Hit windows in seconds and in both directions.
@@ -38,42 +47,48 @@ public class Judge : MonoBehaviour {
     }
 
     static void JudgeNoteHit(Note note, ButtonState state, float diff) {
+        JudgeType judge = JudgeType.Undefined;
         if (state == ButtonState.Pressed || state == ButtonState.Left || state == ButtonState.Right) {
             SFXManager.PlayNoteHitSound();
             if (note.Lane != 0) { // Normal note
                 if (diff < PerfectHitWindow)
-                    Scoring.AddPerfect();
+                    judge = JudgeType.Perfect;
                 else if (diff < GreatHitWindow)
-                    Scoring.AddGood();
+                    judge = JudgeType.Great;
                 else if (diff < BadHitWindow)
-                    Scoring.AddBad();
+                    judge = JudgeType.Bad;
                 else
-                    Scoring.AddMiss();
+                    judge = JudgeType.Miss;
             } else { // Slam note
                 if (diff < BadHitWindow)
-                    Scoring.AddPerfect();
+                    judge = JudgeType.Perfect;
                 else
-                    Scoring.AddMiss();
+                    judge = JudgeType.Miss;
             }
 
             if (note.Type == NoteType.Note) {
-                LaneManager.GetLane(note.Lane).SuccessfulHit(state == ButtonState.Right);
+                LaneManager.GetLane(note.Lane).SuccessfulHit(judge, state == ButtonState.Right);
                 NoteBehaviourManager.ReturnToPool(note);
             }
             else if (note.Type == NoteType.Hold) {
-                LaneManager.GetLane(note.Lane).Hold();
+                LaneManager.GetLane(note.Lane).Hold(judge);
                 NoteBehaviourManager.HideHead(note);
             }
 
+
+
         } else if (state == ButtonState.Released) {
             if (diff < BadHitWindow)
-                Scoring.AddPerfect();
+                judge = JudgeType.Perfect;
             else
-                Scoring.AddMiss();
+                judge = JudgeType.Miss;
             
             LaneManager.GetLane(note.Lane).SuccessfulRelease();
             NoteBehaviourManager.ReturnToPool(note);
         }
+
+        Scoring.AddScore(judge);
+        GameUIManager.ShowTicker(judge);
     }
 
     public static void AddNote(Note note) {
@@ -96,7 +111,7 @@ public class Judge : MonoBehaviour {
             Note note = lane.Peek();
             if (note.HitTime < Maestro.SongTime - BadHitWindow) {
                 lane.Dequeue();
-                Scoring.AddMiss();
+                Scoring.AddScore(JudgeType.Miss);
                 if (note.Type == NoteType.Note)
                     NoteBehaviourManager.ReturnToPool(note);
                 else if (note.Type == NoteType.Hold) {
@@ -110,7 +125,7 @@ public class Judge : MonoBehaviour {
             Note heldNote = heldNotes[i];
             if (heldNote.ReleaseTime < Maestro.SongTime - BadHitWindow) {
                 heldNotes.RemoveAt(i);
-                Scoring.AddMiss();
+                Scoring.AddScore(JudgeType.Miss);
                 LaneManager.GetLane(heldNote.Lane).Release();
                 NoteBehaviourManager.ReturnToPool(heldNote);
             }

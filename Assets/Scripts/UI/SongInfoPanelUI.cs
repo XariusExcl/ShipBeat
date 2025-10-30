@@ -2,9 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.Networking;
 
 public class SongInfoPanelUI : MonoBehaviour
 {
+    Image border;
     [SerializeField] Image bg;
     [SerializeField] TextMeshProUGUI title;
     [SerializeField] TextMeshProUGUI artist;
@@ -18,6 +20,7 @@ public class SongInfoPanelUI : MonoBehaviour
     void Awake()
     {
         SongCaroussel.OnCarousselUpdate.AddListener(UpdateSongInfo);
+        border = GetComponent<Image>();
     }
 
     void UpdateSongInfo()
@@ -28,7 +31,12 @@ public class SongInfoPanelUI : MonoBehaviour
     public void SetData(SongInfo song)
     {
         Color diffColor = songSelectSceneData.GetColorForRatingUI(song.DifficultyRating);
-        bg.color = new Color(diffColor.r, diffColor.g, diffColor.b, 0.5f);
+        border.color = new Color(diffColor.r, diffColor.g, diffColor.b, 0.5f);
+        StartCoroutine(SongFolderReader.FetchImageFile(song.BackgroundImage, (result) =>
+        {
+            if (result.result == UnityWebRequest.Result.Success)
+                bg.sprite = result.fetchedObject as Sprite;
+        }));
         title.text = song.Title;
         artist.text = $"<i>de </i>{song.Artist}";
         creator.text = $"<i>beatmap par </i>{song.Creator}";

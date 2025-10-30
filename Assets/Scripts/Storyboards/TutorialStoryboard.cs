@@ -13,6 +13,7 @@ struct StoryboardTrigger
 public class TutorialStoryboard : MonoBehaviour
 {
     [SerializeField] GameObject tutoBot;
+    [SerializeField] GameObject holoBase;
     [SerializeField] GameObject commandsPanel;
     [SerializeField] GameObject noteExplain;
 
@@ -22,6 +23,7 @@ public class TutorialStoryboard : MonoBehaviour
         new() { bar = 0, beat = 0, action = () => {
             Maestro.IsTutorial = true;
             instance.tutoBot.SetActive(true);
+            instance.holoBase.SetActive(true);
         } },
         new() { bar = 0, beat = 1, action = () => TextboxSystem.StartDialogue("tutorial_1", true) },
         new() { bar = 2, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
@@ -85,6 +87,7 @@ public class TutorialStoryboard : MonoBehaviour
         bar = -1;
         beat = -1;
         tutoBot.SetActive(false);
+        holoBase.SetActive(false);
         GameObject[] friendlyships = GameObject.FindGameObjectsWithTag("Friendlyship");
         foreach (GameObject friendlyship in friendlyships)
             Destroy(friendlyship);

@@ -52,7 +52,7 @@ public class GameUIManager : MonoBehaviour
         songTime.text = ((Maestro.SongTime < 0) ? "-" : "") + TimeSpan.FromSeconds(Maestro.SongTime).ToString(@"m\:ss");
     }
 
-    public static void ShowTicker(TickerType type)
+    public static void ShowTicker(JudgeType type)
     {
         Instance.ticker.ShowTicker(type);
     }

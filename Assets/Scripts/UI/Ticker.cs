@@ -2,13 +2,6 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
-public enum TickerType{
-    Perfect,
-    Good,
-    Bad,
-    Miss
-}
-
 public class Ticker : MonoBehaviour
 {
     TMP_Text tmpText;
@@ -24,8 +17,9 @@ public class Ticker : MonoBehaviour
         anim = GetComponent<Animation>();
     }
 
-    public void ShowTicker(TickerType type)
+    public void ShowTicker(JudgeType type)
     {
+        if (type == JudgeType.Undefined) return;
         tmpText.text = textList[(int)type];
         tmpText.color = textColors[(int)type];
         anim.clip = animClips[(int)type];

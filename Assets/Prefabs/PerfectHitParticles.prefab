@@ -5177,7 +5177,7 @@ GameObject:
   - component: {fileID: 1319770649875621355}
   - component: {fileID: 6884683310525639712}
   m_Layer: 0
-  m_Name: HitParticles
+  m_Name: PerfectHitParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

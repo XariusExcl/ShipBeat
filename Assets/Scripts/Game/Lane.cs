@@ -35,13 +35,13 @@ public class Lane : MonoBehaviour
         // Debug.DrawRay(transform.position, ExtrapolationVector, Color.red, 10f);
     }
 
-    public void SuccessfulHit(bool mirror = false)
+    public void SuccessfulHit(JudgeType judge, bool mirror = false)
     {
         if (receptor != null)
-            receptor.SuccessfulHit(mirror);
+            receptor.SuccessfulHit(judge, mirror);
     }
 
-    public void Hold()
+    public void Hold(JudgeType judge)
     {
         if (receptor != null)
             receptor.SuccessfulHold();

@@ -69,18 +69,18 @@ public class GamePlayerInput : MonoBehaviour {
             lastHorizontal = Mathf.Abs(Input.GetAxis("P1_Horizontal"));
         }
 
-        for (int i = 1; i <= 6; i++)
+        for (int i = 0; i <= 5; i++)
         {
-            if (Input.GetButtonDown("P1_B"+i))
+            if (Input.GetButtonDown("P1_B"+(i+1)))
             {
-                Receptors[i].HandleInput(ButtonState.Pressed);
-                Judge.JudgePlayerInput(i, ButtonState.Pressed);
+                Receptors[(i%3)+1].HandleInput(ButtonState.Pressed);
+                Judge.JudgePlayerInput((i%3)+1, ButtonState.Pressed);
             }
 
-            if (Input.GetButtonUp("P1_B"+i))
+            if (Input.GetButtonUp("P1_B"+(i+1)))
             {
-                Receptors[i].HandleInput(ButtonState.Released);
-                Judge.JudgePlayerInput(i, ButtonState.Released);
+                Receptors[(i%3)+1].HandleInput(ButtonState.Released);
+                Judge.JudgePlayerInput((i%3)+1, ButtonState.Released);
             }
         }
     }

@@ -39,49 +39,34 @@ public class Scoring
         }
     }
 
-    public static void AddScore(int score)
+    public static void AddScore(JudgeType judge)
     {
-        Score += score;
-        GameUIManager.UpdateCombo(Combo);
-        CalculatePercentage();
-    }
+        switch (judge)
+        {
+            case JudgeType.Perfect:
+                Score += 100;
+                Perfects++;
+                Combo++;
+                GameUIManager.UpdateCombo(Combo);
+            break;
+            case JudgeType.Great:
+                Score += 50;
+                Goods++;
+                Combo++;
+                GameUIManager.UpdateCombo(Combo);
+            break;
+            case JudgeType.Bad:
+                Score += 10;
+                Bads++;
+                ResetCombo();
+            break;
+            case JudgeType.Miss:
+                Misses++;
+                ResetCombo();
+            break;
+        }
 
-    public static void AddPerfect()
-    {
-        Perfects++;
-        Combo++;
-        AddScore(100);
         if (Combo > BestCombo) BestCombo = Combo;
-        GameUIManager.ShowTicker(TickerType.Perfect);
-    }
-
-    public static void AddGood()
-    {
-        Goods++;
-        Combo++;
-        AddScore(50);
-        if (Combo > BestCombo) BestCombo = Combo;
-        GameUIManager.ShowTicker(TickerType.Good);
-    }
-
-    public static void AddBad()
-    {
-        Bads++;
-        AddScore(10);
-        ResetCombo();
-        GameUIManager.ShowTicker(TickerType.Bad);
-    }
-
-    public static void AddMiss()
-    {
-        Misses++;
-        AddScore(0);
-        ResetCombo();
-        GameUIManager.ShowTicker(TickerType.Miss);
-    }
-
-    static void CalculatePercentage()
-    {
         Percentage = (Perfects * 100f + Goods * 50f + Bads * 10f) / (Perfects + Goods + Bads + Misses);
     }
 

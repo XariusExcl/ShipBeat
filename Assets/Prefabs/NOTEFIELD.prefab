@@ -452,7 +452,7 @@ MonoBehaviour:
   model: {fileID: 8310197921939922646}
   hitEffect: {fileID: 5383367396216985816}
   holdEffect: {fileID: 0}
-  beamPressColor: {r: 1, g: 1, b: 1, a: 1}
+  beamPressColor: {r: 1, g: 0.45755473, b: 0, a: 0.50980395}
 --- !u!1 &7594381495459031587
 GameObject:
   m_ObjectHideFlags: 0

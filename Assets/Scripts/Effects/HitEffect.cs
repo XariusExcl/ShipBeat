@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.Rendering;
 
 public class HitEffect : MonoBehaviour {
     [SerializeField] float duration = 0.5f;
     MeshRenderer meshRenderer;
-    [SerializeField] GameObject hitEffectPrefab;
+    [SerializeField] GameObject perfectHitEffectPrefab;
+    [SerializeField] GameObject goodHitEffectPrefab;
+    [SerializeField] GameObject badHitEffectPrefab;
 
     void Awake() {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -13,13 +14,26 @@ public class HitEffect : MonoBehaviour {
             meshRenderer.enabled = false;
     }
 
-    public void Show(bool mirror = false)
+    public void Show(JudgeType judge, bool mirror = false)
     {
-        if (hitEffectPrefab != null) {
-            GameObject hitEffect = Instantiate(hitEffectPrefab, transform);
-            if (mirror) {
-                hitEffect.transform.localScale = new Vector3(-1, 1, 1);
-            }
+        GameObject hitEffect;
+        if (goodHitEffectPrefab != null || badHitEffectPrefab != null) switch (judge)
+        {
+            case JudgeType.Perfect:
+                hitEffect = Instantiate(perfectHitEffectPrefab, transform);
+                if (mirror) hitEffect.transform.localScale = new Vector3(-1, 1, 1);
+            break;
+            case JudgeType.Great:
+                hitEffect = Instantiate(goodHitEffectPrefab, transform);
+                if (mirror) hitEffect.transform.localScale = new Vector3(-1, 1, 1);
+            break;
+            case JudgeType.Bad:
+                hitEffect = Instantiate(badHitEffectPrefab, transform);
+                if (mirror) hitEffect.transform.localScale = new Vector3(-1, 1, 1);
+            break;
+        } else {
+            hitEffect = Instantiate(perfectHitEffectPrefab, transform);
+            if (mirror) hitEffect.transform.localScale = new Vector3(-1, 1, 1);
         }
 
         if (meshRenderer != null) {
