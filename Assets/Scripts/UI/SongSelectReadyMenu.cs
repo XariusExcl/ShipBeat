@@ -31,6 +31,7 @@ public class SongSelectReadyMenu : MonoBehaviour
         if (enableButtons && Input.GetButtonDown("P1_B1"))
         {
             IsValidated = true;
+            SongSelectUI.OnSongValidated.Invoke();
             SFXManager.PlaySelectSound();
             SongSelect.CreateSongLoader();
             transitionDirector.Play();

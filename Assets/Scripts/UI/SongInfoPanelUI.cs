@@ -31,7 +31,7 @@ public class SongInfoPanelUI : MonoBehaviour
     public void SetData(SongInfo song)
     {
         Color diffColor = songSelectSceneData.GetColorForRatingUI(song.DifficultyRating);
-        border.color = new Color(diffColor.r, diffColor.g, diffColor.b, 0.5f);
+        border.color = new Color(diffColor.r, diffColor.g, diffColor.b, 0.75f);
         StartCoroutine(SongFolderReader.FetchImageFile(song.BackgroundImage, (result) =>
         {
             if (result.result == UnityWebRequest.Result.Success)

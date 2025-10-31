@@ -19,7 +19,7 @@ public class TutoBotMovement : MonoBehaviour
     }
 
     Vector3 cachedTargetPosition;
-    public void LookAtTarget()
+    void LookAtTarget()
     {
         if (cachedTargetPosition == lookTarget.transform.position)
             return;

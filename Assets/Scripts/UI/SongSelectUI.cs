@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SongSelectUI : MonoBehaviour
 {
     [SerializeField] SongCaroussel songCaroussel;
     [SerializeField] SongSelectReadyMenu songSelectReadyMenu;
     [SerializeField] PlayerSettingsUI playerSettingsUI;
+    public static UnityEvent OnSongValidated = new();
 
     void Awake()
     {

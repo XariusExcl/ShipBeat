@@ -1,3 +1,5 @@
+// This class is used in the built-in animations
+
 using UnityEngine;
 
 public class TutoBotAnimTriggers : MonoBehaviour

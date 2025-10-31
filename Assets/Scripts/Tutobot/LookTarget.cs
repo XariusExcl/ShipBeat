@@ -4,11 +4,16 @@ public class LookTarget : MonoBehaviour
 {
     [SerializeField] Transform trackedObject;
     [SerializeField] Vector3 offset = Vector3.zero;
-    public void Track(string name = "camera")
+    Vector3 initialPostion;
+    void Awake()
+    {
+        initialPostion = transform.localPosition;
+    }
+
+    public void Track(string name)
     {
         if (string.IsNullOrEmpty(name))
         {
-            // Reset tracking if name is empty
             trackedObject = null;
             return;
         }
@@ -29,6 +34,12 @@ public class LookTarget : MonoBehaviour
     public void Track(Transform target)
     {
         trackedObject = target;
+    }
+
+    public void Reset()
+    {
+        trackedObject = null;
+        transform.localPosition = initialPostion;   
     }
 
     public void Update()
