@@ -2122,7 +2122,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -17332,9 +17332,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UseDebugSong: 1
-  DebugSongPath: \\Songs\\Bee Gees In My Nugget\\Middle Milk - Bee Gees In My Nugget
+  DebugSongPath: /Songs/Bee Gees In My Nugget/Middle Milk - Bee Gees In My Nugget
     (Xarius) [Barbecue].osu
-  DebugAudioPath: \\Songs\\Bee Gees In My Nugget\\audio.wav
+  DebugAudioPath: /Songs/Bee Gees In My Nugget/audio.wav
 --- !u!4 &1695915928
 Transform:
   m_ObjectHideFlags: 0
