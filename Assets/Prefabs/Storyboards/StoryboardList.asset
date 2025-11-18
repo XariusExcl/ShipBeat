@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: StoryboardList
   m_EditorClassIdentifier: 
   storyboards:
-  - key: Rambling Pleat
+  - key: Tutorial
     value: {fileID: 172193456112239926, guid: 2bdad3d11dbd669479c89ea63211dc31, type: 3}

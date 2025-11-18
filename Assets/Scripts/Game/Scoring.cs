@@ -33,7 +33,7 @@ public class Scoring
         {
             TotalScore = int.Parse(ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore"));
         }
-        catch (Exception e)
+        catch (Exception)
         {
             TotalScore = 0;
         }
@@ -68,6 +68,7 @@ public class Scoring
 
         if (Combo > BestCombo) BestCombo = Combo;
         Percentage = (Perfects * 100f + Goods * 50f + Bads * 10f) / (Perfects + Goods + Bads + Misses);
+        GameUIManager.ShowTicker(judge);
     }
 
     static void ResetCombo()

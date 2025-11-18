@@ -88,7 +88,6 @@ public class Judge : MonoBehaviour {
         }
 
         Scoring.AddScore(judge);
-        GameUIManager.ShowTicker(judge);
     }
 
     public static void AddNote(Note note) {

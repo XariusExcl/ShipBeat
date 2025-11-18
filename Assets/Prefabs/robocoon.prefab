@@ -4786,6 +4786,8 @@ ParticleSystemRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4807,6 +4809,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -4913,6 +4916,10 @@ PrefabInstance:
     - target: {fileID: -6314176703935156858, guid: 7724a30435b3c764998399582c8e786f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 179.99944
+      objectReference: {fileID: 0}
+    - target: {fileID: -1578373571446707184, guid: 7724a30435b3c764998399582c8e786f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 721205849365349636, guid: 7724a30435b3c764998399582c8e786f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5117,7 +5124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593a8dce294098840b2418778579a6b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookAtTarget: {fileID: 0}
+  lookTarget: {fileID: 0}
+  IsLookingAtTarget: 0
+  disableSlerp: 0
 --- !u!1 &4965545203502228617 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4433698080036840411, guid: 7724a30435b3c764998399582c8e786f, type: 3}
@@ -5194,7 +5203,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: tutobot
   voice: {fileID: 8300000, guid: cc971e88f15d90f4f877545d73eed8dc, type: 3}
+  Color: {r: 0, g: 0, b: 0, a: 0}
   volume: 1
+  eyesTarget: {fileID: 0}
+  bodyTarget: {fileID: 0}
 --- !u!1 &9065753570818536704 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8881512760021192110, guid: 7724a30435b3c764998399582c8e786f, type: 3}
