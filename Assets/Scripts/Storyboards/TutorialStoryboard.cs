@@ -58,16 +58,17 @@ public class TutorialStoryboard : MonoBehaviour
         new() { bar = 46, beat = 0, action = () => {
             TextboxSystem.DisplayNextSentence();
             missCountBeforeSlam = Scoring.Misses; } },
-        new() { bar = 47, beat = 3, action = () => {
+        new() { bar = 48, beat = 0, action = () => {
             if (missCountBeforeSlam < Scoring.Misses )
                 TextboxSystem.StartDialogue("tutorial_bad_4", true);
             else
                 TextboxSystem.StartDialogue("tutorial_good_4", true); } },
-        new() { bar = 48, beat = 2, action = () => TextboxSystem.DisplayNextSentence() },
+        new() { bar = 49, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
         new() { bar = 50, beat = 0, action = () => TextboxSystem.StartDialogue("tutorial_5", true)},
         new() { bar = 52, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
         new() { bar = 54, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
         new() { bar = 56, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
+        new() { bar = 57, beat = 3, action = () => TextboxSystem.DisplayNextSentence() },
     };
 
     int triggerIndex = 0;

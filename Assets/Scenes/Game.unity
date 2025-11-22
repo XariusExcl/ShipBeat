@@ -3372,8 +3372,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UseDebugSong: 1
-  DebugSongPath: \\Songs\\Tutorial\\tutorial.osu
-  DebugAudioPath: \\Songs\\Tutorial\\audio.wav
+  DebugSongPath: /Songs/The 89's Momentum/tutorial.osu
+  DebugAudioPath: /Songs/The 89's Momentum/audio.mp3
 --- !u!4 &755024887
 Transform:
   m_ObjectHideFlags: 0
