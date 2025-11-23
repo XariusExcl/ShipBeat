@@ -19,9 +19,7 @@ public class BeatmapHighscoreUI : MonoBehaviour
     {
         playerName.text = data.PlayerName;
         var timeSpan = DateTime.Now - DateTime.Parse(data.Timestamp);
-        if (timeSpan.TotalDays >= 30)
-            time.text = $"{(int)timeSpan.TotalDays / 30}m";
-        else if (timeSpan.TotalDays >= 1)
+        if (timeSpan.TotalDays >= 1)
             time.text = $"{(int)timeSpan.TotalDays}d";
         else if (timeSpan.TotalHours >= 1)
             time.text = $"{(int)timeSpan.TotalHours}h";

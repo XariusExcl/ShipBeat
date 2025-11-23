@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections;
 using System;
 using UnityEngine.UI;
+using EasyTextEffects.Editor.MyBoxCopy.Extensions;
 
 public class ResultScreenUI : MonoBehaviour
 {
@@ -12,10 +13,13 @@ public class ResultScreenUI : MonoBehaviour
     [SerializeField] TMP_Text tmp_BadCount;
     [SerializeField] TMP_Text tmp_MissCount;
     [SerializeField] TMP_Text tmp_Rank;
+    [SerializeField] Image rankStar;
     [SerializeField] Image rankRing;
     [SerializeField] Image button;
     [SerializeField] GameObject personalHighscore;
     [SerializeField] GameObject cabHighscore;
+    [SerializeField] GameObject rankParticles;
+    [SerializeField] Material rankParticlesMaterial;
     [SerializeField] SongSelectSceneData songSelectSceneData;
     AudioSource audioSource;
     [SerializeField] AudioClip shuffleSound;
@@ -110,9 +114,21 @@ public class ResultScreenUI : MonoBehaviour
         {
             case 'P':
                 rankRing.color = tmp_Rank.color = songSelectSceneData.pRankColor;
+                if (Scoring.Misses == 0 && Scoring.Bads == 0){
+                    rankStar.gameObject.SetActive(true);
+                    rankParticles.SetActive(true);
+                    rankStar.color = songSelectSceneData.pRankColor;
+                    rankParticlesMaterial.color = songSelectSceneData.pRankColor;
+                }
                 break;
             case 'S':
                 rankRing.color = tmp_Rank.color = songSelectSceneData.sRankColor;
+                if (Scoring.Misses == 0 && Scoring.Bads == 0) {
+                    rankStar.gameObject.SetActive(true);
+                    rankParticles.SetActive(true);
+                    rankStar.color = songSelectSceneData.sRankColor;
+                    rankParticlesMaterial.color = songSelectSceneData.sRankColor;
+                }
                 break;
             case 'A':
                 rankRing.color = tmp_Rank.color = songSelectSceneData.aRankColor;
@@ -141,6 +157,10 @@ public class ResultScreenUI : MonoBehaviour
             ShowPersonalHighscore();
         }
         EnableButtons();
+        if (rankStar.IsActive())
+        {
+            rankStar.GetComponent<Animation>().PlayQueued("StarPulse");
+        }
         yield return null;
     }
 }

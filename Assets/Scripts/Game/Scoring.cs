@@ -102,18 +102,18 @@ public class Scoring
         else
         {
             highscores = JsonUtility.FromJson<HighscoreList>(json);
-            if (highscores.list.Count == 0)
+            if (highscores.list.Count == 0) // Map has no highscores
                 highscores.list.Add(CreateHighscore());
             else
             {
+                if (highscores.list[0].Percentage < Percentage)
+                    IsCabHighscore = true;
+                
                 int index = highscores.list.FindIndex(h => h.PlayerName == HighscoreManager.PlayerName);
-                if (index != -1)
+                if (index != -1) // If player has a score already saved
                 {
                     if (highscores.list[index].Percentage < Percentage) // Highscore is beaten
                     {
-                        if (highscores.list[0].Percentage < Percentage)
-                            IsCabHighscore = true;
-
                         TotalScore += Score - highscores.list[index].Score;
                         IsPersonalHighscore = true;
                         BeatmapHighscore updatedHighscore = highscores.list[index];
