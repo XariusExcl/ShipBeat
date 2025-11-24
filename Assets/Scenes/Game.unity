@@ -4480,7 +4480,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 1234
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14894,6 +14894,9 @@ MonoBehaviour:
   scoreText: {fileID: 1079329276}
   percentageText: {fileID: 145698387}
   comboText: {fileID: 923823083}
+  PfcColor: {r: 1, g: 0.7809262, b: 0, a: 0.2784314}
+  FcColor: {r: 0.007843127, g: 0.78039217, b: 0.12596162, a: 0.2784314}
+  NormalColor: {r: 1, g: 1, b: 1, a: 0.2784314}
   ticker: {fileID: 898263709713396795}
   resultsScreen: {fileID: 1560440568}
   transitionDoors: {fileID: 1403401882}

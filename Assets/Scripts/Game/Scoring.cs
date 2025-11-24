@@ -97,16 +97,22 @@ public class Scoring
 
         string json = ExtradataManager.GetDataWithKey($"Scores/{info.Title}_{info.DifficultyName}");
         
-        if (json is null)
-            highscores.list.Add(CreateHighscore());
-        else
+        if (json is null) // Map has no score data
         {
-            highscores = JsonUtility.FromJson<HighscoreList>(json);
-            if (highscores.list.Count == 0) // Map has no highscores
+            highscores.list.Add(CreateHighscore());
+            TotalScore += Score;
+        } 
+        else // Map has score data, parse it
+        {
+            highscores = JsonUtility.FromJson<HighscoreList>(json);            
+            if (highscores.list.Count == 0) // Data is fuxxed, no highscores
+            {
                 highscores.list.Add(CreateHighscore());
+                TotalScore += Score;
+            }
             else
             {
-                if (highscores.list[0].Percentage < Percentage)
+                if (highscores.list[0].Percentage < Percentage) // TODO: Why are we comparing percentages instead of scores?
                     IsCabHighscore = true;
                 
                 int index = highscores.list.FindIndex(h => h.PlayerName == HighscoreManager.PlayerName);
@@ -119,6 +125,7 @@ public class Scoring
                         BeatmapHighscore updatedHighscore = highscores.list[index];
                         updatedHighscore.Score = Score;
                         updatedHighscore.Combo = Combo;
+                        updatedHighscore.Percentage = Percentage;
                         updatedHighscore.MaxCombo = BestCombo;
                         updatedHighscore.Timestamp = DateTime.Now.ToString("o");
                         updatedHighscore.Perfects = Perfects;
@@ -130,15 +137,15 @@ public class Scoring
                         highscores.list[index] = updatedHighscore;
                     }
                 }
-                else
+                else // No scores for this player, create a new score
                 {
-                    // No scores for this player, create a new score
                     highscores.list.Add(CreateHighscore());
                     TotalScore += Score;
                 }
             }
         }
-        highscores.list.Sort((a, b) => b.Score - a.Score);
+
+        highscores.list.Sort((a, b) => b.Score - a.Score); // Reorder scores by descending order
         return JsonUtility.ToJson(highscores);
     }
 

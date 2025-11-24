@@ -72,7 +72,7 @@ public class MainMenuNavigation : MonoBehaviour
         StartCoroutine(CheckIfNameValidCoroutine((valid) =>
         {
             if (valid)
-                if (ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/Settings") is not null)
+                if (ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore") is not null)
                     TextboxSystem.StartDialogue("guest_welcomeback");
                 else
                     TextboxSystem.StartDialogue("guest_tutoask");
