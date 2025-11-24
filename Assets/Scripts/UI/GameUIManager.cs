@@ -18,6 +18,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] ProgressBar progressBar;
     [SerializeField] TextMeshProUGUI songTime;
     [SerializeField] GameObject skipButton;
+    [SerializeField] PlayerInfoScoreUI playerInfoScoreUI;
 
     void Awake()
     {
@@ -99,6 +100,12 @@ public class GameUIManager : MonoBehaviour
     {
         Instance.transitionDoors.CloseDoor();
         Instance.Invoke("LoadSongSelect", 1f);
+    }
+
+    public static void UpdateTotalScore()
+    {
+        Debug.Log("Test");
+        Instance.playerInfoScoreUI.UpdateTotalScore();
     }
 
     void LoadSongSelect()

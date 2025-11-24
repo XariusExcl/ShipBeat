@@ -136,6 +136,8 @@ public class Maestro : MonoBehaviour
     IEnumerator UpdateScore()
     {
         yield return StartCoroutine(ExtradataManager.SetExtraData($"Scores/{SongLoader.LoadedSong.Info.Title}_{SongLoader.LoadedSong.Info.DifficultyName}", Scoring.SaveScore()));
-        StartCoroutine(ExtradataManager.SetExtraData($"Player/{HighscoreManager.PlayerName}/TotalScore", Scoring.TotalScore.ToString()));
+        yield return StartCoroutine(ExtradataManager.SetExtraData($"Player/{HighscoreManager.PlayerName}/TotalScore", Scoring.TotalScore.ToString()));
+        yield return new WaitForSecondsRealtime(2f);
+        GameUIManager.UpdateTotalScore();
     }
 }
