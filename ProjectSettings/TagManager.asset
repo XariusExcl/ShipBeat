@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Friendlyship
+  - PrewarmCube
   layers:
   - Default
   - TransparentFX

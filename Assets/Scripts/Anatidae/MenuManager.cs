@@ -31,8 +31,8 @@ public class MenuManager : MonoBehaviour
     {
         if (!backToMenuCalled && heldQuitTimer >= HeldQuitTime || afkTimer >= AfkTime)
         {
-            BackToMenu();
             backToMenuCalled = true;
+            BackToMenu();
         }
 
         if (Input.GetButton("Coin"))

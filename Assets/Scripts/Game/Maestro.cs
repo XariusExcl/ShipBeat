@@ -34,7 +34,7 @@ public class Maestro : MonoBehaviour
     public static int Beat;
     public static float Tick;
     public static float StartTime;
-    const float StartDelay = 3;
+    const float StartDelay = 4;
     static float _globalOffset = -.1f;
     public static float GlobalOffset
     {

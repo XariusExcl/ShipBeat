@@ -17,8 +17,6 @@ public class MainMenuNavigation : MonoBehaviour
     [SerializeField] GameObject firstLetter;
     [SerializeField] TransitionDoors transitionDoors;
     [SerializeField] VerticalNameInput nameInput;
-    [SerializeField] AudioClip introMusic;
-    [SerializeField] AudioClip introMusicLoop;
 
     [SerializeField] string TutorialSongPath;
     [SerializeField] string TutorialAudioPath;
@@ -26,8 +24,6 @@ public class MainMenuNavigation : MonoBehaviour
     void Start()
     {
         StartCoroutine(ExtradataManager.FetchExtraData());
-        Jukebox.QueueSong(introMusic);
-        Jukebox.QueueSong(introMusicLoop, true);
         DialogueTriggers.StartTutorial.AddListener(StartTutorial);
         DialogueTriggers.StartGame.AddListener(StartGame);
         DialogueTriggers.RetrySelectingName.AddListener(SelectFirstLetter);
