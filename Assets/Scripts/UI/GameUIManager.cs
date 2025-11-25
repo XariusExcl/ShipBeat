@@ -9,19 +9,23 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI percentageText;
     [SerializeField] TextMeshProUGUI comboText;
+    [SerializeField] Color PfcColor;
+    [SerializeField] Color FcColor;
+    [SerializeField] Color NormalColor;
     [SerializeField] Ticker ticker;
     [SerializeField] ResultScreenUI resultsScreen;
     [SerializeField] TransitionDoors transitionDoors;
     [SerializeField] ProgressBar progressBar;
     [SerializeField] TextMeshProUGUI songTime;
     [SerializeField] GameObject skipButton;
-
+    [SerializeField] PlayerInfoScoreUI playerInfoScoreUI;
 
     void Awake()
     {
         uiScore = 0;
         uiPercentage = 100f;
         Instance = this;
+        comboText.text = "";
     }
 
     static int uiScore = 0;
@@ -47,9 +51,16 @@ public class GameUIManager : MonoBehaviour
             percentageText.text = uiPercentage.ToString("F2") + "%";
         }
 
-        progressBar.SetProgress(Maestro.SongTime / (SongLoader.LoadedSong.Info.Length + SongLoader.LoadedSong.Info.SongStart));
+        if (Maestro.SongTime > 30f && Scoring.Bads == 0 && Scoring.Misses == 0)
+        {
+            Instance.comboText.alpha =  Instance.NormalColor.a + Mathf.Sin(Maestro.SongTime * 1.5f) * .1f;
+        }
 
-        songTime.text = ((Maestro.SongTime < 0) ? "-" : "") + TimeSpan.FromSeconds(Maestro.SongTime).ToString(@"m\:ss");
+        if (!Maestro.SongEnded)
+        {
+            progressBar.SetProgress(Maestro.SongTime / (SongLoader.LoadedSong.Info.Length + SongLoader.LoadedSong.Info.SongStart));       
+            songTime.text = ((Maestro.SongTime < 0) ? "-" : "") + TimeSpan.FromSeconds(Maestro.SongTime).ToString(@"m\:ss");
+        }
     }
 
     public static void ShowTicker(JudgeType type)
@@ -59,6 +70,18 @@ public class GameUIManager : MonoBehaviour
 
     public static void UpdateCombo(int combo)
     {
+        if (Maestro.SongTime > 30f)
+            if(Scoring.Bads == 0 && Scoring.Misses == 0)
+            {
+                if (Scoring.Goods == 0)
+                    Instance.comboText.color = Instance.PfcColor;
+                else
+                    Instance.comboText.color = Instance.FcColor;
+                Instance.comboText.alpha =  Instance.NormalColor.a + Mathf.Sin(Maestro.SongTime * 1.5f) * .1f;
+            }
+            else
+                Instance.comboText.color = Instance.NormalColor;
+
         Instance.comboText.text = combo.ToString();
     }
 
@@ -77,6 +100,12 @@ public class GameUIManager : MonoBehaviour
     {
         Instance.transitionDoors.CloseDoor();
         Instance.Invoke("LoadSongSelect", 1f);
+    }
+
+    public static void UpdateTotalScore()
+    {
+        Debug.Log("Test");
+        Instance.playerInfoScoreUI.UpdateTotalScore();
     }
 
     void LoadSongSelect()

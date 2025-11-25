@@ -15,9 +15,9 @@ public class StoryboardLoader : MonoBehaviour
         // fing the storyboard that matches the song title
         foreach (KeyValue kv in storyboardList.storyboards)
         {
-            if (kv.key.Equals(SongLoader.LoadedSong.Info.Title, System.StringComparison.OrdinalIgnoreCase))
+            if (kv.key.Equals(SongLoader.LoadedSong.Info.DifficultyName, System.StringComparison.OrdinalIgnoreCase))
             { 
-                Debug.Log($"Loading storyboard for song: {SongLoader.LoadedSong.Info.Title}");
+                Debug.Log($"Loading storyboard for song: {SongLoader.LoadedSong.Info.DifficultyName}");
                 GameObject storyboardPrefab = kv.value;
                 if (storyboardPrefab != null)
                 {

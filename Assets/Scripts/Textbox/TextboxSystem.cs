@@ -125,7 +125,7 @@ public class TextboxSystem : MonoBehaviour
 	bool isColor = false;
 	int colorStartIndex = 0;
 
-	IEnumerator TypeSentence(string sentence, float shortDelay = .02f, float longDelay = .04f)
+	IEnumerator TypeSentence(string sentence, float shortDelay = .0167f, float longDelay = .0322f)
 	{
 		typing = true;
 		isItalics = isColor = false;

@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using Anatidae;
+using System.Collections;
 
 public class Maestro : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class Maestro : MonoBehaviour
     public static int Beat;
     public static float Tick;
     public static float StartTime;
-    const float StartDelay = 3;
+    const float StartDelay = 4;
     static float _globalOffset = -.1f;
     public static float GlobalOffset
     {
@@ -118,12 +119,9 @@ public class Maestro : MonoBehaviour
 
     void EndSong() {
         SongEnded = true;
-        if (SongFolderReader.SongInfos.Count != 0)
-        {
-            // Special case to not save a score when testing
-            StartCoroutine(ExtradataManager.SetExtraData($"Scores/{SongLoader.LoadedSong.Info.Title}_{SongLoader.LoadedSong.Info.DifficultyName}", Scoring.SaveScore()));
-            StartCoroutine(ExtradataManager.SetExtraData($"Player/{HighscoreManager.PlayerName}/TotalScore", Scoring.TotalScore.ToString()));
-        }
+        if (SongFolderReader.SongInfos.Count != 0) // Special case to not save a score when testing
+            StartCoroutine(UpdateScore());
+
         GameUIManager.ShowResults();
     }
     void CheckCalibration() {
@@ -133,5 +131,13 @@ public class Maestro : MonoBehaviour
             Debug.Log($"Song is {Mathf.Abs(delay) * 1000:F0} ms {(delay > 0 ? "early" : "late")}.Recalibrate!");
             Jukebox.SetPlaybackPosition(SongTime - GlobalOffset);
         }
+    }
+
+    IEnumerator UpdateScore()
+    {
+        yield return StartCoroutine(ExtradataManager.SetExtraData($"Scores/{SongLoader.LoadedSong.Info.Title}_{SongLoader.LoadedSong.Info.DifficultyName}", Scoring.SaveScore()));
+        yield return StartCoroutine(ExtradataManager.SetExtraData($"Player/{HighscoreManager.PlayerName}/TotalScore", Scoring.TotalScore.ToString()));
+        yield return new WaitForSecondsRealtime(2f);
+        GameUIManager.UpdateTotalScore();
     }
 }

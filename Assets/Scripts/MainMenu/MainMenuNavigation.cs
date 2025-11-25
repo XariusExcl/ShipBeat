@@ -17,8 +17,6 @@ public class MainMenuNavigation : MonoBehaviour
     [SerializeField] GameObject firstLetter;
     [SerializeField] TransitionDoors transitionDoors;
     [SerializeField] VerticalNameInput nameInput;
-    [SerializeField] AudioClip introMusic;
-    [SerializeField] AudioClip introMusicLoop;
 
     [SerializeField] string TutorialSongPath;
     [SerializeField] string TutorialAudioPath;
@@ -26,8 +24,6 @@ public class MainMenuNavigation : MonoBehaviour
     void Start()
     {
         StartCoroutine(ExtradataManager.FetchExtraData());
-        Jukebox.QueueSong(introMusic);
-        Jukebox.QueueSong(introMusicLoop, true);
         DialogueTriggers.StartTutorial.AddListener(StartTutorial);
         DialogueTriggers.StartGame.AddListener(StartGame);
         DialogueTriggers.RetrySelectingName.AddListener(SelectFirstLetter);
@@ -72,7 +68,7 @@ public class MainMenuNavigation : MonoBehaviour
         StartCoroutine(CheckIfNameValidCoroutine((valid) =>
         {
             if (valid)
-                if (ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/Settings") is not null)
+                if (ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore") is not null)
                     TextboxSystem.StartDialogue("guest_welcomeback");
                 else
                     TextboxSystem.StartDialogue("guest_tutoask");

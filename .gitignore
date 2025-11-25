@@ -72,7 +72,8 @@ crashlytics-build.properties
 
 /.vscode
 
-Assets/StreamingAssets/Songs*
 # Sorry, can't upload those!
+Assets/StreamingAssets/Songs*
+Assets/StreamingAssets/OutdatedSongs*
 Assets/Resources/Audio
 Assets/Resources/Songs

@@ -41,14 +41,14 @@ AnimationClip:
         time: 0
         value: 0
         inSlope: 51.56299
-        outSlope: 48.269257
+        outSlope: 16.856827
         tangentMode: 1
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.07688746
+        outWeight: 0.05676856
       - serializedVersion: 3
         time: 0.25
-        value: 10
+        value: 2
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -102,6 +102,36 @@ AnimationClip:
     classID: 114
     script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
     flags: 16
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.25
+        value: 5
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_characterSpacing
+    path: Text
+    classID: 114
+    script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+    flags: 0
   m_PPtrCurves: []
   m_SampleRate: 60
   m_WrapMode: 1
@@ -140,14 +170,14 @@ AnimationClip:
         time: 0
         value: 0
         inSlope: 51.56299
-        outSlope: 48.269257
+        outSlope: 16.856827
         tangentMode: 1
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.07688746
+        outWeight: 0.05676856
       - serializedVersion: 3
         time: 0.25
-        value: 10
+        value: 2
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -284,6 +314,36 @@ AnimationClip:
     path: 
     classID: 224
     script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.25
+        value: 5
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_characterSpacing
+    path: Text
+    classID: 114
+    script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
     flags: 0
   m_EulerEditorCurves:
   - serializedVersion: 2

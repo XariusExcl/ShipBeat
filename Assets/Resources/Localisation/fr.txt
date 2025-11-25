@@ -66,6 +66,7 @@ Donnez un coup de joystick à gauche ou à droite au bon moment pour l'esquiver�
 [e:open][e:handsIdle]Vous avez beaucoup de potentiel ! Magnifique esquive.
 #tutorial_5
 [e:open][e:handsIdle]Bon ! Je pense que nous avons fait le tour des fonctionnalités du vaisseau.
-Si jamais vous avez besoin de vous remémorer quoi que ce soit, n'hésitez pas à me demander !
-[e:smile][e:happyWag]Je serais toujours ravie de vous accompagner dans vos missions !
-[!:EndSong]
+[ts:120:34][tp:100:-50][y:ship]ALERTE, AUTRES DEBRIS EN VUE.
+[ts:200:46][tp:0:50][y:tutobot]On dirait que c'est pas fini ! Rappelez-vous de votre entraînement et tout ira bien !
+[e:smile][e:happyWag]Je sais que vous pouvez le faire !
+

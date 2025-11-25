@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public class Jukebox : MonoBehaviour
 {
@@ -45,8 +46,15 @@ public class Jukebox : MonoBehaviour
         Instance.audioSource.Play();
     }
 
-    public void InstancePlay()
+    IEnumerator InstancePlay(float delay)
     {
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
+        Instance.audioSource.Play();
+        yield return new WaitForEndOfFrame();
+        Instance.audioSource.Pause();
+        stopwatch.Stop();
+        yield return new WaitForSecondsRealtime(delay - (stopwatch.ElapsedMilliseconds / 1000f));
         Instance.audioSource.Play();
     }
 
@@ -58,7 +66,7 @@ public class Jukebox : MonoBehaviour
         ClearQueue();
         // Instance.audioSource.PlayScheduled(AudioSettings.dspTime + delay);
         // WEBGL FIX because lmao https://discussions.unity.com/t/audiosource-playscheduled-causes-problems-in-webgl-build/917494/7
-        Instance.Invoke("InstancePlay", delay);
+        Instance.StartCoroutine("InstancePlay", delay);
     }
 
     public static void Pause()
@@ -144,7 +152,7 @@ public class Jukebox : MonoBehaviour
             bool looping = UpNextLooping.Count > 0 ? UpNextLooping.Dequeue() : false;
             if (nextClip == null)
             {
-                Debug.LogWarning("Next clip is null, skipping to next in queue.");
+                UnityEngine.Debug.LogWarning("Next clip is null, skipping to next in queue.");
                 return;
             }
             LoadSong(nextClip);
