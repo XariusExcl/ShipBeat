@@ -5804,6 +5804,10 @@ PrefabInstance:
       propertyPath: m_ScaleInLightmap
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: -3276933295038111232, guid: 79cb8fd37d5bbd84bbb087315351b252, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 92c7cfe412542ce45addae6101437c16, type: 2}
     - target: {fileID: -2980965850986510513, guid: 79cb8fd37d5bbd84bbb087315351b252, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -6016,6 +6020,10 @@ PrefabInstance:
       propertyPath: m_ScaleInLightmap
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3350126359799375373, guid: 79cb8fd37d5bbd84bbb087315351b252, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 92c7cfe412542ce45addae6101437c16, type: 2}
     - target: {fileID: 3560721907998927253, guid: 79cb8fd37d5bbd84bbb087315351b252, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -9738,6 +9746,7 @@ GameObject:
   - component: {fileID: 1440267402}
   - component: {fileID: 1440267401}
   - component: {fileID: 1440267400}
+  - component: {fileID: 1440267403}
   m_Layer: 0
   m_Name: DIRECTOR
   m_TagString: Untagged
@@ -9790,8 +9799,6 @@ PlayableDirector:
     value: {fileID: 1440267401}
   - key: {fileID: 4965781064128089961, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
     value: {fileID: 1440267400}
-  - key: {fileID: -2355761838946499937, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
-    value: {fileID: 1165730906}
   - key: {fileID: 5192785543025976429, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
     value: {fileID: 1660570291}
   - key: {fileID: 5650468549386170701, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
@@ -10124,6 +10131,36 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1440267403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440267397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 6ac3a493e4b94f84984053cc85ebb8f2, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1440267397}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1443165417
 GameObject:
   m_ObjectHideFlags: 0

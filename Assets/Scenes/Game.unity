@@ -2956,7 +2956,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 12<size=60%>.270 <size=100%>M<size=60%>
+  m_text: 0<size=60%>.246 <size=100%>M<size=60%>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8335a74db53faa4781fd72a6dc8dcbc, type: 2}
   m_sharedMaterial: {fileID: 6466562551522254260, guid: d8335a74db53faa4781fd72a6dc8dcbc, type: 2}
@@ -3142,6 +3142,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 666064bcd4f446a42a6e96733b5db342, type: 2}
   - {fileID: 2100000, guid: 42480f1385983034eb87136649f64b97, type: 2}
   - {fileID: 2100000, guid: 2310a3b874174ea4f93cb0dc1ca0ec81, type: 2}
+  gameObjects: []
   prewarmCube: {fileID: 698688688}
 --- !u!4 &698688691
 Transform:
@@ -22392,7 +22393,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 12<size=60%>.270 <size=100%>
+  m_text: 1<size=60%>.000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8335a74db53faa4781fd72a6dc8dcbc, type: 2}
   m_sharedMaterial: {fileID: 6466562551522254260, guid: d8335a74db53faa4781fd72a6dc8dcbc, type: 2}
@@ -22401,8 +22402,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278255360
+  m_fontColor: {r: 0, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

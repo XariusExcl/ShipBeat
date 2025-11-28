@@ -35,7 +35,7 @@ public class Maestro : MonoBehaviour
     public static float Tick;
     public static float StartTime;
     const float StartDelay = 4;
-    static float _globalOffset = -.1f;
+    static float _globalOffset = -.05f;
     public static float GlobalOffset
     {
         get => _globalOffset;

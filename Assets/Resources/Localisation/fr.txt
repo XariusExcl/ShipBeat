@@ -45,13 +45,13 @@ $guest_tutoask_howdareyou Comment oses-tu...
 Allez, c'est à vous ![e:handsIdle]
 #tutorial_bad_2
 [e:handsIdle][e:half]C'est un timing à avoir, mais ça vient avec l'entraînement !
-[e:open]Passons sur les nuages de débris.
-Pour dégager les nuages, il faut rester appuyé sur le bouton correspondant,
+[e:open]Passons sur les longs débris.
+Pour dégager les longs débris, il faut rester appuyé sur le bouton correspondant,
 Et quand le bout du trait arrive dans la zone, relâchez le bouton !
 #tutorial_good_2
 [e:handsClap][e:smile]Bravo ! Je savais que vous étiez un pilote hors-pair !
-[e:handsIdle][e:open]Passons sur les nuages de débris.
-Pour dégager les nuages, il faut rester appuyé sur le bouton correspondant,
+[e:handsIdle][e:open]Passons sur les longs débris.
+Pour dégager les longs débris, il faut rester appuyé sur le bouton correspondant,
 Et quand le bout du trait arrive dans la zone, relâchez le bouton !
 #tutorial_3
 [e:handsTogether][e:open]Bien, je pense que nous-

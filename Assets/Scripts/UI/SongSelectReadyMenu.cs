@@ -34,6 +34,7 @@ public class SongSelectReadyMenu : MonoBehaviour
             SongSelectUI.OnSongValidated.Invoke();
             SFXManager.PlaySelectSound();
             SongSelect.CreateSongLoader();
+            Jukebox.SetVolume(.2f);
             transitionDirector.Play();
         }
     }

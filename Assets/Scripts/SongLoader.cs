@@ -47,6 +47,7 @@ public class SongLoader : MonoBehaviour
 
     public void Init(SongInfo songInfo) {
         preloadedSongInfo = songInfo;
+        Scoring.Init();
         StartCoroutine(SongFolderReader.FetchFile(songInfo.ChartFile, OnFileFetched));
         StartCoroutine(SongFolderReader.FetchAudioFile(songInfo.AudioFile, OnAudioFetched));
     }

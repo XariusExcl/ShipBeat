@@ -24,19 +24,25 @@ public class Scoring
     public static bool IsPersonalHighscore;
     public static bool IsCabHighscore;
     public static int TotalScore;
+
+    public static void Init()
+    {
+        try
+        {
+            TotalScore = int.Parse(ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore"));
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning(e.Message);
+            TotalScore = 0;
+        }
+    }
+
     public static void Reset()
     {
         Score = Combo = BestCombo = Perfects = Goods = Bads = Misses = 0;
         Percentage = 100;
         IsPersonalHighscore = IsCabHighscore = false;
-        try
-        {
-            TotalScore = int.Parse(ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore"));
-        }
-        catch (Exception)
-        {
-            TotalScore = 0;
-        }
     }
 
     public static void AddScore(JudgeType judge)

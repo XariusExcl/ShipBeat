@@ -17,14 +17,12 @@ public class PlayerInfoScoreUI : MonoBehaviour
 
     public void UpdateTotalScore()
     {
-        Debug.Log("Ah oiuais");
         int diff = Scoring.TotalScore - totalScore;
         totalScore = Scoring.TotalScore;
         if (Mathf.Abs(diff) < 1000f) {
             scoreUpdate.gameObject.SetActive(false);
             return;
         }
-        Debug.Log("iuais");
         scoreUpdate.text = $"{((Math.Sign(diff) == 1) ? "" : "-")}{(int)(Math.Abs(diff) / 1000000f)}<size=60%>.{(int)(Math.Abs(diff) % 1000000f / 1000):D3}";
         scoreUpdate.color = (Math.Sign(diff) == 1) ? Color.green : Color.red;
         scoreUpdate.gameObject.SetActive(true);
