@@ -30,7 +30,7 @@ public class SongFolderReader : MonoBehaviour
     bool dataLoadedNotified = false;
     public static UnityEvent OnDataLoaded = new UnityEvent();
     public static UnityEvent OnDataFailed = new UnityEvent();
-    public static List<SongInfo> SongInfos = new List<SongInfo>();
+    public static List<SongDataInfo> SongInfos = new List<SongDataInfo>();
 
     // Caching
     const int maxCacheSize = 10;

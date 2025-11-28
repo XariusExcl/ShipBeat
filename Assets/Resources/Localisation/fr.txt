@@ -1,7 +1,7 @@
 // --------------------------------- longueur max de la textbox : 113 chars --------------------------------- //
 #debug_test
 [y:tutobot][l:camera][o:camera][e:handsIdle][e:happyWag]Hey, la localisation a fonctionné ![e:smile]
-[e:open][e:idleWag]Le [s:i][c:#00ffff]rich text[c:][s:] aussi. Cool !
+[e:open][e:idleWag]Le [i:][c:#00ffff]rich text[c:][i:] aussi. Cool !
 [e:handsShyPoint][e:closeAAA]Est-ce que les choix fonctionnent ?
 $debug_test_yes Oui !
 $debug_test_no Non...
@@ -17,11 +17,12 @@ Je ne suis pas sûre de pouvoir dire ce nom...
 [e:open]Essayez d'en saisir un autre.
 [!:RetrySelectingName]
 #guest_welcomeback
-[y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah ![e:open] Bienvenue agent [s:i][c:#00ffff][k:playerName][c:][s:].[o:camera] Heureuse de vous revoir ![e:smile]
-[e:open]Bonne chance pour vos prochaines missions ![e:handsConverse]
+[y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah ![e:open] Bienvenue agent [i:][c:#00ffff][k:playerName][c:][i:].[o:camera] Heureuse de vous revoir ![e:smile]
+[e:open]Votre score d'agent est de [c:#00ffff][i:][k:totalScoreMill].[s:60][k:totalScoreFrac][s:][i:][c:]M.
+[e:smile]Bonne chance pour vos prochaines missions ![e:handsConverse]
 [!:StartGame]
 #guest_tutoask
-[y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah ![e:smile] Vous voilà enfin agent._._.___ [s:i][c:#00ffff][k:playerName][c:][s:] ?[e:open][o:camera]
+[y:tutobot][l:camera][e:handsIdle][e:happyWag]Ah ![e:smile] Vous voilà enfin agent._._.___ [i:][c:#00ffff][k:playerName][c:][i:] ?[e:open][o:camera]
 [e:idleWag]Désolé si j'écorche votre nom ? Je ne vous trouve pas dans la base de données des pilotes._._.
 [e:half]Ehm_._._. Même si je sais que vos talents de pilote sont bien plus que confirmés._._.
 [e:handsShyPoint][e:closeAAA]Les vaisseaux de notre flotte n'ont peut-être pas les commandes aux mêmes endroits, agissent de manière différente et._._.
@@ -37,8 +38,8 @@ $guest_tutoask_howdareyou Comment oses-tu...
 [e:open]Suivez-moi, Nous allons faire un petit vol d'entraînement.[e:handsConverse]
 [!:StartTutorial]
 #tutorial_1
-[ts:200:46][tp:0:50][y:tutobot][s:i][c:#aaaaaa]*ksssht*[c:#ffffff][s:] Vous me reçevez ?___ Je vous contacte depuis le [s:i]Mothership.[s:]
-[e:smile][e:happyWag]Bienvenue sur [s:i]Elite Beat Airlines[s:] ! Ici votre commandante de bord, TUT-0 !___ Hihi...
+[ti:200:46][tp:0:50][y:tutobot][i:][c:#aaaaaa]*ksssht*[c:#ffffff][i:] Vous me reçevez ?___ Je vous contacte depuis le [i:]Mothership.[i:]
+[e:smile][e:happyWag]Bienvenue sur [i:]Elite Beat Airlines[i:] ! Ici votre commandante de bord, TUT-0 !___ Hihi...
 [e:open][e:idleWag]Regardons ensemble les commandes du vaisseau.
 [e:handsConverse]Des débris vont apparaître sur le LIDAR, juste ici :
 [e:handsTogether]Pour les détruire, il faut appuyer sur le bon bouton, au bon moment !
@@ -55,18 +56,18 @@ Pour dégager les longs débris, il faut rester appuyé sur le bouton correspond
 Et quand le bout du trait arrive dans la zone, relâchez le bouton !
 #tutorial_3
 [e:handsTogether][e:open]Bien, je pense que nous-
-[ts:120:34][tp:100:-50][y:ship]ALERTE, ESQUIVE IMMINENTE REQUISE.
-[ts:200:46][tp:0:50][y:tutobot][e:handsHoldHead][e:point]Un débris indestructible est sur la trajectoire, on va devoir l'esquiver !
+[ti:120:34][tp:100:-50][y:ship]ALERTE, ESQUIVE IMMINENTE REQUISE.
+[ti:200:46][tp:0:50][y:tutobot][e:handsHoldHead][e:point]Un débris indestructible est sur la trajectoire, on va devoir l'esquiver !
 Donnez un coup de joystick à gauche ou à droite au bon moment pour l'esquiver !
 #tutorial_bad_4
-[ts:120:34][tp:100:-50][e:point][y:ship]FAUSSE ALERTE.
-[ts:200:46][tp:0:50][y:tutobot][e:half]...Il faut peut-être envoyer ce vaisseau aux révisions...
+[ti:120:34][tp:100:-50][e:point][y:ship]FAUSSE ALERTE.
+[ti:200:46][tp:0:50][y:tutobot][e:half]...Il faut peut-être envoyer ce vaisseau aux révisions...
 #tutorial_good_4
 [e:inequal][e:handsClap]YES !
 [e:open][e:handsIdle]Vous avez beaucoup de potentiel ! Magnifique esquive.
 #tutorial_5
 [e:open][e:handsIdle]Bon ! Je pense que nous avons fait le tour des fonctionnalités du vaisseau.
-[ts:120:34][tp:100:-50][y:ship]ALERTE, AUTRES DEBRIS EN VUE.
-[ts:200:46][tp:0:50][y:tutobot]On dirait que c'est pas fini ! Rappelez-vous de votre entraînement et tout ira bien !
+[ti:120:34][tp:100:-50][y:ship]ALERTE, AUTRES DEBRIS EN VUE.
+[ti:200:46][tp:0:50][y:tutobot]On dirait que c'est pas fini ! Rappelez-vous de votre entraînement et tout ira bien !
 [e:smile][e:happyWag]Je sais que vous pouvez le faire !
 

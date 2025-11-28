@@ -31,7 +31,7 @@ public class PlayerInfoScoreUI : MonoBehaviour
 
     void UpdateScore(int score)
     {
-        agentScore.text = $"{(int)(score / 1000000f)}<size=60%>.{(int)(score % 1000000f / 1000):D3} <size=100%>M<size=60%>";
+        agentScore.text = $"{(int)(score / 1000000f)}<size=60%>.{(int)(score % 1000000f / 1000):D3} <size=100%>M";
     }
 
     public void TestUpdateTotalScore(int diff)

@@ -27,7 +27,7 @@ public class OsuFileParser
         # endif
         
         SongData songData = new();
-        SongInfo songInfo = new();
+        SongDataInfo songInfo = new();
 
         string[] lines = file.text.Split('\n');
         if (!lines[0].StartsWith("osu file format v"))

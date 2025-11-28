@@ -62,9 +62,9 @@ public class PlayerSettingsUI : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(scrollSpeedSetting.gameObject);
         }
 
-        if (lastHorizontal != Input.GetAxis("P1_Horizontal"))
+        if (lastHorizontal != Input.GetAxisRaw("P1_Horizontal"))
         {
-            lastHorizontal = Input.GetAxis("P1_Horizontal");
+            lastHorizontal = Input.GetAxisRaw("P1_Horizontal");
             if (lastHorizontal > .5) {
                 SFXManager.PlayHorizontalBlipSound();
                 ModifySetting(1);

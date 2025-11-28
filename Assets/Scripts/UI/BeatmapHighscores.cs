@@ -30,7 +30,7 @@ public class BeatmapHighscores : MonoBehaviour
 
     void UpdateHighscores()
     {
-        SongInfo info = SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex];
+        SongDataInfo info = SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex];
         
         string json = ExtradataManager.GetDataWithKey($"Scores/{info.Title}_{info.DifficultyName}");
         if (json is null)

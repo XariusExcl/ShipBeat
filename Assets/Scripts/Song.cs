@@ -4,7 +4,7 @@ public struct SongValidationResult {
     public SongData Data;
 }
 
-public struct SongInfo {
+public struct SongDataInfo {
     public string Title;
     public string Artist;
     public string Creator;
@@ -29,7 +29,7 @@ public struct TimingPoint {
 }
 
 public struct SongData {
-    public SongInfo Info;
+    public SongDataInfo Info;
     public TimingPoint[] TimingPoints;
     public Note[] Notes;
 }

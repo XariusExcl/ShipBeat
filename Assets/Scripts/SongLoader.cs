@@ -23,7 +23,7 @@ public class SongLoader : MonoBehaviour
     public static bool IsAudioLoaded = false;
     public static SongData LoadedSong = new();
     public static SongLoader Instance;
-    SongInfo preloadedSongInfo;
+    SongDataInfo PreloadedSongInfo;
 
     void Awake()
     {
@@ -41,12 +41,12 @@ public class SongLoader : MonoBehaviour
         if (UseDebugSong)
         {
             SongFolderReader.ClearCache();
-            Init(new SongInfo { ChartFile = Application.streamingAssetsPath + DebugSongPath, AudioFile = Application.streamingAssetsPath + DebugAudioPath });
+            Init(new SongDataInfo { ChartFile = Application.streamingAssetsPath + DebugSongPath, AudioFile = Application.streamingAssetsPath + DebugAudioPath });
         }
     }
 
-    public void Init(SongInfo songInfo) {
-        preloadedSongInfo = songInfo;
+    public void Init(SongDataInfo songInfo) {
+        PreloadedSongInfo = songInfo;
         Scoring.Init();
         StartCoroutine(SongFolderReader.FetchFile(songInfo.ChartFile, OnFileFetched));
         StartCoroutine(SongFolderReader.FetchAudioFile(songInfo.AudioFile, OnAudioFetched));
@@ -96,7 +96,7 @@ public class SongLoader : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         Debug.Log($"Scene loaded: {scene.name}");
         if (scene.name == "Game") {
-            if (preloadedSongInfo.ChartFile == null) {
+            if (PreloadedSongInfo.ChartFile == null) {
                 Debug.LogError("No file path set for song loader");
                 SceneManager.LoadScene("SongSelect");
                 return;

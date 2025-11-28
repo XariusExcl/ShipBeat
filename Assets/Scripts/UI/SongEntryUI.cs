@@ -16,7 +16,7 @@ public class SongEntryUI : MonoBehaviour
     [SerializeField] SongSelectSceneData songSelectSceneData;
 
 
-    public void SetData(SongInfo songInfo)
+    public void SetData(SongDataInfo songInfo)
     {
         title.text = songInfo.Title;
         artist.text = songInfo.Artist;

@@ -28,7 +28,7 @@ public class SongInfoPanelUI : MonoBehaviour
         SetData(SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex]);
     }
 
-    public void SetData(SongInfo song)
+    public void SetData(SongDataInfo song)
     {
         Color diffColor = songSelectSceneData.GetColorForRatingUI(song.DifficultyRating);
         border.color = new Color(diffColor.r, diffColor.g, diffColor.b, 0.75f);

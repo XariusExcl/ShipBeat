@@ -97,7 +97,7 @@ public class Scoring
 
     public static string SaveScore()
     {
-        SongInfo info = SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex];
+        SongDataInfo info = SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex];
         HighscoreList highscores = new();
         highscores.list = new();
 

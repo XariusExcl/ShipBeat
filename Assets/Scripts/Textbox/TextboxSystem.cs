@@ -158,17 +158,27 @@ public class TextboxSystem : MonoBehaviour
 				{
 					switch (effect[0])
 					{
-						case "s": // Font styling
-							if (effect[1] == "i")
-							{
-								isItalics = true;
-								italicsStartIndex = i;
-								textboxTextSB.Append("<i>");
+						case "s": // Font Size
+							int size = 100;
+							try {	
+								size = int.Parse(effect[1]);
 							}
-							else
+							catch (Exception) {
+								Debug.LogWarning($"Error parsing font size \"{effect[1]}\" to int.");
+							}
+							textboxTextSB.Append($"<size={size}%>");
+							break;
+						case "i": // Italics
+							if (isItalics)
 							{
 								isItalics = false;
 								textboxTextSB.Append("</i>");
+							}
+							else
+							{
+								isItalics = true;
+								textboxTextSB.Append("<i>");
+								italicsStartIndex = i;
 							}
 							break;
 						case "e": // Emote
@@ -324,6 +334,12 @@ public class TextboxSystem : MonoBehaviour
 				return HighscoreManager.PlayerName;
 			case "score":
 				return Scoring.Score.ToString();
+			case "totalScore":
+				return Scoring.TotalScore.ToString();
+			case "totalScoreMill":
+				return $"{(int)(Scoring.TotalScore / 1000000f)}";
+			case "totalScoreFrac":
+				return $"{(int)(Scoring.TotalScore % 1000000f / 1000):D3}";
 			default:
 				if (LocalisationFileParser.TextLibrary.ContainsKey(key))
 					return LocalisationFileParser.TextLibrary[key].Textboxes[0].Text;

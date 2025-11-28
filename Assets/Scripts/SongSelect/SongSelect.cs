@@ -7,7 +7,8 @@ public class SongSelect : MonoBehaviour
     [SerializeField] GameObject songSelectReadyMenu;
     float playSongTimer;
     const float playSongDelay = .75f;
-    SongInfo selectedSong;
+    SongDataInfo selectedSong;
+    public static int SessionPlayedSongs = 0;
 
     void Start()
     {
@@ -41,6 +42,7 @@ public class SongSelect : MonoBehaviour
         songLoader.AddComponent<SongLoader>();
         SongLoader songLoaderComponent = songLoader.GetComponent<SongLoader>();
         songLoaderComponent.Init(SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex]);
+        SessionPlayedSongs++;
     }
 
     void OnCarousselUpdate()

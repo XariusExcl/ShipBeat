@@ -57,9 +57,9 @@ public class SongCaroussel : MonoBehaviour
     {
         if (!HasFocus || SongSelectReadyMenu.IsValidated || !SongFolderReader.IsDataLoaded) return;
 
-        if (lastVertical != Input.GetAxis("P1_Vertical"))
+        if (lastVertical != Input.GetAxisRaw("P1_Vertical"))
         {
-            lastVertical = Input.GetAxis("P1_Vertical");
+            lastVertical = Input.GetAxisRaw("P1_Vertical");
             if (lastVertical > .5)
                 UpdateCaroussel(ScrollDirection.Up);
 

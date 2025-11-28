@@ -18,13 +18,24 @@ public class GamePlayerInput : MonoBehaviour {
     float lastHorizontal = 0;
     float settingLastHorizontal = 0;
     float settingLastVertical = 0;
+    float restartTimer = 0f;
     void Update()
     {
-        // Settings In-game
         if (Input.GetButton("P1_Start"))
         {
-            if (settingLastVertical != Input.GetAxis("P1_Vertical")) {
-                settingLastVertical = Input.GetAxis("P1_Vertical");
+            // Quit/Restart macro
+            if (Input.GetButton("P1_B1") && Input.GetButton("P1_B2") && Input.GetButton("P1_B3"))
+            {
+                restartTimer += Time.deltaTime;
+                if(restartTimer >= 1f)
+                {
+                    // TODO : Call Restart
+                }
+            } else { restartTimer = 0f; }
+
+            // In-game settings 
+            if (settingLastVertical != Input.GetAxisRaw("P1_Vertical")) {
+                settingLastVertical = Input.GetAxisRaw("P1_Vertical");
                 if (settingLastVertical > .5) {
                     Maestro.LaneSpeed++;
                     InfoToasterUI.ShowToaster($"Vitesse de défilement : {Maestro.LaneSpeed}");
@@ -34,8 +45,8 @@ public class GamePlayerInput : MonoBehaviour {
                 }
             }
 
-            if (settingLastHorizontal != Input.GetAxis("P1_Horizontal")) {
-                settingLastHorizontal = Input.GetAxis("P1_Horizontal");
+            if (settingLastHorizontal != Input.GetAxisRaw("P1_Horizontal")) {
+                settingLastHorizontal = Input.GetAxisRaw("P1_Horizontal");
                 if (settingLastHorizontal > .5) {
                     Maestro.GlobalOffset += 0.005f;
                     Jukebox.SetPlaybackPosition(Maestro.SongTime - Maestro.GlobalOffset);
@@ -50,11 +61,11 @@ public class GamePlayerInput : MonoBehaviour {
             }
         }
 
-        if (lastHorizontal != Input.GetAxis("P1_Horizontal"))
+        if (lastHorizontal != Input.GetAxisRaw("P1_Horizontal"))
         {
-            if (lastHorizontal < .5f && Mathf.Abs(Input.GetAxis("P1_Horizontal")) > .5f) {
+            if (lastHorizontal < .5f && Mathf.Abs(Input.GetAxisRaw("P1_Horizontal")) > .5f) {
                 Receptors[0].HandleInput(ButtonState.Released);
-                if (Input.GetAxis("P1_Horizontal") > 0) {
+                if (Input.GetAxisRaw("P1_Horizontal") > 0) {
                     Judge.JudgePlayerInput(0, ButtonState.Right);
                     playerShip.Jostle(ButtonState.Left);
                     otherShips.Jostle(ButtonState.Left);
@@ -66,7 +77,7 @@ public class GamePlayerInput : MonoBehaviour {
                 }
             }
             
-            lastHorizontal = Mathf.Abs(Input.GetAxis("P1_Horizontal"));
+            lastHorizontal = Mathf.Abs(Input.GetAxisRaw("P1_Horizontal"));
         }
 
         for (int i = 0; i <= 5; i++)

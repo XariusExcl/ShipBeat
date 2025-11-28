@@ -6,12 +6,18 @@ public class CurrentSongTitleandDiff : MonoBehaviour
     [SerializeField] TMP_Text songName;
     [SerializeField] TMP_Text diffName;
 
-    void OnEnable()
+    void Start()
     {
         if (songName is not null)
-            songName.text = $"{SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].Title}";
+            if (SongFolderReader.SongInfos.Count == 0)
+                songName.text = $"{SongLoader.LoadedSong.Info.Title}";
+            else 
+                songName.text = $"{SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].Title}";
         if (diffName is not null)
-            diffName.text = $"{SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].DifficultyName} {GetRatingText(SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].DifficultyRating)}";
+            if (SongFolderReader.SongInfos.Count == 0)
+                diffName.text = $"{SongLoader.LoadedSong.Info.DifficultyName} {GetRatingText(SongLoader.LoadedSong.Info.DifficultyRating)}";
+            else
+                diffName.text = $"{SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].DifficultyName} {GetRatingText(SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex].DifficultyRating)}";
     }
 
     string GetRatingText(int rating)

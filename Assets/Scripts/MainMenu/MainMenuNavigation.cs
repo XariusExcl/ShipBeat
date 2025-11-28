@@ -69,7 +69,10 @@ public class MainMenuNavigation : MonoBehaviour
         {
             if (valid)
                 if (ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore") is not null)
+                {
+                    Scoring.Init(); // TODO : Maybe a more general player data load
                     TextboxSystem.StartDialogue("guest_welcomeback");
+                }
                 else
                     TextboxSystem.StartDialogue("guest_tutoask");
             else
@@ -101,7 +104,7 @@ public class MainMenuNavigation : MonoBehaviour
         songLoader.name = "SongLoader";
         SongLoader songLoaderComponent = songLoader.AddComponent<SongLoader>();
 #if UNITY_EDITOR
-        songLoaderComponent.Init(new SongInfo
+        songLoaderComponent.Init(new SongDataInfo
         {
             ChartFile = Application.streamingAssetsPath + TutorialSongPath,
             AudioFile = Application.streamingAssetsPath + TutorialAudioPath
