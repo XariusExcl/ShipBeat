@@ -21,7 +21,7 @@ public class BeatMarkerBehaviour : MonoBehaviour
 
     void Update()
     {
-        float normalizedTime = (ThisBeatTime - Maestro.SongTime) / (10f / Maestro.LaneSpeed);
+        float normalizedTime = Maestro.GetNormalizedPositionAtTimeSV(ThisBeatTime);
         if (normalizedTime > 1f)
         {
             mesh.SetActive(false);

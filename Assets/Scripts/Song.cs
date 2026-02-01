@@ -24,7 +24,9 @@ public struct SongDataInfo {
 public struct TimingPoint {
     public float Time;
     public float BPM;
+    public float SpeedMultiplier;
     public int Meter;
+    public bool isInherited;
     public bool KiaiMode;
 }
 

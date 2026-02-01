@@ -9,6 +9,7 @@ using System.Collections;
 public class Maestro : MonoBehaviour
 {
     public static List<TimingPoint> TimingPoints = new List<TimingPoint>();
+    static int timingPointIndex = 0;
     static TimingPoint currentTimingPoint = new TimingPoint();
     static TimingPoint currentEffectPoint = new TimingPoint();
 
@@ -24,7 +25,7 @@ public class Maestro : MonoBehaviour
             _laneSpeed = value;
         }
     }
-
+    public static float SpeedMultiplier;
     public static bool SongStarted = false;
     public static bool SongEnded = false;
     public static bool StoryboardEnded = false;
@@ -60,6 +61,8 @@ public class Maestro : MonoBehaviour
         SongTime = 0;
         StartTime = (float)AudioSettings.dspTime + StartDelay;
         currentTimingPoint = TimingPoints[0];
+        timingPointIndex = 0;
+        SpeedMultiplier = 1;
     }
 
     void Start()
@@ -85,7 +88,6 @@ public class Maestro : MonoBehaviour
         Shader.SetGlobalFloat("_Tick", Mathf.Abs(Tick));
     }
 
-    int timingPointIndex = 0;
     void UpdateTimingPoint() {
         if (TimingPoints.Count == 0 || timingPointIndex >= TimingPoints.Count) return;
         if (SongTime >= TimingPoints[timingPointIndex].Time) {
@@ -93,6 +95,7 @@ public class Maestro : MonoBehaviour
                 currentTimingPoint = TimingPoints[timingPointIndex];
 
             currentEffectPoint = TimingPoints[timingPointIndex];
+            SpeedMultiplier = currentEffectPoint.SpeedMultiplier;
 
             timingPointIndex++;
 
@@ -105,7 +108,7 @@ public class Maestro : MonoBehaviour
                 Debug.Log("End Kiai Time");
                 OnKiaiEnd.Invoke();
             }
-            Debug.Log($"Timing Point {currentEffectPoint.Time}: {(IsKiaiTime?"(K) ":"")}current BPM: {currentTimingPoint.BPM} {currentTimingPoint.Meter}/4");
+            Debug.Log($"Timing Point {currentEffectPoint.Time}: {(IsKiaiTime?"(K) ":"")}current BPM: {currentTimingPoint.BPM} ({currentEffectPoint.SpeedMultiplier:F2}x) {currentTimingPoint.Meter}/4");
         }
     }
 
@@ -115,6 +118,50 @@ public class Maestro : MonoBehaviour
         Bar = Mathf.FloorToInt(beat / currentTimingPoint.Meter);
         Beat = Mathf.FloorToInt(beat % currentTimingPoint.Meter);
         Tick = beat - (int)beat;
+    }
+
+    public static float GetNormalizedPositionAtTime(float time)
+    {
+        return (time - SongTime) * LaneSpeed * SpeedMultiplier * 0.1f;
+    }
+
+    public static float GetNormalizedPositionAtTimeSV(float time)
+    {
+        return (time - SongTime) * LaneSpeed * AverageLaneSpeedMultiplier(time) * 0.1f;
+    }
+
+    static float AverageLaneSpeedMultiplier(float endTime)
+    {
+        if (TimingPoints.Count == 0)
+            return 1f;
+
+        float totalWeighted = 0f;
+        float totalDuration = 0f;
+
+        float prevTime = SongTime;
+        float prevMultiplier = SpeedMultiplier;
+
+        for (int i = timingPointIndex; i < TimingPoints.Count && TimingPoints[i].Time < endTime; i++)
+        {
+            float nextTime = TimingPoints[i].Time;
+            float duration = nextTime - prevTime;
+            totalWeighted += prevMultiplier * duration;
+            totalDuration += duration;
+            prevTime = nextTime;
+            prevMultiplier = TimingPoints[i].SpeedMultiplier;
+        }
+
+        if (prevTime < endTime)
+        {
+            float duration = endTime - prevTime;
+            totalWeighted += prevMultiplier * duration;
+            totalDuration += duration;
+        }
+
+        if (totalDuration == 0f)
+            return prevMultiplier;
+
+        return totalWeighted / totalDuration;
     }
 
     void EndSong() {

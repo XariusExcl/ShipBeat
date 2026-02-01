@@ -88,7 +88,7 @@ public class NoteBehaviour : MonoBehaviour
     void Update()
     {
         if (PoolState == NotePoolState.InPool) return;
-        float normalizedTime = (Note.HitTime - Maestro.SongTime) / (10f / Maestro.LaneSpeed);
+        float normalizedTime = Maestro.GetNormalizedPositionAtTimeSV(Note.HitTime);
 
         if (normalizedTime < 1){
             if (Note.Type == NoteType.Hold)
@@ -97,12 +97,12 @@ public class NoteBehaviour : MonoBehaviour
             if (normalizedTime > 0) // Move along the spline
                 splineAnimate.NormalizedTime = normalizedTime;
             else // Move along the extrapolation vector
-                transform.position += lane.ExtrapolationVector * Time.deltaTime * (Maestro.LaneSpeed / 10f);
+                transform.position += lane.ExtrapolationVector * Time.deltaTime * Maestro.LaneSpeed * Maestro.SpeedMultiplier * 0.1f;
         }
 
         if (Note.Type == NoteType.Hold)
         {
-            float normalizedReleaseTime = (Note.ReleaseTime - Maestro.SongTime) / (10f / Maestro.LaneSpeed);
+            float normalizedReleaseTime = Maestro.GetNormalizedPositionAtTimeSV(Note.ReleaseTime);
             tailLineRenderer.SetPosition(0, normalizedTime > 0 ? transform.position : lane.transform.position);
             tailLineRenderer.SetPosition(1, lane.SplineContainer.EvaluatePosition(normalizedReleaseTime));
         }
