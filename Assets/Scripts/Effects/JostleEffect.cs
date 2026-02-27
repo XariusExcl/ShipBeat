@@ -22,10 +22,10 @@ public class JostleEffect : MonoBehaviour
         switch (direction)
         {
             case ButtonState.Right:
-                jostle.x = -jostleAmount;
+                jostle.x = jostleAmount;
                 break;
             case ButtonState.Left:
-                jostle.x = jostleAmount;
+                jostle.x = -jostleAmount;
                 break;
         }
     }

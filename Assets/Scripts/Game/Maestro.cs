@@ -26,6 +26,7 @@ public class Maestro : MonoBehaviour
         }
     }
     public static float SpeedMultiplier;
+    static float globalAverageSpeedMultiplier;
     public static bool SongStarted = false;
     public static bool SongEnded = false;
     public static bool StoryboardEnded = false;
@@ -63,6 +64,7 @@ public class Maestro : MonoBehaviour
         currentTimingPoint = TimingPoints[0];
         timingPointIndex = 0;
         SpeedMultiplier = 1;
+        ComputeAverageGlobalSpeedMultiplier();
     }
 
     void Start()
@@ -127,7 +129,7 @@ public class Maestro : MonoBehaviour
 
     public static float GetNormalizedPositionAtTimeSV(float time)
     {
-        return (time - SongTime) * LaneSpeed * AverageLaneSpeedMultiplier(time) * 0.1f;
+        return (time - SongTime) * LaneSpeed * AverageLaneSpeedMultiplier(time) * (1f / globalAverageSpeedMultiplier) * 0.1f;
     }
 
     static float AverageLaneSpeedMultiplier(float endTime)
@@ -162,6 +164,32 @@ public class Maestro : MonoBehaviour
             return prevMultiplier;
 
         return totalWeighted / totalDuration;
+    }
+
+    static void ComputeAverageGlobalSpeedMultiplier()
+    {
+        if (TimingPoints.Count == 0)
+        {
+            globalAverageSpeedMultiplier = 1f;
+            return;
+        }
+
+        float totalWeighted = 0f;
+        float totalDuration = 0f;
+        float prevTime = TimingPoints[0].Time;
+        float prevMultiplier = TimingPoints[0].SpeedMultiplier;
+
+        for (int i = 1; i < TimingPoints.Count; i++)
+        {
+            float nextTime = TimingPoints[i].Time;
+            float duration = nextTime - prevTime;
+            totalWeighted += prevMultiplier * duration;
+            totalDuration += duration;
+            prevTime = nextTime;
+            prevMultiplier = TimingPoints[i].SpeedMultiplier;
+        }
+
+        globalAverageSpeedMultiplier = totalDuration > 0f ? totalWeighted / totalDuration : 1f;
     }
 
     void EndSong() {

@@ -11,6 +11,8 @@ public enum ButtonState
 
 public class GamePlayerInput : MonoBehaviour {
     [SerializeField] List<Receptor> Receptors;
+    [SerializeField] List<Receptor> ShipButtons;
+    [SerializeField] ShipStick ShipStick;
     [SerializeField] JostleEffect playerShip;
     [SerializeField] JostleEffect otherShips;
 
@@ -67,13 +69,13 @@ public class GamePlayerInput : MonoBehaviour {
                 Receptors[0].HandleInput(ButtonState.Released);
                 if (Input.GetAxisRaw("P1_Horizontal") > 0) {
                     Judge.JudgePlayerInput(0, ButtonState.Right);
-                    playerShip.Jostle(ButtonState.Left);
-                    otherShips.Jostle(ButtonState.Left);
+                    playerShip.Jostle(ButtonState.Right);
+                    otherShips.Jostle(ButtonState.Right);
                 }
                 else {
                     Judge.JudgePlayerInput(0, ButtonState.Left);
-                    playerShip.Jostle(ButtonState.Right);
-                    otherShips.Jostle(ButtonState.Right);
+                    playerShip.Jostle(ButtonState.Left);
+                    otherShips.Jostle(ButtonState.Left);
                 }
             }
             
@@ -85,12 +87,14 @@ public class GamePlayerInput : MonoBehaviour {
             if (Input.GetButtonDown("P1_B"+(i+1)))
             {
                 Receptors[(i%3)+1].HandleInput(ButtonState.Pressed);
+                ShipButtons[i%3].HandleInput(ButtonState.Pressed);
                 Judge.JudgePlayerInput((i%3)+1, ButtonState.Pressed);
             }
 
             if (Input.GetButtonUp("P1_B"+(i+1)))
             {
                 Receptors[(i%3)+1].HandleInput(ButtonState.Released);
+                ShipButtons[i%3].HandleInput(ButtonState.Released);
                 Judge.JudgePlayerInput((i%3)+1, ButtonState.Released);
             }
         }

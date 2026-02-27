@@ -7,11 +7,9 @@ public class BeatMarkerGenerator : MonoBehaviour
     static TimingPoint lookAheadTimingPoint;
     static TimingPoint nextLookAheadTimingPoint;
     static float lastBeatTime = 0;
-    const float LookAhead = 2f;
     List<BeatMarkerBehaviour> beatMarkers = new List<BeatMarkerBehaviour>();
     [SerializeField] GameObject beatMarkerGo;
     SplineContainer splineContainer;
-
     static bool LastTimingPointReached = false;
     void Start()
     {
@@ -23,19 +21,19 @@ public class BeatMarkerGenerator : MonoBehaviour
     {
         lookAheadTimingPoint = nextLookAheadTimingPoint = Maestro.TimingPoints[0];
         LastTimingPointReached = false;
-        lastBeatTime = -LookAhead;
+        lastBeatTime = 0;
     }
 
     void Update()
     {
-        if (Maestro.SongTime > lastBeatTime - LookAhead)
+        if (Maestro.SongTime > lastBeatTime - SongLoader.LookAhead)
         {
             CreateNextBeat();
         }
 
-        if (!LastTimingPointReached && nextLookAheadTimingPoint.Time < Maestro.SongTime + LookAhead)
+        if (Maestro.SongTime > 0f && !LastTimingPointReached && nextLookAheadTimingPoint.Time < Maestro.SongTime + SongLoader.LookAhead)
         {
-            GetNextTimingPoint();
+            GetNextBPMPoint();
         }
     }
 
@@ -51,7 +49,7 @@ public class BeatMarkerGenerator : MonoBehaviour
     }
 
     int nextLookAheadTimingPointIndex = 0;
-    void GetNextTimingPoint()
+    void GetNextBPMPoint()
     {
         lookAheadTimingPoint = nextLookAheadTimingPoint;
         do
@@ -63,7 +61,7 @@ public class BeatMarkerGenerator : MonoBehaviour
         if (nextLookAheadTimingPointIndex >= Maestro.TimingPoints.Count)
         {
             LastTimingPointReached = true;
-            nextLookAheadTimingPointIndex = Maestro.TimingPoints.Count - 1;
+            nextLookAheadTimingPointIndex = Maestro.TimingPoints.Count;
         }
         nextLookAheadTimingPoint = Maestro.TimingPoints[nextLookAheadTimingPointIndex];
     }

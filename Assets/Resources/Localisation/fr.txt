@@ -38,7 +38,7 @@ $guest_tutoask_howdareyou Comment oses-tu...
 [e:open]Suivez-moi, Nous allons faire un petit vol d'entraînement.[e:handsConverse]
 [!:StartTutorial]
 #tutorial_1
-[ti:200:46][tp:0:50][y:tutobot][i:][c:#aaaaaa]*ksssht*[c:#ffffff][i:] Vous me reçevez ?___ Je vous contacte depuis le [i:]Mothership.[i:]
+[ts:200:46][tp:0:50][y:tutobot][i:][c:#aaaaaa]*ksssht*[c:#ffffff][i:] Vous me reçevez ?___ Je vous contacte depuis le [i:]Mothership.[i:]
 [e:smile][e:happyWag]Bienvenue sur [i:]Elite Beat Airlines[i:] ! Ici votre commandante de bord, TUT-0 !___ Hihi...
 [e:open][e:idleWag]Regardons ensemble les commandes du vaisseau.
 [e:handsConverse]Des débris vont apparaître sur le LIDAR, juste ici :
@@ -56,18 +56,18 @@ Pour dégager les longs débris, il faut rester appuyé sur le bouton correspond
 Et quand le bout du trait arrive dans la zone, relâchez le bouton !
 #tutorial_3
 [e:handsTogether][e:open]Bien, je pense que nous-
-[ti:120:34][tp:100:-50][y:ship]ALERTE, ESQUIVE IMMINENTE REQUISE.
-[ti:200:46][tp:0:50][y:tutobot][e:handsHoldHead][e:point]Un débris indestructible est sur la trajectoire, on va devoir l'esquiver !
+[ts:120:34][tp:100:-50][y:ship]ALERTE, ESQUIVE IMMINENTE REQUISE.
+[ts:200:46][tp:0:50][y:tutobot][e:handsHoldHead][e:point]Un débris indestructible est sur la trajectoire, on va devoir l'esquiver !
 Donnez un coup de joystick à gauche ou à droite au bon moment pour l'esquiver !
 #tutorial_bad_4
-[ti:120:34][tp:100:-50][e:point][y:ship]FAUSSE ALERTE.
-[ti:200:46][tp:0:50][y:tutobot][e:half]...Il faut peut-être envoyer ce vaisseau aux révisions...
+[ts:120:34][tp:100:-50][e:point][y:ship]FAUSSE ALERTE.
+[ts:200:46][tp:0:50][y:tutobot][e:half]...Il faut peut-être envoyer ce vaisseau aux révisions...
 #tutorial_good_4
 [e:inequal][e:handsClap]YES !
 [e:open][e:handsIdle]Vous avez beaucoup de potentiel ! Magnifique esquive.
 #tutorial_5
 [e:open][e:handsIdle]Bon ! Je pense que nous avons fait le tour des fonctionnalités du vaisseau.
-[ti:120:34][tp:100:-50][y:ship]ALERTE, AUTRES DEBRIS EN VUE.
-[ti:200:46][tp:0:50][y:tutobot]On dirait que c'est pas fini ! Rappelez-vous de votre entraînement et tout ira bien !
+[ts:120:34][tp:100:-50][y:ship]ALERTE, AUTRES DEBRIS EN VUE.
+[ts:200:46][tp:0:50][y:tutobot]On dirait que c'est pas fini ! Rappelez-vous de votre entraînement et tout ira bien !
 [e:smile][e:happyWag]Je sais que vous pouvez le faire !
 

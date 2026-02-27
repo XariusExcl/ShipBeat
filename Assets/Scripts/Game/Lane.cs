@@ -23,7 +23,7 @@ public class Lane : MonoBehaviour
     {
         ExtrapolationVector = (-(Vector3)SplineContainer.EvaluateTangent(0.01f)).normalized * SplineContainer.CalculateLength();
 
-        if (lineRenderer.enabled)
+        if (lineRenderer != null && lineRenderer.enabled)
         {
             lineRenderer.positionCount = laneResolution;
             for (int i = 0; i < lineRenderer.positionCount; i++)
