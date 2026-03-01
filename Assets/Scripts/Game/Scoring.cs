@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Anatidae;
-using NUnit.Framework;
 using UnityEngine;
 
 [Serializable]
@@ -14,6 +13,7 @@ public class Scoring
 {
     public static int Score { get; private set; } = 0;
     public static int Combo { get; private set; } = 0;
+    public static int MissCombo { get; private set; } = 0;
     public static int BestCombo { get; private set; } = 0;
     public static int Perfects { get; private set; } = 0;
     public static int Goods { get; private set; } = 0;
@@ -53,21 +53,25 @@ public class Scoring
                 Score += 100;
                 Perfects++;
                 Combo++;
+                MissCombo = 0;
                 GameUIManager.UpdateCombo(Combo);
             break;
             case JudgeType.Great:
                 Score += 50;
                 Goods++;
                 Combo++;
+                MissCombo = 0;
                 GameUIManager.UpdateCombo(Combo);
             break;
             case JudgeType.Bad:
                 Score += 10;
                 Bads++;
+                MissCombo = 0;
                 ResetCombo();
             break;
             case JudgeType.Miss:
                 Misses++;
+                MissCombo++;
                 ResetCombo();
             break;
         }
@@ -98,8 +102,7 @@ public class Scoring
     public static string SaveScore()
     {
         SongDataInfo info = SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex];
-        HighscoreList highscores = new();
-        highscores.list = new();
+        HighscoreList highscores = new() { list = new() };
 
         string json = ExtradataManager.GetDataWithKey($"Scores/{info.Title}_{info.DifficultyName}");
         

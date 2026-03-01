@@ -19,6 +19,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI songTime;
     [SerializeField] GameObject skipButton;
     [SerializeField] PlayerInfoScoreUI playerInfoScoreUI;
+    [SerializeField] GameObject giveUpKeybind;
 
     void Awake()
     {
@@ -26,6 +27,7 @@ public class GameUIManager : MonoBehaviour
         uiPercentage = 100f;
         Instance = this;
         comboText.text = "";
+        giveUpKeybind.SetActive(false);
     }
 
     static int uiScore = 0;
@@ -104,8 +106,12 @@ public class GameUIManager : MonoBehaviour
 
     public static void UpdateTotalScore()
     {
-        Debug.Log("Test");
         Instance.playerInfoScoreUI.UpdateTotalScore();
+    }
+
+    public static void ShowGiveUpKeybind(bool active = true)
+    {
+        Instance.giveUpKeybind.SetActive(active);
     }
 
     void LoadSongSelect()

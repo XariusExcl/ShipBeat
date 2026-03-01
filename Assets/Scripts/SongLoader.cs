@@ -17,7 +17,6 @@ public class SongLoader : MonoBehaviour
     [SerializeField] string DebugSongPath;
     [SerializeField] string DebugAudioPath;
 
-
     public const float LookAhead = 4f;
     public static bool IsFileLoaded = false;
     public static bool IsAudioLoaded = false;

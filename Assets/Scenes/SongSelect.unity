@@ -1572,7 +1572,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225509599}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1580,7 +1580,7 @@ Transform:
   - {fileID: 332104092}
   - {fileID: 1824398326}
   - {fileID: 2005167086}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1197007482}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!111 &225509602
 Animation:
@@ -5395,7 +5395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &832696227
 Transform:
   m_ObjectHideFlags: 0
@@ -5405,7 +5405,7 @@ Transform:
   m_GameObject: {fileID: 832696226}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.2071875, z: -0, w: 0.9783012}
-  m_LocalPosition: {x: -6.7433, y: 1.5941, z: 0.745}
+  m_LocalPosition: {x: -6.549, y: 1.5941, z: 0.659}
   m_LocalScale: {x: 0.85715497, y: 1.909936, z: 0.32}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8476,7 +8476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1188247938
 Transform:
   m_ObjectHideFlags: 0
@@ -8615,6 +8615,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 225509601}
   - {fileID: 224730673}
   - {fileID: 866859529}
   - {fileID: 1895616517}
@@ -9823,6 +9824,8 @@ PlayableDirector:
     value: {fileID: 1560136805}
   - key: {fileID: -989806303706046084, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
     value: {fileID: 225509603}
+  - key: {fileID: -6152772167242165396, guid: 25489a28fb10e274dabcf4f07e1247d2, type: 2}
+    value: {fileID: 1845675869}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1440267399
@@ -12437,6 +12440,7 @@ GameObject:
   - component: {fileID: 1845675866}
   - component: {fileID: 1845675868}
   - component: {fileID: 1845675867}
+  - component: {fileID: 1845675869}
   m_Layer: 0
   m_Name: TopDirectionalLight
   m_TagString: Untagged
@@ -12553,6 +12557,28 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!95 &1845675869
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845675865}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1884073530
 GameObject:
   m_ObjectHideFlags: 0
@@ -15394,4 +15420,3 @@ SceneRoots:
   - {fileID: 1505847160}
   - {fileID: 5698663444692947814}
   - {fileID: 1044016864}
-  - {fileID: 225509601}
