@@ -12,6 +12,8 @@ public class MainMenuNavigation : MonoBehaviour
     [SerializeField] EventSystem eventSystem;
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject mainMenuQuickPlayButton;
+    [SerializeField] GameObject mainMenuHowToPlayButton;
+    [SerializeField] GameObject howToPlayMenu;
     [SerializeField] GameObject quickPlayMenu;
     [SerializeField] GameObject quickPlayMenuFirstField;
     [SerializeField] GameObject firstLetter;
@@ -33,8 +35,9 @@ public class MainMenuNavigation : MonoBehaviour
     {
         cameraDolly.MoveToWaypoint(1);
         quickPlayMenu.SetActive(false);
+        howToPlayMenu.SetActive(false);
         mainMenu.SetActive(true);
-        eventSystem.SetSelectedGameObject(mainMenuQuickPlayButton);
+        eventSystem.SetSelectedGameObject(mainMenuQuickPlayButton.gameObject);
     }
 
     public void QuickPlayPressed()
@@ -44,6 +47,12 @@ public class MainMenuNavigation : MonoBehaviour
         quickPlayMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(quickPlayMenuFirstField);
     }
+
+    public void HowToPlayPressed()
+    {
+        howToPlayMenu.SetActive(!howToPlayMenu.activeSelf);
+    }
+
 
     public void SelectFirstLetter()
     {
@@ -56,7 +65,7 @@ public class MainMenuNavigation : MonoBehaviour
         cameraDolly.MoveToPreviousWaypoint();
         quickPlayMenu.SetActive(false);
         mainMenu.SetActive(true);
-        eventSystem.SetSelectedGameObject(mainMenuQuickPlayButton);
+        eventSystem.SetSelectedGameObject(mainMenuQuickPlayButton.gameObject);
     }
 
     public void GuestAuth()
@@ -110,7 +119,7 @@ public class MainMenuNavigation : MonoBehaviour
             AudioFile = Application.streamingAssetsPath + TutorialAudioPath
         });
 #else
-        songLoaderComponent.Init(new SongInfo
+        songLoaderComponent.Init(new SongDataInfo
         {
             ChartFile = "/ShipBeat/StreamingAssets" + TutorialSongPath,
             AudioFile = "/ShipBeat/StreamingAssets" + TutorialAudioPath

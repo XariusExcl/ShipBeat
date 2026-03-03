@@ -105,7 +105,7 @@ public class GamePlayerInput : MonoBehaviour
                     Judge.JudgePlayerInput((i % 3) + 1, ButtonState.Pressed);
                     Receptors[(i % 3) + 1].HandleInput(ButtonState.Pressed);
                     ShipButtons[i % 3].HandleInput(ButtonState.Pressed);
-                    ShipLasers[i % 3].ShootLaser();
+                    ShipLasers[i % 3].StartShooting();
                 }
 
                 if (Input.GetButtonUp("P1_B" + (i + 1)))
@@ -113,6 +113,7 @@ public class GamePlayerInput : MonoBehaviour
                     Judge.JudgePlayerInput((i % 3) + 1, ButtonState.Released);
                     Receptors[(i % 3) + 1].HandleInput(ButtonState.Released);
                     ShipButtons[i % 3].HandleInput(ButtonState.Released);
+                    ShipLasers[i % 3].StopShooting();
                 }
             }
         }

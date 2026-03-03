@@ -10,8 +10,8 @@ public class Maestro : MonoBehaviour
 {
     public static List<TimingPoint> TimingPoints = new List<TimingPoint>();
     static int timingPointIndex = 0;
-    static TimingPoint currentTimingPoint = new TimingPoint();
-    static TimingPoint currentEffectPoint = new TimingPoint();
+    public static TimingPoint CurrentTimingPoint = new TimingPoint();
+    public static TimingPoint CurrentEffectPoint = new TimingPoint();
 
     // Song time and state
     static int _laneSpeed = 7;
@@ -61,7 +61,7 @@ public class Maestro : MonoBehaviour
         Jukebox.SetVolume(0.5f);
         SongTime = 0;
         StartTime = (float)AudioSettings.dspTime + StartDelay;
-        currentTimingPoint = TimingPoints[0];
+        CurrentTimingPoint = TimingPoints[0];
         timingPointIndex = 0;
         SpeedMultiplier = 1;
         ComputeAverageGlobalSpeedMultiplier();
@@ -94,31 +94,31 @@ public class Maestro : MonoBehaviour
         if (TimingPoints.Count == 0 || timingPointIndex >= TimingPoints.Count) return;
         if (SongTime >= TimingPoints[timingPointIndex].Time) {
             if (TimingPoints[timingPointIndex].BPM != float.MinValue) // if BPM is not set to MinValue, then it's a timing point
-                currentTimingPoint = TimingPoints[timingPointIndex];
+                CurrentTimingPoint = TimingPoints[timingPointIndex];
 
-            currentEffectPoint = TimingPoints[timingPointIndex];
-            SpeedMultiplier = currentEffectPoint.SpeedMultiplier;
+            CurrentEffectPoint = TimingPoints[timingPointIndex];
+            SpeedMultiplier = CurrentEffectPoint.SpeedMultiplier;
 
             timingPointIndex++;
 
-            if (currentEffectPoint.KiaiMode && !IsKiaiTime) {
+            if (CurrentEffectPoint.KiaiMode && !IsKiaiTime) {
                 IsKiaiTime = true;
                 Debug.Log("Kiai Time!");
                 OnKiaiStart.Invoke();
-            } else if (!currentEffectPoint.KiaiMode && IsKiaiTime) {
+            } else if (!CurrentEffectPoint.KiaiMode && IsKiaiTime) {
                 IsKiaiTime = false;
                 Debug.Log("End Kiai Time");
                 OnKiaiEnd.Invoke();
             }
-            Debug.Log($"Timing Point {currentEffectPoint.Time}: {(IsKiaiTime?"(K) ":"")}current BPM: {currentTimingPoint.BPM} ({currentEffectPoint.SpeedMultiplier:F2}x) {currentTimingPoint.Meter}/4");
+            Debug.Log($"Timing Point {CurrentEffectPoint.Time}: {(IsKiaiTime?"(K) ":"")}current BPM: {CurrentTimingPoint.BPM} ({CurrentEffectPoint.SpeedMultiplier:F2}x) {CurrentTimingPoint.Meter}/4");
         }
     }
 
     void UpdateTimingInfo() {
-        float relativeTime = SongTime - currentTimingPoint.Time;
-        float beat = relativeTime * (currentTimingPoint.BPM / 60f);
-        Bar = Mathf.FloorToInt(beat / currentTimingPoint.Meter);
-        Beat = Mathf.FloorToInt(beat % currentTimingPoint.Meter);
+        float relativeTime = SongTime - CurrentTimingPoint.Time;
+        float beat = relativeTime * (CurrentTimingPoint.BPM / 60f);
+        Bar = Mathf.FloorToInt(beat / CurrentTimingPoint.Meter);
+        Beat = Mathf.FloorToInt(beat % CurrentTimingPoint.Meter);
         Tick = beat - (int)beat;
     }
 

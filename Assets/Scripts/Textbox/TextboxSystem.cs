@@ -36,14 +36,15 @@ public class TextboxSystem : MonoBehaviour
 
 		if (goTextbox == null)
 			Debug.LogError("TextboxSystem : goTextbox is not assigned!");
+
+		Textboxes = new Queue<Textbox>();
+		goTextbox.SetActive(false);
+		LocalisationFileParser.LoadLanguage("fr");
 	}
 
 	void Start()
 	{
-		Textboxes = new Queue<Textbox>();
-		goTextbox.SetActive(false);
 		textboxBehaviour = goTextbox.GetComponent<TextboxBehaviour>();
-		LocalisationFileParser.LoadLanguage("fr");
 	}
 
 	void Update()

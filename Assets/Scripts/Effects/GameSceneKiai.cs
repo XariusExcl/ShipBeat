@@ -42,8 +42,6 @@ public class GameSceneKiai : MonoBehaviour
         globalVolumeProfile = FindFirstObjectByType<Volume>()?.profile;
         normalCameraFov = mainCamera.fieldOfView;
         normalCameraZPos = mainCamera.transform.localPosition.z;
-        normalChromaticAberration = 0;
-        normalPostExposure = 0;
         globalVolumeProfile.TryGet(out globalChromaticAberration);
         globalVolumeProfile.TryGet(out globalColorAdjustments);
         normalChromaticAberration = globalChromaticAberration.intensity.value;

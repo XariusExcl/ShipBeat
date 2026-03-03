@@ -6,7 +6,7 @@ using UnityEditor.Build.Reporting;
 
 public class BuildVersionProcessor : IPreprocessBuildWithReport
 {
-    const string VERSION = "0.2";
+    const string VERSION = "1.0";
     public int callbackOrder => 0;
 
     public void OnPreprocessBuild(BuildReport report)
