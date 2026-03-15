@@ -4,11 +4,11 @@ using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 
-public class BuildVersionProcessor : IPreprocessBuildWithReport
+public class BuildVersionPreprocessor : IPreprocessBuildWithReport
 {
     const string VERSION = "1.0";
     public int callbackOrder => 0;
-
+    
     public void OnPreprocessBuild(BuildReport report)
     {
         string buildNumber = DateTime.Now.ToString("yyyyMMdd.HHmm");

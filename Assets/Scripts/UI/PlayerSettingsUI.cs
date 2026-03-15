@@ -89,6 +89,6 @@ public class PlayerSettingsUI : MonoBehaviour
     void UpdateUI()
     {
         scrollSpeedSettingText.text = Maestro.LaneSpeed.ToString();
-        audioLatencySettingText.text = $"{(Mathf.Sign(Maestro.GlobalOffset) == 1f ? "+" : "")}{Maestro.GlobalOffset * 1000:F0}ms.";
+        audioLatencySettingText.text = $"{(Mathf.Sign(Maestro.GlobalOffset) == 1f ? "+" : "")}{Maestro.GlobalOffset * 1000:F0}ms";
     }
 }

@@ -133,7 +133,6 @@ public class Scoring
                         IsPersonalHighscore = true;
                         BeatmapHighscore updatedHighscore = highscores.list[index];
                         updatedHighscore.Score = Score;
-                        updatedHighscore.Combo = Combo;
                         updatedHighscore.Percentage = Percentage;
                         updatedHighscore.MaxCombo = BestCombo;
                         updatedHighscore.Timestamp = DateTime.Now.ToString("o");
@@ -164,7 +163,6 @@ public class Scoring
         {
             PlayerName = HighscoreManager.PlayerName ?? "GUE",
             Score = Score,
-            Combo = Combo,
             MaxCombo = BestCombo,
             Timestamp = DateTime.Now.ToString("o"),
             Percentage = Percentage,

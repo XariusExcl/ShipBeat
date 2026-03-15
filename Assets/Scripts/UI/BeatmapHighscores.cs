@@ -9,7 +9,6 @@ public struct BeatmapHighscore
     public string PlayerName;
     public string Timestamp;
     public int Score;
-    public int Combo;
     public int MaxCombo;
     public int Perfects;
     public int Goods;

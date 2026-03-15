@@ -22,6 +22,8 @@ public class SongSelectUI : MonoBehaviour
 
     void Update()
     {
+        if (SongSelectReadyMenu.IsValidated) return;
+
         // Failsafe
         if (!songCaroussel.HasFocus && !songSelectReadyMenu.HasFocus && !playerSettingsUI.HasFocus)
             songCaroussel.HasFocus = true;
