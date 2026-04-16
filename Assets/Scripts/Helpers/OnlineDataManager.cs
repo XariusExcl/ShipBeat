@@ -5,7 +5,6 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
-
 public struct OnlineData
 {
     Dictionary<string, int> SongOnlineIDs;
@@ -16,9 +15,9 @@ public struct OnlineData
 public class OnlineDataManager
 {
     # if UNITY_EDITOR
-    const string API_ENDPOINT = "http://localhost:3443/";
+    public const string API_ENDPOINT = "http://192.168.137.110:3443/";
     # else
-    const string API_ENDPOINT = "https://89.234.181.104/shipbeat-api/";
+    public const string API_ENDPOINT = "https://89.234.181.104/shipbeat-api/";
     # endif
     public static bool Online = false;
     public static OnlineData Data = new OnlineData();
@@ -37,13 +36,41 @@ public class OnlineDataManager
         {
             Debug.Log($"Connection established with {new Uri(API_ENDPOINT).Host}!");
             Online = true;
+            Secret.GetKey((key) => {});
         }
         callback.Invoke(Online);
     }
 
-    public static IEnumerator SendMapDataToServer()
+    [Serializable] struct MapDataPayload
     {
-        // TODO: Send currently installed maps from the machine to the server through POST /songs. Get the online IDs back 
+        public string secret;
+        public List<SongDataInfo> songs;
+    }
+    public static IEnumerator SendMapDataToServer(List<SongDataInfo> songDataInfos)
+    {
+        // Send currently installed maps from the machine to the server through POST /songs. Get the online IDs back
+        yield return Secret.GetKey((key) => {});
+        MapDataPayload payload = new()
+        {
+            secret = Secret.Key,
+            songs = songDataInfos
+        };
+        string bodyJson = JsonUtility.ToJson(payload);
+
+        // Use UnityWebRequest with method POST and set the uploadHandler and content-type manually
+        UnityWebRequest request = new UnityWebRequest("http://localhost:3000/proxy?url=" + API_ENDPOINT + "songs/", "POST");
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(bodyJson);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError) {
+            Debug.LogError($"{request.result} {request.error}");
+        } else {
+            Debug.Log(request.downloadHandler.text);
+        }
+
         yield return null;
     }
 

@@ -20,6 +20,10 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] GameObject skipButton;
     [SerializeField] PlayerInfoScoreUI playerInfoScoreUI;
     [SerializeField] GameObject giveUpKeybind;
+    [SerializeField] EarlyLateUI earlyLateUI;
+    [SerializeField] GameObject fullComboAnimation;
+    [SerializeField] GameObject perfectFullComboAnimation;
+
 
     void Awake()
     {
@@ -28,6 +32,8 @@ public class GameUIManager : MonoBehaviour
         Instance = this;
         comboText.text = "";
         giveUpKeybind.SetActive(false);
+        fullComboAnimation.SetActive(false);
+        perfectFullComboAnimation.SetActive(false);
     }
 
     static int uiScore = 0;
@@ -112,6 +118,26 @@ public class GameUIManager : MonoBehaviour
     public static void ShowGiveUpKeybind(bool active = true)
     {
         Instance.giveUpKeybind.SetActive(active);
+    }
+
+    public static void ShowEarly()
+    {
+        Instance.earlyLateUI.ShowEarly();
+    }
+
+    public static void ShowLate()
+    {
+        Instance.earlyLateUI.ShowLate();
+    }
+
+    public static void ShowFullComboAnimation()
+    {
+        Instance.fullComboAnimation.SetActive(true);
+    }
+
+    public static void ShowPerfectFullComboAnimation()
+    {
+        Instance.perfectFullComboAnimation.SetActive(true);
     }
 
     void LoadSongSelect()

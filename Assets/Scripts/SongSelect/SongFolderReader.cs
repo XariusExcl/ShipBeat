@@ -142,6 +142,7 @@ public class SongFolderReader : MonoBehaviour
             }
         }
         SongInfos.Sort((a, b) => a.DifficultyRating - b.DifficultyRating);
+        StartCoroutine(OnlineDataManager.SendMapDataToServer(SongInfos));
         IsDataLoaded = true;
     }
 

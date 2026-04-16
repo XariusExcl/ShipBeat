@@ -25,7 +25,7 @@ public class Judge : MonoBehaviour {
             if (notes[id].Count == 0) return;
             
             Note note = notes[id].Peek();
-            float diff = Mathf.Abs(note.HitTime - Maestro.SongTime);
+            float diff = note.HitTime - Maestro.SongTime;
             if (diff > MissHitWindow) return;
             
             JudgeNoteHit(note, state, diff);
@@ -39,8 +39,7 @@ public class Judge : MonoBehaviour {
             Note note = heldNotes.Find(n => n.Lane == id);
             if (note.Equals(default(Note))) return; // If no note was found. TODO: Does this work?
             
-            float diff = Mathf.Abs(note.ReleaseTime - Maestro.SongTime);
-
+            float diff = note.HitTime - Maestro.SongTime;
             heldNotes.Remove(note);
             JudgeNoteHit(note, state, diff);
         }
@@ -48,22 +47,31 @@ public class Judge : MonoBehaviour {
 
     static void JudgeNoteHit(Note note, ButtonState state, float diff) {
         JudgeType judge = JudgeType.Undefined;
+        float absDiff = Mathf.Abs(diff);
         if (state == ButtonState.Pressed || state == ButtonState.Left || state == ButtonState.Right) {
             SFXManager.PlayNoteHitSound();
             if (note.Lane != 0) { // Normal note
-                if (diff < PerfectHitWindow)
+                if (absDiff < PerfectHitWindow)
                     judge = JudgeType.Perfect;
-                else if (diff < GreatHitWindow)
+                else if (absDiff < GreatHitWindow)
                     judge = JudgeType.Great;
-                else if (diff < BadHitWindow)
+                else if (absDiff < BadHitWindow)
                     judge = JudgeType.Bad;
                 else
                     judge = JudgeType.Miss;
             } else { // Slam note
-                if (diff < BadHitWindow)
+                if (absDiff < BadHitWindow)
                     judge = JudgeType.Perfect;
                 else
                     judge = JudgeType.Miss;
+            }
+
+            if (judge != JudgeType.Perfect && judge != JudgeType.Miss)
+            {
+                if (Mathf.Sign(diff) == 1)
+                    GameUIManager.ShowEarly();
+                else 
+                    GameUIManager.ShowLate();
             }
 
             if (note.Type == NoteType.Note) {

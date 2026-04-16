@@ -80,8 +80,13 @@ public class Maestro : MonoBehaviour
         if(SongStarted && !SongEnded) {
             if (StoryboardEnded && SongTime > SongLoader.LoadedSong.Info.Length + SongLoader.LoadedSong.Info.SongStart + 0.3f) {
                 SongEnded = true;
-                Invoke("EndSong", 1.5f);
                 Debug.Log("Song Ended");
+                if (Scoring.Misses == 0)
+                {
+                    if (Scoring.Percentage == 100) GameUIManager.ShowPerfectFullComboAnimation();
+                    else GameUIManager.ShowFullComboAnimation();
+                    Invoke("EndSong", 3f);
+                } else Invoke("EndSong", 1.5f);
             }
             UpdateTimingPoint();
             UpdateTimingInfo();

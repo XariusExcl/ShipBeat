@@ -11170,8 +11170,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2112152804
-  m_fontColor: {r: 0.894, g: 0.894, b: 0.894, a: 0.49019608}
+    rgba: 4282532418
+  m_fontColor: {r: 0.25882354, g: 0.25882354, b: 0.25882354, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -12675,18 +12675,6 @@ PrefabInstance:
     - target: {fileID: 8637612904364452590, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.32483283
-      objectReference: {fileID: 0}
-    - target: {fileID: 8811435587681867060, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
-      propertyPath: pitch
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8811435587681867060, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
-      propertyPath: voice
-      value: 
-      objectReference: {fileID: 8300000, guid: 7274ad29f9eb53b48ab086d499d7e402, type: 3}
-    - target: {fileID: 8811435587681867060, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
-      propertyPath: volume
-      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8832220717184389804, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

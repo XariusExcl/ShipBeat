@@ -1,9 +1,12 @@
+using System;
+
 public struct SongValidationResult {
     public bool Valid;
     public string Message;
     public SongData Data;
 }
 
+[Serializable]
 public struct SongDataInfo {
     public string Title;
     public string Artist;

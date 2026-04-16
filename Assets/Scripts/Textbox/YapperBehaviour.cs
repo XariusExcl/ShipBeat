@@ -9,6 +9,7 @@ public class YapperBehaviour : MonoBehaviour
     public bool SupportsAnimation { get { return animator is not null || TryGetComponent(out Animator _); } }
     [SerializeField] AudioClip voice;
     [SerializeField] public Color Color;
+    [Range(0.1f, 4f)][SerializeField] float pitch = 1f;
     [Range(0f, 1f)][SerializeField] float volume = 1f;
     [SerializeField] LookTarget eyesTarget;
     [SerializeField] LookTarget bodyTarget;
@@ -74,7 +75,7 @@ public class YapperBehaviour : MonoBehaviour
     {
         if (voice != null)
         {
-            audioSource.pitch = Random.Range(0.9f, 1.1f); // Random pitch variation
+            audioSource.pitch = pitch * Random.Range(0.9f, 1.1f); // Random pitch variation
             audioSource.PlayOneShot(voice, volume);
         }
     }
