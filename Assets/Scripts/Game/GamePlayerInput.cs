@@ -33,7 +33,7 @@ public class GamePlayerInput : MonoBehaviour
             if (Input.GetButton("P1_B1") && Input.GetButton("P1_B3"))
             {
                 restartTimer += Time.deltaTime;
-                if (restartTimer >= 2f)
+                if (restartTimer >= 1f)
                     AbandonSong();
             }
             else { restartTimer = 0f; }

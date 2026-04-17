@@ -69,7 +69,7 @@ public class TutorialStoryboard : MonoBehaviour
         new() { bar = 54, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
         new() { bar = 56, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
         new() { bar = 57, beat = 3, action = () => TextboxSystem.DisplayNextSentence() },
-        new() { bar = 70, beat = 2, action = () => instance.tutoBot.GetComponentInChildren<YapperBehaviour>().SetEmote("handsClap") },
+        new() { bar = 70, beat = 3, action = () => instance.tutoBot.GetComponentInChildren<YapperBehaviour>().SetEmote("handsClap") },
     };
 
     int triggerIndex = 0;

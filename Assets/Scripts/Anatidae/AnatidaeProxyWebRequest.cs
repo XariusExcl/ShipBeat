@@ -13,14 +13,12 @@ namespace Anatidae {
         public static UnityWebRequest Get(string uri)
         {
             if (useProxy) uri = $"http://localhost:3000/proxy?url={new Uri(uri)}";
-            UnityEngine.Debug.Log(uri);
             return new UnityWebRequest(uri, "GET", new DownloadHandlerBuffer(), null);
         }
 
         public static UnityWebRequest Post(string uri, string postData, string contentType)
         {
             if (useProxy) uri = $"http://localhost:3000/proxy?url={new Uri(uri)}";
-            UnityEngine.Debug.Log(uri);
             UnityWebRequest request = new UnityWebRequest(uri, "POST");
             SetupPost(ref request, postData, contentType);
             return request;

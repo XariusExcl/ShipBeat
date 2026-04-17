@@ -81,7 +81,7 @@ public class Maestro : MonoBehaviour
             if (StoryboardEnded && SongTime > SongLoader.LoadedSong.Info.Length + SongLoader.LoadedSong.Info.SongStart + 0.3f) {
                 SongEnded = true;
                 Debug.Log("Song Ended");
-                if (Scoring.Misses == 0)
+                if (!IsTutorial && Scoring.Misses == 0)
                 {
                     if (Scoring.Percentage == 100) GameUIManager.ShowPerfectFullComboAnimation();
                     else GameUIManager.ShowFullComboAnimation();

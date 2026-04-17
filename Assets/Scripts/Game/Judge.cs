@@ -39,7 +39,7 @@ public class Judge : MonoBehaviour {
             Note note = heldNotes.Find(n => n.Lane == id);
             if (note.Equals(default(Note))) return; // If no note was found. TODO: Does this work?
             
-            float diff = note.HitTime - Maestro.SongTime;
+            float diff = note.ReleaseTime - Maestro.SongTime;
             heldNotes.Remove(note);
             JudgeNoteHit(note, state, diff);
         }
@@ -86,7 +86,7 @@ public class Judge : MonoBehaviour {
 
 
         } else if (state == ButtonState.Released) {
-            if (diff < BadHitWindow)
+            if (absDiff < BadHitWindow)
                 judge = JudgeType.Perfect;
             else
                 judge = JudgeType.Miss;

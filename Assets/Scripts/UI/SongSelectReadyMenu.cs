@@ -35,6 +35,7 @@ public class SongSelectReadyMenu : MonoBehaviour
             SFXManager.PlaySelectSound();
             SongSelect.CreateSongLoader();
             Jukebox.SetVolume(.2f);
+            if (OnlineDataManager.Online) StartCoroutine(OnlineDataManager.SendPlay(SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex]));
             transitionDirector.Play();
         }
     }

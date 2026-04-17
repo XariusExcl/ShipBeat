@@ -77,13 +77,28 @@ public class MainMenuNavigation : MonoBehaviour
         StartCoroutine(CheckIfNameValidCoroutine((valid) =>
         {
             if (valid)
-                if (ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore") is not null)
+                if (OnlineDataManager.Online)
                 {
-                    Scoring.Init(); // TODO : Maybe a more general player data load
-                    TextboxSystem.StartDialogue("guest_welcomeback");
+                    StartCoroutine(OnlineDataManager.GetPlayer(HighscoreManager.PlayerName, () =>
+                    {
+                        if (OnlineDataManager.Data.PlayerInfo.TotalScore != 0)
+                        {
+                            Scoring.Init(); // TODO : Maybe a more general player data load
+                            TextboxSystem.StartDialogue("guest_welcomeback");
+                        }
+                        else
+                            TextboxSystem.StartDialogue("guest_tutoask");
+                    }));
+                } else
+                {
+                    if (ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore") is not null)
+                    {
+                        Scoring.Init(); // TODO : Maybe a more general player data load
+                        TextboxSystem.StartDialogue("guest_welcomeback");
+                    }
+                    else
+                        TextboxSystem.StartDialogue("guest_tutoask");
                 }
-                else
-                    TextboxSystem.StartDialogue("guest_tutoask");
             else
                 TextboxSystem.StartDialogue("guest_badname");
         }));
