@@ -70,6 +70,10 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+# Crash recovery
+/[Aa]ssets/_[Rr]ecovery/
+*.blob
+
 /.vscode
 
 # Sorry, can't upload those!
@@ -77,4 +81,4 @@ Assets/StreamingAssets/Songs*
 Assets/StreamingAssets/OutdatedSongs*
 Assets/Resources/Audio
 Assets/Resources/Songs
-Assets/StreamingAssets/secret
+Assets/Scripts/Secret.cs
