@@ -5202,8 +5202,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: tutobot
-  voice: {fileID: 8300000, guid: cc971e88f15d90f4f877545d73eed8dc, type: 3}
+  voice: {fileID: 8300000, guid: 7274ad29f9eb53b48ab086d499d7e402, type: 3}
   Color: {r: 0, g: 0, b: 0, a: 0}
+  pitch: 1
   volume: 1
   eyesTarget: {fileID: 0}
   bodyTarget: {fileID: 0}

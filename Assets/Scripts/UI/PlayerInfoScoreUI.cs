@@ -7,7 +7,7 @@ public class PlayerInfoScoreUI : MonoBehaviour
 {
     [SerializeField] TMP_Text agentScore;
     [SerializeField] TMP_Text scoreUpdate;
-    int totalScore;
+    long totalScore;
 
     void OnEnable()
     {
@@ -17,7 +17,7 @@ public class PlayerInfoScoreUI : MonoBehaviour
 
     public void UpdateTotalScore()
     {
-        int diff = Scoring.TotalScore - totalScore;
+        long diff = Scoring.TotalScore - totalScore;
         totalScore = Scoring.TotalScore;
         if (Mathf.Abs(diff) < 1000f) {
             scoreUpdate.gameObject.SetActive(false);
@@ -29,7 +29,7 @@ public class PlayerInfoScoreUI : MonoBehaviour
         UpdateScore(totalScore);
     }
 
-    void UpdateScore(int score)
+    void UpdateScore(long score)
     {
         agentScore.text = $"{(int)(score / 1000000f)}<size=60%>.{(int)(score % 1000000f / 1000):D3} <size=100%>M";
     }

@@ -7,6 +7,7 @@ using UnityEngine;
 public struct BeatmapHighscore
 {
     public string PlayerName;
+    public int PlayerID;
     public string Timestamp;
     public int Score;
     public int MaxCombo;

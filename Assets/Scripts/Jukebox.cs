@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 using UnityEngine.Events;
 using System.Collections.Generic;
 using System.Diagnostics;
+using UnityEngine.SceneManagement;
 
 public class Jukebox : MonoBehaviour
 {
@@ -130,6 +131,21 @@ public class Jukebox : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         UpNext ??= new Queue<AudioClip>();
         UpNextLooping ??= new Queue<bool>();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        switch(scene.name)
+        {
+            case "SongSelect":
+            case "Game":
+                audioSource.volume = .5f;
+                break;
+            default:
+                audioSource.volume = 1;
+                break;
+        }
     }
 
     public static void QueueSong(AudioClip clip, bool looping = false)

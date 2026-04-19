@@ -18,17 +18,19 @@ public struct PlayerInfo
 {
     public int ID;
     public string Name;
-    public int TotalScore;
+    public long TotalScore;
+    public int PlayCount;
 }
 
 public class OnlineDataManager
 {
     # if UNITY_EDITOR
-    public const string API_ENDPOINT = "http://192.168.137.110:3443/";
+    public const string API_ENDPOINT = "http://localhost:3443/";
+    public static bool Online = true;
     # else
     public const string API_ENDPOINT = "https://89.234.181.104/shipbeat-api/";
+    public static bool Online = false; 
     # endif
-    public static bool Online = true; // CHANGE ME AAAAAAAAA
     public static OnlineData Data = new OnlineData();
 
     public static IEnumerator OnlineCheck(UnityAction<bool> callback)
@@ -103,6 +105,15 @@ public class OnlineDataManager
         yield return null;
     }
 
+    [SerializeField] struct PlayerInfoResponse
+    {
+        public int id;
+        public string name;
+        public long totalScore;
+        public int playCount;
+        public string createdAt;
+        public string updatedAt;
+    }
     public static IEnumerator GetPlayer(string name, UnityAction callback)
     {
         // Get player data from GET /players/:name
@@ -116,24 +127,34 @@ public class OnlineDataManager
         else
         {
             Debug.Log(request.downloadHandler.text);
-            PlayerInfo playerInfo = JsonUtility.FromJson<PlayerInfo>(request.downloadHandler.text);
-            Data.PlayerInfo = playerInfo;
-            Data.PlayerInfo.Name = name;
-            Debug.Log($"Player data retrieved: {playerInfo.Name}");
+            PlayerInfoResponse playerInfoResponse = JsonUtility.FromJson<PlayerInfoResponse>(request.downloadHandler.text);
+            Data.PlayerInfo = new PlayerInfo
+            {
+                ID = playerInfoResponse.id,
+                Name = playerInfoResponse.name,
+                TotalScore = playerInfoResponse.totalScore,
+                PlayCount = playerInfoResponse.playCount
+            };
+            Debug.Log($"Player data retrieved: {playerInfoResponse.name}");
         }
 
         callback.Invoke();
         yield return null;
     }
 
+    static int songID = 0;
     public static IEnumerator SendPlay(SongDataInfo songDataInfo)
     {
         string songKey = songDataInfo.Title + "_" + songDataInfo.DifficultyName;
         if (Data.SongOnlineIDs.ContainsKey(songKey))
-            yield return SendPlay(Data.SongOnlineIDs[songKey]);
+        {
+            songID = Data.SongOnlineIDs[songKey];
+            yield return SendPlay(songID);
+        }
         else
         {
             Debug.LogError($"id of {songKey} cannot be found.");
+            songID = -1;
             yield return null;
         }
     }
@@ -147,13 +168,32 @@ public class OnlineDataManager
         yield return null;
     }
 
-    public static IEnumerator SendScore(BeatmapHighscore highScore, UnityAction callback)
+    [Serializable] struct SendScoreResponse
     {
-        // TODO: Send the score to POST /songs/clear/:id
+        public int totalScore;
+    }
+    public static IEnumerator SendScore(BeatmapHighscore highScore)
+    {
+        // Send the score to POST /songs/clear/:id
+        if (songID == -1) yield break;
+        string bodyJson = JsonUtility.ToJson(highScore);
+
+        UnityWebRequest request = AnatidaeProxyWebRequest.Post(API_ENDPOINT + "songs/clear/" + songID, bodyJson, "application/json");
+        request.SetRequestHeader("Authorization", $"Basic {Secret.Key}");
+        
+        yield return request.SendWebRequest();
+        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError) {
+            Debug.LogError($"{request.result} {request.error}");
+        } else {
+            string responseJson = request.downloadHandler.text;
+            SendScoreResponse sendScoreResponse = JsonUtility.FromJson<SendScoreResponse>(responseJson);
+            Data.PlayerInfo.TotalScore = sendScoreResponse.totalScore;
+        }
+
         yield return null;
     }
 
-    public static IEnumerator GetHighscores(UnityAction callback)
+    public static IEnumerator GetHighscores(int id, UnityAction callback)
     {
         //TODO: Get the top 20 highscores for a song at [endpoint missing]
         yield return null; 

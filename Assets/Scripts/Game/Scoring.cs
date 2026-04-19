@@ -23,18 +23,44 @@ public class Scoring
     public static char Rank { get { return GetRank(); } }
     public static bool IsPersonalHighscore;
     public static bool IsCabHighscore;
-    public static int TotalScore;
+    public static long TotalScore {
+        get
+        {
+            if (OnlineDataManager.Online)
+            {
+                return OnlineDataManager.Data.PlayerInfo.TotalScore;
+            } else
+            {            
+                try
+                {
+                    return int.Parse(ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore"));
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning(e.Message);
+                    return 0;
+                }
+            }  
+        }
+        private set {}
+    }
 
     public static void Init()
     {
-        try
+        if (OnlineDataManager.Online)
         {
-            TotalScore = int.Parse(ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore"));
-        }
-        catch (Exception e)
-        {
-            Debug.LogWarning(e.Message);
-            TotalScore = 0;
+            TotalScore = OnlineDataManager.Data.PlayerInfo.TotalScore;
+        } else
+        {            
+            try
+            {
+                TotalScore = int.Parse(ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore"));
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning(e.Message);
+                TotalScore = 0;
+            }
         }
     }
 
@@ -157,11 +183,13 @@ public class Scoring
         return JsonUtility.ToJson(highscores);
     }
 
-    static BeatmapHighscore CreateHighscore()
+    public static BeatmapHighscore CreateHighscore()
     {
         BeatmapHighscore highscore = new BeatmapHighscore
         {
             PlayerName = HighscoreManager.PlayerName ?? "GUE",
+            // PlayerID = OnlineDataManager.Data.PlayerInfo.ID,
+            PlayerID = 3, // CHANGEME
             Score = Score,
             MaxCombo = BestCombo,
             Timestamp = DateTime.Now.ToString("o"),

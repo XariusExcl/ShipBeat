@@ -71,7 +71,7 @@ public class Maestro : MonoBehaviour
     {
         SongTime = 0;
         StartTime = (float)AudioSettings.dspTime + StartDelay;
-        InvokeRepeating("CheckCalibration", 3, 3);
+        InvokeRepeating("CheckCalibration", StartDelay, 3);
     }
 
     void Update() {
@@ -85,7 +85,7 @@ public class Maestro : MonoBehaviour
                 {
                     if (Scoring.Percentage == 100) GameUIManager.ShowPerfectFullComboAnimation();
                     else GameUIManager.ShowFullComboAnimation();
-                    Invoke("EndSong", 3f);
+                    Invoke("EndSong", 2.5f);
                 } else Invoke("EndSong", 1.5f);
             }
             UpdateTimingPoint();
@@ -199,7 +199,7 @@ public class Maestro : MonoBehaviour
 
     void EndSong() {
         SongEnded = true;
-        if (SongFolderReader.SongInfos.Count != 0) // Special case to not save a score when testing
+        if (SongFolderReader.SongInfos.Count != 0) // Special case to not save a score when testing. TODO: triggers on tutorial.
             StartCoroutine(UpdateScore());
 
         GameUIManager.ShowResults();
@@ -209,14 +209,23 @@ public class Maestro : MonoBehaviour
         float delay = Jukebox.GetPlaybackPosition() - SongTime + GlobalOffset;
         if (Mathf.Abs(delay) > .020) {
             Debug.Log($"Song is {Mathf.Abs(delay) * 1000:F0} ms {(delay > 0 ? "early" : "late")}. Recalibrate!");
-            Jukebox.SetPlaybackPosition(SongTime - GlobalOffset);
+            // Jukebox.SetPlaybackPosition(SongTime - GlobalOffset);
+            StartTime -= delay;
         }
     }
 
     IEnumerator UpdateScore()
     {
-        yield return StartCoroutine(ExtradataManager.SetExtraData($"Scores/{SongLoader.LoadedSong.Info.Title}_{SongLoader.LoadedSong.Info.DifficultyName}", Scoring.SaveScore()));
-        yield return StartCoroutine(ExtradataManager.SetExtraData($"Player/{HighscoreManager.PlayerName}/TotalScore", Scoring.TotalScore.ToString()));
+        if (OnlineDataManager.Online)
+        {
+            yield return StartCoroutine(OnlineDataManager.SendScore(Scoring.CreateHighscore()));
+
+        } else
+        {
+            yield return StartCoroutine(ExtradataManager.SetExtraData($"Scores/{SongLoader.LoadedSong.Info.Title}_{SongLoader.LoadedSong.Info.DifficultyName}", Scoring.SaveScore()));
+            yield return StartCoroutine(ExtradataManager.SetExtraData($"Player/{HighscoreManager.PlayerName}/TotalScore", Scoring.TotalScore.ToString()));
+        }
+
         yield return new WaitForSecondsRealtime(2f);
         GameUIManager.UpdateTotalScore();
     }

@@ -172,8 +172,15 @@ public class TextboxBehaviour : MonoBehaviour
         float halfWsWidth = rectTransform.rect.width * halfCanvasToScreen - 70f;
         xPos = Mathf.Clamp(yapperScreenPos.x, rectTransform.position.x - halfWsWidth, rectTransform.position.x + halfWsWidth);
 
-        tailTransform.localScale = new Vector3(Mathf.Sign(xPos - rectTransform.position.x), above, 1f);
-        tailTransform.position = new Vector2(Mathf.Lerp(tailTransform.position.x, xPos, .1f), yPos);
+        tailTransform.localScale = new Vector3(
+            Mathf.Sign(xPos - rectTransform.position.x),
+            above,
+            1f
+        );
+        tailTransform.position = new Vector2(
+            Mathf.Clamp(Mathf.Lerp(tailTransform.position.x, xPos, .1f), rectTransform.position.x - halfWsWidth, rectTransform.position.x + halfWsWidth),
+            yPos
+        );
     }
 
     public void DoneIndicatorActive(bool status)

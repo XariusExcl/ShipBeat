@@ -15,6 +15,8 @@ public class TutorialStoryboard : MonoBehaviour
     [SerializeField] GameObject tutoBot;
     [SerializeField] GameObject holoBase;
     [SerializeField] GameObject commandsPanel;
+    [SerializeField] GameObject commandsJustJoystickPanel;
+
     [SerializeField] GameObject noteExplain;
 
     static TutorialStoryboard instance;
@@ -54,10 +56,14 @@ public class TutorialStoryboard : MonoBehaviour
         new() { bar = 40, beat = 0, action = () => TextboxSystem.StartDialogue("tutorial_3", true)},
         new() { bar = 40, beat = 3, action = () => TextboxSystem.DisplayNextSentence() },
         new() { bar = 42, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
-        new() { bar = 44, beat = 0, action = () => TextboxSystem.DisplayNextSentence() },
+        new() { bar = 44, beat = 0, action = () => {
+            TextboxSystem.DisplayNextSentence();
+            instance.commandsJustJoystickPanel.SetActive(true); } },
         new() { bar = 46, beat = 0, action = () => {
             TextboxSystem.DisplayNextSentence();
-            missCountBeforeSlam = Scoring.Misses; } },
+            missCountBeforeSlam = Scoring.Misses; 
+            instance.commandsJustJoystickPanel.SetActive(false);
+            } },
         new() { bar = 48, beat = 0, action = () => {
             if (missCountBeforeSlam < Scoring.Misses )
                 TextboxSystem.StartDialogue("tutorial_bad_4", true);
@@ -95,6 +101,7 @@ public class TutorialStoryboard : MonoBehaviour
             Destroy(friendlyship);
         commandsPanel.SetActive(false);
         noteExplain.SetActive(false);
+        commandsJustJoystickPanel.SetActive(false);
         Maestro.StoryboardEnded = false;
     }
 

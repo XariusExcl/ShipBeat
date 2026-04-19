@@ -22,7 +22,7 @@ public class TutobotWanderingManager : MonoBehaviour
     string selectedAnim;
     void Start()
     {
-        // TODO, put an exception so the first play of the session doesn't show Tutobot
+        // TODO, put a condition so the first play of the session doesn't show Tutobot
 
         SongSelectUI.OnSongValidated.AddListener(WaveGoodbye);
         anim = GetComponent<Animation>();
