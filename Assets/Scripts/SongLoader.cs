@@ -149,7 +149,7 @@ public class SongLoader : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    private static void OnExitPlayMode(PlayModeStateChange state)
+    void OnExitPlayMode(PlayModeStateChange state)
     {
         if (state != PlayModeStateChange.ExitingPlayMode) return;
         IsFileLoaded = false;

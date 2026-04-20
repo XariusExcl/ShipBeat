@@ -61,10 +61,10 @@ public class TutorialStoryboard : MonoBehaviour
             instance.commandsJustJoystickPanel.SetActive(true); } },
         new() { bar = 46, beat = 0, action = () => {
             TextboxSystem.DisplayNextSentence();
-            missCountBeforeSlam = Scoring.Misses; 
-            instance.commandsJustJoystickPanel.SetActive(false);
+            missCountBeforeSlam = Scoring.Misses;
             } },
         new() { bar = 48, beat = 0, action = () => {
+            instance.commandsJustJoystickPanel.SetActive(false);
             if (missCountBeforeSlam < Scoring.Misses )
                 TextboxSystem.StartDialogue("tutorial_bad_4", true);
             else

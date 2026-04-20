@@ -11,7 +11,7 @@ public struct OnlineData
     public PlayerInfo PlayerInfo;
     public Dictionary<string, int> SongOnlineIDs;
     public Dictionary<int, List<BeatmapHighscore>> SongHighscores;
-    public Dictionary<int, BeatmapHighscore> SongPersonalHighscore;
+    public Dictionary<int, BeatmapHighscore> SongPersonalHighscores;
 }
 
 public struct PlayerInfo
@@ -31,7 +31,13 @@ public class OnlineDataManager
     public const string API_ENDPOINT = "https://89.234.181.104/shipbeat-api/";
     public static bool Online = false; 
     # endif
-    public static OnlineData Data = new OnlineData();
+    public static OnlineData Data = new()
+    {
+        PlayerInfo = new(),
+        SongOnlineIDs = new(),
+        SongHighscores = new(),
+        SongPersonalHighscores = new()
+    };
 
     public static IEnumerator OnlineCheck(UnityAction<bool> callback)
     {
@@ -41,7 +47,7 @@ public class OnlineDataManager
         if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
         {
             Debug.LogError(request.error);
-            Debug.LogError("Server offline"); // TODO, reroute all requests to Extradata manager
+            Debug.LogError("Server offline");
         }
         else
         {
@@ -98,14 +104,14 @@ public class OnlineDataManager
             foreach (MapDataResponseSong song in response.songs)
             {
                 string key = $"{song.title}_{song.difficultyName}";
-                Data.SongOnlineIDs[key] = song.id;;
+                Data.SongOnlineIDs[key] = song.id;
             }
         }
 
         yield return null;
     }
 
-    [SerializeField] struct PlayerInfoResponse
+    [Serializable] struct PlayerInfoResponse
     {
         public int id;
         public string name;
@@ -126,7 +132,6 @@ public class OnlineDataManager
         }
         else
         {
-            Debug.Log(request.downloadHandler.text);
             PlayerInfoResponse playerInfoResponse = JsonUtility.FromJson<PlayerInfoResponse>(request.downloadHandler.text);
             Data.PlayerInfo = new PlayerInfo
             {
@@ -135,9 +140,9 @@ public class OnlineDataManager
                 TotalScore = playerInfoResponse.totalScore,
                 PlayCount = playerInfoResponse.playCount
             };
-            Debug.Log($"Player data retrieved: {playerInfoResponse.name}");
         }
-
+        yield return GetPersonalScores(() => {});
+        Debug.Log($"Player data retrieved: {Data.PlayerInfo.Name}, {Data.PlayerInfo.TotalScore}, {Data.PlayerInfo.PlayCount}");
         callback.Invoke();
         yield return null;
     }
@@ -171,6 +176,8 @@ public class OnlineDataManager
     [Serializable] struct SendScoreResponse
     {
         public int totalScore;
+        public bool isPersonalHighscore;
+        public bool isCabHighscore;
     }
     public static IEnumerator SendScore(BeatmapHighscore highScore)
     {
@@ -188,20 +195,122 @@ public class OnlineDataManager
             string responseJson = request.downloadHandler.text;
             SendScoreResponse sendScoreResponse = JsonUtility.FromJson<SendScoreResponse>(responseJson);
             Data.PlayerInfo.TotalScore = sendScoreResponse.totalScore;
+            Scoring.IsPersonalHighscore = sendScoreResponse.isPersonalHighscore;
+            Scoring.IsCabHighscore = sendScoreResponse.isCabHighscore;
         }
 
+        yield return GetHighscores(songID, () => {}, true);
         yield return null;
     }
 
-    public static IEnumerator GetHighscores(int id, UnityAction callback)
+    [Serializable] public struct HighscoreResponse
     {
-        //TODO: Get the top 20 highscores for a song at [endpoint missing]
+        public List<HighscoreResponseElement> scores;
+    }
+    [Serializable] public struct HighscoreResponseElementPlayer { public string name; };
+    [Serializable] public struct HighscoreResponseElement
+    {
+        public int songId;
+        public int playerId;
+        public HighscoreResponseElementPlayer player;
+        public string createdAt;
+        public int score;
+        public int bestCombo;
+        public int perfects;
+        public int goods;
+        public int bads;
+        public int misses;
+        public float percentage;
+        public char rank;
+    }
+    public static IEnumerator GetHighscores(int id, UnityAction callback, bool forceRefresh = false)
+    {
+        // Get the top 20 highscores for a song at /scores/song/:id
+        if (Data.SongHighscores.ContainsKey(id) && !forceRefresh) callback.Invoke();
+        else
+        {            
+            HighscoreResponse highscoreResponse = new();
+            List<BeatmapHighscore> beatmapHighscores = new();
+
+            UnityWebRequest request = AnatidaeProxyWebRequest.Get(API_ENDPOINT + "scores/song/" + id);
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError($"{request.result} {request.error}");
+            }
+            else
+            {
+                highscoreResponse = JsonUtility.FromJson<HighscoreResponse>(request.downloadHandler.text);
+                foreach(HighscoreResponseElement element in highscoreResponse.scores)
+                {
+                    beatmapHighscores.Add(new() 
+                    {
+                        PlayerID = element.playerId,
+                        PlayerName = element.player.name,
+                        Timestamp = element.createdAt,
+                        Score = element.score,
+                        MaxCombo = element.bestCombo,
+                        Perfects = element.perfects,
+                        Goods = element.goods,
+                        Bads = element.bads,
+                        Misses = element.misses,
+                        Percentage = element.percentage,
+                        Rank = element.rank
+                    });
+                }
+            }
+
+            Data.SongHighscores[id] = beatmapHighscores;
+            callback.Invoke();
+        }
         yield return null; 
     }
 
     public static IEnumerator GetPersonalScores(UnityAction callback)
     {
-        //TODO: Get personal scores for every song
-        yield return null; 
+        // Get personal scores for every song at /scores/player/:id
+        HighscoreResponse highscoreResponse = new();
+
+        UnityWebRequest request = AnatidaeProxyWebRequest.Get(API_ENDPOINT + "scores/player/" + Data.PlayerInfo.ID);
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+        {
+            Debug.LogError($"{request.result} {request.error}");
+        }
+        else
+        {
+            highscoreResponse = JsonUtility.FromJson<HighscoreResponse>(request.downloadHandler.text);
+            foreach(HighscoreResponseElement element in highscoreResponse.scores)
+            {
+                Data.SongPersonalHighscores[element.songId] = new() 
+                {
+                    PlayerName = Data.PlayerInfo.Name,
+                    Timestamp = element.createdAt,
+                    Score = element.score,
+                    MaxCombo = element.bestCombo,
+                    Perfects = element.perfects,
+                    Goods = element.goods,
+                    Bads = element.bads,
+                    Misses = element.misses,
+                    Percentage = element.percentage,
+                    Rank = element.rank
+                };
+            }
+        }
+        callback.Invoke();
+        yield return null;
+    }
+
+    public static void ClearData()
+    {
+        Data = new()
+        {
+            PlayerInfo = new(),
+            SongOnlineIDs = new(),
+            SongHighscores = new(),
+            SongPersonalHighscores = new()
+        };
     }
 }

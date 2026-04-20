@@ -32,31 +32,58 @@ public class BeatmapHighscores : MonoBehaviour
     {
         SongDataInfo info = SongFolderReader.SongInfos[SongCaroussel.CurrentSongIndex];
         
-        string json = ExtradataManager.GetDataWithKey($"Scores/{info.Title}_{info.DifficultyName}");
-        if (json is null)
+        if (OnlineDataManager.Online)
         {
-            HideAll();
-            selfHighscoreUi.SetBlank();
-            return;
-        }
-        else
-        {
-            List<BeatmapHighscore> highscores = JsonUtility.FromJson<HighscoreList>(json).list;
-            for (int i = 0; i < highscoreUis.Count; i++)
+            int songId = OnlineDataManager.Data.SongOnlineIDs[info.Title+"_"+info.DifficultyName];
+            if (OnlineDataManager.Data.SongPersonalHighscores.ContainsKey(songId))
             {
-                if (i >= highscores.Count)
+                selfHighscoreUi.SetData(OnlineDataManager.Data.SongPersonalHighscores[songId]);
+            } else selfHighscoreUi.SetBlank();
+
+            HideAll();
+            // TODO: show spinner
+
+            StartCoroutine(OnlineDataManager.GetHighscores(songId, () =>
+            {
+                for (int i = 0; i < highscoreUis.Count; i++)
                 {
-                    highscoreUis[i].Hide();
-                    continue;
+                    if (i >= OnlineDataManager.Data.SongHighscores[songId].Count)
+                    {
+                        highscoreUis[i].Hide();
+                        continue;
+                    }
+                    highscoreUis[i].SetData(OnlineDataManager.Data.SongHighscores[songId][i]);
+                    highscoreUis[i].Show();
                 }
-                highscoreUis[i].SetData(highscores[i]);
-                highscoreUis[i].Show();
-            }
-            int idx = highscores.FindIndex(h => h.PlayerName == HighscoreManager.PlayerName);
-            if (idx != -1)
-                selfHighscoreUi.SetData(highscores[idx]);
-            else
+            }));
+        } else
+        {            
+            string json = ExtradataManager.GetDataWithKey($"Scores/{info.Title}_{info.DifficultyName}");
+            if (json is null)
+            {
+                HideAll();
                 selfHighscoreUi.SetBlank();
+                return;
+            }
+            else
+            {
+                List<BeatmapHighscore> highscores = JsonUtility.FromJson<HighscoreList>(json).list;
+                for (int i = 0; i < highscoreUis.Count; i++)
+                {
+                    if (i >= highscores.Count)
+                    {
+                        highscoreUis[i].Hide();
+                        continue;
+                    }
+                    highscoreUis[i].SetData(highscores[i]);
+                    highscoreUis[i].Show();
+                }
+                int idx = highscores.FindIndex(h => h.PlayerName == HighscoreManager.PlayerName);
+                if (idx != -1)
+                    selfHighscoreUi.SetData(highscores[idx]);
+                else
+                    selfHighscoreUi.SetBlank();
+            }
         }
     }
 

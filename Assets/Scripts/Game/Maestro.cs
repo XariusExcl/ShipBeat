@@ -108,11 +108,9 @@ public class Maestro : MonoBehaviour
 
             if (CurrentEffectPoint.KiaiMode && !IsKiaiTime) {
                 IsKiaiTime = true;
-                Debug.Log("Kiai Time!");
                 OnKiaiStart.Invoke();
             } else if (!CurrentEffectPoint.KiaiMode && IsKiaiTime) {
                 IsKiaiTime = false;
-                Debug.Log("End Kiai Time");
                 OnKiaiEnd.Invoke();
             }
             Debug.Log($"Timing Point {CurrentEffectPoint.Time}: {(IsKiaiTime?"(K) ":"")}current BPM: {CurrentTimingPoint.BPM} ({CurrentEffectPoint.SpeedMultiplier:F2}x) {CurrentTimingPoint.Meter}/4");

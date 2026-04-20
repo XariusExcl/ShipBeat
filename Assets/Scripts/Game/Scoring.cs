@@ -188,8 +188,7 @@ public class Scoring
         BeatmapHighscore highscore = new BeatmapHighscore
         {
             PlayerName = HighscoreManager.PlayerName ?? "GUE",
-            // PlayerID = OnlineDataManager.Data.PlayerInfo.ID,
-            PlayerID = 3, // CHANGEME
+            PlayerID = OnlineDataManager.Data.PlayerInfo.ID,
             Score = Score,
             MaxCombo = BestCombo,
             Timestamp = DateTime.Now.ToString("o"),

@@ -20,7 +20,7 @@ public class TutoBotHead : MonoBehaviour
         float bobAmount = 0.01f;
         float bob = Mathf.Sin(Time.time * bobSpeed) * bobAmount;
         transform.localPosition = new Vector3(transform.localPosition.x, bob + initialPosition.y, transform.localPosition.z);
-        transform.rotation = disableSlerp ? targetRotation : Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        if (Quaternion.Angle(transform.rotation, targetRotation) > 1f) transform.rotation = disableSlerp ? targetRotation : Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
         if (IsLookingAtTarget) LookAtTarget();
     }
 

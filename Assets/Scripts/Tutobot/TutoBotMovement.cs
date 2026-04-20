@@ -14,7 +14,7 @@ public class TutoBotMovement : MonoBehaviour
 
     void Update()
     {
-        transform.rotation = disableSlerp ? targetRotation : Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        if (Quaternion.Angle(transform.rotation, targetRotation) > 1f) transform.rotation = disableSlerp ? targetRotation : Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
         if (IsLookingAtTarget) LookAtTarget();
     }
 

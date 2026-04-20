@@ -8,6 +8,9 @@ public class PlayerInfoNameUI : MonoBehaviour
 
     void OnEnable()
     {
-        agentName.text = HighscoreManager.PlayerName;
+        if (OnlineDataManager.Online)
+            agentName.text = OnlineDataManager.Data.PlayerInfo.Name;
+        else
+            agentName.text = HighscoreManager.PlayerName;
     }
 }
