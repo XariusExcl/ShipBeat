@@ -70,4 +70,13 @@ Donnez un coup de joystick à gauche ou à droite au bon moment !
 [ts:120:34][tp:100:-50][y:ship]ALERTE, AUTRES DEBRIS EN VUE.
 [ts:200:46][tp:0:50][y:tutobot]On dirait que c'est pas fini ! Rappelez-vous de votre entraînement et tout ira bien !
 [e:smile][e:happyWag]Je sais que vous pouvez le faire !
-
+#unlock_hard
+[y:tutobot][e:smile][e:happyWag]Pilote ! Vous venez d'atteindre les [c:#00ffff][i:]0.[s:60]500[s:][i:][c:]M de points de mission ![e:handsClap] Félicitations !
+[e:open][e:handsIdle]Vous êtes désormais accredité pour voler dans les zones [i:]Hard[i:] !
+Continuez comme ça !
+[!:TurnOffHolo][!:EnableResultScreenButtons]
+#unlock_expert
+[y:tutobot][e:point][e:handsHoldHead][e:tailShock]Wow ! Vous venez d'atteindre les [c:#00ffff][i:]2.[s:60]000[s:][i:][c:]M de points de mission ![e:smile][e:happyWag][e:handsClap] Félicitations !
+[e:open][e:handsIdle]Vous êtes désormais accredité pour voler dans les zones [i:]Expert[i:] !
+[e:sleep]Dire que vous n'étiez qu'une jeune pousse il y a si peu de temps... [e:open][e:handsConverse]Comme le temps passe vite !
+[!:TurnOffHolo][!:EnableResultScreenButtons]

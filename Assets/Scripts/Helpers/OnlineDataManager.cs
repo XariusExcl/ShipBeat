@@ -166,8 +166,8 @@ public class OnlineDataManager
 
     public static IEnumerator SendPlay(int id)
     {
-        // TODO: Send a play notification to /songs/play/:id
-        UnityWebRequest request = AnatidaeProxyWebRequest.Post(API_ENDPOINT + "songs/play/" + id, "{}", "application/json");
+        // Send a play notification to /songs/play/:id
+        UnityWebRequest request = AnatidaeProxyWebRequest.Post(API_ENDPOINT + "songs/play/" + id, $"{{ \"PlayerID\": {Data.PlayerInfo.ID} }}", "application/json");
         request.SetRequestHeader("Authorization", $"Basic {Secret.Key}");
         yield return request.SendWebRequest();
         yield return null;

@@ -38,8 +38,8 @@ public class SongInfoPanelUI : MonoBehaviour
                 bg.sprite = result.fetchedObject as Sprite;
         }));
         title.text = song.Title;
-        artist.text = $"<i>de </i>{song.Artist}";
-        creator.text = $"<i>beatmap par </i>{song.Creator}";
+        artist.text = $"<i>de {song.Artist}</i>";
+        creator.text = $"<i>beatmap par {song.Creator}</i>";
         difficultyRating.text = song.DifficultyRating.ToString();
         length.text = TimeSpan.FromSeconds(song.Length).ToString(@"mm\:ss");
         bpm.text = song.BPM.ToString();

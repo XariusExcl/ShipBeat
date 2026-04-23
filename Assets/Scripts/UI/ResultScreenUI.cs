@@ -55,7 +55,7 @@ public class ResultScreenUI : MonoBehaviour
         buttonsEnabled = false;
     }
 
-    void EnableButtons()
+    public void EnableButtons()
     {
         button.color = Color.white;
         buttonsEnabled = true;
@@ -156,11 +156,11 @@ public class ResultScreenUI : MonoBehaviour
             yield return new WaitForSecondsRealtime(1f);
             ShowPersonalHighscore();
         }
-        EnableButtons();
         if (rankStar.IsActive())
         {
             rankStar.GetComponent<Animation>().PlayQueued("StarPulse");
         }
+        TutobotInterventions.CheckforIntervention();
         yield return null;
     }
 }

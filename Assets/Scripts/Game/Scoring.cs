@@ -76,21 +76,21 @@ public class Scoring
         switch (judge)
         {
             case JudgeType.Perfect:
-                Score += 100;
+                Score += Maestro.IsKiaiTime ? 150 : 100;
                 Perfects++;
                 Combo++;
                 MissCombo = 0;
                 GameUIManager.UpdateCombo(Combo);
             break;
             case JudgeType.Great:
-                Score += 50;
+                Score += Maestro.IsKiaiTime ? 75 : 50;
                 Goods++;
                 Combo++;
                 MissCombo = 0;
                 GameUIManager.UpdateCombo(Combo);
             break;
             case JudgeType.Bad:
-                Score += 10;
+                Score += Maestro.IsKiaiTime ? 15 : 10;
                 Bads++;
                 MissCombo = 0;
                 ResetCombo();

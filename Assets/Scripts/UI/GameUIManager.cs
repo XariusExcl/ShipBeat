@@ -34,6 +34,7 @@ public class GameUIManager : MonoBehaviour
         giveUpKeybind.SetActive(false);
         fullComboAnimation.SetActive(false);
         perfectFullComboAnimation.SetActive(false);
+        DialogueTriggers.EnableResultScreenButtons.AddListener(EnableResultScreenButtons);
     }
 
     static int uiScore = 0;
@@ -140,8 +141,18 @@ public class GameUIManager : MonoBehaviour
         Instance.perfectFullComboAnimation.SetActive(true);
     }
 
+    public static void EnableResultScreenButtons()
+    {
+        Instance.resultsScreen.EnableButtons();
+    }
+
     void LoadSongSelect()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("SongSelect");
+    }
+
+    void OnDestroy()
+    {
+        DialogueTriggers.EnableResultScreenButtons.RemoveListener(EnableResultScreenButtons);
     }
 }

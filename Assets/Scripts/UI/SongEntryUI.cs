@@ -14,6 +14,8 @@ public class SongEntryUI : MonoBehaviour
     [SerializeField] Image difficultyColor;
     [SerializeField] Image backgroundImage;
     [SerializeField] SongSelectSceneData songSelectSceneData;
+    [SerializeField] GameObject lockOverlay;
+    [SerializeField] TMP_Text unlockCondition;
 
 
     public void SetData(SongDataInfo songInfo)
@@ -24,6 +26,11 @@ public class SongEntryUI : MonoBehaviour
 
         Color diffColor = songSelectSceneData.GetColorForRating(songInfo.DifficultyRating);
         difficultyColor.color = diffColor;
+
+        SongLockStatus lockStatus = SongUnlockConditions.IsSongLocked(songInfo);
+        lockOverlay.SetActive(lockStatus.IsLocked);
+        unlockCondition.text = $"Pour déverouiller :{lockStatus.UnlockCondition}";
+
         StartCoroutine(SongFolderReader.FetchImageFile(songInfo.BackgroundImage, (result) =>
         {
             if (result.result == UnityWebRequest.Result.Success)
@@ -49,9 +56,7 @@ public class SongEntryUI : MonoBehaviour
 
     Vector3 CarousselToScreenPosition(int position)
     {
-        // return new Vector3(-50f / (Mathf.Abs(position) + 1f), 32f * position, 0);
         return new Vector3((position == 0) ? -30f : 9f * position, 30f * position + ((position != 0) ? Math.Sign(position) * 4 : 0) , 0);
-
     }
 
     void Start()

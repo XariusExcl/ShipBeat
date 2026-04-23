@@ -16,6 +16,7 @@ public class SongSelect : MonoBehaviour
         SongCaroussel.OnCarousselUpdate.AddListener(OnCarousselUpdate);
         Maestro.SongStarted = false;
         Maestro.SongEnded = false;
+        SongUnlockConditions.RunUnlockChecks();
     }
 
     void Update()

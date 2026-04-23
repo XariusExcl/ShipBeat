@@ -27,6 +27,11 @@ public class BeatmapHighscores : MonoBehaviour
     {
         SongCaroussel.OnCarousselUpdate.AddListener(UpdateHighscores);
     }
+    
+    void Start()
+    {
+        UpdateHighscores();
+    }
 
     void UpdateHighscores()
     {
@@ -38,7 +43,10 @@ public class BeatmapHighscores : MonoBehaviour
             if (OnlineDataManager.Data.SongPersonalHighscores.ContainsKey(songId))
             {
                 selfHighscoreUi.SetData(OnlineDataManager.Data.SongPersonalHighscores[songId]);
-            } else selfHighscoreUi.SetBlank();
+            } else selfHighscoreUi.SetData(new()
+            {
+                PlayerName = OnlineDataManager.Data.PlayerInfo.Name
+            });
 
             HideAll();
             // TODO: show spinner

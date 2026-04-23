@@ -17,20 +17,23 @@ public class BeatmapHighscoreUI : MonoBehaviour
 
     public void SetData(BeatmapHighscore data)
     {
-        playerName.text = data.PlayerName;
-        var timeSpan = DateTime.Now - DateTime.Parse(data.Timestamp);
-        if (timeSpan.TotalDays >= 1)
-            time.text = $"{(int)timeSpan.TotalDays}d";
-        else if (timeSpan.TotalHours >= 1)
-            time.text = $"{(int)timeSpan.TotalHours}h";
-        else if (timeSpan.TotalMinutes >= 1)
-            time.text = $"{(int)timeSpan.TotalMinutes}m";
-        else
-            time.text = "<1m";
+        playerName.text = data.PlayerName ?? "...";
+        if (data.Timestamp is not null)
+        {            
+            var timeSpan = DateTime.Now - DateTime.Parse(data.Timestamp);
+            if (timeSpan.TotalDays >= 1)
+                time.text = $"{(int)timeSpan.TotalDays}d";
+            else if (timeSpan.TotalHours >= 1)
+                time.text = $"{(int)timeSpan.TotalHours}h";
+            else if (timeSpan.TotalMinutes >= 1)
+                time.text = $"{(int)timeSpan.TotalMinutes}m";
+            else
+                time.text = "<1m";
+        } else time.text = "...";
 
-        score.text = data.Score.ToString();
-        percentage.text = $"{data.Percentage:F2}%";
-        rank.text = data.Rank.ToString();
+        score.text = data.Score.ToString() ?? "...";
+        percentage.text = $"{data.Percentage:F2}%" ?? "...";
+        rank.text = data.Rank.ToString() ?? "";
 
         Color rankColor;
         switch (data.Rank)
@@ -60,7 +63,7 @@ public class BeatmapHighscoreUI : MonoBehaviour
 
         rankBorder.color = rankColor;
         rankBg.color = new Color(rankColor.r, rankColor.g, rankColor.b, .1f);
-        if (data.Misses == 0 && data.Bads == 0)
+        if (data.Misses == 0 && data.Bads == 0 && (data.Perfects + data.Goods) >=1)
         {
             fcBorder.color = rankColor;
             fcBorder.gameObject.SetActive(true);    

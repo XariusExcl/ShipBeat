@@ -48,7 +48,8 @@ public class PlayerSettingsUI : MonoBehaviour
                 animation.Play("PlayerSettingsFadeout");
                 SFXManager.PlayDeepBlipDownSound();
                 EventSystem.current.SetSelectedGameObject(null);
-                playerSettings = new PlayerSettings { AudioLatency = Maestro.GlobalOffset, ScrollSpeed = Maestro.LaneSpeed };
+                playerSettings.AudioLatency = Maestro.GlobalOffset;
+                playerSettings.ScrollSpeed = Maestro.LaneSpeed;
                 StartCoroutine(ExtradataManager.SetExtraData($"Player/{HighscoreManager.PlayerName}/Settings", JsonUtility.ToJson(playerSettings)));
             }
             return;

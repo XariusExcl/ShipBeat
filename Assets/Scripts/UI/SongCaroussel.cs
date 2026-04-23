@@ -69,7 +69,8 @@ public class SongCaroussel : MonoBehaviour
 
         if (Input.GetButtonDown("P1_B1") && !SongSelectReadyMenu.IsValidated)
         {
-            OnSongSelected.Invoke();
+            if (SongUnlockConditions.IsSongLocked(SongFolderReader.SongInfos[CurrentSongIndex]).IsLocked) SFXManager.PlayReturnSound();
+            else OnSongSelected.Invoke();
         }
     }
 

@@ -197,7 +197,7 @@ public class Maestro : MonoBehaviour
 
     void EndSong() {
         SongEnded = true;
-        if (SongFolderReader.SongInfos.Count != 0) // Special case to not save a score when testing. TODO: triggers on tutorial.
+        if (SongFolderReader.SongInfos.Count != 0 || IsTutorial) // Special case to save a score only when not testing.
             StartCoroutine(UpdateScore());
 
         GameUIManager.ShowResults();
