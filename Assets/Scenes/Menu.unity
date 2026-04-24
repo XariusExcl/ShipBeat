@@ -2044,8 +2044,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OnlineCheckUI
   icon: {fileID: 837754859}
   debugText: {fileID: 1992865786}
-  onlineSprite: {fileID: 979172247, guid: 09309965be8f8ea449c23304b80af279, type: 3}
-  offlineSprite: {fileID: -2022829659, guid: 151a9ab06330c644bb027d65dcfa56df, type: 3}
+  onlineSprite: {fileID: 21300000, guid: 09309965be8f8ea449c23304b80af279, type: 3}
+  offlineSprite: {fileID: 21300000, guid: 151a9ab06330c644bb027d65dcfa56df, type: 3}
 --- !u!1 &290362800
 GameObject:
   m_ObjectHideFlags: 0
@@ -3362,18 +3362,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7625144050709671412, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
   m_PrefabInstance: {fileID: 1230070748956941860}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &472241849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 472241843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b9372a825a7e67468fa7996fff78b79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &509179487 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3804930664872874800, guid: 11a085437d65778b8acba91631bfbc08, type: 3}
@@ -5120,7 +5108,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 163776768, guid: 36b0963b25dc3904fbe9535a610f961d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36b0963b25dc3904fbe9535a610f961d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12713,6 +12701,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -53.079433
       objectReference: {fileID: 0}
+    - target: {fileID: 643239254821897490, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
+      propertyPath: Mute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 643239254821897490, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
+      propertyPath: m_Volume
+      value: 0.485
+      objectReference: {fileID: 0}
+    - target: {fileID: 643239254821897490, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 999657802823524651, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 999657802823524651, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 2910572561026421753, guid: 7369231fea9d4824fbea46b880cb851b, type: 2}
     - target: {fileID: 1083362369494285493, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -12902,17 +12910,9 @@ PrefabInstance:
       value: 0.32483283
       objectReference: {fileID: 0}
     - target: {fileID: 8811435587681867060, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
-      propertyPath: pitch
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8811435587681867060, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
       propertyPath: voice
       value: 
       objectReference: {fileID: 8300000, guid: 7274ad29f9eb53b48ab086d499d7e402, type: 3}
-    - target: {fileID: 8811435587681867060, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
-      propertyPath: volume
-      value: 0.75
-      objectReference: {fileID: 0}
     - target: {fileID: 8832220717184389804, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 77.619354
@@ -12928,10 +12928,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7625144050709671412, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 472241849}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
 --- !u!4 &1230070748956941861 stripped
 Transform:

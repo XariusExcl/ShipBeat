@@ -5006,6 +5006,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7724a30435b3c764998399582c8e786f, type: 3}
       insertIndex: -1
+      addedObject: {fileID: -7952966265696373028}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7724a30435b3c764998399582c8e786f, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 6645355880839132367}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7724a30435b3c764998399582c8e786f, type: 3}
       insertIndex: -1
@@ -5013,6 +5016,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7724a30435b3c764998399582c8e786f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7365247773022454467}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7724a30435b3c764998399582c8e786f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2216182315846773403}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7724a30435b3c764998399582c8e786f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4528810142680815778}
     - targetCorrespondingSourceObject: {fileID: -1884358480048102074, guid: 7724a30435b3c764998399582c8e786f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2768492080257805469}
@@ -5155,6 +5164,103 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7724a30435b3c764998399582c8e786f, type: 3}
   m_PrefabInstance: {fileID: 8750073944142792530}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &-7952966265696373028
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8480251940025235971}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &6645355880839132367
 Animator:
   serializedVersion: 7
@@ -5204,10 +5310,38 @@ MonoBehaviour:
   ID: tutobot
   voice: {fileID: 8300000, guid: 7274ad29f9eb53b48ab086d499d7e402, type: 3}
   Color: {r: 0, g: 0, b: 0, a: 0}
-  pitch: 1
+  pitch: 1.05
   volume: 1
   eyesTarget: {fileID: 0}
   bodyTarget: {fileID: 0}
+--- !u!114 &2216182315846773403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8480251940025235971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b9372a825a7e67468fa7996fff78b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutoBotBehaviour
+--- !u!114 &-4528810142680815778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8480251940025235971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6c93ef0591785d7799d8cb31174c776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutoBotSFXManager
+  wowClip: {fileID: 8300000, guid: 7292e7172da8490478a7db7d02ea94ee, type: 3}
+  sweatClip: {fileID: 8300000, guid: 6bd557e22d80d9c4a9231ddb48cd900d, type: 3}
+  surprisedClip: {fileID: 8300000, guid: 5a10e1ce6d85d7648a6de1d26599490d, type: 3}
+  confusedClip: {fileID: 8300000, guid: 1b58935f06d1c7143bb042c304ce2908, type: 3}
 --- !u!1 &9065753570818536704 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8881512760021192110, guid: 7724a30435b3c764998399582c8e786f, type: 3}
