@@ -56,6 +56,6 @@ public class MenuManager : MonoBehaviour
 
     public void OnApplicationQuit()
     {
-        BackToMenu();
+        if (!backToMenuCalled) BackToMenu();
     }
 }

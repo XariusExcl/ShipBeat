@@ -12707,7 +12707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 643239254821897490, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
       propertyPath: m_Volume
-      value: 0.485
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 643239254821897490, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
       propertyPath: m_PlayOnAwake
@@ -12848,6 +12848,10 @@ PrefabInstance:
     - target: {fileID: 6549893529337745164, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686664075413094095, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
+      propertyPath: m_PlayAutomatically
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7641181082636225850, guid: e592ca8cfaf66a449b64a6e04d57d5c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

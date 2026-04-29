@@ -273,6 +273,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1180883374914271098}
+  - component: {fileID: 6686664075413094095}
+  - component: {fileID: 2582687517156994791}
   m_Layer: 0
   m_Name: Tutobot
   m_TagString: Untagged
@@ -299,6 +301,36 @@ Transform:
   - {fileID: 2171951101479576890}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &6686664075413094095
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7686138836724111206}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: 2bdf156a036313fe0ba9ca137171b69c, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 2bdf156a036313fe0ba9ca137171b69c, type: 2}
+  - {fileID: 7400000, guid: d3f8f1d2837f0ca4192fa197c364d14c, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
+--- !u!114 &2582687517156994791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7686138836724111206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac6c8e222ee076513b0eb93803c05797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DisableHelper
 --- !u!1 &9064804238169875157
 GameObject:
   m_ObjectHideFlags: 0

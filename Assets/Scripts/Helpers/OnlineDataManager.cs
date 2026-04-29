@@ -28,7 +28,7 @@ public class OnlineDataManager
     public const string API_ENDPOINT = "http://localhost:3443/";
     public static bool Online = true;
     # else
-    public const string API_ENDPOINT = "https://89.234.181.104/shipbeat-api/";
+    public const string API_ENDPOINT = "http://localhost:3443/";
     public static bool Online = false; 
     # endif
     public static OnlineData Data = new()
