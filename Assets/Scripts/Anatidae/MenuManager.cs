@@ -29,7 +29,7 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        if (!backToMenuCalled && heldQuitTimer >= HeldQuitTime || afkTimer >= AfkTime)
+        if (!backToMenuCalled && (heldQuitTimer >= HeldQuitTime || afkTimer >= AfkTime))
         {
             backToMenuCalled = true;
             BackToMenu();
@@ -52,10 +52,5 @@ public class MenuManager : MonoBehaviour
             quitText.text = MenuMessage + new string('.', (int)Mathf.Min(Mathf.Max(heldQuitTimer * 3f, afkTimer - AfkTime + 10f * 0.4f), 3));
         }
         else quitText.gameObject.SetActive(false);
-    }
-
-    public void OnApplicationQuit()
-    {
-        if (!backToMenuCalled) BackToMenu();
     }
 }
