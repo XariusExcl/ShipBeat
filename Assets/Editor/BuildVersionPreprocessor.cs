@@ -11,17 +11,15 @@ public class BuildVersionPreprocessor : IPreprocessBuildWithReport
     
     public void OnPreprocessBuild(BuildReport report)
     {
-        string buildNumber = DateTime.Now.ToString("yyyyMMdd.HHmm");
-        string fullVersion = $"{VERSION}.{buildNumber}";
-
-        UnityEditor.PlayerSettings.bundleVersion = fullVersion;
+        SetVersion();
     }
 
     [MenuItem("Build/Set Version")]
     public static void SetVersion()
     {
-        string buildNumber = DateTime.Now.ToString("yyyyMMdd.HHmm");
-        string fullVersion = $"{VERSION}.{buildNumber}";
+        string buildDate = DateTime.Now.ToString("yyMMdd");
+        int buildNumber = int.Parse(UnityEditor.PlayerSettings.bundleVersion.Split("_")[1]) + 1;
+        string fullVersion = $"{VERSION}.{buildDate}_{buildNumber}";
 
         UnityEditor.PlayerSettings.bundleVersion = fullVersion;
     }

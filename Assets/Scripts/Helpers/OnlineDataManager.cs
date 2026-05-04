@@ -28,8 +28,8 @@ public class OnlineDataManager
     public const string API_ENDPOINT = "http://localhost:3443/";
     public static bool Online = true;
     # else
-    public const string API_ENDPOINT = "http://localhost:3443/";
-    public static bool Online = false; 
+    public const string API_ENDPOINT = "https://jules.mmi-troyes.fr/shipbeat-api/";
+    public static bool Online = false;
     # endif
     public static OnlineData Data = new()
     {
@@ -194,9 +194,13 @@ public class OnlineDataManager
         } else {
             string responseJson = request.downloadHandler.text;
             SendScoreResponse sendScoreResponse = JsonUtility.FromJson<SendScoreResponse>(responseJson);
-            Data.PlayerInfo.TotalScore = sendScoreResponse.totalScore;
             Scoring.IsPersonalHighscore = sendScoreResponse.isPersonalHighscore;
             Scoring.IsCabHighscore = sendScoreResponse.isCabHighscore;
+            Data.PlayerInfo.TotalScore = sendScoreResponse.totalScore;
+            if (!Data.SongPersonalHighscores.ContainsKey(songID) || Scoring.IsPersonalHighscore)
+            {
+                Data.SongPersonalHighscores[songID] = highScore;
+            }
         }
 
         yield return GetHighscores(songID, () => {}, true);
