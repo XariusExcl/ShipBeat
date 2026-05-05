@@ -16,7 +16,7 @@ public class ShaderWarmUp : MonoBehaviour
     {
         stopwatch = new Stopwatch();
         stopwatch.Start();
-        Invoke("WarmUp", 0.02f);
+        Invoke("WarmUp", 0.05f); // Allow time for the loading text to show
     }
 
     void WarmUp()

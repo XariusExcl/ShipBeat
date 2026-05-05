@@ -1563,9 +1563,9 @@ MonoBehaviour:
   path1Duration: 16
   path2: {fileID: 2005167085}
   path2Duration: 16
-  animProbability: 1
-  animDelayMin: 0
-  animDelayMax: 0
+  animProbability: 0.5
+  animDelayMin: 3
+  animDelayMax: 15
 --- !u!4 &225509601
 Transform:
   m_ObjectHideFlags: 0
