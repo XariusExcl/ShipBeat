@@ -222,7 +222,7 @@ public class OsuFileParser
 
 #if DEBUG
         stopwatch.Stop();
-        UnityEngine.Debug.Log($"Parsed {songInfo.Title} - {songInfo.DifficultyName} in {stopwatch.Elapsed.TotalMilliseconds:F3}ms {(fastPass ? "(fast" : "(full")}, {songData.Info.NoteCount} notes).");
+        UnityEngine.Debug.Log($"Parsed {songInfo.Title} - {songInfo.DifficultyName} in {stopwatch.Elapsed.TotalMilliseconds:F1}ms {(fastPass ? "(fast" : "(full")}, {songData.Info.NoteCount} notes).");
 #endif
         return new SongValidationResult { Valid = true, Message = "Song is valid", Data = songData };
     }

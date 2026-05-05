@@ -35,7 +35,7 @@ public class ShaderWarmUp : MonoBehaviour
         } else if (!completedCalled)
         {
             stopwatch.Stop();
-            UnityEngine.Debug.Log($"Shader warmup done, took {stopwatch.Elapsed.TotalMilliseconds:F3}ms.");
+            UnityEngine.Debug.Log($"Shader warmup done, took {stopwatch.Elapsed.TotalMilliseconds:F1}ms.");
             WarmupDone.Invoke();
             completedCalled = true;
             Destroy(gameObject);

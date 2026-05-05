@@ -24,7 +24,7 @@ public class SongUnlockConditions : MonoBehaviour
         else if ((OnlineDataManager.Online ?
                 OnlineDataManager.Data.PlayerInfo.TotalScore :
                 long.Parse(ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore")))
-            >= 500000)
+            >= 350000)
         {
             return true;
         } else return false;
@@ -36,7 +36,7 @@ public class SongUnlockConditions : MonoBehaviour
         else if ((OnlineDataManager.Online ?
                 OnlineDataManager.Data.PlayerInfo.TotalScore :
                 long.Parse(ExtradataManager.GetDataWithKey($"Player/{HighscoreManager.PlayerName}/TotalScore")))
-            >= 2000000)
+            >= 1000000)
         {
             return true;
         } else return false;
@@ -53,11 +53,11 @@ public class SongUnlockConditions : MonoBehaviour
         if (info.DifficultyRating >= 12 && !isExpertUnlocked)
         {
             lockStatus.IsLocked = true;
-            lockStatus.UnlockCondition += "\nAvoir au moins 2.000M de points de mission";
+            lockStatus.UnlockCondition += "\nAvoir au moins 1.000M de points de mission";
         } else if (info.DifficultyRating >= 8 && !isHardUnlocked)
         {
             lockStatus.IsLocked = true;
-            lockStatus.UnlockCondition += "\nAvoir au moins 0.500M de points de mission";
+            lockStatus.UnlockCondition += "\nAvoir au moins 0.350M de points de mission";
         }   
 
         return lockStatus;
