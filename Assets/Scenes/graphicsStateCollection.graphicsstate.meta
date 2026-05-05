@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ff6f6ee9e801930fb831707d8ade6957
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 12391, guid: 0000000000000000e000000000000000, type: 0}
+  runtimePlatform: 16
+  graphicsDeviceType: 17
+  version: 0
+  qualityLevelName: Potato
+  shaderVariantCount: 67
+  graphicsStateCount: 0

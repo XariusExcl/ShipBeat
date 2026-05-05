@@ -107,7 +107,7 @@ public class SongLoader : MonoBehaviour
     }
 
     IEnumerator WaitForFileLoad() {
-        while (!IsFileLoaded || !IsAudioLoaded || !PrewarmMaterialHelper.IsMaterialPrewarmDone) {
+        while (!IsFileLoaded || !IsAudioLoaded) {
             yield return null;
         }
         GameStart();

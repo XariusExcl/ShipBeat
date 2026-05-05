@@ -14,7 +14,7 @@ public class Maestro : MonoBehaviour
     public static TimingPoint CurrentEffectPoint = new TimingPoint();
 
     // Song time and state
-    static int _laneSpeed = 7;
+    static int _laneSpeed = 6;
     public static int LaneSpeed // Note time on the lane is 10 / LaneSpeed, i.e 8 = 1250ms
     {
         get => _laneSpeed;

@@ -1,0 +1,1363 @@
+{
+    "m_ObjectHideFlags": 0,
+    "m_CorrespondingSourceObject": {
+        "instanceID": 0
+    },
+    "m_PrefabInstance": {
+        "instanceID": 0
+    },
+    "m_PrefabAsset": {
+        "instanceID": 0
+    },
+    "m_Name": "",
+    "serializedVersion": "2",
+    "m_Version": 0,
+    "m_DeviceRenderer": 17,
+    "m_RuntimePlatform": 16,
+    "m_QualityLevelName": "Potato",
+    "m_VariantInfoMap": [
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "03441f708088aee3a5b350c8716cd879"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_CLUSTER_LIGHT_LOOP _EMISSION _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "1f10c27e5f3cf04fe2cbdf03e9d1e4b9"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "0406db5a14f94604a8c57ccfbc9f3b46",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Particles/Unlit",
+                "shaderAssetGUID": "0406db5a14f94604a8c57ccfbc9f3b46",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_SURFACE_TYPE_TRANSPARENT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "20a81fe87817d5e292583bf0a8d18874"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 9101,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Hidden/Internal-UIRAtlasBlitCopy",
+                "shaderAssetGUID": "662b00f569c02f84bbc426d4c41ceb5e",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "20d887ae54f5619414e035a0a87d28b6"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 3942060899893091223,
+                    "guid": "0000000000000000d000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Hidden/GUITextureBlit2Linear",
+                "shaderAssetGUID": "217fd7e1dbde143bba99f902cbb2b139",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "37ecf58024d5ced5993415187616508e"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 207,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Legacy Shaders/Particles/Alpha Blended Premultiply",
+                "shaderAssetGUID": "4c4b565e9d113c503000c98a4241aa39",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "2080d8dd6103f7adcc52e25bea4966c6"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_ALPHAPREMULTIPLY_ON _CLUSTER_LIGHT_LOOP _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT _SURFACE_TYPE_TRANSPARENT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "46ccf964d5af7f7153104d84a3e4fd9d"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "ecfa8f5732b504ef98fba10aa18d0326",
+                    "type": 3
+                },
+                "shaderName": "UI/Additive",
+                "shaderAssetGUID": "ecfa8f5732b504ef98fba10aa18d0326",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "63dcaf70084111e68e93d7c43b62e3f1"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_CLUSTER_LIGHT_LOOP _EMISSION _ENVIRONMENTREFLECTIONS_OFF _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _RECEIVE_SHADOWS_OFF _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT _SPECULARHIGHLIGHTS_OFF _SURFACE_TYPE_TRANSPARENT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "710082e0b0c8cc5aceb88dc0d0eb3c9c"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "e7857e9d0c934dc4f83f270f8447b006",
+                    "type": 3
+                },
+                "shaderName": "Hidden/Universal Render Pipeline/UberPost",
+                "shaderAssetGUID": "e7857e9d0c934dc4f83f270f8447b006",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_BLOOM_LQ _CHROMATIC_ABERRATION _TONEMAP_NEUTRAL _USE_FAST_SRGB_LINEAR_CONVERSION",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "7e5084aa756a134d345d73ca6baeb470"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_CLUSTER_LIGHT_LOOP _EMISSION _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "7fe4ff3777412a15bff12e98aa90924b"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "650dd9526735d5b46b79224bc6e94025",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Unlit",
+                "shaderAssetGUID": "650dd9526735d5b46b79224bc6e94025",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_SURFACE_TYPE_TRANSPARENT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "a6b430c28b24f0b5c693130fe5439829"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_CLUSTER_LIGHT_LOOP _EMISSION _LIGHT_LAYERS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION",
+                "subShaderIndex": 0,
+                "passIndex": 1,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "ae08db8d2fc0decd6786570508074181"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 104,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Skybox/6 Sided",
+                "shaderAssetGUID": "044123328d1184993000ec194241aa39",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 1,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "afa84e7f0e5947b085cab9c3f94f90f0"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_CLUSTER_LIGHT_LOOP _EMISSION _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _METALLICSPECGLOSSMAP _NORMALMAP _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "b70c2e6a039eea97fb93650d9c9bd7a9"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "DIRLIGHTMAP_COMBINED LIGHTMAP_ON _CLUSTER_LIGHT_LOOP _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _RECEIVE_SHADOWS_OFF _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "c5687c3322020030cc4aebf4236b9df6"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "e8ee25143a34b8c4388709ea947055d1",
+                    "type": 3
+                },
+                "shaderName": "Hidden/Universal Render Pipeline/Scaling Setup",
+                "shaderAssetGUID": "e8ee25143a34b8c4388709ea947055d1",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_FXAA",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "cff84efb983ffceff3e7542426a52f3f"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 9000,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Hidden/Internal-GUITextureClip",
+                "shaderAssetGUID": "ad00782baad4dfc4fbf1e757e42f175b",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "d500ab22d80e95ef0b1b777dfa370c86"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_ALPHAPREMULTIPLY_ON _CLUSTER_LIGHT_LOOP _EMISSION _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _RECEIVE_SHADOWS_OFF _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT _SURFACE_TYPE_TRANSPARENT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "eab87c29f377b2a2f724737eadff5828"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "5f1864addb451f54bae8c86d230f736e",
+                    "type": 3
+                },
+                "shaderName": "Hidden/Universal Render Pipeline/Bloom",
+                "shaderAssetGUID": "5f1864addb451f54bae8c86d230f736e",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 1,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "f1d4ad93e2a625cda780dba28bbfbaf1"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "65df88701913c224d95fc554db28381a",
+                    "type": 3
+                },
+                "shaderName": "Hidden/Universal Render Pipeline/LutBuilderLdr",
+                "shaderAssetGUID": "65df88701913c224d95fc554db28381a",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "f7bc57e86ea021c2adfd196eb95c9815"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_CLUSTER_LIGHT_LOOP _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "02adab80fbd9139cc3c9f9a81f2a2ee5"
+            },
+            "second": {
+                "shader": {
+                    "fileID": -6465566751694194690,
+                    "guid": "10c78610ae6c8154594e19236db0c416",
+                    "type": 3
+                },
+                "shaderName": "Shader Graphs/NoteHitCircle",
+                "shaderAssetGUID": "10c78610ae6c8154594e19236db0c416",
+                "shaderAssetLocalIdentifierInFile": 0,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "2e85a55e51cf3b14d353760c1a86ee42"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 104,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Skybox/6 Sided",
+                "shaderAssetGUID": "044123328d1184993000ec194241aa39",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "8759021737c332b72cc3b1dd679a3a43"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "DIRLIGHTMAP_COMBINED LIGHTMAP_ON _CLUSTER_LIGHT_LOOP _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "85b1af50ada680d49d08fd310262e5ba"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_CLUSTER_LIGHT_LOOP _EMISSION _LIGHT_LAYERS _RECEIVE_SHADOWS_OFF _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION",
+                "subShaderIndex": 0,
+                "passIndex": 1,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "96d9e40366cfffb63b45cc1bea2025b6"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 19011,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Hidden/TextCore/Distance Field SSD",
+                "shaderAssetGUID": "ca9956d58bc62d9479adf7d083c66d77",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "ae3d802bc1d83b425f7a83a1d37dc2b6"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 10760,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "UI/Unlit/Transparent",
+                "shaderAssetGUID": "0fd768bee39c11548b1aa6640083a9bd",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "b3655a47a3028d91252dcd38bf2b264f"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "68e6db2ebdc24f95958faec2be5558d6",
+                    "type": 3
+                },
+                "shaderName": "TextMeshPro/Distance Field",
+                "shaderAssetGUID": "68e6db2ebdc24f95958faec2be5558d6",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "b9f5dfcefbe3c7304e6534e1f9fdcd7c"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 9100,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Hidden/Internal-UIRDefault",
+                "shaderAssetGUID": "1e5f18a346ed454418f93aa7eaf55791",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_UIE_FORCE_GAMMA",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "d11990d11a46008d0393fea19b8de2dd"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "c49e63ed1bbcb334780a3bd19dfed403",
+                    "type": 3
+                },
+                "shaderName": "Hidden/Universal Render Pipeline/FinalPost",
+                "shaderAssetGUID": "c49e63ed1bbcb334780a3bd19dfed403",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "f2993035594d35d87bd682ce757e3f71"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "DIRLIGHTMAP_COMBINED LIGHTMAP_ON _CLUSTER_LIGHT_LOOP _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "fb8d5ab174a9875d854e51abe60cbca4"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_ALPHAPREMULTIPLY_ON _CLUSTER_LIGHT_LOOP _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _RECEIVE_SHADOWS_OFF _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT _SPECULAR_SETUP _SURFACE_TYPE_TRANSPARENT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "2d3279b66e9151d1821d8ec2c3aa4cf1"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "b7839dad95683814aa64166edc107ae2",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Particles/Lit",
+                "shaderAssetGUID": "b7839dad95683814aa64166edc107ae2",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_ALPHAPREMULTIPLY_ON _CLUSTER_LIGHT_LOOP _EMISSION _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SURFACE_TYPE_TRANSPARENT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "3c8ab15c08886d6eae8ed9c244d713e2"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 104,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Skybox/6 Sided",
+                "shaderAssetGUID": "044123328d1184993000ec194241aa39",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 5,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "454ade4ebe9f8eb48355dbb4f0707290"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "0406db5a14f94604a8c57ccfbc9f3b46",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Particles/Unlit",
+                "shaderAssetGUID": "0406db5a14f94604a8c57ccfbc9f3b46",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "PROCEDURAL_INSTANCING_ON _COLORADDSUBDIFF_ON",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "5c4a63a91a208620119f73de0b5df82b"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "93446b5c5339d4f00b85c159e1159b7c",
+                    "type": 3
+                },
+                "shaderName": "Hidden/Universal/CoreBlit",
+                "shaderAssetGUID": "93446b5c5339d4f00b85c159e1159b7c",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "BLIT_DECODE_HDR",
+                "subShaderIndex": 0,
+                "passIndex": 22,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "60aecdc13cfd0ee35616aa40d352c801"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_CLUSTER_LIGHT_LOOP _EMISSION _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _NORMALMAP _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "5caa5233d0a23a30beb307aba232741e"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "DIRLIGHTMAP_COMBINED LIGHTMAP_ON _CLUSTER_LIGHT_LOOP _EMISSION _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "7d1e6b8e0abd79a021ac96e9f4085bb9"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 9007,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Hidden/Internal-GUIRoundedRectWithColorPerBorder",
+                "shaderAssetGUID": "c29c2094d334c044b8718357a02b2172",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "849e2d9faec84ec925e7ba4ffaba37d6"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "68e6db2ebdc24f95958faec2be5558d6",
+                    "type": 3
+                },
+                "shaderName": "TextMeshPro/Distance Field",
+                "shaderAssetGUID": "68e6db2ebdc24f95958faec2be5558d6",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "GLOW_ON",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "5eb63668bbc9dcfd2a0a601a223d9458"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_CLUSTER_LIGHT_LOOP _EMISSION _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _RECEIVE_SHADOWS_OFF _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT _SURFACE_TYPE_TRANSPARENT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "71564073498493b119e8cb6a4256b35d"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_ALPHAPREMULTIPLY_ON _CLUSTER_LIGHT_LOOP _EMISSION _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT _SURFACE_TYPE_TRANSPARENT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "a9f26d544af67895fb9aba4454749914"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 9003,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Hidden/Internal-GUITextureBlit",
+                "shaderAssetGUID": "22168505cb796ee41bd41206e1c2468d",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "cd3ec7b62309a94f4029c0c8dd67eec7"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "5f1864addb451f54bae8c86d230f736e",
+                    "type": 3
+                },
+                "shaderName": "Hidden/Universal Render Pipeline/Bloom",
+                "shaderAssetGUID": "5f1864addb451f54bae8c86d230f736e",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "d5fe965c9ca8b06a0bd2a85fd4b73ce0"
+            },
+            "second": {
+                "shader": {
+                    "fileID": -6465566751694194690,
+                    "guid": "0a6c1c20890913f40a10c0155921e974",
+                    "type": 3
+                },
+                "shaderName": "Shader Graphs/Holo",
+                "shaderAssetGUID": "0a6c1c20890913f40a10c0155921e974",
+                "shaderAssetLocalIdentifierInFile": 0,
+                "keywordNames": "_CLUSTER_LIGHT_LOOP _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "e6eac33bc1c702c4f0eeeb16219bca3e"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 104,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Skybox/6 Sided",
+                "shaderAssetGUID": "044123328d1184993000ec194241aa39",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 3,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "e30e6efce8cbcf52dc9a48386410ea33"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "5f1864addb451f54bae8c86d230f736e",
+                    "type": 3
+                },
+                "shaderName": "Hidden/Universal Render Pipeline/Bloom",
+                "shaderAssetGUID": "5f1864addb451f54bae8c86d230f736e",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 2,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "1dd717d3b85f2505ef1f4146daf355d2"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 104,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Skybox/6 Sided",
+                "shaderAssetGUID": "044123328d1184993000ec194241aa39",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 4,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "36a7c95aa15671c9cd5ecf96e36de0b9"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_CLUSTER_LIGHT_LOOP _EMISSION _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _RECEIVE_SHADOWS_OFF _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "3ea38ff554353fc751f88c1f998aa16f"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "0406db5a14f94604a8c57ccfbc9f3b46",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Particles/Unlit",
+                "shaderAssetGUID": "0406db5a14f94604a8c57ccfbc9f3b46",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_COLORADDSUBDIFF_ON _EMISSION _SURFACE_TYPE_TRANSPARENT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "450b625e3fb852e7c37a48c641d486f8"
+            },
+            "second": {
+                "shader": {
+                    "fileID": -6465566751694194690,
+                    "guid": "471d457894b90394d8a80721066986d9",
+                    "type": 3
+                },
+                "shaderName": "Shader Graphs/Pulse",
+                "shaderAssetGUID": "471d457894b90394d8a80721066986d9",
+                "shaderAssetLocalIdentifierInFile": 0,
+                "keywordNames": "_CLUSTER_LIGHT_LOOP _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "4ce3c7ea0e65cf6f3359f425514f10b4"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 17,
+                    "guid": "0000000000000000e000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Hidden/InternalErrorShader",
+                "shaderAssetGUID": "7490cb225146abf4ebe7abfc57d957e2",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "50f3ae03b19a81650b35c12b890cc448"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 10770,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "UI/Default",
+                "shaderAssetGUID": "203dea5f7870f4649b7b371a655d12b9",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "UNITY_UI_ALPHACLIP",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "51fbd08ded645297d6b765c32ff8037c"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "650dd9526735d5b46b79224bc6e94025",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Unlit",
+                "shaderAssetGUID": "650dd9526735d5b46b79224bc6e94025",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "48679998db3b9692a2bd40f535553a5f"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "5f1864addb451f54bae8c86d230f736e",
+                    "type": 3
+                },
+                "shaderName": "Hidden/Universal Render Pipeline/Bloom",
+                "shaderAssetGUID": "5f1864addb451f54bae8c86d230f736e",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 3,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "52ab8d0db4b7c047f98822cdfeca3572"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_CLUSTER_LIGHT_LOOP _EMISSION _LIGHT_LAYERS _METALLICSPECGLOSSMAP _NORMALMAP _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION",
+                "subShaderIndex": 0,
+                "passIndex": 1,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "475f9f8e45ad43010a09e3d6e7df76ea"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_CLUSTER_LIGHT_LOOP _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "80ab6ee90d752047db2fcc22a9ae07c4"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "DIRLIGHTMAP_COMBINED LIGHTMAP_ON _CLUSTER_LIGHT_LOOP _EMISSION _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _RECEIVE_SHADOWS_OFF _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "8cdb7283065c2d3c1b858dec02c78d2c"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "DIRLIGHTMAP_COMBINED LIGHTMAP_ON _CLUSTER_LIGHT_LOOP _EMISSION _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "971fe348b907a62b4e07819d918e24a7"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "b7839dad95683814aa64166edc107ae2",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Particles/Lit",
+                "shaderAssetGUID": "b7839dad95683814aa64166edc107ae2",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_ALPHAPREMULTIPLY_ON _CLUSTER_LIGHT_LOOP _EMISSION _MAIN_LIGHT_SHADOWS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT _SURFACE_TYPE_TRANSPARENT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "9963cd13072869f057ce74ace8ed1064"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 9004,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Hidden/Internal-GUIRoundedRect",
+                "shaderAssetGUID": "a2c279fd87ed5411e9fcbc0904ec51db",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "a16b7ef6044cea9e186f50d7c8387ff8"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "_CLUSTER_LIGHT_LOOP _LIGHT_LAYERS _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION",
+                "subShaderIndex": 0,
+                "passIndex": 1,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "920b9237e51a3c50f1e7e8d3b148b202"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 10770,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "UI/Default",
+                "shaderAssetGUID": "203dea5f7870f4649b7b371a655d12b9",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "9c3bb3ff1565a366b6afc42c15f22849"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 104,
+                    "guid": "0000000000000000f000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Skybox/6 Sided",
+                "shaderAssetGUID": "044123328d1184993000ec194241aa39",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 2,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "bf2fce624cd48e0427890f3897f995d0"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 70,
+                    "guid": "0000000000000000e000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Hidden/Internal-Loading",
+                "shaderAssetGUID": "7d3344c24e361eb40bbe181c1c6b910b",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "b86ff0475260a96f9afb86547fec9796"
+            },
+            "second": {
+                "shader": {
+                    "fileID": 4800000,
+                    "guid": "933532a4fcc9baf4fa0491de14d08ed7",
+                    "type": 3
+                },
+                "shaderName": "Universal Render Pipeline/Lit",
+                "shaderAssetGUID": "933532a4fcc9baf4fa0491de14d08ed7",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "DIRLIGHTMAP_COMBINED LIGHTMAP_ON _CLUSTER_LIGHT_LOOP _LIGHT_LAYERS _MAIN_LIGHT_SHADOWS _RECEIVE_SHADOWS_OFF _REFLECTION_PROBE_ATLAS _REFLECTION_PROBE_BLENDING _REFLECTION_PROBE_BOX_PROJECTION _SHADOWS_SOFT",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        },
+        {
+            "first": {
+                "serializedVersion": "2",
+                "Hash": "54674b7ab2f938898789116b69dfb7af"
+            },
+            "second": {
+                "shader": {
+                    "fileID": -5847537733579923203,
+                    "guid": "0000000000000000d000000000000000",
+                    "type": 0
+                },
+                "shaderName": "Hidden/Internal-GUITextureClipInactive",
+                "shaderAssetGUID": "f414b5a5a15344061996367cb26531b5",
+                "shaderAssetLocalIdentifierInFile": 4800000,
+                "keywordNames": "",
+                "subShaderIndex": 0,
+                "passIndex": 0,
+                "graphicsStateInfoSet": []
+            }
+        }
+    ],
+    "m_VertexLayoutInfoMap": [],
+    "m_RenderPassInfoMap": [],
+    "m_RenderStateMap": []
+}

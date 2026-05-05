@@ -19,16 +19,24 @@ public class MainMenuNavigation : MonoBehaviour
     [SerializeField] GameObject firstLetter;
     [SerializeField] TransitionDoors transitionDoors;
     [SerializeField] VerticalNameInput nameInput;
+    [SerializeField] GameObject loadingText;
 
     [SerializeField] string TutorialSongPath;
     [SerializeField] string TutorialAudioPath;
 
     void Start()
     {
+        loadingText.SetActive(true);
         StartCoroutine(ExtradataManager.FetchExtraData());
+        ShaderWarmUp.WarmupDone.AddListener(HideLoadingText);
         DialogueTriggers.StartTutorial.AddListener(StartTutorial);
         DialogueTriggers.StartGame.AddListener(StartGame);
         DialogueTriggers.RetrySelectingName.AddListener(SelectFirstLetter);
+    }
+
+    public void HideLoadingText()
+    {
+        loadingText.SetActive(false);
     }
 
     public void ShowMainMenu()
@@ -191,6 +199,7 @@ public class MainMenuNavigation : MonoBehaviour
     {
         DialogueTriggers.StartTutorial.RemoveListener(StartTutorial);
         DialogueTriggers.StartGame.RemoveListener(StartGame);
-        DialogueTriggers.RetrySelectingName.RemoveListener(SelectFirstLetter);        
+        DialogueTriggers.RetrySelectingName.RemoveListener(SelectFirstLetter);
+        ShaderWarmUp.WarmupDone.RemoveListener(HideLoadingText);
     }
 }

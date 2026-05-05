@@ -9,7 +9,7 @@ public class MenuLoad : MonoBehaviour
 
     void Start()
     {
-        PrewarmMaterialHelper.MaterialPrewarmDone.AddListener(LoadingDone);
+        ShaderWarmUp.WarmupDone.AddListener(LoadingDone);
     }
 
     void LoadingDone()
@@ -21,6 +21,6 @@ public class MenuLoad : MonoBehaviour
 
     void OnDestroy()
     {
-        PrewarmMaterialHelper.MaterialPrewarmDone.RemoveListener(LoadingDone);
+        ShaderWarmUp.WarmupDone.RemoveListener(LoadingDone);
     }
 }
