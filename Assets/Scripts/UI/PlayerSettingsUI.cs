@@ -10,6 +10,7 @@ public struct PlayerSettings
 {
     public int ScrollSpeed;
     public float AudioLatency;
+    public int HitAccuracyOption;
 }
 
 public class PlayerSettingsUI : MonoBehaviour
@@ -18,6 +19,9 @@ public class PlayerSettingsUI : MonoBehaviour
     [SerializeField] TMP_Text scrollSpeedSettingText;
     [SerializeField] Selectable audioLatencySetting;
     [SerializeField] TMP_Text audioLatencySettingText;
+    [SerializeField] Selectable hitAccuracySetting;
+    [SerializeField] TMP_Text hitAccuracySettingText;
+    string[] hitAccuracyOptionsText = {"Basique","Avancé","Avancé + Graph"};
     Animation animation;
     public bool HasFocus = false;
     bool shown = false;
@@ -32,9 +36,12 @@ public class PlayerSettingsUI : MonoBehaviour
             playerSettings = JsonUtility.FromJson<PlayerSettings>(json);
             Maestro.GlobalOffset = playerSettings.AudioLatency;
             Maestro.LaneSpeed = playerSettings.ScrollSpeed;
+            EarlyLateUI.HitAccuracyOption = playerSettings.HitAccuracyOption;
         }
         else
-            playerSettings = new PlayerSettings { AudioLatency = Maestro.GlobalOffset, ScrollSpeed = Maestro.LaneSpeed };
+            playerSettings = new PlayerSettings { AudioLatency = Maestro.GlobalOffset, ScrollSpeed = Maestro.LaneSpeed, HitAccuracyOption = 0};
+
+        UpdateUI();
     }
 
     float lastHorizontal;
@@ -48,8 +55,10 @@ public class PlayerSettingsUI : MonoBehaviour
                 animation.Play("PlayerSettingsFadeout");
                 SFXManager.PlayDeepBlipDownSound();
                 EventSystem.current.SetSelectedGameObject(null);
+                // Save values
                 playerSettings.AudioLatency = Maestro.GlobalOffset;
                 playerSettings.ScrollSpeed = Maestro.LaneSpeed;
+                playerSettings.HitAccuracyOption = EarlyLateUI.HitAccuracyOption;
                 StartCoroutine(ExtradataManager.SetExtraData($"Player/{HighscoreManager.PlayerName}/Settings", JsonUtility.ToJson(playerSettings)));
             }
             return;
@@ -75,8 +84,8 @@ public class PlayerSettingsUI : MonoBehaviour
                 SFXManager.PlayHorizontalBlipSound();
                 ModifySetting(-1);
             }
+            UpdateUI();
         }
-        UpdateUI();
     }
 
     void ModifySetting(int mod)
@@ -85,11 +94,14 @@ public class PlayerSettingsUI : MonoBehaviour
             Maestro.LaneSpeed += mod;
         else if (EventSystem.current.currentSelectedGameObject == audioLatencySetting.gameObject)
             Maestro.GlobalOffset += mod * 0.005f;
+        else if (EventSystem.current.currentSelectedGameObject == hitAccuracySetting.gameObject)
+            EarlyLateUI.HitAccuracyOption += mod;
     }
 
     void UpdateUI()
     {
         scrollSpeedSettingText.text = Maestro.LaneSpeed.ToString();
         audioLatencySettingText.text = $"{(Mathf.Sign(Maestro.GlobalOffset) == 1f ? "+" : "")}{Maestro.GlobalOffset * 1000:F0}ms";
+        hitAccuracySettingText.text = hitAccuracyOptionsText[EarlyLateUI.HitAccuracyOption];
     }
 }

@@ -3,11 +3,11 @@ using TMPro;
 using System.Collections;
 using System;
 using UnityEngine.UI;
-using EasyTextEffects.Editor.MyBoxCopy.Extensions;
 
 public class ResultScreenUI : MonoBehaviour
 {
     bool buttonsEnabled = false;
+    [SerializeField] TMP_Text tmp_EarlyLateCount;
     [SerializeField] TMP_Text tmp_PerfectCount;
     [SerializeField] TMP_Text tmp_GoodCount;
     [SerializeField] TMP_Text tmp_BadCount;
@@ -32,6 +32,18 @@ public class ResultScreenUI : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         tmp_PerfectCount.text = tmp_GoodCount.text = tmp_BadCount.text = tmp_MissCount.text = tmp_Rank.text = "";
+        switch (EarlyLateUI.HitAccuracyOption)
+        {
+            default:
+                tmp_EarlyLateCount.text = "";
+            break;
+            case 1: 
+                tmp_EarlyLateCount.text = $"E:{Scoring.Earlies}\nL:{Scoring.Lates}";
+            break;
+            case 2:
+                tmp_EarlyLateCount.text = $"E:{Scoring.Earlies - Scoring.PerfectEarlies}(P{Scoring.PerfectEarlies})\nL:{Scoring.Lates - Scoring.PerfectLates}(P{Scoring.PerfectLates})";
+            break;
+        }
         rankRing.fillAmount = 0f;
         button.color = Color.grey;
         StartCoroutine(ResultAnim());

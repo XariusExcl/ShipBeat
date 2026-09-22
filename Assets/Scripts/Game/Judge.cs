@@ -66,12 +66,10 @@ public class Judge : MonoBehaviour {
                     judge = JudgeType.Miss;
             }
 
-            if (judge != JudgeType.Perfect && judge != JudgeType.Miss)
+            if (judge != JudgeType.Miss)
             {
-                if (Mathf.Sign(diff) == 1)
-                    GameUIManager.ShowEarly();
-                else 
-                    GameUIManager.ShowLate();
+                GameUIManager.ShowEarlyLate(diff);
+                Scoring.AddEarlyLate(diff, judge);
             }
 
             if (note.Type == NoteType.Note) {

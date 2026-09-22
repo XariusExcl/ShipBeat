@@ -3,6 +3,18 @@ using TMPro;
 
 public class EarlyLateUI : MonoBehaviour
 {
+    static int _hitAccuracyOption = 0;
+    public static int HitAccuracyOption
+    {
+        get => _hitAccuracyOption;
+        set
+        {
+            if (value < 0) value = 2;
+            if (value > 2) value = 0;
+            _hitAccuracyOption = value;
+        }
+    }
+    
     TMP_Text text;
     Animation animation;
     [SerializeField] string earlyText;

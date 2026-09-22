@@ -19,6 +19,11 @@ public class Scoring
     public static int Goods { get; private set; } = 0;
     public static int Bads { get; private set; } = 0;
     public static int Misses { get; private set; } = 0;
+    public static int Earlies { get; private set; } = 0;
+    public static int PerfectEarlies { get; private set; } = 0;
+    public static int Lates { get; private set; } = 0;
+    public static int PerfectLates { get; private set; } = 0;
+
     public static float Percentage { get; private set; } = 0;
     public static char Rank { get { return GetRank(); } }
     public static bool IsPersonalHighscore;
@@ -66,7 +71,7 @@ public class Scoring
 
     public static void Reset()
     {
-        Score = Combo = BestCombo = Perfects = Goods = Bads = Misses = 0;
+        Score = Combo = BestCombo = Perfects = Goods = Bads = Misses = Earlies = Lates = PerfectEarlies = PerfectLates = 0;
         Percentage = 100;
         IsPersonalHighscore = IsCabHighscore = false;
     }
@@ -105,6 +110,34 @@ public class Scoring
         if (Combo > BestCombo) BestCombo = Combo;
         Percentage = (Perfects * 100f + Goods * 50f + Bads * 10f) / (Perfects + Goods + Bads + Misses);
         GameUIManager.ShowTicker(judge);
+    }
+
+    public static void AddEarlyLate(float diff, JudgeType judge)
+    {
+        float absDiff = Mathf.Abs(diff);
+
+        if (judge == JudgeType.Perfect)
+        {
+            if (absDiff > Judge.PerfectHitWindow / 2)
+            {
+                if (Mathf.Sign(diff) == 1)
+                {
+                    Earlies++;
+                    PerfectEarlies++;
+                }
+                else
+                {
+                    Lates++;
+                    PerfectLates++;
+                }
+            }
+        } else
+        {
+            if (Mathf.Sign(diff) == 1)
+                Earlies++;
+            else
+                Lates++;
+        }
     }
 
     static void ResetCombo()

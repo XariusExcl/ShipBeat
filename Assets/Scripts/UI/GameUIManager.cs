@@ -21,6 +21,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] PlayerInfoScoreUI playerInfoScoreUI;
     [SerializeField] GameObject giveUpKeybind;
     [SerializeField] EarlyLateUI earlyLateUI;
+    [SerializeField] AccuracyGraphUI accuracyGraphUI;
     [SerializeField] GameObject fullComboAnimation;
     [SerializeField] GameObject perfectFullComboAnimation;
 
@@ -35,6 +36,8 @@ public class GameUIManager : MonoBehaviour
         fullComboAnimation.SetActive(false);
         perfectFullComboAnimation.SetActive(false);
         DialogueTriggers.EnableResultScreenButtons.AddListener(EnableResultScreenButtons);
+        resultsScreen.gameObject.SetActive(false);
+        accuracyGraphUI.gameObject.SetActive(EarlyLateUI.HitAccuracyOption == 2);
     }
 
     static int uiScore = 0;
@@ -119,6 +122,36 @@ public class GameUIManager : MonoBehaviour
     public static void ShowGiveUpKeybind(bool active = true)
     {
         Instance.giveUpKeybind.SetActive(active);
+    }
+
+    public static void ShowEarlyLate(float diff)
+    {
+        float absDiff = Mathf.Abs(diff);
+
+        switch (EarlyLateUI.HitAccuracyOption)
+        {
+            case 0: // Basic
+                if (absDiff > Judge.PerfectHitWindow)
+                {
+                    if (Mathf.Sign(diff) == 1)
+                        ShowEarly();
+                    else
+                        ShowLate();
+                }
+            break;
+            case 2: // Advance + Graph
+                Instance.accuracyGraphUI.AddPoint(diff);
+                goto case 1;
+            case 1: // Advanced
+                if (absDiff > Judge.PerfectHitWindow / 2)
+                {
+                    if (Mathf.Sign(diff) == 1)
+                        ShowEarly();
+                    else 
+                        ShowLate();
+                }
+            break;
+        }
     }
 
     public static void ShowEarly()

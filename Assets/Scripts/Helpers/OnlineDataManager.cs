@@ -47,7 +47,7 @@ public class OnlineDataManager
         if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
         {
             Debug.LogError(request.error);
-            Debug.LogError("Server offline");
+            Debug.LogError($"{new Uri(API_ENDPOINT).Host} is offline.");
         }
         else
         {

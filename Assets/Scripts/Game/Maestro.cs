@@ -207,8 +207,9 @@ public class Maestro : MonoBehaviour
         float delay = Jukebox.GetPlaybackPosition() - SongTime + GlobalOffset;
         if (Mathf.Abs(delay) > .020) {
             Debug.Log($"Song is {Mathf.Abs(delay) * 1000:F0} ms {(delay > 0 ? "early" : "late")}. Recalibrate!");
-            // Jukebox.SetPlaybackPosition(SongTime - GlobalOffset);
-            StartTime -= delay;
+            // TODO: I am still not sure which one to pick.
+            Jukebox.SetPlaybackPosition(SongTime - GlobalOffset); // Adjust song to notes
+            // StartTime -= delay; // Adjust notes to song
         }
     }
 
